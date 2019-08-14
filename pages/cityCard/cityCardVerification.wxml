@@ -1,0 +1,67 @@
+<view class="verification-wrap">
+    <view class="verification-dicount-title">
+        <text class="verification-discount" wx:if="{{!(halfService.DiscountType!=1)}}">全场{{halfService.Discount}}折</text>
+        <text wx:else class="verification-discount-used">
+            <text style="font-size:80rpx;color:#ff5a00" wx:if="{{halfPR}}">￥{{halfPR.Price*1000/100000}}</text>
+            <text style="text-decoration:line-through;color:#ccc" wx:if="{{halfService}}">￥{{halfService.OriginalPrice*1000/100000}}</text>
+        </text>
+        <view class="vz-flex flex verification-dicount-bot" style="background: {{halfPR && halfPR.State>0?'#fe3d49':'#ccc'}}">
+            <view class="flex verification-dicount-bot-item">
+                <icon type="success" size="12" color="#fff"></icon>
+                <text style="padding-left:6rpx">{{!halfService.IsReservation && '免预约' || '需要预约'}}</text>
+            </view>
+            <view class="flex verification-dicount-bot-item" hidden="{{halfService.isNumber}}">
+                <icon type="success" size="12" color="#fff"></icon>
+                <text style="padding-left:6rpx">不限人数</text>
+            </view>
+        </view>
+    </view>
+    <view class="qr-wrap">
+        <view style="position:relative;display:table;left:50%;transform: translateX(-50%)">
+                <image class="qr" src="{{qrUrl}}" />
+                <view class="used" wx:if="{{halfPR && !(halfPR.State>0)}}">已使用</view>
+        </view>
+        
+        <view class="p1">扫码进行消费</view>
+        <view class="p2">券号:{{tradeNumber}}</view>
+        <view class="p3">同一天同一商家只能享受一次同城折扣服务</view>
+    </view>
+    <view class="detail">
+        <view class="vz-flex detail-p1">
+            <view style="width:140rpx">
+                服务名称
+            </view>
+            <view class="wzsl" style="color: #666;width:80%">
+                {{halfPR.HTitle}}
+            </view>
+        </view>
+        <view class="vz-flex detail-p2">
+            <view style="width:140rpx">
+                店铺名称
+            </view>
+            <view class="wzsl" style="color: #666;width:80%">
+               {{storeInfo.SName}}
+            </view>
+        </view>
+        <view class="vz-flex detail-p3" bindtap="openMap" data-lat="{{storeInfo.lat}}" data-lng="{{storeInfo.lng}}">
+            <view style="width:140rpx">店铺地址</view>
+            <view style="color: #666;width:80%;line-height:1.2;margin-top:-2%">
+                <icon class="iconfont icon-position"></icon>
+              {{storeInfo.Address}}
+            </view>
+        </view>
+        <view class="vz-flex detail-p4">
+            <view style="width:140rpx">使用范围</view>
+            <view class="wzsl" style="color: #666;width:80%">可享受商家指定折扣服务</view>
+        </view>
+    </view>
+
+    <view class="vz-flex time-p5 time-wrap " >
+        <view style="width:140rpx">
+            使用时间
+        </view>
+        <view style="color: #666;width:80%">
+            {{halfService.ServicesTime}}
+        </view>
+    </view>
+</view>

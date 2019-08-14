@@ -1,0 +1,32 @@
+<template name="qrcodeusestate">
+ <view class="container"  hidden='{{loadall==0}}'>
+    <view class="weui_msg" hidden='{{!success}}'>
+        <view class="weui_icon_area"><view class="weui_icon_success weui_icon_msg"></view></view>
+        <view class="weui_text_area">
+            <view class="weui_msg_title">操作成功</view>
+            <view class="weui_msg_desc">{{reason}}</view>
+        </view>
+        <view class="weui_opr_area">
+            <view class="weui_btn_area">
+            </view>
+        </view>
+        <view class="weui_extra_area">
+        </view>
+    </view>
+ <view class="weui_msg" hidden='{{success}}'>
+        <view class="weui_icon_area"><view class="weui_icon_warn weui_icon_msg"></view></view>
+        <view class="weui_text_area">
+            <view class="weui_msg_title">操作失败</view>
+            <view class="weui_msg_desc">{{reason}}</view>
+        </view>
+        <view class="weui_opr_area">
+            <view class="weui_btn_area">
+            </view>
+        </view>
+        <view class="weui_extra_area">
+
+        </view>
+    </view>
+
+</view> 
+</template>  

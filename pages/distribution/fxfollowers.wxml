@@ -1,0 +1,9 @@
+<view class="d-flex d-flex-center distribution-center bg-f f-14rem bottom-line" style="padding:1rem;margin-bottom:5px;">
+        <view class="flex">
+            <view style="display:inline-block;">下属人数：<i class="c-f5a0">{{SubCount}}</i></view>
+            <view style="display:inline-block;">带来效益：<i class="c-f5a0">￥{{SubPrice*1000/100000}}</i></view>
+        </view>
+</view>
+    <view style="margin-top:5px;" >
+
+              <view class="manage-cell bottom-line" wx:for="{{listfollower}}">         <view class="d-flex d-flex-center top">             <image class="head" src="{{item.HeadingUrl}}"></image>             <view class="flex center">                 <p class="f-14rem clamp1" style="margin-bottom:2px;">{{item.NickName}}</p>             </view>             <view class="f-12rem c666 ta-r">                 带来效益：<i class="c-09cf">￥{{item.Price*1000/100000}}</i>              <view>  {{item.CreateDateStr}}   </view>       </view>         </view>     </view>      </view>

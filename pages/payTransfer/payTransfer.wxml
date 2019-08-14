@@ -1,0 +1,23 @@
+<view class="loader">
+	<view class="loader-inner">
+		<view class="loader-line-wrap">
+			<view class="loader-line"></view>
+		</view>
+		<view class="loader-line-wrap">
+			<view class="loader-line"></view>
+		</view>
+		<view class="loader-line-wrap">
+			<view class="loader-line"></view>
+		</view>
+		<view class="loader-line-wrap">
+			<view class="loader-line"></view>
+		</view>
+		<view class="loader-line-wrap">
+			<view class="loader-line"></view>
+		</view>
+		<view class="tips">{{payonline==0?"支付成功，正在跳转":"支付成功"}}</view>
+	</view>
+	<view wx:if='{{1==payonline}}' style='width:100%;height:100px;line-height:100px;text-align:center;position:fixed;bottom:30%'>
+		<view catchtap='gotoshop' style='text-align:center;margin:0 auto;background:#fa0f31;width:200rpx;line-height:80rpx;color:#fff;font-size:32rpx;border-radius:10rpx;'>返回店铺</view>
+	</view>
+</view>

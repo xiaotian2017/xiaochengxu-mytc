@@ -1,0 +1,8 @@
+{
+    "enablePullDownRefresh": true,
+    "navigationBarTitleText": "我的祝福贺卡",
+    "navigationBarBackgroundColor": "#e60000",
+    "navigationBarTextStyle": "white",   
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+}

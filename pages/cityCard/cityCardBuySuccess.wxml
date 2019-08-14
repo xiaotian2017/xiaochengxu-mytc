@@ -1,0 +1,58 @@
+<view>
+<view class="success-top">
+    <icon type="success" size="100" color="#fe3d49" class="success-icon" />
+    <view class="success-title">恭喜你，购买成功</view>
+</view>
+
+<view class="success-store vz-flex flex-between">
+    <view>{{halfService.STitle}}</view>
+    <view style="color:#fe3d49">￥ {{halfService.DiscountPrice*1000/100000}}</view>
+</view>
+
+<view class="success-store-info">
+    <view class="vz-flex success-store-info-item">
+        <view style="width:18%;padding-right:10rpx">商家地址</view>
+        <view class="wzsl" style="color:#666">{{storeInfo.Address}}</view>
+    </view>
+    <view class="vz-flex flex-between success-store-info-item" style="border-top:1rpx solid #f0f0f0">
+        <view class="vz-flex" bindtap="makePhone" data-telnum="{{storeInfo.TelePhone}}">
+            <view style="width:100%;padding-right:20rpx">联系电话</view>
+            <view style="color:#666">{{storeInfo.TelePhone}}</view>
+        </view>
+        <icon class="iconfont icon-dianhua"></icon>
+    </view>
+</view>
+
+<view class="success-order-info">
+    <view class="order-info-title">订单信息</view>
+    <view class="vz-flex success-order-info-item">
+        <view style="width: 160rpx">订单号</view>
+        <view>{{halfPR.OrderNum}}</view>
+    </view>
+    <view class="vz-flex success-order-info-item">
+        <view style="width: 160rpx">交易时间</view>
+        <view>{{orderTime}}</view>
+    </view>
+    <view class="vz-flex success-order-info-item">
+        <view style="width: 160rpx">总价</view>
+        <view>￥{{originalPrice}}</view>        
+    </view>
+</view>
+
+<!--footer bar -->
+<view class="footer vz-flex">
+        <view class="footer-item" bindtap="toIndex">
+          <icon class="iconfont icon-index footer-icon"></icon>
+          <text>首页</text>
+        </view>
+        <view class="footer-item footer-active">
+          <icon class="iconfont icon-tongcheng footer-icon"></icon>
+          <text>我的同城卡</text>
+        </view>
+        <view class="footer-item" bindtap="toMine">
+          <icon class="iconfont icon-person footer-icon"></icon>
+          <text>个人中心</text>
+        </view>
+      </view>
+
+    </view>

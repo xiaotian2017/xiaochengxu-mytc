@@ -1,0 +1,17 @@
+<!-- catchtouchmove="true"可以禁止滑动  2019/6/30 -->
+<view id='canvas-container' catchtouchmove="true" class="maskblack" style="oveflow:auto;" hidden='{{maskhide}}'>
+  <canvas hidden='{{canvahide}}'
+    style="width:{{canwidth}}px;height:{{canheight}}px;z-index:99999;margin:8px auto;  overflow-y: hidden;border-radius: 12px"
+    canvas-id="firstCanvas"></canvas>
+  <view class="fix-tl-100 fenxiang_tk_js">
+    <view class="dialog-content kanjia_share">
+      <view class='maskbtnparent' style="width: {{canwidth}}px;">
+        <view class="bpro" wx:if='{{1==isfx}}'>通过您的海报分享每生成一笔订单，你将获得￥{{fxearns}}收益</view>
+        <view class='d-flex flex-between'>
+          <button class='maskbtn close' bindtap='closemsk'>关闭</button>
+          <button class='maskbtn save' bindtap='savetophone'>保存到手机相册</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

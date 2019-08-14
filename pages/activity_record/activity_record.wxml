@@ -1,0 +1,37 @@
+
+<view class="container" style="padding-bottom:20px;">
+     <!--无数据-->
+    <view class='rankingNull' style='background:#fff;padding:70rpx;' hidden='{{showallbottomtip==true?false:true}}'>
+        <image src='http://j.vzan.cc/content/city/xcx/images/rankingNull.png' style='width:420rpx;height:320rpx;display:block;margin:0 auto;'></image>
+        <view style='font-size:28rpx;' class='c999 ta-c' style='margin-top:40rpx;'>暂时还没有数据哦</view>
+    </view>
+    <!--记录-->
+    <view>
+        <view class='d-flex d-flex-center activity_record_cell' hidden='{{0==cuthelpers.length}}' wx:for="{{cuthelpers}}">
+            <view class='head'>
+                <image src='{{item.UserLogo}}'></image>
+            </view>
+            <view class='flex infor'>
+                <view>
+                    <text class='name wzsl'>{{item.UserName}}'</text>减掉了<text class='money'>{{item.Amount*1000/100000}}元</text>
+                </view>
+                <view class='date'>{{item.ShowTime}}</view>
+            </view>
+        </view>
+        <view class='d-flex d-flex-center activity_record_cell' hidden='{{0==lovehelpers.length}}' wx:for="{{lovehelpers}}">
+            <view class='head'>
+               
+                <image src='{{item.UserHeadImg}}'></image>
+            </view>
+            <view class='flex infor'>
+                    <text class='name wzsl'>{{item.UserName}}'</text>
+            </view>
+            <view class='flex infor'>
+            
+                <view class='date'>{{item.CreateDateStr}}</view>
+            </view>
+        </view>
+        <!--到底-->
+     <view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>		
+    </view>
+</view>

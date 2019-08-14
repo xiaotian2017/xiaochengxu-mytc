@@ -1,0 +1,69 @@
+.dialog-black-mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.basewrap {
+  min-width: 320px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.maskblack {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  z-index: 1001;
+}
+
+.bpro {
+  font-size: 24rpx;
+  text-align: center;
+  margin: 2px auto;
+  color: #fff;
+}
+
+.maskbtn {
+  margin: 0;
+  width: 44.93%;
+  color: #fff;
+  display: block;
+  line-height: 2.125;
+  font-size: 36rpx;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 32px;
+}
+
+.maskbtnparent {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 4px auto;
+}
+
+.flex-between {
+  -webkit-box-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: flex;
+}
+
+.close {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.save {
+  background: -webkit-linear-gradient(left, #FA0F20, #FA0F73);
+  background: -o-linear-gradient(right, #FA0F20, #FA0F73);
+  background: -moz-linear-gradient(right, #FA0F20, #FA0F73);
+  background: linear-gradient(to right, #FA0F20, #FA0F73);
+}

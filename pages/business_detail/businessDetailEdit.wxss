@@ -1,0 +1,151 @@
+view {
+    box-sizing: border-box;
+}
+
+.common-title {
+    height: 88rpx;
+    line-height: 88rpx;
+    padding-left: 20rpx;
+    font-size: 32rpx;
+    color: #333;
+    background: #fff;
+}
+
+.theme-item {
+    height: 88rpx;
+    padding: 0 20rpx;
+    line-height: 88rpx;
+    border-top: 1rpx solid #f0f0f0;
+    font-size: 28rpx;
+    color: #333;
+    background: #fff;
+}
+
+.color-block {
+    width: 150rpx;
+    height: 60rpx;
+    border-radius: 8rpx;
+}
+
+.color-name {
+    padding-left: 30rpx;
+}
+
+.tab-name-input {
+    width: rpx;
+    max-width: 340rpx;
+}
+
+.tab-item {
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 28rpx;
+    background: #ffff;
+    border-top: 1rpx solid #f0f0f0;
+    padding: 0 0 0 20rpx;
+}
+
+.tab-item-btn {
+    padding: 0 30rpx;
+}
+
+.label-img {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.label-wrap {
+    border-top: 1rpx solid #f0f0f0;
+    background: #fff;
+    padding-bottom: 20rpx;
+    margin-bottom: 200rpx;
+}
+
+.label-item {
+    width: 126rpx;
+    font-size: 24rpx;
+    text-align: center;
+    margin-left: 20rpx;
+    padding-top: 20rpx;
+    opacity: .5;
+}
+
+.active {
+    opacity: 1;
+}
+
+.create-cate-btn-wrap {
+    padding: 30rpx;
+    background: #f0f0f0;
+}
+
+.create-cate-btn-wrap view {
+    color: #fe3d49;
+    border: 1rpx solid #fe3d49;
+    text-align: center;
+    line-height: 80rpx;
+    height: 80rpx;
+    border-radius: 12rpx;
+    font-size: 36rpx;
+}
+
+.create-cate-name-wrap {
+    width: 600rpx;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32rpx;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-title {
+    height: 108rpx;
+    line-height: 108rpx;
+    text-align: center;
+    color: #555;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.create-cate-name-wrap input {
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    height: 108rpx;
+    width: 90%;
+    margin: 20rpx;
+    border: 1rpx solid #f0f0f0;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-btn {
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+}
+
+.create-cate-name-btn-wrap {
+    position: relative;
+}
+
+.create-cate-name-btn-wrap::after {
+    content: '';
+    display: block;
+    height: 60rpx;
+    border-left: 2rpx solid #f0f0f0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.submit-wrap {
+    height: 90rpx;
+    width: 100%;
+    background: #fe3d49;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+    z-index: 10;
+}

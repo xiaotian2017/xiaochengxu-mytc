@@ -1,0 +1,17 @@
+{
+    "component":true,
+    "usingComponents":{
+        "city-convenientInfo":"../ConvenientInfo/ConvenientInfo",
+        "city-localNews":"../LocalNews/LocalNews",
+        "city-recommandStore":"../RecommandStore/RecommandStore",
+        "city-storeActive":"../StoreActive/StoreActive",
+        "city-lovePrice":"../LovePrice/LovePrice",
+        "city-privilege":"../Privilege/Privilege",
+        "city-group":"../Group/Group",
+        "city-cutPrice":"../CutPrice/CutPrice",
+        "city-cityCard":"../CityCard/CityCard",
+        "city-loading":"../Loading/Loading",
+        "city-backTop":"../BackTop/BackTop",
+        "city-mask":"../Mask/Mask"
+    }
+}

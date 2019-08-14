@@ -1,0 +1,137 @@
+
+.pushedTop{
+	margin-top: 10px;
+	background-color: #fff;
+	width: 100%;
+	height:45px;
+	padding:0 10px;
+	box-sizing:border-box;
+}
+.pushedTop span{
+	height:45px;
+	line-height:45px;
+	font-size: 14px;
+}
+.pushedTop_left{
+	color:#666666;
+	margin-right: 10px;
+}
+.pushedWay{
+	line-height:45px;
+	font-size: 14px;
+	padding-left: 10px;
+	box-sizing:border-box;
+}
+.pushedWayList{
+	width: 100%;
+	height: auto;
+	background-color: #fff;
+	overflow: hidden;
+}
+.pushedWayList .ul{
+	width: 100%;
+	height: auto;
+}
+.pushedWayList .ul .li{
+	width: 100%;
+	height:45px;
+	position: relative;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding:0 10px;
+    box-sizing:border-box;
+    font-size: 14px;
+}
+.pushedWayList .ul .li:after{
+	content: " ";
+    position: absolute;
+    left: 3%;
+    bottom: 0;
+    width: 94%;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.pushedWayList .ul .li .ways{
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #000;
+    line-height: 20px;
+    font-size: 14px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+#time{
+	font-size: 14px;
+	font-family: "微软雅黑";
+	padding-left: 10px;
+	box-sizing:border-box;
+}
+.waysRight{
+	color:#999999;
+}
+.waysRight i{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	border:1px solid #bababa;
+	margin-left: 10px;
+	vertical-align: -7px;
+}
+.waysRight i.active{
+	border:none;
+	background:url(../images/tongcheng-01.png)no-repeat -20.650px -93px;
+	-webkit-background-size: 50rem;
+	background-size: 50rem;
+}
+.pushedBtn{
+	width: 100%;
+	height: 50px;
+	background-color: #fff;
+	position: fixed;
+	bottom:0;
+	left: 0;
+	font-family: "微软雅黑";
+}
+.pushedBtn .amout{
+	width: 40%;
+	height: 50px;
+	float: left;
+	background-color: #fff;
+	line-height: 50px;
+	font-size:16px;
+	text-align: center;
+	color:#333333;
+} 
+.pushedBtn .amout i{
+	color:#ff5d38;
+	margin-left: 0.20px;
+}
+.pushedBtninner{
+width:100%;
+height:50px;
+font-size:16px;
+color:#fff;
+background-color:#ff5d38;
+font-family:"微软雅黑";
+text-align:center;
+line-height:50px;
+
+}
+.on{
+	vertical-align: -8px;
+	margin-right: 0.20px;
+}

@@ -1,0 +1,69 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="container" wx:if="{{isLoaded}}">
+  <!--搜索栏-->
+  <view class="index_serch_position">
+    <view class="index_serch">
+      <view class="d-flex d-flex-center index_serch_cell" style='padding:0 20px'>
+        <input confirm-type="search" bindconfirm="search" class="flex input_search" placeholder="搜索店铺" bindinput='bindKeyInput' focus="{{focus}}" />
+        <icon type="search" class="search" size="15" catchtap='search' style='z-index:999;float:right' />
+      </view>
+    </view>
+  </view>
+  <!--商家列表-->
+  <view class="business_list_all">
+    <view class="content">
+      <!--导航-->
+      <scroll-view class="left" scroll-y="true">
+      <button catchtap='turntab' data-id='0' claCStoreTypeSecondLss='{{selectId==0 ? "active" :""}}'>全部 </button>
+        <block wx:for="{{types}}" wx:key="id">
+          <button catchtap='turntab' data-id='{{item.Id}}' class='{{selectId==item.Id ? "active" :""}}'>{{item.Name}} </button>
+        </block>
+      </scroll-view>
+      <!--商家-->
+      <scroll-view class="right" scroll-y="true" style="height: {{windowHeight}}px" bindscrolltolower="handleLower">
+        <view class="tuijian_shangjia_cells" wx:for="{{stores}}" catchtap='clickToDetail' data-phone='{{item.ShopOwernPhone}}' data-phone='{{item.Phone}}' data-qrcode='{{item.Qrcode}}' data-vip='{{item.XcxVipVer}}'  wx:key="{{item.StoreId}}" data-id='{{item.Id}}' wx:key="unique">
+          <view class="d-flex d-flex-center tuijian_shangjia_cell">
+            <view class="head">
+              <image  src="{{''!=item.LogoUrl?item.LogoUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"  style="border-radius:5px;" />
+              <label class="icon_yuyue" wx:if='{{item.TopStatus>0}}'>
+                <text class='zhiding_text'>置顶</text>
+              </label>
+            </view>
+            <view class='flex'>
+              <view class="flow_auto">
+                <text class="title clamp1">{{item.SName}}</text>
+                <text class="juli" wx:if="{{item.Distance>0}}">{{item.Distance}}km</text>
+              </view>
+              <view class="f02">{{item.Tag.length>0?item.Tag:''}}
+                <text class="visitor">{{item.ViewCount}}人来过</text>
+              </view>
+              <view class="f03" wx:if='{{item.OpenId.length>0}}'>
+                <image class="icon_weixin_pay" src="http://j.vzan.cc/content/city/xcx/images/Entertainment_02.png" />
+                <text>本店支持微信支付</text>
+              </view>
+            </view>
+            <!--活动-->
+          </view>
+          <view class="tuijian_shangjia_activity" wx:if="{{item.ShowBooking>0||item.ShowCoupon>0}}">
+            <view wx:if="{{item.ShowBooking>0}}" class="activity clamp1">
+              <label class="purple" style="border-radius:2px;">订</label>{{item.ShowBookingName}}</view>
+            <view wx:if="{{item.ShowCoupon>0}}" class="activity clamp1">
+              <label class="blue" style="border-radius:2px;">惠</label>{{item.ShowCouponName}}</view>
+               	<view class="activity clamp1" wx:if="{{item.StoreCutId>0}}"><label class="yellow">砍</label>{{item.StoreCutTitle}}</view>
+          </view>
+        </view>
+        <view style="width:100%;text-align:center;margin-bottom:30rpx;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>
+        <view style="width:100%;text-align:center;margin-bottom:30rpx;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showallbottomtip==true?'':'none'}}">— — 数据显示完了 — —</view>
+      </scroll-view>
+    </view>
+  </view>
+  <city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="backIndex">首页</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-settled" bindtap="toaddshop">入驻</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+</view>
+
+
+  
+  <template is="shopnotcanentertip" data="{{currentshopqrcode:currentshopqrcode,currentshoptip:currentshoptip,currentphone:currentphone}}"></template>

@@ -1,0 +1,70 @@
+<import src="../../public/shoptemplate.wxml" />
+<view class="container" style='padding-bottom:70px;{{showpage===1?"":"display:none"}}'>
+    <view class='ruzhu_cells'>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_shopname"></view>
+            <view class="flex">
+                <input value='{{store.storeName}}' placeholder-style="color:#999" bindinput="getStoreName" placeholder='请输入您的店铺名称'></input>
+            </view>
+        </view>
+
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_shopkind"></view>
+            <view class='flex right'>
+                <picker mode="multiSelector" class='shopkind_picker' bindchange="chooseStoreType" bindcolumnchange="storeTypeColumnChange" value="{{typeIndex}}" range="{{storeTypes}}" range-key="{{'name'}}">
+                    <view class="picker">
+                        {{storeTypes[0][storeMultiIndex[0]].name}}<text wx:if="{{storeTypes[1][storeMultiIndex[1]]}}">:</text>{{storeTypes[1][storeMultiIndex[1]].name}}
+                    </view>
+                </picker>
+                <label class="right_arrow"></label>
+            </view>
+        </view>
+        <!--套餐  -->
+        <view class='ruzhu_cells mt-1' style='margin:20rpx 0'>
+            <view class="d-flex d-flex-center ruzhu_cell">
+                <view class="icon_size icon_ruzhu_time"></view>
+                <view class='flex right'>
+                    <view class='picker_down' style='color:{{paymentDurArr[0][typeIndex]?"#333":"#999"}};'>{{paymentDurArr[0][typeIndex].name ||"请选择认领期限"}} </view>
+                    <picker mode="multiSelector" class='shopkind_picker' bindchange="paymentChange" value="{{typeIndex}}" range="{{paymentDurArr}}" range-key="{{'name'}}">
+                        <view class="picker">{{paymentDurArr[0][typeIndex].name}}</view>
+                    </picker>
+                    <label class="right_arrow"></label>
+                </view>
+            </view>
+        </view>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_dianzhuname"></view>
+            <view class="flex">
+                <input placeholder-style="color:#999" bindinput="getUserName" value='{{store.userName}}' placeholder='请输入店主姓名'></input>
+            </view>
+        </view>
+    </view>
+
+    <view class='ruzhu_cells mt-1'>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_phone"></view>
+            <view class="flex">
+                <input placeholder-style="color:#999" maxlength="11" type='number' placeholder='请输入联系电话' bindinput='getPhone' value='{{store.phone}}'></input>
+            </view>
+        </view>
+    </view>
+
+    <view class="a-describe-cells" style="margin-top:6px;">
+        <view class="a-describe-cell">
+            <label class="a-describe-label" style="width: auto;color: #999;font-size: 14px;">认领说明</label>
+        </view>
+        <view class="a-describe-f" style="height:auto;min-height:240rpx">
+            <textarea bindinput="getStoreDecri" class="Desdes" style="user-select: text; overflow-y: auto; outline: none; cursor: text;line-height:48rpx" placeholder="请输入认领说明，最多输入200字" show-confirm-bar auto-height/>
+        </view>
+    </view>
+
+    <view class='fix-bl'>
+        <view class='d-flex d-flex-center pay_bottom_nav'>
+            <view hidden="{{store.storeId>0 ? false : true}}" class='shifukuan flex'>
+                <text class='f01'>实付款：</text>
+                <text class='f02'>{{paymentNumArr[0][typeIndex]}}</text>
+            </view>
+            <view class='bt {{store.storeId>0 ? "flex":"" }}' catchtap="submit">确认认领</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,57 @@
+@import '/components/component.wxss';
+view{
+    --font-color:#333;
+    --main-color:#fe3d49
+}
+.foot-bar{
+    display:-webkit-box;
+    display:flex;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 50px;
+    color:var(--font-color);
+    text-align: center;
+    line-height: 1.35;
+    font-size: 12px;
+    border-top: 1rpx solid #f2f2f2;
+    box-sizing: border-box;
+    background: #fff;
+    z-index:100;
+}
+.foot-item::before{
+    display: block;
+    content: '';
+    margin: 0 auto 2px;
+    width:22px;
+    height:21px;
+    background: url(http://j.vzan.cc/content/city/xcx/images/goods.png?v=2) no-repeat;
+    background-size:157px
+}
+.foot-active{
+    color: var(--main-color)
+}
+.foot-item:nth-of-type(1)::before{
+    background-position: -67px -3px
+}
+.foot-item:nth-of-type(2)::before{
+    background-position: -1px -1px
+}
+.foot-item:nth-of-type(2).foot-active::before{
+    background-position:-1px -36px
+}
+.foot-item:nth-of-type(3)::before{
+    background-position: -100px -3px
+}
+.foot-item:nth-of-type(3).foot-active::before{
+    background-position:-100px -36px
+}
+.foot-item:nth-of-type(4)::before{
+    background-position:-35px -3px
+}
+.foot-item:nth-of-type(4).foot-active::before{
+    background-position: -35px -36px
+}
+.foot-item:nth-of-type(5)::before{
+    background-position:-136px -1px
+}

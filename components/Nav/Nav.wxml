@@ -1,0 +1,7 @@
+<scroll-view class="city-nav" scroll-x="true" scroll-with-animation="true" scroll-left="{{currentScrollLeft}}">
+    <block wx:for="{{cityNavList}}" wx:key="unique">
+        <view data-navItemIndex="{{index}}" class="nav-item {{index === currentNav?'navActive':''}}" bindtap="switchNav">
+            <text class="nav-name">{{item.Name}}</text>
+        </view>
+    </block>
+</scroll-view>

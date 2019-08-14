@@ -1,0 +1,4 @@
+<template name="loadingAll">
+     <!--数据加载状态-->
+     <view class="listFinish c999" hidden="{{LoadingAll}}">没有更多的数据了</view>
+</template>

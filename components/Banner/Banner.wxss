@@ -1,0 +1,40 @@
+@import  '/components/component.wxss';
+.swiper-container {
+    position: relative;
+}
+
+.swiper_box{
+    height:250rpx;
+    background:#EFEFEF;    
+}
+
+.slide-image{
+    width:100vw;
+    height:100%
+}
+
+.indicator-dots-wrap {
+    position: absolute;
+    bottom: 16rpx;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.indicator-dots-default {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .5);
+}
+
+.indicator-dots-default + .indicator-dots-default {
+    margin-left: 12rpx;
+}
+
+.indicator-dots-active {
+    height: 15rpx;
+    width: 28rpx;
+    border-radius: 24rpx;
+    background: #ffff;
+    transition: all .5s ease-in;
+}   

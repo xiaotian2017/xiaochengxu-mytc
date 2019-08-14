@@ -1,0 +1,257 @@
+<import src="../../public/shoptemplate.wxml" />
+<!-- 上传图片 -->
+<view class="release-img-wrap">
+    <template is="item_image_shop" data="{{config:uploadimgobjects['topGoodsDecri'].config,which:'topGoodsDecri',itemid:csid}}"></template>
+</view>
+<!-- 优惠信息填写 -->
+<view class="release-discount-name-wrap">
+    <view class="release-discount-name-item vz-flex vz-flex-center">
+        <view class="release-discount-name-left">
+            优惠名称
+        </view>
+        <input type="text" value="{{discountName}}" class="release-discount-name-input" bindinput="getDiscountName" placeholder="请填写优惠名称"
+        />
+    </view>
+    <view class="release-discount-name-item vz-flex vz-flex-center">
+        <view class="release-discount-name-left">
+            购买价格
+        </view>
+        <input type="digit" class="release-discount-name-input" placeholder="请输入购买价格" bindinput="getDiscountBuyingPrice" value="{{discountBuyingPrice}}"
+        />
+        <text>元</text>
+    </view>
+    <view class="release-discount-name-item vz-flex vz-flex-center">
+        <view class="release-discount-name-left">
+            <view>到店付</view>
+            <text style="color:#fe3d49" bindtap="showPayInStore">什么是到店付?</text>
+        </view>
+        <input type="text" class="release-discount-name-input" bindinput="getDiscountPayInStore" value="{{discountPayInStore}}" placeholder="填写时请带上单位,例:10元"
+        />
+    </view>
+    <view class="release-discount-name-item vz-flex vz-flex-center">
+        <view class="release-discount-name-left">
+            原价
+        </view>
+        <input type="digit" class="release-discount-name-input" placeholder="请输入原价" value="{{discountInitPrice}}" bindinput="getDiscountInitPrice"
+        />
+        <text>元</text>
+    </view>
+</view>
+<!-- 优惠时间设置 -->
+<view class='ruzhu_cells mt-1 discount-time-wrap'>
+        <view class="d-flex d-flex-center vz-flwx-bw  ruzhu_cell">
+            <view>购买开始时间</view>
+            <view data-type="0" bindtap="commontDateFn" class="c333'}}">{{initBuyStartTime}}
+                <text style="font-family:consolas">></text>
+            </view>
+        </view>
+
+        <view class="d-flex d-flex-center vz-flwx-bw  ruzhu_cell">
+            <view>购买结束时间</view>
+            <view data-type="1" bindtap="commontDateFn" class="c333'}}">{{endBuyTime}}
+                <text style="font-family:consolas">></text>
+            </view>
+        </view>
+        <view class="d-flex d-flex-center vz-flwx-bw  ruzhu_cell">
+
+            <view>开始使用时间</view>
+            <view data-type="2" bindtap="commontDateFn" class="c333'}}">{{initUseStartTime}}
+                <text style="font-family:consolas">></text>
+            </view>
+        </view>
+
+        <view class="d-flex d-flex-center vz-flwx-bw  ruzhu_cell">
+            <view>截至使用时间</view>
+            <view data-type="3" bindtap="commontDateFn" class="c333'}}">{{endUseTime}}
+                <text style="font-family:consolas">></text>
+            </view>
+        </view>
+        <view class="ruzhu_cell vz-flex vz-flex-center flex-between" wx:if="{{!isTimePicker}}">
+            <view>使用时间段</view>
+            <input type="text" class="release-discount-name-input" value="{{useTimeSpan}}" placeholder="请填写使用时间段(可不填)" bindinput="getUseTimeSpan"
+            />
+        </view>
+        </view>
+
+        <!--优惠描述 -->
+        <view class='discount-time-wrap ruzhu_cells mt-1 description' style="margin-bottom:20rpx;">
+            <view class="d-flex d-flex-center ruzhu_cell c999">
+                优惠描述
+            </view>
+            <view class='write_cell bg-f c333' style='border:none'>
+                <textarea wx:if="{{!isTimePicker}}" style="cursor: text;" auto-height="true" value='{{discountDescription}}' class='write_textarea'
+                    placeholder='快来描述你的商品吧~' placeholder-style="#999" bindinput="getDescription" />
+            </view>
+            <view class="shop-ruzhu-pic-ul" style="padding-bottom:20rpx">
+                <template is="item_image_shop" data="{{config:uploadimgobjects['botGoodsDecri'].config,which:'botGoodsDecri',itemid:csid}}"></template>
+            </view>
+        </view>
+        <!-- 设置规则 -->
+        <view class="discount-rule" style="margin-bottom:20rpx;">
+            <view class="discount-rule-item vz-flex vz-flex-center"  wx:if="{{!isTimePicker}}">
+                <view class="discount-rule-item-left">生成数量</view>
+                <input type="number" value="{{discountCreateNum}}" bindinput="getDiscountCreateNum" />
+            </view>
+            <view class="discount-rule-item vz-flex vz-flwx-bw vz-flex-center">
+                <view class="discount-rule-item-left">每用户限购</view>
+                <view>
+                    <picker mode="selector" bindchange="getLimitNum" value="{{index}}" range="{{limitNumArray}}">
+                        <view class="picker">
+                            <text>{{discountLimitNum==0 && '不限' || discountLimitNum}}</text>
+                            <text style="font-family:consolas">></text> {{array[index]}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="discount-rule-item vz-flex vz-flex-center">
+                <view class="discount-rule-item-left">可退款</view>
+                <view style="width:400rpx" class="vz-flex vz-flex-center">
+                    <radio-group class="radio-group" bindchange="getTuikuanradioChange">
+                        <label style="width:100rpx">
+                            <radio color="" value="不可退款" checked="{{discountTuikuan==='不可退款'}}" />不可退款
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio color="" value="可退款" checked="{{discountTuikuan==='可退款'}}" />可退款
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+            <view class="discount-rule-item vz-flex vz-flex-center">
+                <view class="discount-rule-item-left">叠加使用</view>
+                <view style="width:400rpx">
+                    <radio-group class="radio-group" bindchange="getDieJiaradioChange">
+                        <label style="width:100rpx">
+                            <radio color="" value="不可叠加" checked="{{discountDieJia==='不可叠加'}}" />不可叠加
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio color="" value="可叠加" checked="{{discountDieJia==='可叠加'}}" />可叠加
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+            <view class="discount-rule-item vz-flex vz-flex-center">
+                <view class="discount-rule-item-left">填写电话</view>
+                <view style="width:400rpx">
+                    <radio-group class="radio-group" bindchange="getDianHuaradioChange">
+                        <label style="width:100rpx">
+                            <radio color="" value="需要" checked="{{discountDianHua==='需要'}}" />需要
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio color="" value="不需要" checked="{{discountDianHua==='不需要'}}" />不需要
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+            <view class="discount-rule-item vz-flex vz-flex-center">
+                <view class="discount-rule-item-left">是否需要预约</view>
+                <view style="width:400rpx">
+                    <radio-group class="radio-group" bindchange="getYuYueradioChange">
+                        <label style="width:100rpx">
+                            <radio color="" value="免预约" checked="{{discountYuYue==='免预约'}}" />免预约
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio color="" value="需要预约" checked="{{discountYuYue==='需要预约'}}" />需要预约
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+            <view wx:if="{{discountYuYue==='需要预约'}}" class="release-discount-name-item vz-flex vz-flex-center">
+                <view class="release-discount-name-left">
+                    提前预约时间
+                </view>
+                <input type="number" placeholder="请输入提前预约时间" style="width: 440rpx" value="{{yuYueTime}}" class="release-discount-name-input"
+                    bindinput="getYuYueTime" />
+                <text>小时</text>
+            </view>
+        </view>
+ <view>
+         <view class="distribution-wrap">
+            <view class="vz-flex vz-flex-center flex-between voucher-item">
+                <view>
+                    人人分销          
+                </view>
+                <switch bindchange="distributionToggle" checked="{{isShowDistribution}}" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center flex-between" wx:if="{{isShowDistribution}}">
+                    <view class="voucher-item-left">分成比例
+                        <text class="required">*</text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                    <input type="number" placeholder="0" maxlength="3" value="{{distribution}}" style="text-align:right" bindinput="getDistribution" />
+                    <text>%</text>
+                   </view>
+            </view>
+    </view>
+  </view>
+        <view class="voucher-wrapper" wx:if="{{isAdd==0}}">
+            <view class="vz-flex vz-flex-center flex-between voucher-item ">
+                <view>
+                    返现代金券
+                    <text class="instructions">（刺激二次消费）</text>
+                </view>
+                <switch bindchange="voucherToggle" />
+            </view>
+            <view hidden="{{!isVoucher}}">
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">券的面额
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherPrice}}" bindinput="getVoucherPrice" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">发放数量
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherNum}}" bindinput="getVoucherNum" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        使用范围
+                    </view>
+                    <view class="vz-flex vz-flex-center voucher-use-scope">
+                        <view class="{{voucherScopeIdx==1?'active':''}}" data-idx="1" bindtap="changeVoucherScope">无门槛</view>
+                        <view class="{{voucherScopeIdx==2?'active':''}}" data-idx="2" bindtap="changeVoucherScope">满 减</view>
+                    </view>
+                </view>
+                <view wx:if="{{voucherScopeIdx==2}}" class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        满减金额
+                    </view>
+                    <input type="number" maxlength="2" placeholder="0" value="{{fullSubtraction}}" bindinput="getFullSubtraction"/>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center flex-between">
+                    <view>使用开始时间</view>
+                    <view data-type="4" bindtap="commontDateFn" class="c333'}}">{{voucherBeginTime}}
+                        <text style="font-family:consolas">></text>
+                    </view>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center flex-between">
+                    <view>使用结束时间</view>
+                    <view data-type="5" bindtap="commontDateFn" class="c333'}}">{{voucherEndTime}}
+                        <text style="font-family:consolas">></text>
+                    </view>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center"  wx:if="{{!isTimePicker}}">
+                        <view class="voucher-item-left">领取有效天数
+                            <text class="required">*</text>
+                        </view>
+                        <input type="number" placeholder="0" maxlength="5" value="{{voucherValidDay}}" bindinput="getValidDay" />
+                    </view>
+            </view>
+        </view>
+
+        <view class="rule-des vz-flex">
+            <view>说明：</view>
+            <view>
+                <view class="rule-des-item">1.优惠需要同城管理员审核后才可显示</view>
+                <view class="rule-des-item">2.用户购买后可抵扣线下实际消费金额</view>
+                <view class="rule-des-item">3.勾选可退款，用户在有效期过后依然可退</view>
+            </view>
+        </view>
+        <view class="relase-discount-btn" bindtap="sendDiscount">
+            {{csid==0 && '发布优惠' || '保存修改'}}
+        </view>
+
+      
+        
+        <base-time-picker id='timerPicker' bindtimerpickercancel="timerPickerCancel" bindtimerpickerconfirm="timerPickerConfirm" timer-value-arr-idx="{{timerValueArrIdx}}" is-time-picker="{{isTimePicker}}"></base-time-picker>

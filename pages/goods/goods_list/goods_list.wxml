@@ -1,0 +1,24 @@
+
+<import src="/public/floatbtntpl.wxml" />
+<view class="nav d-flex">
+    <view class="nav-item flex {{navType != 'cityCard'?'nav-active':''}}">{{navType != 'cityCard'?storeTypeList[currentGoodsType].Name:''}}</view>    
+    <view class="nav-item flex" catchtap="showLayer">分类</view>
+    <view class="scan-type d-flex" catchtap="selectViewType" data-viewType="{{viewType}}">
+        <view class="icon {{viewType == 'column'?'icon-list':'icon-column'}}"></view>
+    </view>
+</view>
+ 
+<city-goods-list id='module_goodlist' currentNav="0"  cityNavList="['']" viewType="{{viewType}}"  currentGoodsType="{{currentGoodsType}}" navType="{{navType}}" storeTypeList="{{storeTypeList}}" param="{{param}}" pullDownRefresh="{{pullDownRefresh}}"></city-goods-list>
+
+<!-- 底部导航 -->
+<city-goods-footBar active="1"></city-goods-footBar>
+
+<!-- 下拉列表 -->
+<view class="goods-layer {{showLayer}}" bind:tap="hideLayer">
+    <view class="good-layer-list {{slideDown}}">
+        <block wx:for="{{storeTypeList}}" wx:key="unique">
+            <view class="goods-layer-item {{index === currentGoodsType?'goods-layer-item-active':''}}" hover-class="select" data-index="{{index}}" bindtap="selectGoodsType">{{item.Name}}</view>
+        </block>
+    </view>
+</view>
+<template is="floatshowpathbtn" data="{{showpath:showpath}}"></template> 

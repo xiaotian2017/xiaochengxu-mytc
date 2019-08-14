@@ -1,0 +1,20 @@
+@import  '../component.wxss';
+@import  '../publicCss/publicActivity.wxss';
+
+.content{
+    height: 140rpx
+}
+.origin,.left{
+    font-size: 24rpx;
+    color: #999
+}
+.origin{
+    text-decoration: line-through
+}
+.left{
+    margin-left: 10rpx
+}
+
+.progressBg{
+    margin-top: 18rpx
+}

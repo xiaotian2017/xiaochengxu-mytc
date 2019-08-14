@@ -1,0 +1,89 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+
+}
+
+.store-wrap {
+    padding: 0 20rpx;
+    line-height: 60rpx;        
+    background-color: #f7f7f7;
+    font-size: 28rpx;
+}
+
+.main {
+    background: #fff;
+}
+
+.main-inner {
+    text-align: center;
+    padding: 44rpx 0;
+    color:#111;
+    font-size: 26rpx;
+}
+
+.money {
+     color: #fe3d49;
+     font-size: 40rpx;
+     margin-right: 20rpx;
+}
+
+.des {
+    font-size: 24rpx;
+    color: #fff;
+    background: #fe3d49;
+    padding: 16rpx 20rpx;
+}
+
+.hexiaoren {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.p1 {
+    font-size: 28rpx;
+    color: #111;
+}
+
+.p2 {
+    font-size: 24rpx;
+    color: #666;
+    margin-top: 4rpx;
+}
+
+.lianxi {
+    line-height: 30rpx;
+    color: #fe3d49;
+    border: 1rpx solid #fe3d49;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 26rpx;
+    margin-left: 30rpx;
+}
+
+.f-12rem{
+  font-size: 12px;
+}.top-line::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #f0f0f0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+} .infor {
+    padding: 10px 0;
+}.hexiaoren-wrap{
+  padding:10px;
+} .infor .f01{
+  margin-top: 3px;
+}.c-09cf {
+    color: #009cff;
+}

@@ -1,0 +1,17 @@
+<view class="voteCountDown">
+    <view class="count-over" wx:if="{{activeOver}}">
+        已结束
+    </view>
+    <view class="flex flex-center justify-center count-time" wx:else>
+        <view>距离投票</view>
+        <view wx:if="{{activeNoStart}}" class="count-status">开始</view>
+        <view class="count-status" wx:else>结束</view>
+        <view class="count-item countNum">{{timeList[0]}}</view>
+        <view class="count-item count-red">天</view>
+        <view class="count-item countNum">{{timeList[1]}}</view>
+        <view class="count-red">：</view>
+        <view class="count-item countNum">{{timeList[2]}}</view>
+        <view class="count-red">：</view>
+        <view class="count-item countNum">{{timeList[3]}}</view>
+    </view> 
+</view>

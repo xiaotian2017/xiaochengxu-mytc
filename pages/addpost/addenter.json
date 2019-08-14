@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "city-navigator": "/components/Navigator/Navigator",
+    "city-bottomnav": "/components/BottomNav/BottomNav"
+  },
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black"
+}

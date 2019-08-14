@@ -1,0 +1,70 @@
+<view>
+    <view class="vz-flex flex voucher-tab-wrap flex-between">
+        <view class="voucher-tab-item {{state==0?'active':''}}" bindtap="" data-state="0" bindtap="changeTab">进行中</view>
+        <view class="voucher-tab-item {{state==1?'active':''}}" data-state="1" bindtap="changeTab">未开始</view>
+        <view class="voucher-tab-item {{state==2?'active':''}}" data-state="2" bindtap="changeTab">已结束</view>
+        <view class="voucher-tab-item {{state==3?'active':''}}" data-state="3" bindtap="changeTab">已发完</view>
+    </view>
+    <view class="no-data" wx:if="{{voucherList.length==0}}">暂无数据</view>
+    <block wx:if="{{voucherList.length>0}}" wx:for="{{voucherList}}" wx:key="{{index}}">
+     <view class="voucher-list-wrap">         
+        <view class="voucher-list vz-flex">
+             <view class="voucher-list-left">
+                 <view class="voucher-ft-32" wx:if="{{item.IsDiscount==0}}">￥{{item.VoucherMoney}}</view>
+                 <view class="voucher-ft-32" wx:else>{{item.Discount}}折</view>
+                 <view class="voucher-ft-32" wx:if="{{item.Deducting==0}}">无门槛</view>
+                 <view class="voucher-ft-28" wx:else>满 {{item.Deducting}}减{{item.VoucherMoney}}</view>
+                 <view class="voucher-ft-24" wx:if="{{item.ValidDays>0}}">{{item.ValidDays}}天内有效</view>                 
+             </view>
+             <view>
+                <view class="voucher-ft-32 c333 vz-flex flex-center">
+                    <!-- <view wx:if="{{item.Type==1}}">
+                        <view>领券</view>
+                        <view>{{item.VoucherMoney+'元代金券'}}</view>
+                    </view>  -->
+                    <view wx:if="{{item.Type!=1}}" class="voucher-label">返券</view> 
+                    <view class="voucher-ft-32" wx:if="{{item.IsDiscount==1}}">{{item.Discount}}折代金券</view>
+                    <view wx:else>{{item.VoucherMoney+'元代金券'}}</view>
+                </view>
+                <view style="padding-top: 40rpx" class="c666 voucher-ft-28">
+                    {{item.DrawNum}}人获取/{{item.UseCount}}人使用
+                </view>
+                <view class="c666 voucher-ft-24" wx:if="{{item.UseStartDateStr!=''&&item.UseStartDateStr!=null&&item.UseEndDateStr!=''&&item.UseEndDateStr!=null}}">
+                        {{item.UseStartDateStr}}-{{item.UseEndDateStr}}
+                </view>
+             </view>
+         </view>
+         <view class="voucher-bottom vz-flex flex-between flex-center">
+             <view class="voucher-ft-28 c666">
+                 剩余<text style="color:#009cff">{{item.CreateNum-item.DrawNum}}</text>张数
+             </view>
+             <view class="vz-flex voucher-ft-24">
+                 <view class="voucher-btn" style="margin-right: 20rpx" bindtap="toRecord" data-vid="{{item.id}}">参与记录</view>
+                 <view class="voucher-btn" data-vid="{{item.id}}" bindtap="showEditLayer">编 辑</view>
+             </view>
+         </view>
+     </view>
+    </block>
+    <view class="mask" wx:if="{{isShowEdit}}">
+        <view class="edit-voucher">
+            <view class="edit-voucher-title">代金券编辑</view>
+            <view class="vz-flex flex-center" style="padding: 24rpx 0 0 0">
+                <view style="padding: 0 0 0 24rpx;font-size:28rpx">
+                    代金券开关：
+                </view>
+                <view>
+                    <switch bindchange="getSwitchState"  checked="{{switchState}}" style="padding-left:20rpx"></switch>                      
+                </view>                           
+            </view>
+            <view class="c666" style="font-size: 24rpx;padding:16rpx 0 24rpx 210rpx;">关闭后，停止发放代金券</view>  
+            <view class="vz-flex flex-center" style="padding:0 0 24rpx 0;border-bottom: 1rpx solid #f0f0f0">
+                <view style="padding: 0 0 0 24rpx;font-size:28rpx">增加发放数量：</view>
+                <input value="{{editNum}}" type="text" bindinput="getEditNum" class="edit-input" style="padding-left: 20rpx"/>
+            </view>
+            <view class="vz-flex flex-center flex" style="padding-top:24;text-align: center">
+                <view class="flex" style="padding:24rpx 0;border-right: 1rpx solid #f0f0f0" bindtap="closeEditLayer">取消</view>
+                <view class="flex" style="padding:24rpx 0;color:#fe3d49"  bindtap="confirmEdit">确认</view>
+            </view>
+        </view>
+    </view>
+</view>

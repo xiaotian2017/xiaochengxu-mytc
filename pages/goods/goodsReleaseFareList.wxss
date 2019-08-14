@@ -1,0 +1,41 @@
+view {
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.fare-lise-left {
+    width: 66%;    
+}
+
+.fare-title {
+    font-size: 34rpx;
+    color: #333;
+    line-height: 1.5;
+}
+
+.fare-desp {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1.4;
+}
+
+.fare-list-wrap {
+    padding: 20rpx 30rpx;
+    background: #fff;
+    margin-bottom: 20rpx;
+}
+
+.fare-list-right {
+    font-size: 30rpx;    
+}
+
+.fare-list-right .edit {
+    margin-right:40rpx;
+    color: #fe3d49;
+}
+
+.fare-list-right .del {
+    color: #999;
+}
+
+

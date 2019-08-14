@@ -1,0 +1,6 @@
+<!-- 导航栏 -->
+<view class="foot-bar d-flex flex-center">
+    <block wx:for="{{footBarList}}" wx:key="unique">
+        <view class="foot-item flex-1 {{index == active?'foot-active':''}}" catchtap="goToLink" data-index="{{index}}">{{item}}</view>
+    </block>
+</view>

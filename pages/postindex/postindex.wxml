@@ -1,0 +1,77 @@
+<import src="../../public/template.wxml" />
+<import src="../../public/floatbtntpl.wxml" />
+
+
+<scroll-view id="wrapper" scroll-y='true' enable-back-to-top="true" scroll-with-animation="true" bindscrolltolower="onReachBottom_scroll" bindscroll="scrollEvent" scroll-top="{{scrolling.toppx}}">
+  
+  <!-- 搜索  -->
+  
+<view style="position: relative">
+  <city-search searchType="classify"></city-search>
+  <city-banner imgUrls="{{imgUrls}}"></city-banner>
+</view>
+  <!--banner  -->  
+ 
+
+  <!-- 图标 -->
+  <!-- <city-iconBanner indexItemList="{{typeitems}}"></city-iconBanner> -->
+
+  <view wx:if="{{typeitems.length>0}}" class="swiper-container">
+    <swiper style="height:{{4.51*pagerows}}rem;background-color:#fff;" indicator-dots="true" indicator-color="gray" indicator-active-color="#fe3d49">
+      <block wx:for="{{typeitems}}" wx:for-item="typeitem" wx:key='{{typeitem.Id}}'>
+        <swiper-item>
+          <block wx:for="{{typeitem}}" wx:for-item="pageitem" wx:key='{{pageitem.Id}}'>
+            <view class="center_ul">
+              <block wx:for="{{pageitem}}" wx:for-item="item" wx:key='{{item.Id}}'>
+                <view class="center_li" style='width:{{100/rowcount}}%' catchtap="itemclick" data-typeid="{{item.TypeId}}" data-typename="{{item.Title}}">
+                  <i class="{{item.ClassName}} typeimg"></i>
+                  <text>{{item.Title}}</text>
+                </view>
+              </block>
+            </view>
+          </block>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+    <view style='position:relative;margin:2px' hidden='{{!advopen||""==advid}}'>
+
+      <ad wx:if="{{''!=advid}}" unit-id="{{advid}}"></ad> 
+  </view>
+  <view class="page">
+    <view class="page__bd">
+      <view class="weui-tab">
+        <view class="newpost">
+        <text style="display:inline-block;position:relative"><text class="line"></text>
+        <text class="dot-l"></text><text class="line-r"></text>
+        <text class="dot-r"></text>最新推荐</text>
+        </view>
+        <view class="weui-tab__content" style="padding-bottom:16rpx">
+          <!-- <block wx:for="{{newposts}}" wx:key='{{item.Id}}'> -->
+  <!-- 便民信息 -->
+          <city-convenientInfo  post="{{newposts}}" showpath="{{showpath}}" repost="{{repost}}"></city-convenientInfo>
+            <!--帖子列表-->
+            <!-- <template is="template_postlist" data="{{content:item,typeid:typeid,tongcheng_new_02:tongcheng_new_02,tongcheng_01:tongcheng_01,showcallbtn:1,showallbtns:showallbtns,contentH:contentH,index:index}}"></template> -->
+          <!-- </block> -->
+          <view class="classname">
+            <view style="width:100%;text-align:center;font-size:14px;color:#aaa;background-color:#fff;height:40px;vertical-align:middle">
+              <image hidden='{{!isLoadData}}' style='width:50px;height:40px;vertical-align:middle' src='http://j.vzan.cc/content/city/xcx/images/cityxcxloading.gif'></image>{{isLoadData ? '正在加载 . .' : havemore ? '上拉加载更多' : '— — 已加载全部 — —'}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 返回顶部 -->
+  <city-backTop bindtap="backTop" show="{{scrolling.showBack}}"></city-backTop>
+</scroll-view>
+
+<!-- <red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams" ></red-package> -->
+<template is="city_kefu_win" data="{{city_kefu_hidden:city_kefu_hidden,cityphone:cityphone,QrCodeUrl:QrCodeUrl}}"></template>
+<!-- <template is="bottom_nav" data="{{buyversion:buyversion,currenttab:currenttab}}"></template> -->
+<city-bottomnav cur-tab="3"></city-bottomnav>
+<city-navigator>
+  <view slot="slot1" class="navigatorItem navigatorItem-order" bindtap="goToMyOrder">我的订单</view>
+  <view slot="slot2" class="navigatorItem navigatorItem-publish" bindtap="toaddpage" hidden='{{1==buyVersion}}'>发布</view>
+  <view slot="slot3" class="navigatorItem navigatorItem-service" bindtap="bindtap_showkefuwin">客服</view>
+  <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>

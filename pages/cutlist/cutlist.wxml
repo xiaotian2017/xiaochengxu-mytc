@@ -1,0 +1,280 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+
+<view class='tab-wrap' style='background:#f5f5f5;position:{{isScroll?"fixed":"static"}}'>
+    <view class='tabBar d-flex bz' style='margin-bottom:10rpx;padding:0 20rpx;width:100%;background:#fff'>
+        <view wx:for="{{arrayNav}}" class="flex  tabItem c333 {{index==tabfirst?'tabItemActive':''}}" data-index='{{index}}' wx:for-item="itemNav"
+            catchtap='click_navfirst'>{{itemNav}}</view>
+    </view>
+    <!--导航start-->
+    <view hidden='{{0!=isgrouptabsecond}}' class="d-flex business_detail_nav" style='position:static;'>
+        <button class="flex {{tabsecond==0? 'active':''}}" hover-class="none" hidden='{{0==tabfirst || 3==tabfirst}}' data-index='{{0}}'
+            catchtap='click_navsecond'>未付款</button>
+        <button class="flex {{tabsecond==1? 'active':''}}" hover-class="none" data-index='{{1}}' catchtap='click_navsecond'>可使用</button>
+        <button class="flex {{tabsecond==2 ? 'active':''}}" hover-class="none" data-index='{{2}}' catchtap='click_navsecond'>已使用</button>
+        <button class="flex {{tabsecond==3 ? 'active':''}}" hover-class="none" data-index='{{3}}' hidden='{{3==tabfirst}}' catchtap='click_navsecond'>已过期</button>
+    </view>
+    <!--导航end-->
+    <!--拼团导航start-->
+    <view hidden='{{1!=isgrouptabsecond}}' class="d-flex business_detail_nav" style='position:static;'>
+        <button class="flex {{tabsecond==0? 'active':''}}" hover-class="none" data-index='{{0}}' catchtap='click_navsecond'>全部</button>
+        <button class="flex {{tabsecond==1? 'active':''}}" hover-class="none" data-index='{{1}}' catchtap='click_navsecond'>进行中</button>
+        <button class="flex {{tabsecond==2 ? 'active':''}}" hover-class="none" data-index='{{2}}' catchtap='click_navsecond'>已成功</button>
+        <button class="flex {{tabsecond==3 ? 'active':''}}" hover-class="none" data-index='{{3}}' catchtap='click_navsecond'>未成团</button>
+    </view>
+    <!--拼团导航end-->
+    <!-- 商品导航start -->
+    <view hidden='{{2!=isgrouptabsecond}}' class="d-flex business_detail_nav" style='position:static;'>
+        <button class="flex {{tabsecond==0? 'active':''}}" hover-class="none" data-index='{{0}}' catchtap='click_navsecond'>全部</button>
+        <button class="flex {{tabsecond==1? 'active':''}}" hover-class="none" data-index='{{1}}' catchtap='click_navsecond'>未付款</button>
+        <button class="flex {{tabsecond==2 ? 'active':''}}" hover-class="none" data-index='{{2}}' catchtap='click_navsecond'>待发货</button>
+        <button class="flex {{tabsecond==3 ? 'active':''}}" hover-class="none" data-index='{{3}}' catchtap='click_navsecond'>待收货</button>
+        <button class="flex {{tabsecond==4 ? 'active':''}}" hover-class="none" data-index='{{4}}' catchtap='click_navsecond'>已退款</button>
+    </view>
+    <!-- 商品导航end -->
+</view>
+<!--列表-->
+<view style="padding-top:{{isScroll?'200rpx':'0'}}">
+    <!--减价start-->
+    <view class='pintuan_manage_cells mb-1' wx:for="{{cuts}}" hidden='{{1!=tabfirst}}' data-bid='{{item.BId}}' data-buid='{{item.Id}}'
+        bindtap='gotucutdetail'>
+        <view class="d-flex d-flex-center pintuan_manage_cell jizan">
+            <view class="head">
+                <image src="{{item.ShopLogoUrl}}"></image>
+                <label class="zhuangtai">
+                    {{item.statetext}}
+                </label>
+            </view>
+            <view class="flex content">
+                <view class="f01 clamp1">{{item.BName}}</view>
+                <view class="f03">已有{{item.HelpNum}}位好友帮你减价</view>
+                <view class="price01"> 
+                   现价: <label style='color:#FF5A00'>￥{{item.CurrentPrice*1000/100000}}</label>
+                   最低: <label style='margin-left:2px'>￥{{item.FloorPrice*1000/100000}}</label>
+                </view>
+                <view class="price01">
+                    实付:<label style='color:#FF5A00'>￥{{item.Payfree*1000/100000}}</label>
+                </view>
+            </view>
+        </view>
+        <view class="bt_cell">
+            <view style='display:{{item.State==1||tabsecond==3||tabsecond==2?"none":""}}' class="bt active" catchtap="goPay" data-buid='{{item.Id}}' data-atype='0'
+                data-bid='{{item.BId}}'>现价购买</view>
+            <view class='bt active' catchtap='gotohelps' data-buid='{{item.Id}}' data-type='0'>帮友明细</view>
+            <view style='display:{{item.State!=1?"none":""}}' class='bt active' catchtap='gotouse' data-bid='{{item.BId}}' data-buid='{{item.Id}}'>去使用</view>
+        </view>
+    </view>
+    <!--减价end-->
+    <!--抢优惠start-->
+    <view hidden='{{0!=tabfirst}}' class="d-flex d-flex-center my_order_cell mb-1" wx:key='unique' wx:for='{{coupons}}' data-id='{{item.Id}}'
+        data-csid='{{item.StoreCouponId}}' catchtap='clickToCouponDetail'>
+        <view class="head">
+            <image src="{{item.ImgUrl}}" mode="aspectFill" style='border-radius:3px'></image>
+        </view>
+        <view class="flex content">
+            <view class="flow_auto">
+                <text class="title clamp1">{{item.CouponName}}</text>
+                <text class="state">{{item.StoreValidateCode}}</text>
+            </view>
+            <view class="f01">
+                <text decode="{{true}}">{{item.ShopName}}</text>
+            </view>
+            <view class="f02">
+                <text>有效期至：{{item.ShowTime}}</text>
+            </view>
+        </view>
+    </view>
+    <!--抢优惠end-->
+    <!--集爱心start-->
+    <view class='pintuan_manage_cells mb-1' wx:for="{{loves}}" hidden='{{2!=tabfirst}}'>
+        <view class="d-flex d-flex-center pintuan_manage_cell jizan" data-loveid='{{item.LId}}' data-luid='{{item.Id}}' bindtap='gotolovedetail'>
+            <view class="head">
+                <image src="{{item.likeModel.ImgUrl}}"></image>
+                <label class="zhuangtai" wx-if='{{item.State==0}}'>
+                    {{item.statetext}}
+                </label>
+            </view>
+            <view class="flex content">
+                <view class="f01 clamp1">{{item.likeModel.Title}}</view>
+                <view class="f03">已有{{item.LikeNum}}位好友为你比心</view>
+                <view class="f04"> 现价
+                    <label class="price">{{item.NowPrice*1000/100000}}</label>
+                    <label class="price02">最低￥{{item.FloorPrice*1000/100000}}</label>
+                </view>
+                 <view class="f04" wx:if='{{!!item.morders}}'>实付
+                    <label class="price">{{item.morders.payment_free*1000/100000}}</label>
+                </view>
+                  <view wx:if='{{item.CanRefund && item.State == 0}}' catchtap='refundCoupon' data-scid="{{item.Id}}" class="f02" style='float:right;border: solid 1px #ccc;padding: 2px 10px;'>
+                    <text>退款</text>
+                 </view>
+                 <view wx:elif='{{!item.CanRefund }}' class="f02" style='float:right;'>
+                    <text>不可退款</text>
+                 </view>
+                  <view wx:elif='{{item.State == -2}}' class="f02" style='float:right;'>
+                    <text>已退款</text>
+                 </view>
+            </view>
+        </view>
+        <view class="bt_cell">
+            <view style='display:{{item.State==1||tabsecond==3||tabsecond==2?"none":""}}' class='bt active' catchtap='goPay' data-buid='{{item.Id}}' data-atype='1'
+                data-bid='{{item.LId}}'>现价购买</view>
+            <view class='bt active' catchtap='gotohelps' data-buid='{{item.Id}}' data-type='1'>帮友明细</view>
+            <view style='display:{{item.State!=1?"none":""}}' class='bt active' catchtap='lovegotouse' data-loveid='{{item.LId}}' data-luid='{{item.Id}}'>去使用</view>
+        </view>
+    </view>
+    <!--集爱心end-->  
+    <!--拼团start-->
+    <view class='pintuan_manage_cells mb-1' wx:for="{{groups}}" hidden='{{3!=tabfirst}}' data-gid='{{item.GroupId}}' data-gsid='{{item.GroupSponsorId}}'
+        bindtap='gotugroupdetail'>
+        <view class="d-flex d-flex-center pintuan_manage_cell jizan">
+            <view class="head">
+                <image src="{{item.ShopLogoUrl}}"></image>
+                <label class="zhuangtai" wx-if='{{item.State==0}}'>
+                    {{item.statetext}}
+                </label>
+            </view>
+            <view class="flex content">
+                <view class="f01 clamp1">{{item.Name}}</view>
+                <view class="f03">
+                    <view class="dd_tuan" style="margin-top: 15px;">
+                        <view class='groupicon'></view>
+                        <view class="dd_t_l">{{item.GroupSize}}人团</view>
+                        <view class='splitline'>|</view>
+                        <view class="dd_t_r">已团{{item.HaveNum}}人</view>
+                    </view>
+                    <view class="f04">
+                        <label class="price" wx:if='{{item.PState==0}}'>{{item.UnitPrice*1000/100000}}</label>
+                        <label class="price" wx:else>{{item.DiscountPrice*1000/100000}}</label>
+                        <label class="price02">原价￥{{item.OriginalPrice*1000/100000}}</label>
+                        <label class="price02">实付￥{{item.BuyPrice*1000/100000}}</label>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bt_cell">
+            <view wx:if='{{item.PState==0}}' class='bt active' catchtap='gotugroupdetail' data-gid='{{item.GroupId}}' >商品详情</view>
+            <view wx:else class='bt active' catchtap='gotusubgroupdetail' data-gid='{{item.GroupId}}' data-gsid='{{item.GroupSponsorId}}'>参团详情</view>
+            <view wx:if='{{0==item.State&&(item.PState==2||item.PState==0)}}' class='bt active' catchtap='gotousegroup' data-gid='{{item.GroupId}}'
+                data-guid='{{item.Id}}'>去使用</view>
+            <view wx:elif='{{-1==item.State&&(item.PState==2||item.PState==0)}}' class='bt'>已使用</view>
+            <view wx:elif='{{-3==item.State&&(item.PState==2||item.PState==0)}}' class='bt'>已失效</view>
+            <view wx:elif='{{-2==item.State}}' class='bt'>已退款</view>
+             <view wx:elif='{{0==item.State&&item.PayState==0&&0!=item.PState&&2!=item.PState&&1!=item.PState}}' class='bt active' catchtap='refundGroup' data-gid='{{item.GroupId}}' data-guid='{{item.Id}}'>退款</view> 
+        </view>
+    </view>
+    <!--拼团end-->
+    <!-- 商品 -->
+    <view hidden='{{4!=tabfirst}}'>
+        <block wx:for="{{goods}}" wx:key="{{index}}">
+            <view style="background:#fff" class="goods-order-list">
+                <view class="vz-flex flex-center flex-between goods-order-top">
+                    <view class="vz-flex flex-center" data-sid="{{item.CStore.Id}}" bindtap="toStore">
+                        <image class="store-avatar" src="{{item.CStore.LogoUrl=='' || item.CStore.LogoUrl==null?'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg':item.CStore.LogoUrl}}"
+                        />
+                        <view class="wzsl" style="margin-left:10rpx;max-width:300rpx;">{{item.CStore.SName}}</view>
+                        <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                    <view style="color:#fe3d49">
+                        {{(item.GetGoodsOrder.State==-4) && '拒绝退款'||(item.GetGoodsOrder.State==-3) && '申请退款中'||(item.GetGoodsOrder.State==0) && '未付款'||(item.GetGoodsOrder.State==1) && '待核销'|| (item.GetGoodsOrder.State==2) && '已核销'||(item.GetGoodsOrder.State==3)
+                        && '待发货'||(item.GetGoodsOrder.State==4) && '正在配送' || (item.GetGoodsOrder.State==5) && '配送完成待收货'||(item.GetGoodsOrder.State==6)
+                        && '已收货'||(item.GetGoodsOrder.State==-1) && '已取消订单'||(item.GetGoodsOrder.State==-2) && '已退款'}}
+                    </view>
+                </view>
+                <block wx:for="{{item.GetGoodsOrderDetailList}}" wx:key="{{index}}">
+                    <view class="goods-order-mid vz-flex flex-center" bindtap="toOrderDetail" data-id="{{item.GoodsOrderId}}">
+                        <image class="goods-img" src="{{item.ImgUrl=='' || item.ImgUrl==null?'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg':item.ImgUrl}}"
+                        />
+                        <view class="goods-order-mid-left">
+                            <view class="goods-name wzsl" style="width:100%">{{item.GoodsName}}</view>
+                            <view class="goods-size clamp2" style="width:40%">{{item.AttrName!='' && item.AttrName!=null?'已选:'+item.AttrName:' '}}</view>
+                            <!-- 有同城卡的情况 40% 无100% -->
+                            <view class="vz-flex flex-center flex-between">
+                                <view class="goods-price">
+                                    ￥{{common.toFixed(item.Price/100)}}
+                                </view>
+                                <view class="goods-num">
+                                    x{{item.BuyNum}}
+                                    <text wx:if="{{item.State==-2}}">-已退款</text>
+
+                                </view>
+                            </view>
+                            <view class="vz-flex flex-center goods-city-card" wx:if="{{item.Goods.hctId>0&&item.IsHct>0}}">
+                                <view class="wzsl" style="max-width:160rpx;">{{item.Goods.ctname}}</view>
+                                <view style="margin-left:8rpx;">{{item.Goods.discount}}折优惠</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                <view class="goods-order-bottom">
+                    <!-- <text wx:if="{{null != item.GetyMorders && item.GetyMorders.Integration > 0}}">积分抵
+                        <text style="color:#fe3d49">￥{{common.toFixed(item.GetyMorders.Integration/100)}}</text>
+                    </text> -->
+                     共{{item.GetGoodsOrder.BuyNum}}件商品 合计:
+                    <text style="color: #fe3d49">￥{{common.toFixed(item.GetGoodsOrder.BuyPrice/100)}}</text>
+                    <view wx:if='{{null!=item.GetyMorders}}'>
+                    实付:
+                                        <text style="color: #fe3d49">￥{{common.toFixed(item.GetyMorders.payment_free/100)}}</text> <text wx:if="{{item.FreightMoney!='' && item.FreightMoney>0 && item.GetGoodsOrder.State!=-2}}">(含运费{{common.toFixed(item.FreightMoney/100)}})</text>
+                    </view>
+                    <view wx:else>
+                     <text wx:if="{{item.FreightMoney!='' && item.FreightMoney>0 && item.GetGoodsOrder.State!=-2}}">(含运费{{common.toFixed(item.FreightMoney/100)}})</text>
+                    </view>
+                   
+                </view>
+                <view class="vz-flex flex-center goods-order-btn">
+                    <view wx:if="{{item.GetGoodsOrder.State==1}}" bindtap="toOrderDetail" data-id="{{item.GetGoodsOrder.Id}}">
+                        扫码核销
+                    </view>
+                    <view wx:if="{{item.GetGoodsOrder.State==5||item.GetGoodsOrder.State==4}}" data-id="{{item.GetGoodsOrder.Id}}" data-tel="{{item.CStore.TelePhone}}" bindtap="confirmAccept">确认收货</view>
+                    <view wx:if="{{item.GetGoodsOrder.State==0}}" data-id="{{item.GetGoodsOrder.OrderId}}"  data-goid="{{item.GetGoodsOrder.Id}}" bindtap="goodsPay">
+                        付款
+                    </view>
+                    <view data-id="{{item.GetGoodsOrder.Id}}" bindtap="cancelOrder" wx:if="{{item.GetGoodsOrder.State==0}}" style="border-color:#ccc;color:#ccc">
+                        取消订单
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<!-- 商品 -->
+<view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>
+<view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showallbottomtip==true?'':'none'}}">— — 数据显示完了 — —</view>
+
+<!--底部导航-->
+<view class="fix-bl d-flex shangjia_bottom_nav index">
+    <view class="flex bt_li" hover-class='none' data-idx="1" bindtap='bottomnavswitch' data-url='{{buyversion==3?"../index/index":buyversion==2?"../shopindex/shopindex":"../postindex/postindex"}}'>
+        <icon class="iconfont icon-index"></icon>
+        <text>首页</text>
+    </view>
+    <view class="flex bt_li" data-idx="2" data-url='../activity/activity?type={{tranparm}}' bindtap='bottomnavswitch'>
+        <icon class="iconfont icon-kanjia"></icon>
+        <text>活动</text>
+    </view>
+    <view class="flex bt_li active" hover-class='none' data-url='../cutlist/cutlist' bindtap='bottomnavswitch'>
+        <icon class="iconfont icon-order"></icon>
+        <text>我的订单</text>
+    </view>
+    <view class="flex bt_li" hover-class='none' data-url='../person_center/person_center' bindtap='bottomnavswitch'>
+        <icon class="iconfont icon-person"></icon>
+        <text>我的</text>
+    </view>
+</view>
+<view class="mask" wx:if="{{showVoucher}}">
+        <view class="dialog-Voucher">
+            <icon class="iconfont icon-guanbi guanbi" catchtap="closeVoucher"></icon>
+            <view class="dialog-name">购物返券</view>
+            <view>
+                <text style="color: rgb(216, 78, 67);font-size: 150rpx;line-height: 1; margin-top: 10rpx;">{{voucher.VoucherMoney}}</text>
+                <text style="color: rgb(216, 78, 67);">元</text>          
+            </view>
+            <view style="color: rgb(251, 220, 163); margin-top: 90rpx;font-size: 28rpx">          
+                    <text wx:if="{{voucher.Deducting>0}}">满{{voucher.VoucherMoney}}元使用</text><text wx:if="{{voucher.ValidDays>0}}"><text wx:if="{{voucher.ValidDays>0&&voucher.Deducting>0}}">|</text>{{voucher.ValidDays}}天内有效</text>
+            </view>  
+            <view style="color: rgb(251, 220, 163); margin-top: 40rpx;font-size: 28rpx;text-decoration: underline" catchtap="tomyVoucher">
+                查看代金券
+            </view>
+        </view>
+    </view>
+    <!-- 快捷导航 -->
+<city-navigator  wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>

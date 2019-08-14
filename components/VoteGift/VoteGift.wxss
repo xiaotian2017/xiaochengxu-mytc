@@ -1,0 +1,115 @@
+@import '/components/component.wxss';
+.vote-gift-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .42);
+    z-index: 1999
+}
+.vote-gift-content {
+    width: 660rpx;
+    height: 920rpx;
+    box-sizing: border-box;
+    padding: 30rpx 20rpx;
+    font-size: 0;
+    border-radius: 8rpx;
+    background: #fff;
+}
+.gift-title-1 {
+    font-size: 28rpx;
+    margin-bottom: 24rpx
+}
+.gift-title-2 {
+    margin-bottom: 20rpx
+}
+.emphasize {
+    font-size: 32rpx
+}
+.send-name {
+    margin: 0 6rpx;
+    max-width: 60%
+}
+.vote-gift-item{
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10rpx;
+    width: 33.3333%;
+    text-align: center;
+    box-sizing: border-box
+}
+.vote-gift-item:not(:nth-of-type(3n)){
+    border-right: 1rpx solid #f0f0f0
+}
+.vote-gift-item:nth-of-type(1){
+    border-bottom: 1rpx solid #f0f0f0
+}
+.vote-gift-item:nth-of-type(2){
+    border-bottom: 1rpx solid #f0f0f0
+}
+.vote-gift-item:nth-of-type(3){
+    border-bottom: 1rpx solid #f0f0f0
+}
+
+.vote-gift-img{
+    margin-top: 10rpx;
+    width: 170rpx;
+    height: 170rpx;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.06);
+    margin-bottom: 10rpx
+}
+.gift-name {
+    margin-bottom: 10rpx;
+    font-size: 28rpx;
+    color: #fe3d49
+}
+.vote-checkbox{
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx
+}
+.vote-gift-value {
+    padding: 0 8rpx;
+    font-size: 24rpx;
+    color: #333
+}
+.gift-price {
+    color: #fe3d49
+}
+.vote-btn {
+    margin-top: auto;
+    width: 100%;
+    height: 84rpx;
+    line-height: 84rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #fff;
+    background: #fe3d49;
+    border-radius: 8rpx
+}
+.close-gift-layer {
+    margin-top: 30rpx;
+    position: relative;
+    width: 48rpx;
+    height: 48rpx;
+    border: 4rpx solid #fff;
+    border-radius: 50%
+}
+.close-gift-layer::before,.close-gift-layer::after{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    content: '';
+    display: block;
+    width: 4rpx;
+    height: 70%;
+    background: #fff;
+    border-radius: 2rpx
+}
+.close-gift-layer::before{
+    transform: rotate(45deg)
+}
+.close-gift-layer::after{
+    transform: rotate(-45deg)
+}

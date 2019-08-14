@@ -1,0 +1,30 @@
+view {
+    /* background: green; */
+}
+
+.vz-icon-info {
+    top: 40rpx;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 80rpx;
+}
+
+.expire-text {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto 40rpx;
+    font-size: 28rpx;
+}
+
+.c-qrcode {
+    width: 400rpx;
+    height: 400rpx;
+    display: block;
+    margin: 0 auto 40rpx;
+}
+
+.container {
+    background: #FFF;
+    padding-bottom: 100rpx;
+}

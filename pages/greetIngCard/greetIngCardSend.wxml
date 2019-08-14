@@ -1,0 +1,62 @@
+<view class="container">
+    <view class="title">
+        您准备把祝福发给
+    </view>
+    <input class="input" bindinput="getToNickName" type="text" disabled="{{isShowRed}}" maxlength="10" placeholder="建议不多于5个字"
+    />
+    <view class="title">
+        您的昵称
+    </view>
+    <input class="input" bindinput="getFromNickName" disabled="{{isShowRed}}" type="text" maxlength="10" placeholder="建议不多于5个字"
+    />
+    <view class="title">
+        请选择模板
+    </view>
+    <scroll-view scroll-x class="card-temp-wrap">
+        <block wx:for="{{cardTempList}}" wx:key="{{index}}">
+            <view class="card-temp-item" data-cardid="{{item.cardId}}" bindtap="chooseCardTemp">
+                <view class="card-temp-item-img">
+                    <image src="{{item.cardImg}}" class="temp-image" />
+                    <view class="choose-icon-wrap" wx:if="{{item.cardId==cardId}}">
+                        <image class="choose-icon" src="https://j.vzan.cc/content/city/cardtype/img/card-type06.png" />
+                    </view>
+                </view>
+                <view>{{item.cardName}}</view>
+            </view>
+        </block>
+    </scroll-view>
+    <view class="vz-flex flex-between flex-center redpackage-wrap">
+        <!-- <view>
+            塞红包
+        </view> -->
+        <!-- <view class="{{redAmountConfirmText!='非必填'? 'no-essential' : ''}}" catchtap="redLayerChange">
+            {{redAmountConfirmText}}
+            <icon class="iconfont icon-jiantou"></icon>
+        </view> -->
+    </view>
+    <view class="btn btn1" bindtap="sendGreetingCard">
+        发送祝福
+    </view>
+    <view class="btn btn2" bindtap="toMyCard">
+        我的祝福
+    </view>
+
+    <!-- 红包弹窗 -->
+    <view class="mask" wx:if="{{isShowRed}}" catchtouchmove="return">
+        <view class="redpackage-main">
+            <view class="vz-flex flex-center flex input-item">
+                <text class="flex">红包总额(元)</text>
+                <input class="flex red-input" bindinput="getRedMoney" type="digit" maxlength="5" placeholder="0" value="{{redMoney}}" />
+            </view>
+            <view class="vz-flex flex-center flex input-item">
+                <text class="flex">红包个数(个)</text>
+                <input class="red-input flex" bindinput="getRedNumber" type="number" placeholder="0" maxlength="6" value="{{redNumber}}"
+                />
+            </view>
+            <view class="red-tips">微信官方收取{{payrate*100+'%'}}手续费</view>
+            <view class="red-money"> ￥ {{redAmount}}</view>
+            <view class="red-btn" catchtap="redBtn">塞入红包</view>
+            <view catchtap="redLayerChange" class="close"></view>
+        </view>
+    </view>
+</view>

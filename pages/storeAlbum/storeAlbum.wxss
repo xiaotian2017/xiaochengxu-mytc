@@ -1,0 +1,140 @@
+view {
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.create-cate-btn-wrap {
+    padding: 30rpx;
+    background: #f0f0f0;
+}
+
+.create-cate-btn-wrap view {
+    color: #fe3d49;
+    border: 1rpx solid #fe3d49;
+    text-align: center;
+    line-height: 80rpx;
+    height: 80rpx;
+    border-radius: 12rpx;
+    font-size: 36rpx;
+}
+
+.create-cate-name-wrap {
+    width: 600rpx;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32rpx;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-title {
+    height: 108rpx;
+    line-height: 108rpx;
+    text-align: center;
+    color: #555;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.create-cate-name-wrap input {
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    height: 108rpx;
+    width: 90%;
+    margin: 20rpx;
+    border: 1rpx solid #f0f0f0;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-btn {
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+}
+
+.create-cate-name-btn-wrap {
+    position: relative;
+}
+
+.create-cate-name-btn-wrap::after {
+    content: '';
+    display: block;
+    height: 60rpx;
+    border-left: 2rpx solid #f0f0f0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ablum-box {
+    width: 48%;
+    height: 340rpx;
+    border-radius: 8rpx;
+    position: relative;
+    margin-top: 24rpx;
+}
+
+.ablum-box image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.ablum-name {
+    width: 100%;
+    height: 48rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 48rpx;
+    font-size: 28rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.photo-num {
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    line-height: 48rpx;
+    border-radius: 80rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+    font-size: 28rpx;
+    z-index: 100;
+}
+
+.del-btn {
+    background: #666;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+
+.add-album-btn {
+    height: 90rpx;
+    line-height: 90rpx;
+}
+
+.album-radio {
+    position: absolute;
+}
+
+.del-album-btn {
+    padding: 20rpx;
+    font-size: 28rpx;
+    color: #333;
+    position: fixed;
+    right: 20rpx;
+    bottom: 200rpx;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 16rpx;
+}
+

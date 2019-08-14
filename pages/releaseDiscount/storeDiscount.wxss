@@ -1,0 +1,162 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.store-discount-tab {
+    height: 80rpx;
+    line-height: 80rpx; 
+    text-align: center;
+    font-size: 28rpx;
+}
+
+.base-active {
+    color: #fe3d49;
+    border-bottom: 1rpx solid #fe3d49;
+}
+
+.store-discount-tab-wrap {
+    border-bottom: 1rpx solid #f0f0f0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10000;
+    background: #fff;
+}
+
+.store-discount-list-wrap {
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.dsh {
+    padding: 0 12rpx;
+    border: 1px solid #999;
+    font-size: 24rpx;
+    color: #333;
+    height: 46rpxrem;
+    line-height: 46rpx;
+    border-radius: 8rpx;
+    width: 100rpx;
+    width:140rpx;
+    text-align:center;
+    
+}
+
+.vpcTil {
+    font-size: 32rpx;
+    color: #333;
+    font-weight: bold;
+    overflow: hidden;
+    width:500rpx;    
+margin-bottom: 30rpx;
+}
+
+.vpc_b1 {
+    margin-right: 10rpx;
+    color: #333;
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+}
+
+.vpc_b1-2 {
+    color: #fe3d49;
+    font-size: 48rpx;
+}
+
+.vpc_b1-3 {
+    color: #999;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+}
+
+.vpc_b1-4 {
+    color: #fe3d49;
+    font-size: 28rpx;
+}
+
+.vpc_b2 {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.yaunjia {
+    color: #fe3d49;
+}
+
+ .shengyu {
+    font-size: 24rpx;
+    color: #333;
+    line-height: 60rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.shijian {
+    color: #999;
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+}
+
+.vTIn {
+    box-sizing: border-box;
+    font-size: 24rpx;
+    color: #999;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.vTIn-inner {
+    height: 68rpx;
+}
+.bot-btn {
+    display: inline-block;
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 0 12rpx;
+    color:#fe3d49;
+    text-align: center;
+    border: 1px solid #fe3d49;
+    border-radius: 8rpx; 
+    font-size:24rpx; 
+    margin:15rpx 0;
+    margin-left: 12rpx;
+}
+
+.bot-btn-wrap {
+position: absolute;
+right: 20rpx;
+}
+
+.announcement-bt {
+    height: 90rpx;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fe3d49;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+    z-index:10
+}
+
+.add-btn {
+    transform: rotate(45deg);
+    font-size: 32rpx;
+}
+
+
+.re-coupons {
+    font-size:24rpx;
+    background:rgba(0, 0, 0, 0.5);
+    color:#fff;
+    position:absolute;
+    width:100%;
+    text-align:center;
+    padding:6rpx 0;
+    bottom:0rpx;
+    
+    }    

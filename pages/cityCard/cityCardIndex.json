@@ -1,0 +1,10 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "同城卡",
+    "usingComponents": { 
+        "city-tips":"/components/Tips/Tips"   
+
+    }  
+}

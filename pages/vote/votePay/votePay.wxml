@@ -1,0 +1,28 @@
+<view id="wrapper" class="d-flex flex-col" wx:if="{{init}}">
+    <view class="flex">
+        <block wx:for="{{gift}}" wx:key="unique">
+            <view class="gift-item d-flex flex-center">
+                <image src="{{item.GiftImg}}" class="gift-item-img"></image>
+                <view class="flex d-flex flex-col flex-between gift-item-info">
+                    <view>{{item.GiftName}}</view>
+                    <view class="gift-item-price">￥{{item.GiftPrice}}</view>
+                </view>
+                <view class="gift-action d-flex">
+                    <view class="minus" data-index="{{index}}" catchtap="giftMinus">-</view>
+                    <view class="gift-num">
+                        {{item.Count}}
+                    </view>
+                    <view class="add" data-index="{{index}}" catchtap="giftAdd">+</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="d-flex footer">
+        <view class="flex footer-count">
+            合计<text class="footer-price">{{total}}</text>
+        </view>
+        <view class="footer-btn" catchtap="payOrder">确认支付</view>
+    </view>
+</view>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

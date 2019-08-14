@@ -1,0 +1,5 @@
+<view class="search-wrap" catchtap="clickToSearch">
+    <icon type="search" size="18" class="search-btn" color="#929292"/>
+    <view class="search-input">请输入关键字</view>
+    <!-- <view class="search-btn">搜索</view> -->
+</view>

@@ -1,0 +1,130 @@
+<view class='tabBar d-flex bz' style='padding:0 20rpx;width:100%;background:#fff'>
+    <view wx:for="{{arrayNav}}" class="flex  tabItem c333 {{index==currentNav?'tabItemActive':''}}" data-idx='{{index}}' wx:for-item="itemNav"
+        bindtap='click_nav'>{{itemNav.title}}</view>
+</view>
+
+<view style="padding-bottom:100rpx;overflow:hidden">
+    <view style="padding: 20rpx">
+        <view class="city-card-list">
+            <view class="city-card-body"  bindtap="toPurchasePage" data-typeid='{{curCityCard.Id}}'>
+                <image src="{{curCityCard.ImgUrl}}"></image>
+                <view class="black-mask" style="z-index: 2;"></view>
+                <text class="city-card-name" style="color:{{isOpenCityCard&&'yellow'||'#fff'}}">{{curCityCard.Name}}</text>
+                <text class="city-card-des" style="color:{{isOpenCityCard&&'yellow'||'#fff'}}">{{curCityCard.Propaganda}}</text>
+                <text class="city-card-tips" style="color:{{isOpenCityCard&&'yellow'||'#fff'}}">{{nickName}} {{!isOpenCityCard && '未开通' || '有效期至 '+isOpenCityCard }}</text>
+                <view class="city-card-label" style="background:{{isOpenCityCard&&'yellow'||'#999'}};color:{{isOpenCityCard&&'red'||'#fff'}}">
+                    {{!isOpenCityCard && '未开通' || '已开通'}}
+                </view>
+            </view>
+        </view>
+        <!-- // 城主暂未出售同城卡 -->
+        <view class="vz-flex flex-between buy-card-btn" wx:if="{{!isOpenCityCard }}">
+            <view bindtap="toPurchasePage" data-typeid='{{curCityCard.Id}}'>立即购买</view>
+            <view bindtap="buyByExchangeCode">兑换码开卡</view>
+        </view>
+    </view>
+    <!-- 时间条 -->
+    <view style="background: #fff;margin-bottom:20rpx;">
+        <view class="date-wrap" style="border-bottom: 1rpx solid #f0f0f0">
+            <view class="vz-flex">
+                <text space="false" class="date-left {{isDateActiveIdx=='all' && 'date-active'}}" data-date="0" bindtap="getDate" data-idx="all"
+                    style="display:inline-block;width:120rpx;flex-basis:120rpx;font-size:28rpx">{{curMonth}}月\n全部</text>
+                <scroll-view scroll-x class="vz-flex base-scroll-view">
+                    <block wx:for="{{dateArr}}" wx:key="index">
+                        <text space="false" bindtap="getDate" data-date="{{item.dateStr}}" data-day="{{item.dayStr}}" data-idx="{{index}}" class="base-scroll-item-view  {{isDateActiveIdx==index && 'date-active'}}">{{item.dateStr+'\n'+item.dayStr}}</text>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+        <!-- <view class="vz-flex flex-between" style="padding:0 20rpx">
+            <view class="bot-left">
+                <picker bindchange="bindPickerAreaChange" value="{{areaArrayIndex}}" range-key="Name" range="{{areaArray}}">
+                    <view class="picker vz-flex flex-between flex-center" style="height:80rpx;line-height:80rpx">
+                        <text>{{areaArray[areaArrayIndex].Name}}</text>
+                        <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                </picker>
+            </view>
+            <view class="bot-right">
+                <picker bindchange="bindPickerCardChange" value="{{cardArrayIdx}}" range="{{cardArray}}" range-key="Name">
+                    <view class="picker vz-flex flex-between flex-center" style="height:80rpx;line-height:80rpx">
+                        <text>{{cardArray[cardArrayIdx].Name}}</text>
+                        <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                </picker>
+            </view>
+        </view> -->
+    </view>
+    <!-- 优惠店铺列表 -->
+    <view>
+        <block wx:for="{{halfServiceList}}" wx:key="{{index}}">
+            <view class="city-card-discount-list-wrap">
+                <view class="city-card-discount-list-title wzsl vz-flex flex-fenter">
+                    <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                    {{item.StoreName}}
+                </view>
+                <view class="vz-flex city-card-discount-list-bot" bindtap="toCityCardService" data-typeid="{{item.TypeId}}" data-hid="{{item.Id}}" data-gid="{{item.goodsId}}">
+                    <view class="city-card-store-logo-wrap">
+                        <image src="{{!item.ImgUrl && 'http://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg' || item.ImgUrl }}"
+                            class="city-card-store-logo"></image>
+                        <view class="city-card-discount-label">{{item.Discount}}折</view>
+                    </view>
+                    <view style="width:60%">
+                        <view class="city-card-discount-store-name wzsl">{{item.Title}}</view>
+                        <view class="city-card-discount-desc" style="line-height: 1.4;">{{item.IsToday==1?'今天可用':'每'+item.ServicesTime}}</view>
+                        <view class="city-card-discount-desc wzsl">已抢{{item.PurchaseCount}}份</view>
+                        <view class="city-card-discount-tips wzsl" wx:if="{{item.DiscountType==1}}">凭券享折扣</view>
+                        <view class="city-card-discount-tips wzsl" wx:else>
+                            <text space="true" style="color:#ff5a00;font-size: 42rpx;">￥{{item.DiscountPrice*1000/100000}} </text>
+                            <text style="font-size:26rpx;color:#666;text-decoration:line-through">￥{{item.OriginalPrice*1000/100000}}</text>
+                        </view>
+                    </view>
+                    <view class="city-card-discount-getting" wx:if="{{item.DiscountType==1}}" style="background:{{item.IsReceive==1?'#CCC':'#fe3d49'}}">{{item.IsReceive==1?'已领取':'立即领取'}}</view>
+                    <view class="city-card-discount-getting" wx:else>马上抢购</view>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>        
+    </view>
+</view>
+
+<!-- 兑换码开卡 -->
+<view hidden="{{isShowExchange}}" class="exchange-code-wrap" catchtouchmove="return">
+    <view class="exchange-code-body">
+        <view class="exchange-code-title">
+            兑换码开卡
+            <icon class="iconfont icon-guanbi" bindtap="closeExchangeCodeLayer"></icon>
+        </view>
+        <input class="exchange-code-input" maxlength="10" bindinput="getValidCode" value="{{validCode}}" placeholder="请输入兑换码" />
+        <view class="exchange-code-valid-btn" bindtap="validExchangeCode">
+            验证兑换码
+        </view>
+    </view>
+</view>
+<!-- 快捷导航 -->
+<city-navigator  wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>
+<!--footer bar -->
+<view class="footer vz-flex">
+    <view class="footer-item" bindtap="toIndex">
+        <icon class="iconfont icon-index footer-icon"></icon>
+        <text>首页</text>
+    </view>
+    <view class="footer-item footer-active">
+        <icon class="iconfont icon-city-vip footer-icon"></icon>
+        <text>同城卡</text>
+    </view>
+    <view class="footer-item" bindtap="toCutlist">
+        <icon class="iconfont icon-order footer-icon"></icon>
+        <text>我的订单</text>
+    </view>
+    <view class="footer-item" bindtap="toMine">
+        <icon class="iconfont icon-person footer-icon"></icon>
+        <text>我的</text>
+    </view>
+</view>
+<!-- 快捷导航 -->
+<city-navigator  wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>

@@ -1,0 +1,139 @@
+.voucher-tab-wrap {
+    background: #fff;
+    padding: 0 20rpx;
+}
+
+.voucher-tab-item {
+    font-size: 28rpx;
+    color: #666;
+    line-height: 90rpx;
+    margin: 0 40rpx;
+}
+
+.active {
+    color: #fe3d49;
+    border-bottom: 2rpx solid #fe3d49;
+}
+
+.voucher-list-wrap {
+    padding: 20rpx;
+}
+
+.voucher-list {
+    background: #FFF;
+    margin-bottom: 20rpx;
+    height: 260rpx;
+    border-radius: 8rpx;
+    position: relative;
+}
+
+.vouher-list-money {
+    font-size: 50rpx;
+    color: #fe3d49;
+    padding-left: 20rpx;
+}
+
+.voucher-list-store {
+    font-size: 28rpx;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    height: 60rpx;
+    width: 360rpx;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    line-height: 1.6;
+}
+
+.voucher-store-name {
+    width: 70%;
+    /* padding-top: 50rpx; */
+}
+
+.voucher-btn {
+    font-size: 28rpx;
+    padding: 6rpx 20rpx;
+    background: #fe3d49;
+    color: #fff;
+    border-radius: 8rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100rpx;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.voucher-line {
+    border-left: 2rpx dotted #f0f0f0;
+    height: 260rpx;
+    position: relative;
+}
+
+.voucher-line::before {
+    display: block;
+    content: '';
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 100%;
+    background: #f0f0f0;
+    position: absolute;
+    top: -15rpx;
+    left: -15rpx;
+}
+
+.voucher-line::after {
+    display: block;
+    content: '';
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 100%;
+    background: #f0f0f0;
+    position: absolute;
+    bottom: -15rpx;
+    left: -15rpx;
+}
+
+.no-data {
+    font-size: 28rpx;
+    color: #666;
+    text-align: center;
+}
+
+.voucher-active {
+    background: #ccc;
+    color: #fff;
+}
+
+.vouher-tips {
+    font-size: 24rpx;
+    color: #666;
+    padding-left: 30rpx;
+    padding-top: 20rpx;
+}
+
+.out-date {
+    position: absolute;
+    font-size: 24rpx;
+    color: #fff;
+    background: #fe3d49;
+    top: 0;
+    width: 160rpx;
+    text-align: center;
+}
+
+.voucher-rule {
+    font-size: 24rpx;
+    color: #fe3d49;
+    padding-left: 20rpx;
+}
+
+.new-user {
+    font-size: 24rpx;
+    color: #fe3d49;
+    margin-left: 40rpx;
+}
+

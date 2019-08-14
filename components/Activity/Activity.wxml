@@ -1,0 +1,10 @@
+<view class='index-activity flex flex-between flex-wrap'>
+    <block wx:for="{{indexItem}}" wx:key="{{index}}">
+        <view class="active-item {{item.Sort>=0?'':'empty-icon'}}" data-url="{{item.LinkUrl}}" bindtap="navFn"> 
+            <view class="active-title" wx:if="{{item.Sort != -1}}">{{item.Title}}</view>
+            <view class="active-icon">
+              <image mode='widthFix' src="{{item.LogoUrl}}"></image>
+            </view>
+        </view>
+    </block>
+</view>

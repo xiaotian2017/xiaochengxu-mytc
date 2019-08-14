@@ -1,0 +1,20 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.address-item {
+    padding: 20rpx 30rpx;
+    font-size: 32rpx;    
+    line-height: 80rpx;
+    background: #fff;    
+    color: #333;
+}
+
+.address-item + .address-item{
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.address-item input {
+    text-align: right;
+}

@@ -1,0 +1,9 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "city-vote-count-down":"/components/VoteCountDown/VoteCountDown",
+        "city-navigator":"/components/Navigator/Navigator",
+        "city-video":"/components/BaseVideo/BaseVideo",
+        "city-vote-detail": "/components/VoteDetail/VoteDetail"
+    }
+}

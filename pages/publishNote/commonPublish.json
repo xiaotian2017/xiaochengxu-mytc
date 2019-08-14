@@ -1,0 +1,8 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh":false,
+    "usingComponents": {
+    "city-navigator": "/components/Navigator/Navigator"
+  }
+}

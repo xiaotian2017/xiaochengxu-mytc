@@ -1,0 +1,14 @@
+
+.activity_record_cell{padding: 20rpx 30rpx;background: #fff;font-size: 30rpx;border-bottom: 1rpx solid #f0f0f0;}
+
+.activity_record_cell .head{width: 100rpx;height: 100rpx;border-radius: 50%;overflow: hidden;margin-right: 20rpx}
+
+.activity_record_cell .head image{height: 100%;width: 100%}
+
+.activity_record_cell .name{color: #fe3d49;max-width: 200rpx;display: block;float: left}
+
+.activity_record_cell .money{color: #fd8f45;}
+
+.activity_record_cell .date{color: #999;font-size: 24rpx;margin-top: 10rpx}
+
+.to-the-end{color: #ccc;font-size: 28rpx;padding: 20rpx;text-align: center;}

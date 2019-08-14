@@ -1,0 +1,151 @@
+.city-post-commentInput{
+    display: none;
+    position: fixed;
+    bottom:-100vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 1200
+}
+.commentInput-title{
+    height: 90rpx;
+    padding:10rpx 20rpx;
+    border-bottom: 1rpx solid #e5e5e5
+}
+.commentInput-title .close{
+    width:48rpx;
+    height: 48rpx
+}
+.commentInput-title .close::before,.commentInput-title .close::after{
+    width: 2px;
+    height:100%;
+    background: #ccc;
+}
+.commentInput-title .avatar{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    overflow: hidden
+}
+.commentInput-title .avatar image{
+    width: 100%;
+    height: 100%
+}
+.icon-deliver{
+    overflow:hidden;
+    width:52rpx;
+    height:52rpx
+}
+.icon-deliver .deliver{
+    position:relative;
+    width:52rpx;
+    height:52rpx;
+    background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M942 118L71 455c-50 19-48 46 2 61l211 63 85 254c12 34 41 41 66 16l110-109 219 159c28 21 57 10 65-24l159-717c7-35-13-52-46-40zM810 280L438 612c-7 6-13 17-14 26l-16 155c-2 17-8 18-14 1l-71-217c-3-8 1-19 8-23l472-283c30-18 33-14 7 9z" fill="#ccc"/></svg>') no-repeat;
+    background-size:100%;
+    -webkit-filter: drop-shadow(#fe3d49 52rpx 0);
+    filter: drop-shadow(#fe3d49 52rpx 0);
+}
+.icon-deliver .active{
+    left:-52rpx;
+    border-right:52rpx solid transparent;  
+}
+.city-post-commentArea{
+    position: relative;
+    box-sizing: border-box;
+    padding:10rpx 20rpx 30rpx;
+    height: 300rpx;
+    max-height:360rpx;
+    width: 100vw
+}
+.city-post-commentContent{
+    width: 100%;
+    height: 100%;
+    color: #333;
+    font-size: 30rpx
+}
+.input-account{
+    line-height: 1;
+    position: absolute;
+    right:20rpx;
+    bottom:0;
+    color: #999;
+}
+.over-text{
+    color:#fe3d49
+}
+.city-upImg{
+    padding: 20rpx 20rpx 0 20rpx;
+}
+.city-upSigns,.city-upImg-item{
+    width:150rpx;
+    height:150rpx
+}
+.city-upSigns{
+    box-sizing: border-box;
+    border: 2rpx dashed #ccc
+}
+.city-upSigns .add{
+    margin: auto;
+    width: 100rpx;
+    height: 100rpx;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path d="M54,39H26c-0.5,0-1-0.5-1-1l0,0c0-0.5,0.4-1,1-1h28c0.5,0,1,0.5,1,1l0,0C55,38.5,54.5,39,54,39z" fill="#ccc"/><path d="M40,53L40,53c-0.5,0-1-0.5-1-1V24c0-0.5,0.5-1,1-1l0,0c0.5,0,1,0.4,1,1v28C41,52.5,40.5,53,40,53z" fill="#ccc"/></svg>')
+}
+.city-upImg-item{
+    position: relative
+}
+.city-upImg-item:not(:nth-last-of-type(3n)){
+    margin-right:20rpx
+}
+
+.city-upImg-item image{
+    width: 100%;
+    height: 100%
+}
+.city-upImg-item .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36rpx;
+    height: 36rpx;
+    background: rgba(0,0,0,.36)
+}
+.city-upImg-item .close::before,.city-upImg-item .close::after{
+    background: #fff
+}
+.slideFromDown{
+    display: block;
+    -webkit-animation: slideFromDown .22s cubic-bezier(0.000, 0.545, 0.005, 0.990) both;
+    animation: slideFromDown .36s cubic-bezier(0.000, 0.545, 0.005, 0.990) both
+}
+.slideDown{
+    display:block;
+    -webkit-animation: slideDown .36s cubic-bezier(0.175, 0.240, 0.000, 0.865) both;
+    animation: slideDown .36s cubic-bezier(0.175, 0.240, 0.000, 0.865) both
+}
+@-webkit-keyframes slideFromDown{
+    to{
+        transform: translate3d(0,-100vh,0)
+    }
+}
+@keyframes slideFromDown{
+    to{
+        transform: translate3d(0,-100vh,0)
+    }
+}
+@-webkit-keyframes slideDown{
+    from{
+        transform: translate3d(0,-100vh,0)
+    }
+    to{
+        transform: translate3d(0,0,0)
+    }
+}
+@keyframes slideDown{
+    from{
+        transform: translate3d(0,-100vh,0)
+    }
+    to{
+        transform: translate3d(0,0,0)
+    }
+}

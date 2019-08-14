@@ -1,0 +1,64 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+
+}
+
+.store-wrap {
+    padding: 0 20rpx;
+    line-height: 60rpx;        
+    background-color: #f7f7f7;
+    font-size: 28rpx;
+}
+
+.main {
+    background: #fff;
+}
+
+.main-inner {
+    text-align: center;
+    padding: 44rpx 0;
+    color:#111;
+    font-size: 26rpx;
+}
+
+.money {
+     color: #fe3d49;
+     font-size: 40rpx;
+     margin-right: 20rpx;
+}
+
+.des {
+    font-size: 24rpx;
+    color: #fff;
+    background: #fe3d49;
+    padding: 16rpx 20rpx;
+}
+
+.hexiaoren {
+    width: 120rpx;
+    height: 120rpx;
+}
+
+.p1 {
+    font-size: 28rpx;
+    color: #111;
+}
+
+.p2 {
+    font-size: 24rpx;
+    color: #666;
+    margin-top: 4rpx;
+}
+
+.lianxi {
+    line-height: 30rpx;
+    color: #fe3d49;
+    border: 1rpx solid #fe3d49;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 26rpx;
+    margin-left: 30rpx;
+}
+

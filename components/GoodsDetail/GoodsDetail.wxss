@@ -1,0 +1,152 @@
+@import '/utils/wxParse/wxParse.wxss';
+@import '/components/component.wxss';
+
+view{
+    word-break: break-all
+}
+.wrapper{
+    box-sizing: border-box;
+    padding-bottom: 100rpx;
+    background: #f2f2f2;
+    height:100vh;
+    overflow-y: scroll
+}
+.goods-banner{
+    height:375rpx
+}
+.goods-banner image{
+    width: 100%;
+    height: 100%
+}
+.goods-info,.open-cityCard,.store{
+    padding: 20rpx;
+    margin-bottom: 20rpx;
+    background: #fff
+}
+.goods-title{
+    margin-bottom: 10rpx;
+    font-size: 28rpx;
+    color: var(--font-color)
+}
+.goods-price{
+    font-size:32rpx;
+    color: var(--main-color)
+}
+.goods-price::before{
+    content: "￥";
+    font-size: 24rpx;
+    vertical-align:1px;
+    color: var(--main-color)
+}
+.goods-origin-price{
+    color: #666;
+    font-size: 26rpx;
+    text-decoration: line-through
+}
+.goods-origin-price,.goods-limit{
+    margin-left: 20rpx
+}
+.goods-limit{
+    color:#666;
+    font-size:28rpx
+}
+.goods-sales{
+    margin-left: auto;
+    font-size: 28rpx;
+    color: #999
+}
+.arrow{
+    vertical-align: middle;
+    width: 28rpx;
+    height: 28rpx
+}
+.open-cityCard{
+    font-size: 28rpx
+}
+.main-color{
+    color: var(--main-color)
+}
+.store{
+    position: relative
+}
+.store-avatar{
+    margin-right: 10rpx;
+    width:72rpx;
+    height:72rpx
+}
+.store-avatar image{
+    width: 100%;
+    height: 100%
+}
+.store-name{
+    max-width: 65%;
+    font-size: 28rpx;
+    color: var(--font-color)
+}
+.store-location,.enter-store{
+    color: #999
+}
+.store-location{
+    margin-top: 10rpx;
+    font-size: 26rpx
+}
+.enter-store{
+    position: absolute;
+    top: 38rpx;
+    bottom: 0;
+    right: 20rpx;
+    height: 28rpx;
+    font-size: 28rpx
+}
+
+.goods-description-tag{
+    position: relative;
+    padding: 20rpx;
+    font-size: 28rpx;
+    line-height: 1;
+    color: #333;
+    background: #fff;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.goods-description-tag::before{
+    display: inline-block;
+    content: '';
+    width: 6rpx;
+    height: 28rpx;
+    margin-right: 10rpx;
+    vertical-align: middle;
+    background: var(--main-color);
+    border-radius: 2rpx
+}
+.goods-description{
+    font-size: 28rpx;
+    padding:20rpx 20rpx 0;
+    background: #fff
+}
+.goods-video{
+    padding-bottom: 20rpx
+}
+.goods-descriImgList{
+    text-align: center
+}
+.goods-descriImgList image{
+    width: 100%
+}
+.wxParse-p{
+    margin-bottom:10rpx; 
+    color: #333;
+    font-size: 28rpx
+}
+.wxParse-inline{
+    color: #333;
+    font-size: 28rpx;
+    line-height:1.5
+}
+
+.re-coupon-label {
+    font-size: 24rpx;
+    color:#ffb504;   
+    font-weight: normal;
+    padding:4rpx 20rpx;
+    border: 1rpx solid #ffb504;   
+}

@@ -1,0 +1,222 @@
+@import "../../utils/wxParse/wxParse.wxss";
+@import "../postindex/postindex.wxss";
+@import "../../public/navigatorCommon.wxss";
+.top_nav {
+  background: #fff;
+}
+
+hearder_sou {
+  text-align: center;
+  color: gray;
+  font-size: 25rpx;
+  background-color: #fff;
+  margin: 18rpx 50rpx;
+  height: 1.5rem;
+  line-height: 30rpx;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.hearder_sou_2 {
+  text-align: center;
+  color: gray;
+  font-size: 25rpx;
+  margin: 15rpx 20rpx;
+  height: 2rem;
+  line-height: 40rpx;
+}
+
+.hearder_sou_i {
+  height: 0.7rem;
+  width: 20px;
+  display: inline-block;
+}
+
+page {
+  font-size: 62.5%
+}
+
+.page__bd {
+  height: 100%;
+  padding-bottom: 0;
+}
+
+.newpost {
+  text-align: center;
+  font-size: 15px;
+  color: #929292;
+  border-bottom: 1px solid #e4e4e4;
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff;
+}
+
+.scrolltypeitemtop {
+  width: 20%;
+  font-size: 14px;
+  background-color: #fff;
+  height: 50px;
+  line-height: 50px;
+  color: #f00;
+  text-align: center;
+  display: inline-block;
+  border-bottom: 2px solid #f00;
+  position: absolute;
+  z-index: 11;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+}
+
+.scrolltypename {
+  width: 100%;
+  font-size: 14px;
+  white-space: nowrap;
+  background-color: #fff;
+  margin-bottom: 1px;
+  height: 50px;
+  color: #333;
+}
+
+.scrolltypeitem {
+  text-align: center;
+  display: inline-block;
+  width: 20%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  height: 48px;
+  line-height: 50px;
+}
+
+.hearder_sou_i {
+  height: 0.7rem;
+  width: 20px;
+  display: inline-block;
+}
+
+.typebottom {
+  /*border-bottom: 2px solid #f00;*/
+  color: #f00;
+}
+
+.headerSort {
+  background-color: white;
+  display: flex; 
+  justify-content: space-between;
+  font-size: 32rpx;
+  position: relative;
+  border-top: 1rpx solid #EAEAEA;
+}
+
+.sortItem {
+  height:84rpx;
+  text-align:center;
+  line-height:84rpx;
+  font-size:28rpx;
+  color:#5e5e5e;  
+  position: relative;
+}
+
+.body_choose {
+  z-index: 10000;
+  position: absolute;
+  width: 100%;
+  font-size: 32rpx;
+  height: 44vh;
+  display: flex;
+  background: #f2f5f7;
+  left: 0;
+}
+
+.body_choose1 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.chooseitem {
+  padding-left: 30rpx;
+  line-height: 40px;
+  color: #5e5e5e;
+  font-size: 28rpx;
+}
+
+.bg {
+  background-color: rgb(120, 120, 120);
+  position: fixed;
+  width: 100%;
+  height: 50vh;
+  bottom: 0;
+  opacity: 0.6;
+  left: 0;
+  z-index: 98;
+}
+
+.search_box {
+  position: relative;
+}
+
+.serarch-wrapper .search-btn {
+  font-size: 28rpx;
+  color: #101010;
+  text-align: center;
+  padding: 0 60rpx 0 20rpx;
+}
+
+.search_icon {
+  position: absolute;
+  right: 0;
+}
+
+.search-input {
+  width: 540rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #333;
+  border-radius: 40rpx;
+  background: #eaeaea;
+  text-align: center;
+  height: 60rpx;
+}
+
+.icon-person-svg {
+  background: url('data:image/svg+xml,<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M924 233v-6l-1-1v-1h-1l-1-1v-1l-2-1v-1l-1-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-5l-1 1h-1v1h-3L113 516c-11 4-16 15-12 26 3 6 7 9 12 11l236 95 25 135c2 11 12 18 22 17 5-1 9-4 11-7l88-87 178 71c10 4 21-1 25-10l224-524h1v-7l1-3zM364 611l-190-76 604-231-414 307zm41 127l-13-74 63 25-50 49zm265-5L407 628l452-334-189 439z" /></svg>') no-repeat !important;
+}
+
+.icon-jiahao-svg {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M821 807H214V199h607v608zm-575-32h543V231H246v544z"/><path d="M701 518H333c-9 0-16-7-16-16s7-16 16-16h368c9 0 16 7 16 16s-7 16-16 16z"/><path d="M518 696c-9 0-16-7-16-16V326c0-9 7-16 16-16s16 7 16 16v354c0 8-7 16-16 16z"/></svg>') no-repeat !important;
+}
+
+.serarch-wrapper {
+  background: #fff;
+  padding: 20rpx 0 30rpx 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;  
+}
+
+.icon-index-home::before, .icon-index-info, .icon-publish::before, .icon-my-publish::before {
+  font-size: 48rpx;
+}
+
+.icon-index-info::before {
+  color: #fa0f20;
+}
+
+.container {
+  height: 98vh;
+  overflow: hidden;
+}
+
+.icon-jiantou-down::before {
+  font-size: 24rpx;
+}
+
+
+.sortItem .arrow-rotate {  
+  transform: rotate(-180deg);
+  transition: transform .5s;
+}

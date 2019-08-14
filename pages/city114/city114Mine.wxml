@@ -1,0 +1,79 @@
+<view class="vz-flex vz-flex-1 top-tab">
+    <view class="vz-flex-1 {{activeIdx==1 && 'active'}}" bindtap="getTongGuo">已通过</view>
+    <view class="vz-flex-1 {{activeIdx==0 && 'active'}}" bindtap="getDaiShenHe">待审核</view>
+    <view class="vz-flex-1 {{activeIdx==-1 && 'active'}}" bindtap="getShiXiao">已失效</view>
+</view>
+
+<view style="background:#f0f0f0">
+    <block wx:for="{{ruZhuList}}" wx:key="{{index}}">
+        <view style="margin-bottom:20rpx; background: #fff">
+            <view style="padding: 30rpx 20rpx;border:1rpx solid #f0f0f0;position:relative">
+                <view class="wzsl" style="font-size:32rpx">{{item.Name}}</view>
+                <view class="wzsl" style="font-size:28rpx;color:rgba(102, 102, 102, 0.342);padding-top:30rpx;padding-bottom:20rpx">地址: {{item.AreaName}}</view>
+                <view style="font-size:28rpx;color:#666">电话: {{item.LinkPhone}}</view>
+                <view class="out-time">{{item.State==1 && item.outDateTime && item.outDateTime+' 到期' || ''}}</view>
+                <view class="out-time">{{item.TopStatus > 0 && item.State==1 && item.outTopDateTime && item.outTopDateTime+' 置顶到期' || ''}}</view>
+                
+                <view wx:if="{{item.State<0}}" class="vz-flex flex-center">
+                    <icon type="warn" size="16" color="#fe3d49"></icon>
+                    <view class="warn-info">{{item.State==-4 && '店铺到期下架' || item.State==-3 && '店铺待支付' || item.State==-1 && '店铺已删除'}}</view>
+                </view>
+                <view wx:if="{{(item.State==1 && xuFeiList.length>0 ) || item.State==-3 && xuFeiList.length>0}}" class="xufei" bindtap="xufei"
+                    data-id="{{item.Id}}"> {{item.State==-3?'支付':'续费'}}</view>
+                <view class="xufei" wx:if="{{item.State==-1}}" data-idx="{{index}}" bindtap="checkReason">查看原因</view>
+            </view>
+            <view wx:if="{{item.State>=0}}" style="padding:30rpx 20rpx;border-bottom:1rpx solid #f0f0f0;" class="vz-flex vz-between bot-warp">
+                <view wx:if="{{item.TopStatus <= 0 && item.State==1 && !isIos}}" bindtap="setTop" data-id="{{item.Id}}" class="bot1">
+                    付费置顶
+                </view>
+                <view wx:if="{{item.State>=0}}" bindtap="backEdit" data-id="{{item.Id}}" class="bot2">
+                    编辑
+                </view>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{isDone}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+</view>
+
+<view class="xufei-warp" wx:if="{{isShowPay}}">
+    <view class="xufei-body">
+        <view class="xufei-title">
+            付费
+        </view>
+        <block>
+            <view>
+                <radio-group class="radio-group" bindchange="payChange">
+                    <label class="radio" wx:for="{{payList}}" wx:key="{{index}}">
+                        <radio value="{{index}}" checked="{{index==0}}" />{{item}}
+                    </label>
+                </radio-group>
+            </view>
+        </block>
+        <view class="xufei-btn-warp">
+            <view class="xufei-btn" catchtap="buyIt">
+                马上购买
+            </view>
+        </view>
+        <icon class="iconfont icon-guanbi close-btn" catchtap="closeBtn"></icon>
+    </view>
+</view>
+
+
+<view class="xufei-warp" wx:if="{{isShowReason}}">
+    <view class="xufei-body">
+        <view class="xufei-title" style="border:0">
+            删除原因
+        </view>
+        <view class="reason-body">
+            {{delReason!='null' && delReason!==null && delReason || ''}}
+        </view>
+        <view>
+            <image class="qr" src="{{cityqr}}"></image>
+            <view class="tips">
+                截图保存，联系管理员
+            </view>
+            <view class="tips" catchtap="vzMakePhone">Tel: {{cityphone}}</view>
+        </view>
+        <icon class="iconfont icon-guanbi close-btn" style="bottom:-90rpx" catchtap="closeBtn2"></icon>
+    </view>
+</view>

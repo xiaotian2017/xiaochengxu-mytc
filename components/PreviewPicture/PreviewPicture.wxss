@@ -1,0 +1,21 @@
+@import  '/components/component.wxss';
+.image-list{
+    position:relative;
+    padding-bottom:10rpx    
+}
+.image-item{
+    width: 220rpx;   
+}
+.image-account{
+    position:absolute;
+    top:0;
+    right:0;
+    padding:8rpx 12rpx;
+    font-size:24rpx;
+    color:#fff;
+    background:rgba(0,0,0,.36)
+}
+
+.image-item + .image-item {
+    margin-left:20rpx;
+}

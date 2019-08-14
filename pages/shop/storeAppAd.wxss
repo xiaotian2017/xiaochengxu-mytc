@@ -1,0 +1,22 @@
+view {
+    background: #ffff;
+}
+
+.qrcode {
+    width: 400rpx;
+    height: 400rpx;
+    padding: 40rpx 0;
+}
+
+.tips {
+    font-size: 32rpx;
+
+    text-align: center;
+}
+
+.city-phone {
+    text-align: center;
+    font-size: 32rpx;
+    padding: 20rpx 0 80rpx;
+    font-weight: 700;
+}

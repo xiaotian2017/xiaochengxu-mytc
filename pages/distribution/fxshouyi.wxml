@@ -1,0 +1,65 @@
+
+    <view style="margin:0 0 10px;" wx:if='{{!!mainmodel&&0==fxratelay}}'>
+        <view class="d-flex d-flex-center commodity-benifit-cell">
+            <image class="head" src="{{mainmodel.headimg}}"></image> 
+            <view class="flex">
+                <view class="f-14rem clamp1">{{mainmodel.nickname}}</view>
+                <view class="f-12rem c666" style="margin-top:3px">{{mainmodel.fxtitle}}</view>
+                <view class="f-14rem" style="margin-top:3px">收益：<i class="money">￥{{mainmodel.realamount*1000/100000}}</i></view>
+                <view class="bt" catchtap='lookfollowers' data-itemid='{{itemid}}' data-subcityid='{{mainmodel.subcityid}}' data-itemtype='{{itemtype}}' style="margin-top:5px;display:inline-block">分销下属</view>
+               <view class="bt" wx:if='{{null!=fxrateconfig}}'  catchtap='turnfxrate' style="margin-top:5px;display:inline-block;margin-left:6px">分销比例                     </view>
+            </view>
+        </view>
+
+        <view class="bg-f mr-1" id="listul" wx:for="{{listcash}}">
+<view class="manage-cell bottom-line">         <view class="d-flex d-flex-center top">             <image  class="head" src="{{item.HeadImg}}"></image>             <view class="flex">                 <view class="clearfix" style="margin-bottom:2px;">                     <view class="f-14rem clamp1 name fl">{{item.NickName}}</view>                     <view class="f-16rem ta-r money bold fr">￥{{item.RealAmount*1000/100000}}</view>                 </view>                 <view class="clearfix">                     <view class="f-12rem c666 fl">{{item.CreateTime}}</view>                 </view>             </view>         </view>     </view>
+        </view>
+    </view>
+<view style="text-align: center;font-size: 20px;font-family: 'Microsoft YaHei',Arial;font-weight: bold;margin-top: 10px;margin-top: 20px;" wx:if='{{1==fxratelay}}'>
+                    各项分成比例
+                </view>
+<view id="panel" class="flex-column" wx:if='{{1==fxratelay}}'>
+
+  <view class="flex-cell flex-row">
+    <text class="flex-cell flex-row">消费类型</text>
+    <text class="flex-cell flex-row">分成比例</text>
+    
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">付费发帖</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.AddPostRate}}%</text>
+   
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">信息置顶</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.TopPostRate}}%</text>
+   
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户入驻</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.AddStoreRate}}%</text>
+  
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户置顶</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.TopStoreRate}}%</text>
+    
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">同城卡</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.CityCardRate}}%</text>
+    
+  </view>
+<view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户认领</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.ShopClaimUnitRate}}%</text>
+    
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row" >申请分销</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.ApplyCitySubRate}}%</text>
+  </view>
+
+</view>  <view style='margin:30px 45%;fontsize:12px;text-decoration:underline;color:blue ' bindtap='turnfxrate' wx:if='{{1==fxratelay}}'>
+  返回
+  </view>

@@ -1,0 +1,34 @@
+<view class="container">
+    <block wx:for="{{privilegeList}}" wx:key="{{index}}">
+        <!--  抢优惠 -->
+        <view class="flex item" data-storeid='{{item.storeId}}' data-id='{{item.ItemId}}' data-itemtype="{{item.ItemType}}" catchtap='goPrivilegeDtl' style="position: relative;">
+            <view style="position: relative;width:24%">
+                <image class="cover" style="width:100%;vertical-align: middle" mode="widthFix" src="{{item.ImgUrl?item.ImgUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"></image>                           
+                <image class="activity-logo" mode="widthFix" src="{{item.ItemType==1&&'https://j.vzan.cc/content/city/xcx/images/youhui.png'||item.ItemType==2&&'https://j.vzan.cc/content/city/xcx/images/pintuan.png'||item.ItemType==3&&'https://j.vzan.cc/content/city/xcx/images/aixinjia.png'||item.ItemType==4&&'https://j.vzan.cc/content/city/xcx/images/jianjia.png'}}"></image>             
+            </view>
+            <view class="content" style="width:76%;padding-left:20rpx">
+                <view class="title clamp1" style="font-size: 32rpx; font-weight: 700">{{item.ItemName}}</view>
+                <view class="flex flex-reverse" style="margin-bottom:20rpx;">
+                    <view class="timer">{{wxTimerList[index]}}</view>
+                </view>
+                <view class="flex flex-between">                
+                        <view class="start-price" wx:if="{{item.ItemType!=2}}">
+                            <text>￥</text>
+                            <text style="font-size:32rpx;">{{item.DiscountPrice*100/10000}}起</text>
+                            <text style="text-decoration: line-through;color:#929292;margin-left:20rpx">￥{{item.OriginalPrice*1000/100000}}</text>
+                        </view>               
+                        <view class="start-price" wx:else>
+                            <text style="color:#333">团购</text>￥
+                            <text style="font-size:32rpx;">{{item.DiscountPrice*100/10000}}</text>
+                            <text style="text-decoration: line-through;color:#929292;margin-left:20rpx">￥{{item.OriginalPrice*1000/100000}}</text>
+                        </view>
+                        <view class="flex flex-center flex-between ori-price" style="color:#929292;font-size: 28rpx;">                             
+                            <view class="">已售{{item.RemainNum}}</view>
+                         </view>                                    
+                </view>
+            </view>
+            <!-- <city-countDown countDownColor="#fe4b4b" startDate="{{item.StartDate}}" endDate="{{item.EndDate}}" isEnd="{{item.IsEnd}}" currentType="{{currentType}}"></city-countDown> -->
+        </view>
+        <!-- 爱心价 -->
+    </block>
+</view>

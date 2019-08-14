@@ -1,0 +1,34 @@
+.voucher-tab-wrap {
+    background: #fff;
+    padding: 0 20rpx;
+    margin-bottom:20rpx;  
+}
+
+.voucher-tab-item {
+    font-size: 28rpx;
+    color: #666;
+    line-height: 90rpx;
+    padding: 0 40rpx;
+    text-align: center;
+}
+
+.active {
+    color: #fe3d49; 
+}
+
+.avatar {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+
+.icon-jiantou::before {
+    transform:translateY(-4rpx) rotate(90deg); 
+}
+
+
+.no-data {
+    font-size: 28rpx;
+    color: #666;
+    text-align: center;
+}

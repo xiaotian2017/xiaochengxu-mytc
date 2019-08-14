@@ -1,0 +1,30 @@
+@import  '/components/component.wxss';
+.item{
+    height: 176rpx;
+    margin-bottom: 20rpx;
+    border-radius: 8rpx;
+    padding-bottom: 20rpx;
+    box-shadow: 4rpx 4rpx 10rpx #ccc;
+}
+.content,.cover{
+    height: 100%
+}
+.content{
+    width: calc(100vw - 216rpx);
+    margin-right: 20rpx;
+    height: 176rpx
+}
+.title,.text-info{
+    font-size: 28rpx
+}
+city-postInfo{
+    margin-top:auto;
+}
+.cover{
+    width:286rpx;
+    border-radius: 8rpx
+}
+
+.local-news-wrap {
+    padding: 20rpx 20rpx 0;
+}

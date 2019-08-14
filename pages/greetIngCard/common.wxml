@@ -1,0 +1,49 @@
+<template name="common">
+    <image bindtap="closeAudio" src="https://j.vzan.cc/content/city/lunaryear/img/music.png" class="audio-label {{!audioObj.isPlay?'audio-rotate':''}}"></image>
+
+    <view class="laba-red-packet-bt" bindtap="showRed" wx:if="{{redPackageObj.isShowRedBtn}}" style="z-index: 99;">
+        <image mode="widthFix" src="http://j.vzan.cc/content/city/newcards/img/redActive.png" style="width:100%"></image>
+    </view>
+
+    <view class="mask show" wx:if="{{redPackageObj.isShowRed}}">
+        <view class="red-package-wrap show">
+            <view class="red-package-top">
+                <!-- <view class="rep-package-amount">红包总金额为1元</view> -->
+                <image class="image1" src="https://j.vzan.cc/content/city/rp/images/redTop.png"></image>
+                <image class="image2" src="http://j.vzan.cc/content/city/xcx/images/redbagrel.png"></image>
+                <view class="red-package-tips"> {{redPackageObj.isReceiveFail && redPackageObj.redAmount==0 ? '红包已抢光' : '恭喜您！获得一个红包'}}</view>
+                <view wx:if="{{redPackageObj.redAmount==0 && !redPackageObj.isReceiveFail }}" catchtap="drawNormalRedPacket" class="open-red-package-btn"></view>
+                <view class="red-amount" wx:else style="font-size:{{redPackageObj.isReceiveFail && redPackageObj.redAmount==0?'30rpx':'60rpx'}}">
+                    {{redPackageObj.isReceiveFail && redPackageObj.redAmount==0? '红包总额 '+redPackageObj.allAmount+'元' : '￥'+redPackageObj.redAmount}}
+                    <view class="to-cash vz-flex flex-center flex-between">
+                        <view wx:if="{{!redPackageObj.isReceiveFail || redPackageObj.redAmount!=0}}" catchtap="goToBill">去提现</view>
+                        <view catchtap="goToDetail" style="padding-left:{{redPackageObj.isReceiveFail && redPackageObj.redAmount==0 ? '0' : '30rpx'}}">查看领取详情</view>
+                    </view>
+                </view>
+            </view>
+            <view class="red-package-bot">
+                <image src="https://j.vzan.cc/content/city/rp/images/redBot.png"></image>
+                <view class="red-package-balance-tips">领取的红包请在个人收益查看</view>
+            </view>
+            <view catchtap="closeRed" class="close"></view>
+        </view>
+    </view>
+
+    <view class="my-bless" bindtap="toMyBless">
+        <view class="text">
+            <view style="padding-top:20%">我的</view>
+            <view>祝福</view>
+        </view>
+    </view>
+
+    <view class="index-btn" bindtap="toIndex">
+        <text>首页</text>
+    </view>
+
+    <button class="zhuanfa" open-type="share">
+        <icon class="iconfont icon-zhuanfa" style="color:#ccc"></icon>
+    </button>
+
+    <view class='share-poster' style='display:block;' hover-class='none' bindtap='createposter'>海报</view>
+
+</template>

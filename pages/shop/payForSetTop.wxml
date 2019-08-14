@@ -1,0 +1,30 @@
+<view class="set-top-container">
+    <view style="padding:32rpx 0;">
+        置顶方式  
+    </view>
+    <block wx:for="{{setTopArr}}" wx:key="{{index}}">
+        <view>
+            <view class="d-flex flex-center flex-between" style="padding:24rpx 0;border-top:1rpx solid #f0f0f0;" data-idx="{{index}}" catchtap="chooseSetTopItem">
+                <view class="d-flex flex-center">
+                    <radio checked="{{index==radioIdx}}" />
+                    <view>{{item.ExtentName}}</view>
+                </view>
+                <view>{{item.Price*1000/100000}}{{'元/'+item.ShowNote}}</view>
+            </view>
+            <view wx:if="{{index==radioIdx}}" class="d-flex flex-center flex-between" style="padding:16rpx 24rpx 16rpx 32rpx;background: #f4f4f4;margin: 0 -24rpx">
+                <view style="white-space: nowrap">置顶时长</view>
+                <input type="number" maxlength="3" bindinput="acountAmount"  focus="{{index==radioIdx}}"  class="set-top-input"
+                    style="box-sizing: content-box;background: #fff;padding:8rpx 0 8rpx 24rpx" />
+            </view>
+        </view>
+    </block>
+    <view class="vz-flex publish-btn">
+        <view class="ft-28" style="width:60%;background: #fff;text-align: center">
+            需付款
+            <text class="color-primary" style="font-size:36rpx;color:#fe3d49;">￥{{setTopAmount*1000/100000}}</text>
+        </view>
+        <view class="ft-32" style="width:40%;text-align: center;color:#fff;background:#fe3d49" bindtap="addOrder">
+            立即支付
+        </view>
+    </view>
+</view>

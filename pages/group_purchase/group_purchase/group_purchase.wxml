@@ -1,0 +1,269 @@
+<import src="../../../utils/wxParse/wxParse.wxml" />
+<view wx:if='{{1==renderpage}}'>
+<view id="wrapper" wx:if="{{init}}">
+    <scroll-view scroll-y="true" enable-back-to-top="true" bindscroll="getRecommand" class="scrollContent">
+        <!-- 关注 -->
+        <view class="followLayer d-flex flex-center">
+            <view class="followCheck followCount">{{mainmodel.ViewCount}}人查看</view>
+            <view class="followPerson followCount">{{mainmodel.Store.favorite_num}}人关注</view>
+            <view class="followGroup followCount">{{mainmodel.GroupUserList.length}}人购买</view>
+        </view>
+        <view class="d-flex" id="nav" style="position:relative">
+            <!--优惠详情轮播-->
+            <swiper class="swiper" indicator-color="#d9d9d9" indicator-active-color="#fe3d49" autoplay="true" interval="3000" duration="500"
+                style="width:100vw;height:450rpx">
+                <block wx:for="{{mainmodel.ImgList}}">
+                    <swiper-item style="width:100%">
+                        <image mode="scaleToFill" src="{{item.thumbnail}}" data-filepath="{{item.filepath}}" class="slide-image" catchtap="viewFullPic"
+                            data-type="sliderShow" />
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class="timer-count-wrap">
+                <view class="countTime d-flex flex-center" wx:if="{{!over && mainmodel.IsEnd != 1 && mainmodel.State > 0}}">
+                    <text wx:if="{{nostart == 1 && mainmodel.State >= 1}}">距活动开始剩余</text>
+                    <text wx:if="{{!nostart && mainmodel.IsEnd != 1 && mainmodel.State > 0}}">距活动结束剩余</text>
+                    <view class="times">{{timeList[0][0]}}</view>天
+                    <view class="times">{{timeList[0][1]}}</view>时
+                    <view class="times">{{timeList[0][2]}}</view>分
+                    <view class="times">{{timeList[0][3]}}</view>秒
+                </view>
+                <view wx:if="{{over && mainmodel.IsEnd == 1}}" class="isOver">
+                    活动已结束
+                </view>
+            </view>
+        </view>
+        <!-- 优惠主要信息 -->
+        <view class="groupInfo">
+            <view class="title clamp2">{{mainmodel.GroupName}}</view>
+            <view class="vz-flex flex-between flex-center">
+                <view class="small_money">原价￥{{mainmodel.OriginalPrice}}</view>
+                <view class="re-coupon-label" wx:if="{{voucher}}">返{{voucher.VoucherMoney}}元代金券</view>
+            </view>
+            <view class="d-flex main-info flex-end flex-between">
+                <view class="big_money">
+                    <text>底价</text>
+                    ￥{{mainmodel.DiscountPrice*1000/100000}}
+                </view>
+                <view class="d-flex" style="color:#fe3d49;font-size:26rpx">
+                    <view class="restCount">剩余{{mainmodel.RemainNum}}份</view>|
+                    <view wx:if="{{mainmodel.LimitNum == 0}}" class="limit">
+                        不限购
+                    </view>
+                    <view wx:if="{{mainmodel.LimitNum == 1}}" class="limit">
+                        限购{{mainmodel.LimitNum}}份数
+                    </view>
+                </view>
+            </view>
+            <view class="time">
+                <text>使用截止日期</text>
+                {{mainmodel.UserDateEnd}}
+            </view>
+            <view class='num'>已售{{mainmodel.CreateNum-mainmodel.RemainNum}}份</view>
+        </view>
+        <view class="tips">
+            开团并邀请
+            <view class="groupTips">{{mainmodel.GroupSize - 1}}</view>人参加，即组团成功，详细见
+            <view class="groupTips" catchtap="groupRules">拼团玩法</view>
+        </view>
+        <!-- 已开团网友 -->
+        <view class="openGroup" wx:if="{{mainmodel.GroupSponsorList.length > 0}}">
+            <view class="openTips">
+                不想自己开团？可参加一下网友开的团，人满即拼团成功
+            </view>
+            <view class="openGroupList">
+                <block wx:for="{{mainmodel.GroupSponsorList}}">
+                    <view class="openGroupItem d-flex flex-center">
+                        <view class="userHead">
+                            <image src="{{item.UserLogo}}"></image>
+                        </view>
+                        <view class="d-flex flex-between flex">
+                            <text class="userName c333">{{item.UserName}}</text>
+                            <view class="c666">
+                                <view style="text-align:right">还差
+                                    <text style="color:#fe3d49">{{item.NeedNum}}</text>人成团</view>
+                                <view>剩余{{timeList[index+1][1]}}:{{timeList[index+1][2]}}:{{timeList[index+1][3]}}{{nostart?'开始':'结束'}}</view>
+                            </view>
+                        </view>
+                        <!-- 参团按钮 -->
+                        <view catchtap="goToOpenGroup" class="groupBtn" data-Id="{{item.Id}}">去参团</view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!-- 地址导航 -->
+        <view class="d-flex storeInfo mt-1">
+            <view class="head" catchtap="goStoreDtl">
+                <image src="{{mainmodel.Store.LogoUrl}}" mode="aspectFill" ></image>
+            </view>
+            <view class="flex content flex content d-flex flex-col justify-center" catchtap="goStoreDtl">
+                <view class="title clamp1">{{mainmodel.Store.SName}}</view>
+                <view class="f01" style="color:#999" catchtap="getLocation">
+                    <icon class="icon_local"></icon>{{mainmodel.Store.Address}}
+                    <text style='color:#fe3d49;' catchtap="getLocation">(点击导航)</text>
+                </view>
+            </view>
+            <!-- 打电话 -->
+            <view class="callphone">
+                <view catchtap='call' data-phone="{{mainmodel.Store.TelePhone}}">
+                </view>
+            </view>
+        </view>
+        <!-- 团购详情 -->
+        <view class="groupDtl">
+            <!-- 标题 -->
+            <view class="groupDtlTitle">拼团详情</view>
+            <base-video wx:if="{{videoParams.convertFilePath!==''}}" video-params="{{videoParams}}"></base-video>
+            <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+            <view class="DescImgList">
+                <block wx:for="{{mainmodel.DescImgList}}">
+                    <image mode="widthFix" src="{{item.thumbnail}}" data-filepath="{{item.filepath}}" catchtap="viewFullPic" data-type="desc"></image>
+                </block>
+            </view>
+            <!-- 猜你喜欢 -->
+            <view class="recommand">
+                <view class="likeTitle">
+                    <view class="icon-like">
+                        <view></view>
+                    </view>猜你喜欢
+                </view>
+                <!--推荐列表-->
+                <view class="likeList d-flex flex-wrap flex-between">
+                    <block wx:for="{{recommandList}}">
+                        <view class="likeItem d-flex flex-col" data-Id="{{item.Id}}" data-storeid="{{item.StoreId}}" catchtap="goGroupDtl">
+                            <view class="likeItemCover">
+                                <image src="{{item.ImgUrl}}"></image>
+                            </view>
+                            <view class="likeItemTitle clamp1">{{item.GroupName}}</view>
+                            <view class="likeItemInfo clamp2">{{item.Description}}</view>
+                            <view class="likeItemPrice d-flex ">
+                                <view class="currentPrice">￥{{item.DiscountPrice}}</view>
+                                <view class="originPrice">￥{{item.OriginalPrice}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <!-- 支付按钮 -->
+    <view id="footer" class="d-flex">
+        <view class="moreGroup d-flex flex-col justify-center flex-center" catchtap='goGroupList'>
+            <view class="dot">
+                <view class="dot1"></view>
+            </view>
+            <view style="margin-top:16rpx">更多拼团</view>
+        </view>
+        <view class="waitActive flex" wx:if="{{mainmodel.State == 0}}">
+            该团还未通过审核
+        </view>
+        <view class="waitActive flex" wx:if="{{mainmodel.IsEnd != 1 && mainmodel.State > 0 && nostart}}">
+            该团还未开始,敬请期待
+        </view>
+        <view class="footerActive flex d-flex" wx:if="{{!over && mainmodel.IsEnd != 1 && mainmodel.State > 0 && !nostart}}">
+            <view class="d-flex flex-col justify-center flex-center flex singlePurchase" catchtap="openPay" data-index="0">
+                <view class="tag">单独购买</view>
+                <view>￥{{mainmodel.UnitPrice*1000/100000}}</view>
+            </view>
+            <view class="d-flex flex-col justify-center flex-center flex groupPurchase" catchtap="openPay" data-index="1">
+                <view class="tag">开新团
+                    <text style="margin:0 6rpx">|</text> {{mainmodel.GroupSize}}人团</view>
+                <view>￥{{mainmodel.ShowOpenNewPrice*1000/100000}}</view>
+            </view>
+        </view>
+        <view class="overActive flex d-flex justify-center flex-center" wx:if="{{over && mainmodel.IsEnd == 1}}">
+            团购已结束
+        </view>
+    </view>
+    <!-- 弹窗 -->
+    <!-- <template is="shopnotcanentertip" data="{{...storeInfo}}"></template> -->
+    <!-- 支付弹层-->
+    <view class="paymentLayer d-flex" wx:if="{{openLayer}}">
+        <view class="paymentContent">
+            <span class="close" catchtap="cancle"></span>
+            <view class="paymentTitle c3333 d-flex flex-center">
+                <text>购买数量：</text>
+                <!-- 支付数量 -->
+                <view class="paymentNum d-flex">
+                    <view class="minus flex" catchtap="minus"></view>
+                    <view class="num flex">{{payNum}}</view>
+                    <view class="add flex" catchtap="add"></view>
+                </view>
+            </view>
+            <view class="phone">
+                联系电话：
+                <text style="color:#fe3d49">{{Phone}}</text>
+            </view>
+            <view wx:if="{{listvoucher.length>0}}" class="voucher-box vz-flex flex-between" bindtap="showVoucher">
+                <view wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+                <view wx:else>减
+                    <text style="color:#ff5a00">{{voucherMoney}}</text>元</view>
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+            <view class="exchangeTime">兑换时间：
+                <text style="color:#fe3d49">{{mainmodel.UserDateEnd}}</text>
+                <text style="margin-left:20rpx">前到店兑换</text>
+            </view>
+            <view class="d-flex paymentBtn">
+                <view class="shouldPay flex">应付款
+                    <text style="color:#fe3d49">￥{{(shouldpay-voucherMoney*100)*1000/100000}}</text>
+                </view>
+                <view class="surePay" catchtap="finishPay">付款</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 快捷导航 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-poster" bindtap="createposter" hidden='{{shareposterparams.isfx==1}}'>海报</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-index" bindtap="backHome">首页</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-order" bindtap="goMyGroup">我的团购</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+
+<red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package>
+
+<share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+
+<view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+        <view class="re-coupon-body">
+            <view class="re-coupon-body-title">
+                选择代金券
+                <icon class="iconfont icon-cha" style="padding:40rpx;position:absolute;right:-20rpx;top:56%;" bindtap="hideVoucher"></icon>
+            </view>
+            <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+                <view class="re-coupon-item-wrap">
+                    <block wx:for="{{listvoucher}}" wx:key="{{index}}">
+                        <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+                            <view class="re-coupon-price">
+                                <text>￥</text>
+                                <text>{{item.Money}}</text>
+                            </view>
+                            <view class="re-coupon-right">
+                                <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+                                <view wx:else>无门槛</view>
+                                <view class="c666">
+                                    <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                                        <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                                        <text>{{mainmodel.Store.SName}}</text>
+                                    </view>
+                                    <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+                                </view>
+                            </view>
+                            <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+     <view wx:if='{{shareposterparams.isfx==1}}' class="make-money" bindtap="sharePoster" data-fx='1'>
+<image src='/images/icon-fx.png' />
+<text>分享赚钱</text>
+</view>
+<view wx:else class="make-money" bindtap="sharePoster" data-fx='0'>
+<image src='/images/icon-share.png' />
+<text>生成海报</text>
+</view>
+    </view> 

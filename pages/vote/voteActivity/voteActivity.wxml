@@ -1,0 +1,261 @@
+<import src="../../../public/floatbtntpl.wxml" />
+<import src="../../../utils/wxParse/wxParse.wxml" />
+
+<view id="app" wx:if="{{init}}">
+    <scroll-view id="content" scroll-y bindscroll="detectScrollTop">
+        <!-- 头部 -->
+        <view class="top-banner"  wx:if="{{currentPage !== 3}}">
+            <swiper autoplay="true" indicator-color="#f2f2f2" indicator-active-color="#fe3d49" indicator-dots="{{imgUrls.length > 1}}" id="banner">
+                <block wx:for="{{imgUrls}}" wx:key="unique">
+                    <swiper-item>
+                        <image src="{{item.filepath}}" class="banner-img" mode="aspectFill"></image>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <city-vote-count-down countDownObj="{{countDownObj}}" wx:if="{{currentPage === 0}}" 
+            bind:getActiveStatus="getActiveStatus"></city-vote-count-down>
+        </view>
+
+        <!-- 首页 -->
+        <view id="page-index" hidden="{{currentPage !== 0}}" wx:if="{{loadPage[0]}}">
+            <!-- 跑马灯 -->
+            <view wx:if="{{!!pageReward.SubTitle}}" class="page-index-marqueen d-flex">
+                <view class="marqueen-icon">
+                    <view class="icon-broadcast"></view>
+                </view>
+                <view class="page-index-marqueen-text" style="--marqueen-length:{{pageReward.SubTitleLen}}">{{pageReward.SubTitle}}</view>
+            </view>
+
+            <!-- 投票信息 -->
+            <view class="d-flex vote-info">
+                <view class="flex">参选数
+                    <text class="fe3d49">{{voteInfo.PublicVote}}</text>
+                </view>
+                <view class="flex">总投票
+                    <text class="fe3d49">{{voteInfo.VoteCount}}</text>
+                </view>
+                <view class="flex">浏览量
+                    <text class="fe3d49">{{voteInfo.ClickCount}}</text>
+                </view>
+            </view>
+
+            <!--搜索+导航-->
+            <view class="status-area">
+                <!-- fixed-area -->
+                <view class="">
+                    <view class="search-vote-item d-flex flex-center" catchtap="showSearch">
+                        <image class="icon-search" src="./icon-search.svg"></image>
+                        <view>请输入选手编号</view>
+                    </view>
+                    <view class="vote-nav d-flex flex-between" capture-bind:touchstart="switchPageIndexNav">
+                        <block wx:for="{{pageIndex.voteNavList}}" wx:for-index="navIndex" wx:key="unique">
+                            <view class="vote-nav-item flex {{navIndex === pageIndex.indexCurrentNav?'fe3d49':''}}" data-currentnav="{{navIndex}}">{{item}}</view>
+                        </block>
+                        <view class="nav-slider" style="left:{{pageIndex.leftArr[pageIndex.indexCurrentNav]+'px'}}"></view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- swiper -->
+            <swiper current="{{pageIndex.indexCurrentNav}}" bindchange="swiperPageIndexBlock" id="swiper-page">
+                <!-- 最新 -->
+                <swiper-item class="swiper-page-item">
+                    <scroll-view class="swiper-page-content" scroll-y="{{pageIndex.isScroll}}">
+                        <block wx:for="{{!activeNoStart && pageIndex.pageArr[0]}}" wx:key="unique">
+                            <view class="vote-item" catchtap="goVoteDetail" data-participantId="{{item.Id}}">
+                                <view class="vote-item-cover">
+                                    <image class="vote-item-img" src="{{item.ImgeIds}}"></image>
+                                    <view class="vote-item-info">
+                                        <text class="vote-item-text-gap">{{item.SerialNum}}号</text>
+                                        <text class="vote-item-text-gap">{{item.Poll}}票</text>
+                                        <text wx:if="{{voteInfo.IsSwitchGift}}">{{item.Giftcount}}礼物</text>
+                                    </view>
+                                </view>
+                                <view class="vote-item-content d-flex flex-center flex-between">
+                                    <view class="clamp1 vote-player ">{{voteInfo.ShowProductName?item.ProductName:item.NickName}}</view>
+                                    <view class="vote-btn fe3d49">投票</view>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="vote-empty" wx:if="{{pageIndex.pageArr[0].length === 0}}">
+                            <image src="./vote-empty.png" class="vote-empty-img"></image>
+                            <view wx:if="{{activeNoStart}}">
+                                <view class="vote-empty-tips">评选活动还没开始呢</view>
+                                <view class="vote-empty-tips vote-empty-nostart">过阵子再来瞧瞧吧</view>
+                            </view>
+                            <view wx:if="{{pageIndex.pageArr[1].length === 0 && !activeNoStart && !activeOver}}">
+                                <view class="vote-empty-tips">哎呀，还没有人参与评选呢</view>
+                                <view catchtap="attendVote" class="vote-empty-link">快来报名参加吧</view>
+                            </view>
+                        </view>
+                        <view class="check-all-rank" wx:if="{{pageIndex.pageArr[0].length > 0 && pageIndex.loadingAllArr[0]}}">已查看所有最新投票</view>
+                    </scroll-view>
+                </swiper-item>
+                <!-- 热门 -->
+                <swiper-item class="swiper-page-item">
+                    <scroll-view class="swiper-page-content" scroll-y="{{pageIndex.isScroll}}">
+                        <block wx:for="{{!activeNoStart && pageIndex.pageArr[1]}}" wx:key="unique">
+                            <view class="vote-item" catchtap="goVoteDetail" data-participantId="{{item.Id}}">
+                                <view class="vote-item-cover">
+                                    <image class="vote-item-img" src="{{item.ImgeIds}}"></image>
+                                    <view class="vote-item-info">
+                                        <text class="vote-item-text-gap">{{item.SerialNum}}号</text>
+                                        <text class="vote-item-text-gap">{{item.Poll}}票</text>
+                                        <text wx:if="{{voteInfo.IsSwitchGift}}">{{item.Giftcount}}礼物</text>
+                                    </view>
+                                    <!-- 不要删这段代码 -->
+                                    <!-- <view class="voted-rank {{'voted-rank-'+index}}" wx:if="{{index <= 2}}">
+                                    </view> -->
+                                </view>
+                                <view class="vote-item-content d-flex flex-center flex-between">
+                                    <view class="clamp1 vote-player">{{voteInfo.ShowProductName?item.ProductName:item.NickName}}</view>
+                                    <view class="vote-btn fe3d49">投票</view>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="vote-empty" wx:if="{{pageIndex.pageArr[1].length === 0}}">
+                            <image src="./vote-empty.png" class="vote-empty-img"></image>
+                            <view wx:if="{{activeNoStart}}">
+                                <view class="vote-empty-tips">评选活动还没开始呢</view>
+                                <view class="vote-empty-tips vote-empty-nostart">过阵子再来瞧瞧吧</view>
+                            </view>
+                            <view wx:if="{{pageIndex.pageArr[1].length === 0 && !activeOver}}">
+                                <view class="vote-empty-tips">哎呀，还没有人参与评选呢</view>
+                                <view catchtap="attendVote" class="vote-empty-link">快来报名参加吧</view>
+                            </view>
+                        </view>
+                        <view class="check-all-rank" wx:if="{{pageIndex.pageArr[1].length > 0 && pageIndex.loadingAllArr[1]}}">已查看所有热门投票</view>
+                    </scroll-view>
+                </swiper-item>
+            </swiper>
+        </view>
+
+        <!-- 排行 -->
+        <view id="page-rank" hidden="{{currentPage !== 1}}" wx:if="{{loadPage[1]}}">
+            <view class="page-rank-top">
+                <image class="page-rank-img-title" src="./phb-title.png"></image>
+                <view class="page-rank-title d-flex flex-between">
+                    <text>排名</text>
+                    <text wx:if="{{voteInfo.ShowProductName}}">{{voteInfo.ShowProductName?'参赛作品':'参选者'}}</text>
+                    <text wx:if="{{voteInfo.IsSwitchGift}}">礼物</text>
+                    <text>票数</text>
+                </view>
+            </view>
+            <scroll-view scroll-y class="page-rank-content">
+                <block wx:for="{{pageRank.rankList}}" wx:key="unique">
+                    <view catchtap="goVoteDetail" data-participantId="{{item.Id}}" class="d-flex flex-center rank-item" hover-class="hover-active">
+                        <view wx:if="{{index <= 2}}" class="rank-position-img {{'rank-position-img-'+index}} {{voteInfo.IsSwitchGift?'rank-item-adjust':''}}"></view>
+                        <view wx:else class="rank-position {{voteInfo.IsSwitchGift?'rank-item-adjust':''}}">{{item.Position}}</view>
+                        <view class="d-flex flex-center" style="width:32%">
+                            <image src="{{item.HeadImgUrl}}" class="rank-avatar"></image>
+                            <view class="clamp1 rank-product-name">{{voteInfo.ShowProductName?item.ProductName:item.NickName}}</view>
+                        </view>
+                        <view class="rank-gift" wx:if="{{voteInfo.IsSwitchGift}}">{{item.Giftcount}}</view>
+                        <view class="rank-poll">{{item.Poll}}</view>
+                    </view>
+                </block>
+            <view class="check-all-rank" wx:if="{{pageRank.loadingAll}}">已查看全部排行榜</view>
+            </scroll-view>
+        </view>
+
+        <!-- 奖品 -->
+        <view id="page-reward" hidden="{{currentPage !== 2}}" wx:if="{{loadPage[2]}}">
+            <view class="page-reward-title">
+                {{pageReward.Title}}
+            </view>
+            <view class="page-reward-video" wx:if="{{!!pageReward.video}}">
+                <view class="block-name">视频介绍</view>
+                <view class="">
+                    <city-video wx:if="{{!!pageReward.video}}" video-params="{{pageReward.video}}"></city-video>
+                </view>
+            </view>
+            <view class="page-reward-rules">
+                <view class="block-name">活动规则</view>
+                <view class="page-reward-rules-content">
+                    <template is="wxParse" data="{{wxParseData:pageReward.Describe.nodes}}" />
+                </view>
+            </view>
+            <view class="page-reward-time">
+                <view class="block-name">活动时间</view>
+                <view class="page-reward-time-item">
+                    <text>报名时间</text>：{{pageReward.StartDate}}
+                </view>
+                <view class="page-reward-time-item">
+                    <text>报名结束</text>：{{pageReward.EndDate}}
+                </view>
+                <view class="page-reward-time-item">
+                    <text>投票开始</text>：{{pageReward.VoteStartDate}}
+                </view>
+                <view class="page-reward-time-item">
+                    <text>投票结束</text>：{{pageReward.VoteEndDate}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 我的投票页面 -->
+        <view id="page-my" hidden="{{currentPage !== 3}}" wx:if="{{loadPage[3]}}">
+            <city-vote-detail detailObj="{{detailObj}}" showBar="{{false}}" wx:if="{{pageMy.isAttend}}"></city-vote-detail>
+            <view class="check-all-rank" wx:else>您未参与该投票</view>
+        </view>
+    </scroll-view>
+
+    <!--footer -->
+    <view id="footer" class="d-flex" capture-bind:touchstart="switchPage">
+        <view class="flex footer-item footer-item-index {{currentPage === 0?'fe3d49 footer-item-index-active':''}}" data-currentpage="0">
+            首页
+        </view>
+        <view class="flex footer-item footer-item-rank {{currentPage === 1?'fe3d49 footer-item-rank-active':''}}" data-currentpage="1">
+            排行
+        </view>
+        <view class="flex footer-item footer-item-reward {{currentPage === 2?'fe3d49 footer-item-reward-active':''}}" data-currentpage="2">
+            奖品
+        </view>
+        <view class="flex footer-item footer-item-mine {{currentPage === 3?'fe3d49 footer-item-mine-active':''}}" data-currentpage="3">
+            我的
+        </view>
+    </view>
+</view>
+<!-- 搜索 -->
+<view id="search-page" class="d-flex flex-col" wx:if="{{showSearchPage}}">
+    <!-- 搜索框 -->
+    <view class="d-flex search-area flex-center">
+        <view class="search-input d-flex flex-center flex">
+            <image src="./icon-search.svg" class="icon-search"></image>
+            <input type="text" confirm-type="search" focus="true" placeholder="请输入选手编号" maxlength="3" bindconfirm="searchVoteItem" bindinput="getSearchNum"
+                value="{{searchNum}}" class="flex" />
+        </view>
+        <view class="back {{showSearchPage?'back-anim':''}}" catchtap="hideSearch">返回</view>
+    </view>
+    <!-- 搜索结果 -->
+    <view class="search-page-content flex {{showSearchPage?'show-search-page-content':''}}">
+        <view class="vote-item" wx:if="{{!!searchResult.Id}}" catchtap="goVoteDetail" data-participantId="{{searchResult.Id}}">
+            <view class="vote-item-cover">
+                <image class="vote-item-img" src="{{searchResult.ImgeIds}}"></image>
+                <view class="vote-item-info">
+                    <text class="vote-item-text-gap">{{searchResult.SerialNum}}号</text>
+                    <text class="vote-item-text-gap">{{searchResult.Poll}}票</text>
+                    <text wx:if="{{voteInfo.IsSwitchGift}}">{{searchResult.Giftcount}}礼物</text>
+                </view>
+            </view>
+            <view class="vote-item-content d-flex flex-center flex-between">
+                <view class="clamp1 vote-player">{{voteInfo.ShowProductName?searchResult.ProductName:searchResult.NickName}}</view>
+                <view class="vote-btn fe3d49">投票</view> 
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 快捷导航 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="goIndex">首页</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-service" bindtap="bindtap_showkefuwin">客服</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-publish" bindtap="attendVote" wx:if="{{!pageMy.isAttend && !activeNoStart && !activeOver}}">参赛</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-order" bindtap="editMyVote" wx:if="{{pageMy.isAttend && currentPage === 3 &&!activeNoStart && !activeOver}}">编辑</view>
+    <view slot="slot6" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showPath}}">获取链接</view>
+</city-navigator>
+
+<!-- 提示 -->
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<!-- 客服 -->
+<template is="city_kefu_win" data="{{city_kefu_hidden:city_kefu_hidden,cityphone:cityphone,QrCodeUrl:qrCodeUrl}}"></template>

@@ -1,0 +1,69 @@
+<view class="wrapper">
+    <view id="grid" class="d-flex flex-wrap">
+        <view class="gridItem ">
+            <view class="title">已发放</view>
+            <view>
+                <text style="color:#fe3d49;margin-right:10rpx">￥{{verifyNum.Price?verifyNum.Price * 1000 /100000:'0:00'}}</text>
+                <text>{{verifyNum.Inventory?verifyNum.Inventory:0}}份</text>
+            </view>
+        </view>
+        <view class="gridItem">
+            <view class="title">已销售</view>
+            <text class="c999">{{verifyNum.BuyNum?verifyNum.BuyNum:0}}份</text>
+        </view>
+        <view class="gridItem">
+            <view class="title">已核销/收货</view>
+            <text class="c999">{{verifyNum.ValidNum?verifyNum.ValidNum:0}}份</text>
+        </view>
+        <view class="gridItem">
+            <view class="title">已入账</view>
+            <text style="color:#fe3d49">￥{{verifyNum.GetedCash?verifyNum.GetedCash*1000/100000:'0.00'}}</text>
+        </view>
+    </view>
+    <!-- 说明 -->
+    <view class="tips d-flex c999">
+        <text>收益说明:</text>
+        <view class="flex">
+            <view>1.不可退款的立即入账，可退款的核销入账</view>
+            <view style="margin-top:10rpx">2.入账数值已扣除7%手续费，提现请到
+                <text style="color:#fe3d49" catchtap="goMyEarns">我的收益</text>
+            </view>
+        </view>
+    </view>
+    <!-- 列表页 -->
+    <block wx:for="{{recordList}}" wx:key="unique">
+        <view class="item">
+            <view class="d-flex item-top flex-center">
+                <view class="avatar">
+                    <image src="{{item.ShopLogoUrl}}"></image>
+                </view>
+                <view class="flex d-flex flex-col flex-between" style="height:150rpx">
+                    <view class="customer clamp1">姓名：{{item. NickName}}
+                    </view>
+                    <view class="phone">手机：{{item.Phone}}</view>
+                    <view class="date">日期：{{item.ShowTime}}</view>
+                </view>
+                <view catchtap="call" data-phone="{{item.Phone}}" class="contact">联系</view>
+            </view>
+            <view class="item-bot">
+                <view style="margin-bottom:10rpx">价格：
+                    <text class="price">{{item.TotalPrice * 1000 / 100000}}</text>
+                </view>
+                <view>核销状态：
+                    <view class="status" style="display:inline-block">
+                        {{item.State == -2 ? '已退款':''}}
+                        {{item.State == 1 ? ' 待核销':'' }}
+                        {{item.State == 0 ? '未付款':''}}
+                        {{item.State == 3 ? '待发货':''}}
+                        {{item.State == 4 ? '正在配送':''}}
+                        {{item.State == 5 ? '待收货':''}}
+                        {{item.State == 6 ? '已收货':''}}
+                        {{item.State == -1? '已取消':''}}                        
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{isAll}}" class="loadingAll">— — 数据已加载完 — —</view>
+    <view wx:if="{{isNoData}}" class="loadingAll">— — 暂无数据 — —</view>
+</view>

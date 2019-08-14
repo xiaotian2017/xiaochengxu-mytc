@@ -1,0 +1,11 @@
+.city-content{
+    width: 100vw;
+    height:calc(100vh - 96rpx);
+    padding-bottom: 96rpx;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+.index-scroll{
+    height: 100%
+}

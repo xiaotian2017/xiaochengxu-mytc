@@ -1,0 +1,36 @@
+<view>
+    <block wx:for="{{fareListArr}}">
+        <view style="background: #fff" class="address-list">
+            <view class="address-list-top">
+                <view class="vz-flex flex-between flex-center">
+                    <view>{{item.NickName}}</view>
+                    <view>{{item.TelePhone}}</view>
+                </view>
+                <view style="padding:20rpx 0">
+                    {{item.Address}}
+                </view>
+            </view>
+            <view class="vz-flex flex-center flex-between" style="padding: 20rpx 0 20rpx 30rpx">
+                <label bindtap="setDefault" data-id="{{item.Id}}" data-state="{{item.IsDefault}}">
+                    <radio checked="{{item.IsDefault==1}}" disabled="{{item.IsDefault==0}}"></radio> 设为默认
+                </label>
+                <view class="vz-flex flex-center flex-between">
+                    <view class="address-btn" data-id="{{item.Id}}" bindtap="toAddress">
+                        编辑
+                    </view>
+                    <view class="address-btn" data-id="{{item.Id}}" bindtap="deleteAddress">
+                        删除
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+
+<view wx:if="{{isHasData}}" style="margin-top:20rpx;width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">暂无数据</view>
+<view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+
+<view class="add-btn-wrap" data-id="0" bindtap="toAddress">
+    <icon class="iconfont icon-guanbi add-btn"></icon>
+    添加地址
+</view>

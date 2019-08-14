@@ -1,0 +1,31 @@
+@import  '../component.wxss';
+@import  '../publicCss/publicActivity.wxss';
+
+.signs{
+    position:absolute;
+    top:16rpx;
+    left:-32rpx;
+    text-align:center;
+    color:#fff;
+    width:120rpx;
+    font-size:10px;
+    line-height:1;
+    padding:2px 0;
+    background-image: linear-gradient(80deg, #ff911f, #ea490e);
+    transform:rotate(-45deg);
+}
+.content{
+    height: 160rpx
+}
+.content .origin{
+    font-size: 24rpx;
+    color: #999;
+    text-decoration: line-through
+}
+
+.progressBg{
+    margin-top: 50rpx
+}
+
+
+

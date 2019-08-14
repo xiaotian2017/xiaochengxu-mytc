@@ -1,0 +1,27 @@
+page{background: #fff}
+
+.withdraw .head{width: 80rpx;height: 80rpx;border-radius: 50%;overflow: hidden;margin-right:20rpx;}
+
+.withdraw .name{font-size: 28rpx;}
+
+.withdraw .head image{width: 100%;height: 100%;}
+
+.withdraw .balance{font-size:60rpx;color: #ff5a00;text-align: center;padding: 20rpx 0;}
+
+.withdraw .balance text{font-size: 28rpx;color: #333;text-align: center}
+
+.withdraw .rule{font-size:24rpx;padding: 30rpx;color: #999;}
+
+.withdraw .rule text{display: block;line-height: 1.65;}
+
+.withdraw .rule text.f01{color: #666}
+
+.withdraw .cell{padding: 30rpx;margin-top: 30rpx;}
+
+.withdraw .cell .money{height: 80rpx;border: 1rpx solid #f0f0f0;border-radius: 10rpx;}
+
+.withdraw .cell .money input{height: 100%;width: 100%;padding: 0 20rpx;box-sizing: border-box;
+font-size: 28rpx;}
+
+.withdraw .cell .bt{color: #fff;background: #fe3d49;height: 80rpx;padding: 0 40rpx;border-radius: 10rpx;margin-left: 20rpx;line-height: 80rpx;}
+

@@ -1,0 +1,734 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<import src="../../public/floatbtntpl.wxml" />
+<view wx:if="{{1==renderpage}}">
+<view class="container" style="--deepMoreTextColor:{{deepMoreTextColor}};--normalTextColor:{{normalTextColor}};--deepTextColor:{{deepTextColor}};--customBtnColor:{{customBtnColor}};--customBotBg:{{customBotBg}};background:var(--customBotBg);--customTabColor:{{customTabColor}}">
+  <!--商家详情轮播-->
+  <swiper class="swiper_business_detail" indicator-dots="false" indicator-dots="true" indicator-color="#d9d9d9" indicator-active-color="#fe3d49"
+    autoplay="true" interval="2000" duration="500" wx:if="{{topBanners != null && topBanners.length> 0}}">
+    <block wx:for="{{topBanners}}" wx:key='item.filepath'>
+      <swiper-item>
+        <image src="{{item.filepath}}" data-src="{{item.filepath}}" class="slide-image" mode="aspectFill" catchtap='clickToPreview'
+        />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--地址-->
+  <view class='business_detail_address' style='padding:0;--customBg:{{customBg}};background:var(--customBg);margin-bottom:2rpx'>
+    <view class="d-flex D_s_con">
+      <view class="head">
+        <image src="{{store.LogoUrl}}" mode="aspectFill"></image>
+      </view>
+      <view class="flex content">
+        <view class="title clamp1" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">{{store.SName}}</view>
+        <view class="f01 clamp2" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}" hidden='{{null==store.Address||""!=store.Address}}'>
+          <icon class="iconfont icon-position" ></icon>{{store.Address}}</view>
+        <view class="f02 flow_auto" hidden='{{store.lng==0&&store.lat==0}}'>
+          <button class="daohang_bt" hover-class="none" catchtap="clickShowMap" style="color:var(--customBtnColor)">点击导航</button>
+        </view>
+      </view>
+      <view class="d-flex flex-col">
+        <view class='save' style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}" bindtap='click_concernpath' data-storeid='{{store.Id}}'>
+          <icon class="{{hasconcernpath==1?'active':''}} iconfont icon-xing1 "></icon>
+          <text class="{{hasconcernpath==1?'active':''}}">{{hasconcernpath==1?'取消收藏':'收藏页面'}}</text>
+        </view>
+        <view class='collection' wx:if='{{0==isclaim}}' catchtap='goToObtain'>
+          认领
+        </view>
+        <view class='collection' wx:elif='{{2==isclaim}}'>
+          认领审核中
+        </view>
+        <view class='collection' wx:if='{{3==isclaim}}'>
+          认领被拒绝
+        </view>
+      </view>    
+    </view>
+    <view wx:if='{{annoucements.length>0}}' class="tcTitle" style="width:100%;display:block;--customBg:{{customBg}};background:var(--customBg)">
+      <view class="d-flex d-flex-center tc-index-toutiao-all" style="width:100%;">
+        <view>
+          <view class="tc-index-toutiao-pic"></view>
+        </view>
+        <view class="marquee">
+          <view class="content" style="margin-left:35px;--customBg:{{customBg}};background:var(--customBg);color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">
+            <text wx:for='{{annoucements}}'>
+              <text wx:if='{{0==index}}' style='display:inline-block;width:200px;'></text>{{item.Announcement}}
+              <text style='display:inline-block;width:30px'></text>
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="vz-flex flex-center flex-wrap label-wrap" style='--customBg:{{customBg}};background:var(--customBg)'>
+    <view class="label-item {{labelObj.WiFi?'active':''}}" wx:if="{{labelObj.WiFi}}"  data-flag="WiFi" >
+        <view class="label-img">         
+            <view class="wifi common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">WiFi</view>
+    </view>    
+    <view class="label-item {{labelObj.Wired?'active':''}}" wx:if="{{labelObj.Wired}}" data-flag="Wired" >        
+        <view class="label-img">
+            <view class="wired common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">有线上网</view>
+    </view>
+    <view class="label-item {{labelObj.Parking?'active':''}}" wx:if="{{labelObj.Parking}}" data-flag="Parking" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="parking common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">停车场</view>
+    </view>
+    <view class="label-item {{labelObj.WC?'active':''}}" wx:if="{{labelObj.WC}}" data-flag="WC" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="wc common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">卫生间</view>
+    </view>
+    <view class="label-item {{labelObj.Shower?'active':''}}" wx:if="{{labelObj.Shower}}" data-flag="Shower" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="shower common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">热水淋浴</view>
+    </view>
+    <view class="label-item {{labelObj.Check?'active':''}}" wx:if="{{labelObj.Check}}" data-flag="Check" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="check common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter: {{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">行李寄存</view>
+    </view>
+    <view class="label-item {{labelObj.Shuttle?'active':''}}" wx:if="{{labelObj.Shuttle}}" data-flag="Shuttle" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="shuttle common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter:{{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">接送服务</view>
+    </view>
+    <view class="label-item {{labelObj.Visit?'active':''}}" wx:if="{{labelObj.Visit}}" data-flag="Visit" bindtap="chooseLabel">
+        <view class="label-img">
+            <view class="visit common" style="-webkit-filter:{{isDeepColor?'drop-shadow(var(--deepMoreTextColor) 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};filter:{{isDeepColor?'drop-shadow(deepMoreTextColor 40rpx 0)':'drop-shadow(#333 40rpx 0)'}};"></view>   
+        </view>
+        <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'#333'}}">送货上门</view>
+    </view>
+</view>
+
+<view wx:if="{{miniCouponList.length>0}}" bindtap="showCouponList" class="coupon-list-wrap vz-flex flex-center flex-between"style="--customBg:{{customBg}};background:var(--customBg)">
+   <view class="coupon-list-title">
+    代金券
+   </view>
+   <view class="vz-flex flex-center">
+   <view class="coupon-list-mini" wx:for="{{miniCouponList}}" wx:if="{{index<2}}" wx:key="{{index}}" style="position:relative"> 
+      {{item.IsDiscount==1&&item.Discount*100/1000+'折券'||item.Deducting>0&&'满'+item.Deducting+'减'+item.VoucherMoney||'无门槛减'+item.VoucherMoney}}
+      <view class="border-outer"></view>
+   </view>
+  </view>  
+  <image class="more-btn" src="https://j.vzan.cc/content/city/xcx/images/coupon-more-11.png"></image>
+</view>
+
+   <!-- 各类优惠活动 -->
+  <view>
+    <!-- 相册 -->
+    <view class="groupList" wx:if="{{picArr.length>0}}">
+      <view class="d-flex index_title_cell mt-1" style="padding: 20rpx;border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+        <view class="flex" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">
+          <label class="biaozhi green">图</label>相册</view>
+          <view bindtap="toAlbum2"><text style="font-size:28rpx;color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">查看更多</text><icon class="iconfont icon-jiantou"></icon></view>
+      </view>
+      <!--相册栏-->
+      <view class="groupItem" style="padding:20rpx;--customBg:{{customBg}};background:var(--customBg)">
+        <scroll-view scroll-x class="ablum-wrap">
+          <block wx:for="{{picArr}}" wx:key="{{index}}">
+            <image class="ablum-photo" src="{{item.thumbnail}}" data-url="{{item.filepath}}" bindtap="previewImg"></image>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <!-- 拼团 -->
+    <view wx:if="{{groupList.length>0}}" class="groupList">
+      <view class="d-flex index_title_cell mt-1" style="padding: 20rpx;border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+        <view class="flex" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">
+          <label class="biaozhi green">团</label>拼团</view>
+      </view>
+      <!--拼团栏-->
+      <view class="groupItem">
+        <view data-remainnum='{{item.RemainNum}}' data-gid='{{item.Id}}' class="ymyh_cell {{item.RemainNum==0?'gray':''}}" wx:for="{{groupList}}"
+          wx:key="{{index}}" catchtap="goGroupDtl" style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+          <view class="d-flex content">
+            <view class="head">
+              <image src="{{item.ImgUrl}}" mode="aspectFill" style='border-radius:3px'></image>
+            </view>
+            <view class="flex d-flex flex-col">
+              <view class="title clamp1" style="margin-bottom:auto;color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">{{item.GroupName}}</view>
+              <view class="price">￥{{item.DiscountPrice*10000 / 1000000}}
+                <label class="xiexian line-through c666 f-13rem">￥{{item.OriginalPrice*10000 / 1000000}}</label>
+              </view>
+              <view class="progress">
+                <view class="gray">
+                  <view class="jindu" style="background:#fe3d49;width:{{(1-item.RemainNum/item.CreateNum)*100}}%;"></view>
+                </view>已抢{{item.CreateNum-item.RemainNum}}份
+              </view>
+              <button class="zhuangtai {{item.RemainNum==0?'over':'progressing'}}" wx:if="{{item.State==1}}" style="background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}">{{item.RemainNum==0?'已抢完':'马上参团'}}</button>
+              <button class="zhuangtai {{item.RemainNum==0?'over':'progressing'}}" wx:if="{{item.State==2}}" style="background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}">准备开团</button>
+            </view>
+          </view>
+        </view>
+        <view class="show-more" style="--customBg:{{customBg}};background:var(--customBg)" bindtap="showAllGroup" wx:if="{{allGroupList.length>2&&allGroupList.length!=groupList.length}}">展开更多{{allGroupList.length-groupList.length}}个拼团</view>
+      </view>
+    </view>
+    <!--抢优惠-->
+    <view wx:if="{{CouponList.length>0}}" style="--customBg:{{customBg}};background:var(--customBg)">
+      <view class="d-flex index_title_cell mt-1" style="padding: 20rpx;border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+        <view class="flex" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">
+          <label class="biaozhi orange" style="background:#fe3d49">惠</label>抢优惠</view>
+      </view>
+      <!--抢优惠栏-->
+      <view>
+        <view catchtap='clickToCouponDetail' data-remainnum='{{item.RemainNum}}' data-couponid='{{item.Id}}'class="ymyh_cell {{item.RemainNum==0?'gray':''}}"
+          wx:for="{{CouponList}}" wx:key="{{index}}" style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+          <view class="d-flex content">
+            <view class="head">
+              <image src="{{item.LogoUrl?item.LogoUrl:'http://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"
+                mode="aspectFill" style='border-radius:3px'></image>
+              <label class="icon_yuyue" wx:if="{{item.EarlyBookTime==0}}">
+                <text class="yuyue_text">免预约</text>
+              </label>
+            </view>
+            <view class="flex">
+              <view class="title clamp1" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">{{item.CouponName}}</view>
+              <view class="daodian" style='line-height:20px;height:20px;'>
+                <label class="{{item.NewPayCash==null||item.NewPayCash.length==0?'':'daodian-pay'}}">{{item.NewPayCash.length>0?'需到店付'+item.NewPayCash:''}}</label>
+              </view>
+              <view class="price" style="color:#fe3d49">￥{{item.BuyPrice*10000 / 1000000}}
+                <label class="xiexian line-through c666 f-13rem">￥{{item.CouponMoney*10000 / 1000000}}</label>
+              </view>
+              <view class="progress">
+                <view class="gray">
+                  <view class="jindu" style="background:#fe3d49;width: {{(1-item.RemainNum/item.CreateNum)*100}}%;"></view>
+                </view>已抢{{item.CreateNum-item.RemainNum}}份
+              </view>
+              <button class="zhuangtai" style="background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}">{{item.RemainNum==0?'已抢完':'马上抢购'}}</button>
+            </view>
+          </view>
+        </view>
+        <view class="show-more" style="--customBg:{{customBg}};background:var(--customBg)" bindtap="showAllCoupon" wx:if="{{allCouponList.length>2&&allCouponList.length!=CouponList.length}}">展开更多{{allCouponList.length-CouponList.length}}个优惠</view>
+      </view>
+    </view>
+    <!--减价-->
+    <view hidden='{{CutList.length<=0?true:false}}'>
+      <view class="d-flex index_title_cell mt-1" style="padding: 20rpx;border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+        <view class="flex" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">
+          <label class="biaozhi orange" style="background:#fe3d49">减</label>减价</view>
+      </view>
+      <view>
+        <view class="ymyh_cell" wx:for="{{CutList}}" data-bid='{{item.Id}}' bindtap='gotocutself' wx:key="{{index}}" style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+          <view class="d-flex d-flex-center content">
+            <view class="head">
+              <image src="{{item.ImgUrl}}"></image>
+            </view>
+            <view class="flex">
+              <view class="title clamp1" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">{{item.BName}}</view>
+              <view class="price" style="font-size:32rpx;color:#fe3d49">底价￥{{item.FloorPrice*1000/100000}}
+                <label class="xiexian line-through c666 f-13rem">￥{{item.OriginalPrice*1000/100000}}</label>
+              </view>
+              <view class="daodian">
+                <text decode="true" class="daodian-pay" style="color:#999;border:none;padding:0;">仅剩{{item.RemainNum}}份&nbsp;&nbsp;{{item.BrowseCount}}人关注</text>
+              </view>
+              <button class="zhuangtai" style="margin-top:65px;background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}">去减价</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="show-more" style="--customBg:{{customBg}};background:var(--customBg)" bindtap="showAllCutList" wx:if="{{allCutList.length>2&&allCutList.length!=CutList.length}}">展开更多{{allCutList.length-CutList.length}}个减价</view>
+    </view>
+    <!--集爱心-->
+    <view hidden='{{LoveList.length<=0?true:false}}'>
+      <view class="d-flex index_title_cell mt-1" style="padding: 20rpx;border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+        <view class="flex" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">
+          <label class="biaozhi orange" style="background:#fe3d49">爱</label>集爱心</view>
+      </view>
+      <view>
+        <view class="ymyh_cell" wx:for="{{LoveList}}" data-loveid='{{item.Id}}' bindtap='gotoloveself' style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+          <view class="d-flex d-flex-center content">
+            <view class="head">
+              <image src="{{item.ImgUrl}}"></image>
+            </view>
+            <view class="flex">
+              <view class="title clamp1" style="color:{{isDeepColor?'var(--deepTextColor)':'var(--normalTextColor)'}}">{{item.Title}}</view>
+              <view class="price" style="font-size:32rpx;color:#fe3d49" >最低价￥{{item.LikeMaxPrice*1000/100000}}
+                <label class="xiexian line-through c666 f-13rem">￥{{item.OriginalPrice*1000/100000}}</label>
+              </view>
+              <view class="daodian">
+                <text decode="true" class="daodian-pay" style="color:#999;border:none;padding:0;">仅剩{{item.RemainNum}}份&nbsp;&nbsp;共{{item.CreateNum}}份</text>
+              </view>
+              <button class="zhuangtai" style="margin-top:65px;background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}">立即参与</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="show-more" style="--customBg:{{customBg}};background:var(--customBg)" bindtap="showAllLoveList" wx:if="{{allLoveList.length>2&&allLoveList.length!=LoveList.length}}">展开更多{{allLoveList.length-LoveList.length}}个爱心价</view>
+    </view>
+  </view>
+
+  <view class="mt-1">
+    <!--导航-->
+    <view class="d-flex business_detail_nav" style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">    
+        <button wx:for="{{navigationList}}" wx:key="{{index}}" class="flex {{currentype==(item.navtype==0&&'xinxi'|| item.navtype==1&&'store-goods'|| item.navtype==2&&'dongtai')?'active':''}}" style="border-color:{{currentype==(item.navtype==0&&'xinxi'|| item.navtype==1&&'store-goods'|| item.navtype==2&&'dongtai')?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)':'var(--customTabColor)' }};color:{{currentype==(item.navtype==0&&'xinxi'|| item.navtype==1&&'store-goods'|| item.navtype==2&&'dongtai')?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)':'var(--customTabColor)'}}" hover-class="none"  data-type="{{item.navtype==0&&'xinxi'|| item.navtype==1&&'store-goods'|| item.navtype==2&&'dongtai'}}" bindtap='actiontype'>{{item.navname}}</button> 
+    </view>
+
+    <!--商家动态-->
+    <view class="business_detail_dongtai_all" wx:if="{{currentype=='dongtai'}}"  style="--customBg:{{customBg}};background:var(--customBg)">
+      <view class="business_detail_dongtai" wx:for="{{StrategyList}}" wx:for-index='index' wx:key="{{index}}"  style="--customBg:{{customBg}};background:var(--customBg);border-color:var(--customBotBg)">
+        <view class="title" wx:if="{{item.Title.length>0}}" data-strategeid="{{item.Id}}" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}" catchtap='tostrategydetail'>{{item.Title}}</view>
+        <view class="f01" data-strategeid="{{item.Id}}" catchtap='tostrategydetail' style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{item.ContentDesc}}</view>
+        <view class="pic_ul" wx:if="{{item.DescImgList.length>0}}" style="margin-bottom:20rpx;">
+          <view class='li' wx:for="{{item.DescImgList}}" wx:for-item="img" wx:key="unique" wx:for-index="idx" hidden="{{idx>=4}}">
+            <image src='{{img.filepath}}' data-src='{{img.filepath}}' data-index='{{index}}' mode="aspectFill" style='border-radius:3px'
+              catchtap='clickToPreviewStrategy'></image>
+            <label class="more" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">共{{item.DescImgList.length}}张</label>
+          </view>
+        </view>
+        <city-video wx:if="{{item.videoDtl!=null&&item.videoDtl!='null'}}" video-params="{{item.videoDtl}}"></city-video>
+        <view class="gongneng_bt_all">
+          <view class="flex" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">发布于{{item.CreateDate}}</view>
+          <view style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">
+            <icon class='iconfont icon-eye'></icon>{{item.PageView}}</view>
+        </view>
+
+      </view>
+      <!--更多数据-->
+      <view class="no_data" style='padding:10px;' catchtap='clickToLoadMore'>{{isLoadData ? '正在加载 . .' :StrategyList.length==0?'— — 暂无数据 — —': havemore ? '点击加载更多' : '— — 已加载全部 — —'}}</view>
+    </view>
+
+    <view wx:if="{{currentype=='xinxi'}}">
+      <view class="business-tab-wrap vz-flex flex-center" style="--customBg:{{customBg}};background:var(--customBg)">
+        <block wx:for="{{['介绍','评价','相册']}}" wx:key="{{index}}">
+          <view class="{{index==businessIdx? 'active' : ''}}" style="border-color:{{index==businessIdx?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)':'#ccc'}};color:{{index==businessIdx?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)':'#666'}}" bindtap="setBusinessTab" data-idx="{{index}}">
+            {{item}}
+          </view>
+        </block>
+      </view>
+      
+      <!-- 商家信息 -->
+      <view class="business_detail_infor" style="margin-top:20rpx;--customBg:{{customBg}};background:var(--customBg);color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}" wx:if="{{currentype=='xinxi' && businessIdx==0}}">
+          <city-video wx:if="{{videoAttachmentList}}" video-params="{{videoAttachmentList}}"></city-video>
+        <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+        <image wx:for='{{introimgs}}' wx:key='{{item.id}}' src='{{item.filepath}}' data-src='{{item.filepath}}' data-index='{{index}}'
+          mode="aspectFill" catchtap='clickIntroToPreview'></image>
+
+    </view>
+      <!-- 相册 -->
+      <view class="vz-flex flex-center flex-between flex-wrap" wx:if="{{currentype=='xinxi' && businessIdx==2}}" style="margin-top:20rpx;--customBg:{{customBg}};background:var(--customBg);padding:20rpx;">
+        <block wx:for="{{storeAlbum}}" wx:key="{{index}}">
+          <view class="ablum" data-id="{{item.Id}}" data-sid="{{item.StoreId}}" data-name="{{item.name}}" bindtap="toAlbum">
+            <image src="{{item.coverImg}}"></image>
+            <view class="ablum-photo-num">
+              {{item.picCount}}
+            </view>
+            <view class="ablum-name wzsl">
+              {{item.name}}
+            </view>
+          </view>
+        </block>
+        <view wx:if="{{storeAlbum.length==0}}" class="no_data" style='padding:10px;text-align:center;width:100%;color:#999;font-size:28rpx;'>— — 暂无数据 — —</view>        
+      </view>
+
+      <!--评价-->      
+      <view wx:if="{{currentype=='xinxi' && businessIdx==1}}">
+        <view class="d-flex d-flex-center index_title_cell mt-1" style="border-color:var(--customBotBg);--customBg:{{customBg}};background:var(--customBg)">
+            <view class="flex" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">网友点评</view>
+            <view bindtap='pinglun' hover-class="none" class="right" style="color:var(--customBtnColor)">我要点评
+                <label class="right_arrow"></label>
+            </view>
+        </view>
+        <!--评论内容-->
+        <view>
+            <view class="p_list" wx:for="{{CommentList}}" wx:for-index="commentidx" wx:key="index" style="border-color:{{isDeepColor?'#2a2e36':'var(--customBotBg)'}};--customBg:{{customBg}};background:var(--customBg)">
+                <view class="d-flex d-flex-center p_header">
+                    <view class="p_img">
+                        <image src="{{item.ComUser.Headimgurl}}" alt=""></image>
+                    </view>
+                    <view class="flex">
+                        <view class="clamp1 pc_name" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{item.ComUser.NickName}}</view>
+                    </view>
+                    <view class="pc_time" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{item.FromNowTime}}</view>
+                </view>
+    
+                <view class="p_content">
+                    <view class="p_txt">
+                        <block wx:for="{{item.ContentHtml.nodes}}" wx:for-item="node" wx:key="{{index}}">
+                            <image wx:if="{{node.tag=='img'}}" data-src="{{node.attr.src}}" bindtap="pictureTap" src="{{node.attr.src}}" style="width:24px;height:24px;"></image>
+                            <text wx:else style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{node.text}}</text>
+                        </block>
+                    </view>
+                    <view class="pImg" wx:if="{{item.ImagUrls.length>0}}">
+                        <view class='li' wx:for="{{item.ImagUrls}}" wx:for-item="img" wx:for-index="idx" wx:key="{{index}}" wx:if="{{idx<4}}">
+                            <image src="{{img}}" data-src="{{img}}" data-index='{{commentidx}}' mode="aspectFill" catchtap='clickToPreviewComment'></image>
+                            <label class="more" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">共{{item.ImagUrls.length}}张</label>
+                        </view>
+                    </view>
+                    <view class="p_bot">
+                        <button bindtap='pinglun_small' style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}" hover-class="none" data-index='{{commentidx}}' data-comuserid="{{item.ComUser.Id}}" data-parentorchild="{{item.Id}}">
+                            <icon class="p_icon01"></icon>回复</button>
+                    </view>
+                    <view class="p_pro" wx:if="{{item.SubCommentList.length>0}}">
+                        <block wx:for="{{item.SubCommentList}}" wx:key="{{index}}" wx:for-item="itemsc">
+                            <view>
+                                <label style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{itemsc.ComUser.NickName}}</label>
+                                <block wx:if="{{item.Id!=itemsc.ParentId}}">
+                                    <text style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">回复</text>
+                                    <label href="javascript:;" style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{itemsc.DUser.NickName}}</label>
+                                </block>：
+                                <block wx:for="{{itemsc.ContentHtml.nodes}}" wx:key="{{index}}" wx:for-item="node">
+                                    <image wx:if="{{node.tag=='img'}}" data-src="{{node.attr.src}}" bindtap="pictureTap" src="{{node.attr.src}}" style="width:24px;height:24px;"></image>
+                                    <text wx:else style="color:{{isDeepColor?'var(--deepMoreTextColor)':'var(--normalTextColor)'}}">{{node.text}}</text>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--没有更多数据了-->
+        <view class='no_more_data' style="text-align:center;height: 30px;line-height: 30px;color: #999;--customBg:{{customBg}};background:var(--customBg)">
+            {{isCommentLoadData ? '正在加载 . .' : commentHavemore ? '上拉加载更多' : '没有更多点评了'}}
+        </view>
+    </view>      
+    </view>
+
+    <!-- 商品 -->
+    <view wx:if="{{currentype == 'store-goods'}}" class="goods-list">
+      <view class="vz-flex flex-center flex-wrap cate-wrap" style="--customBg:{{customBg}};background:var(--customBg)">
+        <block wx:for="{{goodsCate}}" wx:key="{{index}}">
+          <view class="cate-item {{index==cateIdx?'cate-active':''}}" style="border-color:{{index==cateIdx?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)': '#ccc'}};color:{{index==cateIdx?isDeepColor?'var(--deepTextColor)':'var(--customBtnColor)':isDeepColor?'var(--deepMoreTextColor)':'var(--customTabColor)'}}" data-idx="{{index}}" data-id="{{item.Id}}" bindtap="getStoreGoods">
+            {{item.Name}}
+          </view>
+        </block>
+      </view>
+
+      <view wx:if="{{goodsList.length> 0}}" class="vz-flex flex-wrap" style="margin:0 -20rpx;">
+        <block wx:for="{{goodsList}}" wx:key="{{index}}">
+          <view class="goods-column-item" bindtap="goToGoodsDetail" data-gid="{{item.Id}}">
+            <view class="store-goods-cover">
+              <image src="{{item.ImgUrl?item.ImgUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg@!200x200'}}"
+                lazy-load="true"></image>
+              <view class="goods-discount" wx:if="{{item.discount > 0}}">{{item.discount}}折</view>
+            </view>
+            <view class="goods-info d-flex flex-col">
+              <view class="goods-title wzsl">{{item.GoodsName}}</view>
+              <view class="d-flex flex-center flex-between">
+                <view style="color:#fe3d49;font-size: 28rpx">
+                  <view>￥{{item.Price *1000/100000}}</view>
+                  <view style="font-size: 24rpx;" wx:if="{{openMemberPrice&&item.MemberPrice>0}}">会员价:{{item.MemberPrice *1000/100000}}</view>
+                </view>
+                <view class="btn" style="background:{{isDeepColor?'linear-gradient(to right, #4363ef,#7d33f4)':'var(--customBtnColor)'}}" data-gid="{{item.Id}}" catchtap="addGoodCar">
+                    <icon class="icon-font icon-car"  style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#fff'}}"></icon>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <!-- <view class="load-moreGoods" wx:if="{{goodsList.length > 0 && !loadingAll}}" catchtap="getStoreGoods">
+        <text>点击</text>加载更多商品
+      </view> -->
+    </view>
+    <view class="load-all-goods" wx:if="{{loadingAll && currentype == 'store-goods'}}" style="--customBg:{{customBg}};background:var(--customBg)">
+      更多商品即将上架,敬请期待
+    </view>
+  </view>
+</view>
+
+<!--底部栏-->
+<view class="fix-bl d-flex shangjia_bottom_nav" style="--customBg:{{customBg}};background:var(--customBg);border-top:none;box-shadow:0 1rpx 8rpx #ccc">
+  <button class="flex bt_li" catchtap='gotonindex' hover-class="none">
+    <icon class="iconfont icon-index" style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#333'}}"></icon>
+    <text  style="color:{{isDeepColor?'#b8c2e0':'#333'}}">首页</text>
+  </button>
+  <button class="flex bt_li" catchtap='clickPayOnline' hover-class="none" hidden='{{store.OpenId==null||store.OpenId.length==0||!openPayOnline}}'>
+    <icon class="iconfont icon-order"  style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#333'}}"></icon>
+    <text  style="color:{{isDeepColor?'#b8c2e0':'#333'}}">在线买单</text>
+  </button>
+  <button class="flex bt_li" catchtap='toGoodCar' hover-class="none" style="position:relative">
+      <icon class="icon-font icon-car"  style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#333'}}"></icon>
+      <text style="color:{{isDeepColor?'#b8c2e0':'#333'}}">购物车</text>
+      <view class="buy-car-num" wx:if="{{cartCount>0}}">{{cartCount}}</view>
+    </button>
+  <button class="flex bt_li" catchtap='clickShowMap' hover-class="none">
+    <icon class="iconfont icon-position"  style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#333'}}"></icon>
+    <text  style="color:{{isDeepColor?'#b8c2e0':'#333'}}">导航到店</text>
+  </button>
+  <button class="flex bt_li" catchtap='makePhoneCall' hover-class="none">
+    <icon class="iconfont icon-dianhua"  style="background:none;font-size: 44rpx;color:{{isDeepColor?'#b8c2e0':'#333'}}"></icon>
+    <text  style="color:{{isDeepColor?'#b8c2e0':'#333'}}">联系商家</text>
+  </button>
+</view>
+
+<!--首评论弹框-->
+<view wx:if="{{currentpl=='pinglun_tk'}}">
+  <view class="black_mask"></view>
+  <view class="p_replay">
+    <!--照片展示-->
+    <view class="upload_pic_ul01" wx:if="{{!items[0].content.imghidden}}">
+      <view class='li' wx:for="{{items[0].content.imageList}}" wx:for-item="image" wx:key="unique" wx:for-index="imageIndex">
+        <image src="{{image}}" mode="aspectFill"></image>
+        <icon bindtap="clearImage" data-row="0" data-index="{{imageIndex}}"></icon>
+      </view>
+      <view class='li' catchtap='chooseImage' data-row="0" wx:if="{{items[0].content.imageList.length<9}}">
+        <image src="http://j.vzan.cc/content/city/xcx/images/choic-img.png"></image>
+      </view>
+    </view>
+    <view class="pr_txt">
+      <textarea class="pr_txtIn" placeholder="用户评论：" value='{{items[0].content.contenttext}}' bindinput="contenttextadd"></textarea>
+    </view>
+    <view class="d-flex d-flex-center pr_bot">
+      <view class="flex pr_b_l">
+        <icon class="emjio" catchtap='qqfaceHidden'></icon>
+        <icon class="pic" catchtap="showimg"></icon>
+      </view>
+      <view class="pr_b_r">
+        <button class="button1 button2" data-type='0' catchtap="addComment" style="background:{{customBtnColor}};">回复</button>
+        <button class="button1" catchtap="pinglunHide">取消</button>
+      </view>
+    </view>
+
+    <view class="post-qq-face-all" hidden="{{qqfacehidden}}">
+      <view class="qqFace">
+        <swiper circular="true" indicator-active-color="#e5e5e5" indicator-color="#f2f2f2" indicator-dots="true">
+          <block wx:for="{{qqFaceList.getFacePage(qqfacenamedata)}}" wx:for-index="pageIndex" wx:for-item="pageItem">
+            <swiper-item class="qqFace-page-item">
+              <block wx:for="{{pageItem}}" wx:for-index="subIndex" wx:for-item="subItem">
+                <i class="qqFace-item" style="{{items[0].content.qqfacedata[27*pageIndex + subIndex]}}" data-title="{{subItem}}" catchtap="clickface"></i>
+              </block>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--子评论弹框-->
+<view wx:if="{{currentsmallpl=='pinglunsmall_tk'}}">
+  <view class="black_mask"></view>
+  <view class="p_replay">
+    <view class="pr_txt">
+      <textarea class="pr_txtIn" placeholder="回复:" value='{{items[0].content.contenttext}}' bindinput="contenttextadd"></textarea>
+    </view>
+    <view class="d-flex d-flex-center pr_bot">
+      <view class="flex pr_b_l">
+        <icon class="emjio" catchtap='qqfaceHidden'></icon>
+      </view>
+      <view class="pr_b_r">
+        <button class="button1 button2" catchtap="addComment" data-comuserid="{{items[0].content.comuserid}}" data-type="{{items[0].content.parentorchild}}">回复</button>
+        <button class="button1" catchtap='pinglun_smallHide'>取消</button>
+      </view>
+    </view>
+    <view class="post-qq-face-all" hidden="{{qqfacehidden}}">
+      <swiper circular="true" indicator-active-color="#e5e5e5" indicator-color="#f2f2f2" indicator-dots="true">
+        <block wx:for="{{qqFaceList.getFacePage(qqfacenamedata)}}" wx:for-index="pageIndex" wx:for-item="pageItem">
+          <swiper-item class="qqface-page-item">
+            <block wx:for="{{pageItem}}" wx:for-index="subIndex" wx:for-item="subItem">
+              <i style="background: url(https://j.vzan.cc/content/images/imgpost2/qqface.jpg) no-repeat;background-size:100%;{{items[0].content.qqfacedata[27*pageIndex + subIndex]}}"
+                data-title="{{subItem}}" catchtap="clickface"></i>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>
+
+<!-- <image hidden='{{!showpath}}' src="https://i.vzan.cc/citysource/xcx_heka/share.png" class="tipsIcon" style='width:40px;height:40px;bottom:150px'
+  bindtap="gotoshopmgr"></image> -->
+<!-- <template is="floatshowpathbtn" data="{{showpath:showpath}}"></template> -->
+<!-- 
+<red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package> -->
+<!-- <image hidden='{{!showpath}}' src="https://i.vzan.cc/citysource/xcx_heka/share.png" class="tipsIcon" style='width:40px;height:40px;bottom:150px'
+  bindtap="gotoshopmgr"></image> -->
+<!-- <template is="floatshowpathbtn" data="{{showpath:showpath}}"></template> -->
+
+<!-- 更多 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-report" bindtap="toReport" >举报</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-moreGoods" bindtap="toGoodsMgr" wx:if="{{showpath}}">商品管理</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-store" bindtap="toStoreMgr" wx:if="{{showpath}}">店铺管理</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-link"  bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+  
+</city-navigator>
+
+<!-- 购物车弹框 -->
+<view class="goods-car-layer {{showLayer}}" >
+    <view class="goods-car-wrapper {{slide}}">
+        <view class="close" catchtap="hideLayer"></view>
+        <!-- 加入购物车 -->
+        <view class="goods-base-info d-flex">
+            <view class="goods-cover">
+                <image src="{{mainmodel.mainmodel.ImgUrl}}" mode="widthFix"/>
+            </view>
+            <view>
+          <!-- 无商品属性正常价格 -->
+          <view class="goods-price" style='display:inline-block' wx:if="{{mainmodel.mainmodel.GoodsAttrList.length <= 0}}">
+              <text>{{mainmodel.mainmodel.Price * 1000 / 100000}}</text>  
+              <text wx:if="{{mainmodel.OpenMemberPrice&&mainmodel.mainmodel.MemberPrice>0}}"><text style="color:#FF0000;padding-left:20rpx;font-size: 26rpx">会员价:</text>{{mainmodel.mainmodel.MemberPrice * 1000 / 100000}}</text>                             
+      </view>    
+      <!-- 有商品属性设置正常价格 -->
+      <view class="goods-price" style='display:inline-block'  wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+          <text>{{goodsSizeActive !== ''?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Price *1000 / 100000:mainmodel.mainmodel.Price * 1000 / 100000}}</text>
+          <text wx:if="{{mainmodel.OpenMemberPrice&&mainmodel.mainmodel.MemberPrice>0}}">
+              <text style="color:#FF0000;padding-left:20rpx;font-size: 26rpx">会员价:</text>{{goodsSizeActive !== ''?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].MemberPrice>0?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].MemberPrice *1000 / 100000 :mainmodel.mainmodel.Price * 1000 / 100000:mainmodel.mainmodel.Price * 1000 / 100000}}                         
+          </text>
+      </view>   
+                <view class="goods-remain">
+                    库存：{{mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Stock ? mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Stock:mainmodel.mainmodel.Stock}}
+                </view>
+
+                <view class="goods-size-name" wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+                    {{goodsSizeActive !== ''?'已选：'+mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].AttrName:'请选择尺码'}}
+                </view>
+                <view class="goods-layer-disocount" wx:if="{{mainmodel.mainmodel.hctId>0&&mainmodel.ishalfcard !== undefined && mainmodel.ishalfcard === 0}}" data-hctId="{{mainmodel.mainmodel.hctId}}" catchtap="goToOpenCityCard">(我要{{mainmodel.mainmodel.discount}}折)</view>
+            </view>
+        </view>
+        <!-- 尺寸选择 -->
+        <scroll-view class="goods-size-select" scroll-y="true">
+            <view class="goods-size" wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+                <view class="goods-size-tag">请选择尺码</view>
+                <view class="d-flex flex-wrap">
+                    <block wx:for="{{mainmodel.mainmodel.GoodsAttrList}}" wx:key="unique">
+                        <view class="goods-size-item {{index === goodsSizeActive?'goods-size-active':''}} {{item.Stock <=0 ?'goods-sold':''}}"
+                            data-index="{{index}}" catchtap="selectCurrentSize">{{item.AttrName}}</view>
+                    </block>
+                </view>
+            </view>
+            <!-- 购买数量 -->
+            <view class="goods-quantity d-flex flex-between flex-center">
+                <view class="goods-quantity-tag">
+                    购买数量
+                    <text wx:if="{{!!limitNum}}" class="goods-limit">(每人限购{{limitNum}}件)</text>
+                </view>
+
+                <view class="goods-quantity-action d-flex">
+                    <view class="goods-minus" catchtap="minusGoods">
+                        <image src="http://j.vzan.cc/content/city/xcx/images/minus.svg" />
+                    </view>
+
+                    <input type="number" bindinput="fillGoods" bindblur="testGoods" class="goods-input"
+                        value="{{goodsNum >= 1?goodsNum:''}}" confirm-type="done"></input>
+
+                    <view class="goods-add" catchtap="addGoods">
+                        <image src="http://j.vzan.cc/content/city/xcx/images/add.svg" />
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="goods-layer-btn" catchtap="selectDone" data-type="{{layerType}}">
+            确定
+        </view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+<view class="mask" style="z-index: 100000;" wx:if="{{CityMemberVoucher}}">
+  <view class="store-coupon-wrp">
+    <image class="store-coupon-bg" src="https://j.vzan.cc/content/city/xcx/images/store-coupon-bg.png"></image>
+      <view class="store-coupon-title">你有一张优惠券领取</view>
+      <view class="vz-flex flex-center coupon-item">
+          <view class="coupon-list-left">
+              <view class="price-amount-wrp">
+                  <view wx:if="{{CityMemberVoucher.IsDiscount==0}}">
+                      <text class="money-label">￥</text>
+                      <text class="money-amount">{{CityMemberVoucher.VoucherMoney}}</text>
+                  </view>
+                  <view wx:else  style="color: #fff">
+                      {{CityMemberVoucher.Discount*100/1000}}折
+                  </view>
+                  <view wx:if="{{CityMemberVoucher.Deducting>0}}" class="coupon-condition">
+                      满{{CityMemberVoucher.Deducting}}可用
+                  </view>
+                  <view wx:else class="coupon-condition">
+                      无门槛
+                  </view>
+              </view>
+          </view>
+          <view class="coupon-list-right">
+              <view class="vz-flex ">
+                  <view class="only-tip" wx:if="{{CityMemberVoucher.IsCityMember>0}}">会员专属</view>
+                  <view class="coupon-name clamp1">{{CityMemberVoucher.StoreName}}</view>
+              </view>
+              <view class="coupon-tips" wx:if="{{CityMemberVoucher.UseEndDateStr!=''&&CityMemberVoucher.UseStartDateStr!=''}}">{{CityMemberVoucher.UseEndDateStr}}过期</view>
+              <view class="coupon-tips" wx:else> 长期可领取
+                  <text wx:if="{{CityMemberVoucher.ValidDays>0}}">,领取后{{CityMemberVoucher.ValidDays}}天有效</text>
+              </view>
+              <view class="use-condition" wx:if="{{CityMemberVoucher.IsDiscount==1}}">限在线买单用</view>
+              <view class="fresh-man" wx:if="{{CityMemberVoucher.IsNewUser>0}}">限店铺新人</view>                                       
+          </view> 
+      </view>
+      <view bindtap="drawVoucher" data-layer="1" class="store-receive-btn" data-vid="{{CityMemberVoucher.id}}"> 
+        立即领取
+      </view>
+      <image bindtap="closeCouponLayer" class="close-btn" src="https://j.vzan.cc/content/city/xcx/images/stotre-coupon-cha-11.png"></image>
+  </view>
+</view>
+<view class="mask" style="z-index: 10000;" wx:if="{{isShowCouponBot}}">
+    <view class="coupon-list-wrp">
+        <view class="coupon-title vz-flex flex-center flex-between">
+          <view>领券</view>
+          <view class="iconfont icon-cha" bindtap="showCouponList"></view>
+        </view>
+        <scroll-view scroll-y style="height:400rpx">
+            <block wx:for="{{miniCouponList}}" wx:key="{{index}}">
+                <view class="vz-flex flex-center coupon-item" data-vid="{{item.id}}" bindtap="toCouponDetail">
+                    <view class="coupon-list-left">
+                        <view class="price-amount-wrp">
+                            <view wx:if="{{item.IsDiscount==0}}">
+                                <text class="money-label">￥</text>
+                                <text class="money-amount">{{item.VoucherMoney}}</text>
+                            </view>
+                            <view wx:else style="color: #fff">
+                                {{item.Discount*100/1000}}折
+                            </view>
+                            <view wx:if="{{item.Deducting>0}}" class="coupon-condition">
+                                满{{item.Deducting}}可用
+                            </view>
+                            <view wx:else class="coupon-condition">
+                                无门槛
+                            </view>
+                        </view>
+                    </view>
+                    <view class="coupon-list-right">
+                        <view class="vz-flex flex-center">
+                            <view class="only-tip" wx:if="{{item.IsCityMember>0}}">会员专属</view>
+                            <view class="coupon-name clamp1">{{item.StoreName}}</view>
+                        </view>
+                        <view class="coupon-tips" wx:if="{{item.UseEndDateStr!=''&&item.UseStartDateStr!=''}}">{{item.UseEndDateStr}}过期</view>
+                        <view class="coupon-tips" wx:else> 长期可领取
+                            <text wx:if="{{item.ValidDays>0}}">,领取后{{item.ValidDays}}天有效</text>
+                        </view>
+                        <view class="use-condition" wx:if="{{item.IsDiscount==1}}">限在线买单用</view>
+                        <view class="fresh-man" wx:if="{{item.IsNewUser>0}}">限店铺新人</view>
+                        <view class="receive-btn" wx:if="{{item.IsHaving==0}}" data-vid="{{item.id}}" catchtap="drawVoucher">立即领取</view>
+                        <view class="receive-btn" wx:else style="opacity: .5">已领取</view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>
+</view>
+<wxs module="qqFaceList">
+  var getFacePage = function(arg){ 
+    var qqface = arg;
+    console.log(arg)
+    var len = qqface.length,
+        facePageArr = [],
+        facePageNum = ~~(len / 27);
+    for(var i = 0;i < facePageNum ; i++){ 
+      facePageArr.push([])
+      for(var k = 26;k>=0;k--){
+        facePageArr[i].push(qqface[27*i + k])
+      } 
+      facePageArr[i].reverse()
+    } 
+    facePageArr.push(qqface.slice(27*facePageNum))
+    console.log(facePageArr)
+      return facePageArr 
+  }
+     module.exports = { getFacePage:getFacePage }
+</wxs>

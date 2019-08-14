@@ -1,0 +1,33 @@
+<view style="padding: 20rpx 20rpx 100rpx;">
+    <view class="recommend" wx:if="{{allData.tjlist.length>0}}">
+        <view class="recommend-title">推荐</view>
+        <view class="vz-flex flex flex-center flex-wrap">
+            <block wx:for="{{allData.tjlist}}" wx:key="{{index}}">
+                <view class="category-item" bindtap="toPostList" data-id="{{item.TypeId}}" data-name="{{item.Title}}" style="width:50%">{{item.Title}}</view>
+            </block>
+        </view>
+    </view>
+    <view class="recommend">
+            <view class="recommend-title">全部</view>
+            <view class="vz-flex flex flex-center flex-wrap">
+                <block wx:for="{{allData.tlist}}" wx:key="{{index}}">
+                    <view class="category-item" bindtap="toPostList"  data-id="{{item.TypeId}}"  data-name="{{item.Title}}"  style="width:50%">{{item.Title}}</view>
+                </block>
+            </view>
+        </view>
+</view>
+
+<view class="fix-bl d-flex shangjia_bottom_nav index">
+        <view class="flex bt_li" hover-class='none' bindtap='bottomnavswitch' data-url='{{buyversion==3?"/pages/index/index":buyversion==2?"/pages/shopindex/shopindex":"/pages/postindex/postindex"}}'>
+            <icon class="iconfont icon-index" style="background-image:none"></icon>
+            <text>首页</text>
+        </view>
+        <view class="flex bt_li" hover-class='none' data-url='/pages/addpost/addenter' bindtap='bottomnavswitch'>
+            <icon class="iconfont icon-jiahao-svg" style="background-image:none"></icon>
+            <text>发布</text>
+        </view>
+        <view class="flex bt_li" hover-class='none' data-url='/pages/mypublish/mypublish' bindtap='bottomnavswitch'>
+            <icon class="iconfont icon-person-svg" style="background-image:none"></icon>
+            <text>我的发布</text>
+        </view>
+</view>

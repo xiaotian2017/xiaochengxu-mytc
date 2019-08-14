@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"我的购物车",
+    "usingComponents": {
+        "city-tips":"/components/Tips/Tips"
+    }
+}

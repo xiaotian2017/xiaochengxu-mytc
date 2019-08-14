@@ -1,0 +1,15 @@
+<template name="item_image_shop">
+  <view class="d-flex flex-wrap">
+    <block wx:for="{{config.imageList}}" wx:for-item="image" wx:for-index="imageIndex" wx:key="image.Id">
+      <view style="margin:0 0 20rpx 20rpx;width:160rpx;position:relative;">
+        <image style='width:160rpx;height:160rpx;' src="{{image}}" data-src="{{image}}" bindtap="previewImage"  data-index="{{imageIndex}}"></image>
+        <image src="http://j.vzan.cc/content/city/xcx/images/delete.png" data-which='{{which}}' style='width:15px;height:15px;right:0 !important;top:0' class='clear_btn' bindtap="clearImage"  data-index="{{imageIndex}}"></image>
+      </view>
+    </block>
+    <view bindtap='uploadLogoImg'  data-which='{{which}}' data-itemid='{{itemid}}'  class="a-describe-photo" hidden="{{config.imageList.length == 9}}" style='position:relative'>
+            <view class="btnaddfile" hidden="{{config.images_full}}" style="margin:0 0 10px 10px;border:1px dashed #a0a0a0;background:url(http://i.pengxun.cn/content/images/uploadpic.png) no-repeat center / auto 19px;width:75px;height:75px;position:relative">            
+            </view>
+            <view hidden="{{config.images_full}}" style='content: "";position: absolute;left: 0px;top: 0px;width: 100%;height: 100%;border-radius: 4px;box-sizing:border-box;z-index: 0;'></view>
+      </view>
+  </view>
+</template>

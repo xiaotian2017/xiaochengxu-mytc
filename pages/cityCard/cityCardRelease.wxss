@@ -1,0 +1,232 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+/* 上传照片 */
+.release-img-wrap {
+    padding:20rpx 0;   
+    background: #fff;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+  }
+  .btnaddfile {
+      width:70px;
+      height:70px;
+      display:block;
+      float:left;
+  }
+  
+  .clear_btn {
+      position:absolute;
+      top:0;
+  }
+
+  .p1 {
+    height: 100rpx;
+    line-height: 100rpx;    
+    font-size:  28rpx;
+    color:#333;
+  }
+  .p2 {
+    color:#999;
+    font-size:  28rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.discount-name {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    width: 100%;
+    padding: 0 20rpx;
+}
+
+.discount-type-btn {
+    text-align: center;
+    padding: 16rpx 70rpx;  
+}
+
+.discount-type-btn-wrap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    border: 1rpx solid #fe3d49;
+    border-radius: 8rpx;
+}
+
+.discount-type-active {
+    background: #fe3d49;
+    color: #fff;
+}
+
+.ruzhu_cells .kuang-input{
+    vertical-align:middle;
+    border-color: #999;
+    color:#333
+}
+.write_cell .write_textarea{
+    margin: 0;
+    min-height: 160rpx;
+    word-break: break-all
+}
+.description .clear_btn{
+  position:absolute; 
+  top:0
+}
+.lingqu .ruzhu_cell{
+    padding: 20rpx;
+    margin-bottom: 0;
+    border-bottom: 1rpx solid #f0f0f0
+}
+.jizan_rules wx-text{
+    margin-bottom: 8rpx
+}
+
+.vz-flwx-bw {
+        -webkit-box-pack: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.discount-time-wrap {
+    font-size: 28rpx;
+    background: #FFF;
+}
+
+.discount-detail {
+    height: 80rpx;
+    line-height: 64rpx;
+}
+
+.release-bot {
+    background: #FFF;
+    padding: 0 20rpx;
+}
+
+.limit-number {
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.release-btn {
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 32rpx;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 100;
+    background: #fe3d49;
+}
+
+.mask {
+ width: 100%;
+ height: 100vh;
+ position: fixed;
+ background: rgba(0, 0, 0, .5); 
+ top: 0;
+ z-index: 1000;
+}
+
+.date-main {
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 20000;
+}
+
+.date-main-bar {
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.date-main-bar view {
+    padding: 0 20rpx;
+}
+
+.date-main-item {
+  width: 14.28%;
+  height: 124rpx;
+  text-align: center;
+  line-height: 124rpx;
+  color: #333;
+  position: relative;
+  font-size: 28rpx;
+}
+
+.date-main-item::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #f0f0f0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5); 
+}
+
+.date-main-item::after{
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #f0f0f0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+
+}
+
+.date-main-item1 {
+    height: 60rpx;
+    line-height: 60rpx;
+    width: 20%; 
+    text-align: center;
+    border: 1rpx solid #999;
+    color: #999;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+}
+
+.date-main-item1-active {
+    border-color: #fe3d49;
+    color: #fe3d49;
+} 
+
+.date-main-item1 {
+    margin-bottom: 20rpx;
+}
+
+.date-main-item1{
+    margin-left: 34rpx;
+}
+
+.week {
+    padding: 20rpx 20rpx 0 0;
+}
+
+.word {
+    margin-bottom: 200rpx;
+    font-size: 24rpx;
+    color: #fe3d49;
+    line-height: 4;
+    padding-left: 20rpx;
+}
+
+.date-main-item-active {
+    color: #fe3d49;
+}

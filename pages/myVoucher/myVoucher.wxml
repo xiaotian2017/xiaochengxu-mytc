@@ -1,0 +1,54 @@
+<view>
+    <view class="vz-flex flex voucher-tab-wrap flex-between">
+        <view class="voucher-tab-item {{state==0?'active':''}} " bindtap="" data-state="0" bindtap="changeTab">可使用</view>
+        <view class="voucher-tab-item {{state==1?'active':''}} " data-state="1" bindtap="changeTab">未开始</view>
+        <view class="voucher-tab-item {{state==2?'active':''}} " data-state="2" bindtap="changeTab">已使用</view>
+        <view class="voucher-tab-item {{state==3?'active':''}} " data-state="3" bindtap="changeTab">已过期</view>
+    </view>
+    <view class="voucher-list-wrap">
+        <view class="no-data" wx:if="{{!voucherList.length}}">暂无数据</view>
+        <block wx:for="{{voucherList}}">
+            <view class="vz-flex voucher-list vz-flex-center flex-between" style="overflow: hidden;"  data-vid="{{item.VId}}" bindtap="toCityCardCouponDetail">
+                <view style="width: 80%;">
+                    <view class="vz-flex flex-center voucher-store-name">
+
+                        <view class="vouher-list-money" wx:if="{{item.Voucher.IsDiscount==1}}" style="white-space: nowrap;">
+                            {{item.Voucher.Discount/10}}折
+                        </view>
+                        <view wx:else class="vouher-list-money">
+                            ￥{{item.Money}}
+                        </view>
+                        <view wx:if="{{item.Voucher.Deducting}}" class="voucher-rule" style="white-space: nowrap;"> 满{{item.Voucher.Deducting}}元可用</view>
+                        
+                        <view wx:else class="voucher-rule">无门槛</view>
+                        
+                        <view wx:if="{{item.Voucher.IsNewUser==1}}" class="new-user" style="white-space: nowrap;">[新人专属]</view>
+                        
+                    </view>
+                    <view class="voucher-list-store">
+                            <view>
+                                <icon class="iconfont icon-city-store"></icon>
+                                {{item.Store.SName}}
+                            </view>
+                        </view>
+                    <view class="vouher-tips" wx:if="{{item.EndDateStr!=''&&item.StartDateStr!=''}}">{{item.StartDateStr}}-{{item.EndDateStr}}</view>
+                    <view class="vouher-tips" wx:else>长期可领取</view>
+                </view>
+                <view style="width: 30%;position: relative;">
+                    <view class="voucher-line"></view>
+                    <view  class="voucher-btn {{state!=0?'voucher-active':''}}" catchtap="toStore" data-id="{{item.Store.Id}}">
+                        {{state==0?'可使用':''}} {{state==1?'未开始':''}} {{state==2?'已使用':''}} {{state==3?'已过期':''}}
+                    </view>
+                </view>            
+                <view class="out-date" wx:if="{{state==0 && item.EndDateStr!='' && item.enddays >= 0}}">
+                        <text wx:if="{{item.enddays == 0 && item.EndDateStr!=''}}">今天过期</text>
+                        <text wx:else>{{item.enddays}}天后过期</text>                        
+                </view>      
+                <view class="out-date" wx:if="{{state==1 && item.startdays >= 0}}">
+                        <text wx:if="{{item.startdays == 0}}">今天开始</text>
+                        <text wx:else>{{item.startdays}}天后开始</text>                   
+                </view>                    
+            </view>
+        </block>
+    </view>
+</view>

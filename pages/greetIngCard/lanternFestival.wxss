@@ -1,0 +1,912 @@
+.rel{position: relative;}
+
+.none{display: none;}
+
+.lantern-wrapper{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    font-size: 28rpx;
+    line-height: 1;
+    text-align: center;
+    background: #1f224f;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiase;
+    overflow: hidden;
+}
+
+.lantern-content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3
+}
+
+.star-shine{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url(data:image/png;base64,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) repeat-y 0 0;
+    background-size: 100%;
+    -webkit-animation: shine03 4s ease-in-out infinite;
+    animation: shine03 4s ease-in-out infinite;
+    opacity: 0;
+    z-index: 1
+}
+
+@keyframes shine03{ 
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 0;
+    } 
+} 
+
+.lantern-pic01{
+    width:100vw;
+    min-height: 100vh; 
+} 
+
+.lantern-pic02{
+    width: 100%;
+    margin-top: 4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: movearound01 15s infinite;
+    -webkit-animation: movearound01 15s infinite;
+}
+
+@keyframes  movearound01{
+    0%{left: 0;top: 10px}
+    25%{left: 5rem;}
+    50%{left: 0;top:0;}
+    75%{left:  5rem;}
+    100%{left: 0;top: 10px}
+}
+
+.lantern-pic03{
+    width: 100%;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+    transform: scale(0.65);
+    animation:bigger01 8s linear infinite;
+    -webkit-animation: bigger01 8s linear infinite;   
+}
+@keyframes bigger01{
+    0% {
+        transform: scale(0.65);
+    }
+
+    25% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.65);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.65);
+    }
+}    
+
+.newyear-pic01{
+    width: 100%
+}
+
+.newyear-title{
+    color: #fffeb3;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 50rpx;
+    padding:0 1rem;
+    line-height: 1.45;
+    position: relative;
+    z-index: 10
+}
+
+.lantern-pic04{
+    width: 100%
+}
+
+.lantern-pic05{
+    float: right;
+    width: 50%
+}
+
+.lantern-pic06{
+    position: relative;
+    width: 80%;
+    margin-top: -1.5rem;
+    margin-left: -150rpx
+}
+
+.lantern-pic07{
+    position: relative;
+    width: 88%;
+    margin: -5rem 0 0 25%;
+    margin-top: -5rem;
+    animation: movearound02 10s linear infinite;
+    -webkit-animation: movearound02 10s linear infinite
+}
+
+@keyframes movearound02{
+    0% {
+        left: 25%;
+        top: 30px
+    }
+
+    25% {
+        left: 0
+    }
+
+    50% {
+        left: 25%;
+        top: 0
+    }
+
+    75% {
+        left:0
+    }
+
+    100% {
+        left: 25%;
+        top:30px
+    }
+}        
+
+.lantern-pic08{
+    width: 100%;
+    opacity: .2;
+    -webkit-animation: shine02 4s ease-in-out infinite;
+    animation: shine02 4s ease-in-out infinite
+}
+
+@keyframes shine01{
+    0%{opacity:.2}
+    25%{opacity:.6}
+    50%{opacity:1}
+    75%{opacity:.6}
+    100%{opacity:.2}
+}    
+
+.lantern-pic09{
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    width: 100%
+}
+
+.lantern-pic10{
+    position: relative;
+    width: 100%
+}
+
+.lantern-pic11{
+    position: absolute;
+    top: -3rem;
+    left: 0;
+    width: 100%;
+    opacity: .4;
+    -webkit-animation: shine02 4s ease-in-out infinite;
+    animation: shine02 4s ease-in-out infinite
+}
+
+@keyframes shine02{
+    0%{opacity:.4}
+    25%{opacity:.8}
+    50%{opacity:1}
+    75%{opacity:.8}
+    100%{opacity:.4}
+} 
+
+.animate-ship{
+    margin-left:-50%;
+    width: 100%;
+    -webkit-animation:movearound03 20s linear infinite;
+    animation:movearound03 20s linear infinite
+}
+
+@keyframes movearound03{
+        0% {
+            margin-left:-50%;
+            bottom: 4rem
+        }
+        20% {
+            bottom: 3rem
+        }
+        40% {
+            bottom: 4rem
+        }
+        60% {
+            bottom: 3rem
+        }
+        80% {
+            bottom: 4rem
+        }
+        100% {
+            margin-left:100%
+        }
+}
+
+
+.lantern-pic12{
+    width: 100%
+}
+
+.blessing-btn {
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 36.6%;
+    height: 82rpx;
+    animation: move 2s ease-in infinite;
+    -webkit-animation: move 2s ease-in infinite
+}
+
+.lantern-blessing{
+    position: relative;
+    font-size:32rpx;
+    line-height: 1.8;
+    color: #fffeb3;
+    border-radius: 50%;
+    text-shadow: 0 0 10px rgba(193, 243, 252, .65);
+    z-index: 20
+}
+
+.lantern-blessing .name{
+    position: relative;
+    width: 100px;
+    text-align: left;
+    margin: 1rem 0 0 60%;
+}
+.lantern-blessing .name::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:-80rpx;
+    margin: auto 0;
+    width:60rpx;
+    height: 1px;
+    background: #fffeb3
+}
+.blue-light{
+    display: block;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    width: 50%;
+    height: 15rem;
+    background: rgba(59, 114, 237, .5);
+    transform: translate(-50%,-50%);
+    -webkit-filter: blur(50px); 
+    -moz-filter: blur(50px);
+    -ms-filter: blur(50px);    
+    filter: blur(50px)
+}
+
+.newyear-pic03{
+    width: 100%;
+    margin-top: -6rem
+}
+
+.newyear-pic04{
+    width: 100%
+}
+
+.newyear-pic05{
+    position: absolute;
+    bottom: 10px;
+    right: 75.2%;
+    width:10.6%
+}
+
+@keyframes move{
+    0% {
+        transform: scale(0.9);
+    }
+
+    5% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.1);
+    }
+
+    15% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(0.9)
+    }
+}
+
+.newyear-pic02{width: 100%}
+
+.newyear09-all{
+    position: relative;
+}
+
+.word-kuang{
+    padding: .7rem;
+    background: #ff5200;
+    border-radius: 1rem;
+    color: #ffdf61;
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0
+}
+
+.triangle{
+    position: absolute;
+    width:0;
+    height:0; 
+    border-width:.6rem; 
+    border-color:#ff5200 transparent transparent transparent; 
+    border-style:solid dashed  dashed;
+    overflow:hidden
+}
+
+.newyear09-all .word01{
+    top: 18%;
+    left: 4.5%
+}
+   
+.animation-word01{ 
+    animation:animation-word01 .5s linear;
+    animation-fill-mode :forwards
+}
+
+@keyframes animation-word01{
+    0%{opacity: 0;}
+    100%{opacity: 1}
+}
+
+.newyear09-all .word02{
+    top: 42%;
+    left: 4.3%
+}
+   
+.animation-word02{ 
+    animation:animation-word02 .5s .5s linear forwards
+}
+@keyframes animation-word02{
+    0%{opacity: 0}
+    100%{opacity: 1}
+}
+
+.newyear09-all .word03{
+    top: 24%;
+    right: 9.8%
+}
+
+.animation-word03{
+    animation:animation-word03 .5s 1s linear forwards
+}
+
+@keyframes animation-word03{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+.newyear09-all .word04{
+    top: 42%;
+    right: 2%;
+}
+
+.animation-word04{
+    animation:animation-word04 .5s 1.5s linear;
+    animation-fill-mode :forwards;}
+
+@keyframes animation-word04{
+    0%{opacity: 0}
+    100%{opacity: 1}
+}
+
+.newyear09-all .word01 .triangle{
+    bottom: -1.2rem;
+    right: 1.5rem
+}
+
+.newyear09-all .word02 .triangle{
+    bottom: -1.2rem;
+    left: 1.5rem
+}
+
+.newyear09-all .word03 .triangle{
+    bottom: -1.2rem;
+    left: 1.5rem;
+}
+
+.newyear09-all .word04 .triangle{
+    bottom: -1.2rem;
+    left: 1.5rem;
+}
+
+.newyear10-all .word01{
+    top: 38%;
+    left: 3%
+}
+
+.newyear10-all .word02{
+    top: 17%;
+    left: 18%
+}
+
+.newyear10-all .word03{
+    top:20%;
+    left: 42%
+}
+
+.newyear10-all .word04{
+    left: 67%;
+    top:23%
+}
+
+.newyear10-all .word01 .triangle{
+    bottom: -1.2rem;
+    left: 3rem
+}
+
+.newyear10-all .word02 .triangle{
+    bottom: -1.2rem;
+    left: 1.5rem
+}
+
+.newyear10-all .word03 .triangle{
+    bottom: -1.2rem;
+    left: 1.5rem
+}
+
+.newyear10-all .word04 .triangle{
+    bottom: -1.2rem;
+    left: 3rem
+}
+
+.benifit {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    padding: 0 10px 0 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 12px;
+    line-height: 30px;
+    color: #fff;
+    height: 30px;
+    background: rgba(0, 0, 0, .16);
+    z-index: 99
+}
+
+.my-blessing-bt {
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    color: #fff;
+    background: rgba(0, 0, 0, .16);
+    z-index: 99;
+    border-radius: 50%;
+    padding-top: 5px;
+    box-sizing: border-box;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.laba-red-packet-bt.bounce {
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+}
+
+.pocketDialog {
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+
+@keyframes bounce{
+    0%, 20%, 30%,40%, 80%, 100% {
+        transform: translatey(0);
+    }
+
+    25% {
+        transform: translatey(-10px);
+    }
+
+    35% {
+        transform: translatey(-5px);
+    }
+}    
+
+/*横幅*/
+.topcouplets{
+    animation: topcouplets 1.4s linear;
+    animation-fill-mode : forwards;
+}
+
+@keyframes topcouplets{
+   0%{width: 1.1rem}
+   100%{width: 17.8rem}
+}
+
+.leftcouplets{
+    animation:leftcouplets 1.4s .3s linear;
+    animation-fill-mode : forwards;
+}
+
+@keyframes leftcouplets{
+    0%{height: 1.1rem}
+    100%{height: 25.5rem}
+ }
+
+.laba-red-packet-bt img {
+    width: 100%;
+}
+
+.laba-music {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    width: 35px;
+    opacity:1;
+    z-index: 99;
+}
+
+.laba-music.rotato {
+    animation: rotato 1s linear infinite;
+    -webkit-animation: rotato 1s linear infinite;
+}
+
+.laba-music img {
+    width: 100%;
+}
+
+.laba-red-packet-bt {
+    width: 45px;
+    position: fixed;
+    bottom: 80px;
+    right: 10px;
+    z-index: 99;
+}
+
+@keyframes rotato{
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
+}    
+
+.swing01{
+    -webkit-animation: swing01 3s infinite;
+    animation: swing01 3s infinite
+}
+
+.swing02{
+    -webkit-animation: swing02 3s infinite;
+    animation: swing02 3s infinite
+}
+
+@-webkit-keyframes swing01{
+    0%{-webkit-transform: rotate(10deg);-webkit-transform-origin: 50% 0;}
+    25%{-webkit-transform: rotate(-10deg);-webkit-transform-origin: 50% 0;}
+    50%{-webkit-transform: rotate(10deg);-webkit-transform-origin: 50% 0;}
+    75%{-webkit-transform: rotate(-10deg);-webkit-transform-origin: 50% 0;}
+    100%{-webkit-transform: rotate(10deg);-webkit-transform-origin: 50% 0;}
+}
+@keyframes swing01{
+    0%{transform: rotate(-10deg);transform-origin: 50% 100%;}
+    25%{transform: rotate(10deg);transform-origin: 50% 100%;}
+    50%{transform: rotate(-10deg);transform-origin: 50% 100%;}
+    75%{transform: rotate(10deg);transform-origin: 50% 100%;}
+    100%{transform: rotate(-10deg);transform-origin: 50% 100%;}
+}
+
+@-webkit-keyframes swing02{
+    0%{-webkit-transform: rotate(-10deg);-webkit-transform-origin: 50% 0;}
+    25%{-webkit-transform: rotate(10deg);-webkit-transform-origin: 50% 0;}
+    50%{-webkit-transform: rotate(-10deg);-webkit-transform-origin: 50% 0;}
+    75%{-webkit-transform: rotate(10deg);-webkit-transform-origin: 50% 0;}
+    100%{-webkit-transform: rotate(-10deg);-webkit-transform-origin: 50% 0;}
+}
+
+@keyframes swing02{
+    0%{transform: rotate(10deg);transform-origin: 50% 100%;}
+    25%{transform: rotate(-10deg);transform-origin: 50% 100%;}
+    50%{transform: rotate(10deg);transform-origin: 50% 100%;}
+    75%{transform: rotate(-10deg);transform-origin: 50% 100%;}
+    100%{transform: rotate(10deg);transform-origin: 50% 100%;}
+}
+
+
+/*弹框*/
+.qr-dialog{
+    width:260px;
+    height: 290px;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding:20px 0 0;
+    box-sizing: border-box;
+    z-index: 1001;
+    text-align: center;
+}
+
+.qr-dialog .f01{font-size: 16px;color: #333;margin: 10px 0 15px;}
+
+
+.qr-dialog .pic01{width:200px;margin: 0 auto;display: block;}
+
+.qr-dialog .icon-guanbi{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 16px;
+    color: #999;
+  }
+/* 音乐 */
+.audio-label {
+    position: fixed;
+    top: 40rpx;
+    right: 20rpx;
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    opacity: .25;
+    z-index: 99;
+}
+
+.audio-rotate {
+    animation: rotate 1s linear infinite;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* 红包 */
+@keyframes bounce {
+    0%, 20%, 30%, 40%, 80%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20rpx);
+    }
+    35% {
+        transform: translateY(-10rpx);
+    }
+}
+
+.laba-red-packet-bt {
+    width: 90rpx;
+    position: fixed;
+    bottom: 300rpx;
+    right: 20rpx;
+    animation:bounce 1s ease-in infinite;
+}
+/* 红包弹层 */
+.show {     
+    animation: show .5s  linear;
+    animation-fill-mode : forwards;
+}
+@keyframes show {
+    5% {
+       opacity: 0
+    }   
+    50% {       
+        opacity: .5
+    }
+    100% {
+        
+        opacity: 1
+    }
+}
+/* 红包收益 */
+.red-package-bot image{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.red-package-balance-tips {
+    width: 100%;
+    text-align: center;
+    font-size: 28rpx;
+    color: #f9d39d;
+    position: absolute;
+    bottom: 160rpx;
+}
+
+.close {
+    position: absolute;
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    right: 20rpx;
+    top: 20rpx;
+    overflow: hidden;
+}
+
+.close::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #ccc;
+    border-radius: 120% 0;
+}
+
+.close::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #ccc;
+    border-radius: 120% 0;
+}
+
+.close::before {
+    transform: rotate(45deg);
+}
+
+.close::after {
+    transform: rotate(-45deg);
+}
+/* 我的祝福 */
+.my-bless {
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    font-size: 24rpx;
+    position: fixed;
+    bottom: 180rpx;
+    right: 20rpx;
+    background: rgba(0, 0, 0, .16);
+    z-index: 99;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 100;  
+}
+.my-bless .text {  
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+}
+/* 首页 */
+.index-btn {
+    display:block;
+    width:80rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:24rpx;
+    position:fixed;
+    bottom:60rpx;
+    right:20rpx;
+    background:rgba(0, 0, 0, .16);    
+    color:#fff;
+    border-radius:50%;
+    text-align:center;
+    z-index:100;
+}
+
+.index-btn text {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+}
+/* 分享转发 */
+.share {
+    display:block;
+    width:80rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:24rpx;
+    position:fixed;
+    top:20rpx;
+    right:20rpx;
+    background:rgba(0, 0, 0, .16);    
+    color:#fff;
+    border-radius:50%;
+    text-align:center;
+    z-index:100
+}
+
+.zhuanfa {
+    display:block;
+    width:70rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:40rpx;
+    position:fixed;
+    top:140rpx;
+    right:20rpx;
+    background:rgba(0, 0, 0, .16);    
+    color:#fff;
+    border-radius:50%;
+    text-align:center;
+    z-index:100
+}
+
+.share-poster {
+    display:block;
+    width:70rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:24rpx;
+    position:fixed;
+    top:240rpx;
+    right:20rpx;
+    background:rgba(0, 0, 0, .3);    
+    color:#fff;
+    border-radius:50%;
+    text-align:center;
+    z-index:100;
+}
+@media screen and (min-width:320px) {
+    html {
+        font-size: 50%
+    }
+}
+
+@media screen and (min-width:360px) {
+    html {
+        font-size: 62.5%
+    }
+}
+
+@media screen and (min-width:414px) {
+    html {
+        font-size: 75%
+    }
+}
+
+@media screen and (min-width:640px) {
+    html {
+        font-size: 113%
+    }
+}

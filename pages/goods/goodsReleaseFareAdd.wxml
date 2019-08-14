@@ -1,0 +1,27 @@
+<view class="fare-name-wrap vz-flex flex-center">
+    <veiw class="fare-name-tips">模板名称</veiw>
+    <input bindblur="getFareName" maxlength="20" class="fare-name-input" value="{{fareName}}" type="text" placeholder="请输入模板名称" />
+</view>
+
+<view class="fare-main">
+    <view class="fare-main-tip">
+        送货费用
+    </view>
+    <view style="padding:20rpx 0">
+        <view class="vz-flex flex-center">
+            <input bindinput="getBaseCount" type="number" maxlength="3" value="{{baseCount}}"/>
+            <view style="margin: 0 20rpx">件内</view>
+            <input bindinput="getBaseCost" value="{{baseCost}}" type="digit" maxlength="6" />
+            <view style="margin-left:20rpx">元</view>
+        </view>
+        <view class="vz-flex flex-center" style="padding-top:20rpx;">
+            <view style="margin-right:20rpx">每增加一件，运费增加</view>
+            <input bindinput="getExtraCost" type="digit" value="{{extraCost}}" maxlength="6"/>
+            <view style="margin-left:20rpx">元</view>
+        </view>
+    </view>
+</view>
+
+<view class="fare-add-btn" bindtap="createFare">
+    完成
+</view>

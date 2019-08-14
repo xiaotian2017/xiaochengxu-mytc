@@ -1,0 +1,122 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.verification-dicount-title {
+    height: 320rpx;
+    background: #fff;
+    text-align: center;  
+    position: relative;  
+}
+
+.verification-wrap {
+    padding: 30rpx;
+}
+
+.verification-dicount-bot{
+    position: absolute;
+    bottom: 0;
+    width: 100%;    
+}
+
+.verification-dicount-bot-item {
+    color: #fff;
+    font-size: 24rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+
+.verification-discount {
+    font-size: 64rpx;
+    color: #ff5a00;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);    
+}
+
+.qr {
+    width: 340rpx;
+    height: 340rpx;
+    display: block;
+    margin: 0  auto;
+    padding: 30rpx 0 20rpx;
+}
+
+.p1 {
+    color: #666;
+    font-size: 32rpx;
+    text-align: center;
+}
+.p2 {
+    font-size: 28rpx;
+    color: #999;
+    text-align: center;
+    padding-top:20rpx;
+}
+.p3 {
+    text-align: center;
+    font-size: 28rpx;
+    color: #999;
+    padding-top:20rpx;
+}
+
+.qr-wrap {
+    background: #fff;
+    padding-bottom: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.detail {
+    background: #fff;
+    padding: 0 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.detail-p1 {
+    padding: 26rpx 0;    
+    font-size: 28rpx;
+    color:#ccc;
+}
+
+
+.detail-p2, .detail-p3, .detail-p4, .time-p5 {
+    padding: 26rpx 0;        
+    font-size: 28rpx;
+    color:#ccc;
+    border-top:1rpx solid #f0f0f0;
+}
+
+.time-wrap {
+    background: #fff;  
+    padding-left:20rpx;
+}
+
+
+.verification-discount-used {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+  }
+
+  .used {
+    font-size:32rpx;
+    height:127rpx;
+    width:127rpx;
+    border:1rpx solid #f0f0f0;
+    color:#ccc;
+    font-weight:700;
+    line-height:127rpx;
+    position:absolute;
+    right:-20rpx;
+    bottom:-20rpx;
+    transform:rotate(-45deg) ;
+    -webkit-transform:rotate(-45deg);
+    border-radius:50%;
+    text-align:center;  
+  }
+  

@@ -1,0 +1,51 @@
+.navigator-mask{
+    display: none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.42);
+    z-index:99
+}
+
+.navigator{
+    position:fixed;
+    right:-268rpx;
+    bottom:110px;
+    z-index: 100;
+    transition:transform .28s linear;
+}
+.navigator-show{
+    transform: translateX(-268rpx)
+}
+.navigator .tag{
+    padding:10rpx 0;
+    width:32px;
+    height: 34px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #fff;
+    background:rgba(0,0,0,0.42);
+}
+.navigator-content{
+    padding:10rpx 28rpx;
+    font-size: 24rpx;
+    color: #666;
+    background: #fff;
+    border-top-left-radius: 8rpx;
+    border-bottom-left-radius: 8rpx;
+}
+.navigator-item{
+    text-align: center
+}
+.navigator-item image{
+    display: block;
+    width: 56rpx;
+    height: 56rpx;
+    margin: 0 auto;
+}
+.navigator-item:not(:last-of-type){
+    margin-right: 20rpx
+}

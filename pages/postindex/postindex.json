@@ -1,0 +1,13 @@
+{
+    "usingComponents": {
+      "city-convenientInfo": "/components/ConvenientInfo/ConvenientInfo",
+        "city-banner":"/components/Banner/Banner",
+        "city-search":"/components/Search/Search",
+        "city-iconBanner":"/components/IconBanner/IconBanner",        
+        "city-backTop":"/components/BackTop/BackTop",
+        "city-navigator":"/components/Navigator/Navigator",
+          "city-bottomnav": "/components/BottomNav/BottomNav"
+    },
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+}

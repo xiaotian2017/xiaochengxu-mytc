@@ -1,0 +1,56 @@
+.tips{
+    display: none;
+    position:fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    height: 40px;
+    z-index: 100000000;
+}
+.tips-content{
+    display:inline-block; 
+    min-width: 240rpx;
+    max-width: 580rpx;
+    line-height: 40px;
+    height:40px;
+    padding:0 20rpx;
+    font-size: 28rpx;
+    color: #fff;
+    border-radius: 8rpx;
+    background: rgba(0,0,0,.52);
+}
+.sliderFromDown{
+    display: block;
+    animation:sliderFromDown .22s linear both
+}
+
+@keyframes sliderFromDown{
+    0%{
+        transform: translateY(500px)
+    }
+    100%{
+        transform: none
+    }
+}
+
+@keyframes scaleHide{
+    40%{
+        transform: scale(.88)
+    }
+    90%{
+        transform: scale(.88);
+        opacity: 1
+    }
+    100%{
+        transform: scale(.72);
+        opacity: 0
+    }
+}
+
+.scaleHide{
+    display: block;
+    animation: scaleHide .42s linear both
+}

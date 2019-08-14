@@ -1,0 +1,7 @@
+{
+    "component":true,
+    "usingComponents":{
+        "city-countDown":"../CountDown/CountDown",
+        "city-progressBar":"../ProgressBar/ProgressBar"
+    }
+}

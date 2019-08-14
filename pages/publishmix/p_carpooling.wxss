@@ -1,0 +1,215 @@
+@import "../../css/publish_cljy.wxss";
+view {
+  line-height: 1;
+}
+
+.main {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #606c71;
+  padding-top: 20rpx;
+}
+
+.timePicer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+}
+
+.pickerview {
+  width: 20%;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: white;
+}
+
+.btn {
+  background-color: white;
+  position: fixed;
+  bottom: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 999;
+  font-size: 32rpx;
+}
+
+.custtimepicker {
+  font-size: 14px;
+  font-family: "微软雅黑";
+}
+
+.checkicon {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  background: url(https://j.vzan.cc/content/city/images/icon01.png)no-repeat -100px 0;
+  -webkit-background-size: 500px;
+  background-size: 500px;
+  margin-right: 4px;
+}
+
+.pc_icon {
+  display: inline-block;
+}
+
+.gonggaoclass {
+  overflow: hidden;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0px;
+  z-index: 999999;
+  height: 100%;
+}
+
+.gonggaobox {
+  max-height: 360px;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 100px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #999;
+  padding: 30px 20px;
+}
+
+.gongaobox2 {
+  text-align: left;
+  height: 300px;
+  overflow: auto;
+}
+
+.carSM {
+  display: block;
+}
+
+.carSMTitle {
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+  color: black;
+}
+
+.gonggaozhidao {
+  color: #40affe;
+  font-size: 15px;
+  background-color: #f2f2f2;
+  border-radius: 0 0 5px 5px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.type-choose {
+  padding: 0 20rpx;
+  background: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-bottom: 20rpx;
+}
+
+.type-item {   
+  text-align: center;
+  line-height:  52rpx;
+  border-radius: 30rpx;
+  color: #929292;
+  font-size: 30rpx;
+  width:160rpx;
+  position: relative;
+}
+
+.type-item::after {
+  content: "";
+  display: block;
+  border: 1rpx solid #929292;
+  position: absolute;
+  left: -50%;
+  height: 200%;
+  transform: scale(.5);
+  bottom: -50%;
+  width: 200%;
+  border-radius: 60rpx;
+}
+
+.type-item-active {
+  color:#fff;
+  background: #fa0f20;
+  border-color: #fa0f20;
+}
+
+.type-item-active::after{
+  border: none;
+}
+
+.personnal-info-title {
+  font-weight: 700;
+  color: #101010;
+}
+
+.personnal-info-label {
+  font-size: 40rpx;
+  background: #fee7e8;
+  border: 2rpx solid #fa0f20;
+  color: #fa0f20;
+  border-radius: 16rpx;
+  line-height: 56rpx;
+  width:110rpx;
+  text-align:center;
+  transform: scale(.5);    
+}
+
+.wrapper-personal-info {
+  background: #fff;
+  font-size: 32rpx;     
+  padding: 30rpx 30rpx 0;
+}
+
+.con_ul .li::after {
+ border: none;
+}
+
+.other-type {
+  padding: 28rpx 28rpx 0;
+  background: #fff;
+}
+
+.note-footer {
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+
+}
+
+.note-footer view {
+  line-height: 98rpx;   
+  text-align: center;
+}
+
+/* .note-footer view:first-child {
+  width: 70%;    
+}    */
+
+.note-footer .confirm-btn {
+  width: 30%;
+  color:#fff;
+  background: linear-gradient(to right, #fa0f20, #fa0f73);   
+}
+
+.li_title {
+  font-size: 32rpx;
+}
+
+.carpooling-detail {
+  padding: 50rpx 30rpx 0;
+  font-size: 32rpx;
+  background: #fff;
+}
+

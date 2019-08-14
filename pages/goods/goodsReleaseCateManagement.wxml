@@ -1,0 +1,40 @@
+<block wx:for="{{cateArr}}" wx:key="{{index}}">
+    <view class="vz-flex flex-center cate-item-wrap">
+        <view style="width: 40%;color:#333">
+            {{item.Name}}
+        </view>
+        <view style="width:60%" class="vz-flex flex-center flex-between cate-management-btn">
+            <view class="cate-item-btn" data-id="{{item.Id}}" bindtap="showSortLayer">{{item.SortVal}}排序</view>
+            <view class="cate-item-btn" data-type="3" data-id="{{item.Id}}" bindtap="delCateName">删除</view>
+            <view class="cate-item-btn" data-type="2" data-id="{{item.Id}}" data-name="{{item.Name}}" bindtap="showAddCateLayer">编辑</view>
+        </view>
+    </view>
+</block>
+
+<view class="add-cate-btn fixed-bot" data-type="1" data-id="0" bindtap="showAddCateLayer">
+    新增分类
+</view>
+
+<!-- 新建分类 -->
+<view class="mask" style="z-index:1000" wx:if="{{isShowAddCateLayer}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">新建分类名称</view>
+        <input type="text" placeholder="名称小于8个字" maxlength="8" bindinput="getCate" value="{{cateName}}"/>
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" catchtap="closeCreateCateNameLayer">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="addOrEditCateName">确定</view>
+        </view>
+    </view>
+</view>
+
+<!-- 分类排序 -->
+<view class="mask" style="z-index:1000" wx:if="{{isShowSortLayer}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">分类排序</view>
+        <input type="number" placeholder="排序值" maxlength="3" bindinput="getSort" />
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" catchtap="closeSortLayer">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmSortLayer">确定</view>
+        </view>
+    </view>
+</view>

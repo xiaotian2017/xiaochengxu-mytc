@@ -1,0 +1,101 @@
+@import "../../../public/navigatorCommon.wxss";
+
+page{
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background: #fff
+}
+page::-webkit-scrollbar,#content::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent
+}
+#content{
+    padding:0 10rpx;
+    width: 100vw;
+    height: 100vh;
+    font-size: 0;
+    box-sizing: border-box
+}
+.vote-item {
+    display: inline-block;
+    margin-top: 12rpx;
+    width: 49%;
+    box-sizing: border-box;
+    border: 1rpx solid #f2f2f2;
+    border-radius: 8rpx;
+    overflow: hidden
+}
+
+.vote-item:nth-child(odd) {
+    margin-right: 1%
+}
+.vote-item:nth-child(even) {
+    margin-left: 1%
+}
+.vote-item-cover,.vote-item-img{
+    width: 100%;
+    height: 280rpx
+}
+.vote-item-content {
+    padding: 20rpx;
+    width: 100%;
+    height:252rpx;
+    box-sizing: border-box
+}
+.vote-item-title{
+    width: 100%;
+    margin-bottom: 20rpx;
+    color: #333;
+    font-size: 32rpx
+}
+.vote-item-info {
+    font-size: 24rpx;
+    padding-bottom: 10rpx
+}
+.vote-username {
+    max-width: 75%
+}
+.vote-btn {
+    width: 100%;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#fff;
+    text-align: center;
+    border-radius: 8rpx
+}
+.vote-active {
+    background: #fe3d49
+}
+.vote-active::after{
+    content: '我要参与'
+}
+.vote-inactive {
+    background: #ccc
+}
+.vote-inactive::after{
+    content: '投票结束'
+}
+.loading-all {
+    padding:  30rpx 0;
+    font-size: 24rpx;
+    text-align: center;
+    color: #ccc
+}
+.status-empty{
+    text-align: center;
+    padding-top: 100rpx
+}
+.status-empty-img{
+    width: 160rpx;
+    height: 160rpx;
+    margin-bottom: 20rpx
+}
+.voting {
+    vertical-align: middle;
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx
+}

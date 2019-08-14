@@ -1,0 +1,84 @@
+@import "../../css/cell.wxss";
+
+.use_cell{padding:15px 10px;color:#333;font-size:14px;background: #fff;border-bottom:1rpx solid #f0f0f0;}
+
+.use_cell .head{height: 160rpx;width: 160rpx;margin-right: 20rpx;}
+
+.use_cell .head image{width: 100%;height: 100%;}
+
+.use_cell .f01{font-size: 32rpx;}
+
+.use_cell .f02{font-size: 28rpx;color:#666;margin-top: 10rpx;}
+.icon_yh_call{
+background-image:url(https://j.vzan.cc/content/city/images/smallapp_entertainment_01.png?v=1.21);
+background-size:500px;
+background-repeat:no-repeat;
+}
+
+.icon_yh_call{
+background-position:-85px 0;
+width:29px;
+height:29px;
+display:block;
+}
+.weui_msg {
+    padding-top: 36px;
+    text-align: center;
+}.weui_msg .weui_icon_area {
+    margin-bottom: 70px;
+}.weui_icon_warn.weui_icon_msg:before {
+    color: #f76260;
+}
+.weui_icon_success.weui_icon_msg:before {
+    color: #1aad19;
+}
+[class*="weui_icon_"]:before, [class^=weui_icon_]:before {
+  font-size: 104px;
+    font-family: weui;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: inherit;
+
+    margin-right: 2px;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 10px;
+    margin-left: 2px;
+}.weui_icon_warn:before {
+    content: "\EA0B";
+}.weui_msg .weui_text_area {
+    margin-bottom: 25px;
+    margin: 0 20px;
+}.weui_msg .weui_msg_title {
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 20px;
+}.weui_msg .weui_msg_desc {
+    font-size: 14px;
+    color: #888;
+    padding-top: 5px;
+}
+[class*=" weui_icon_"]:before, [class^=weui_icon_]:before {
+    margin: 0;
+}.weui_msg {
+    margin-top: 36px;
+    text-align: center;
+}.weui_msg .weui_opr_area {
+    margin-bottom: 25px;
+}.weui_msg .weui_extra_area {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #888;
+}
+
+.weui_extra_area {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}.weui_icon_success:before{content:"\EA06"}

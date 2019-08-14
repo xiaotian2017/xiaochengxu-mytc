@@ -1,0 +1,9 @@
+<view class="loading" hidden="{{isLoding}}">
+    <image src="http://j.vzan.cc/content/city/xcx/images/loading.svg?v=1.2"></image>
+</view>
+<view class="loading-all" wx:if="{{loadingAll}}">
+    已加载全部数据
+</view>
+<view class="loading-err" wx:if="{{loadingErr}}">
+    获取数据出错
+</view>

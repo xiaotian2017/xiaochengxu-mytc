@@ -1,0 +1,145 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.0",
+	"appid": "wxf19f73c0309593ab",
+	"projectname": "7777777777777",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 15,
+			"list": [
+				{
+					"id": -1,
+					"name": "会员店铺",
+					"pathName": "pages/cityCard/memberStore",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员特价商品",
+					"pathName": "pages/cityCard/memberStoreGoods",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "会员券",
+					"pathName": "pages/cityCard/memberStoreCoupon",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "同城卡首页",
+					"pathName": "pages/cityCard/cityCardIndex",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员券详情",
+					"pathName": "pages/cityCard/memberCouponDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "同城卡购买",
+					"pathName": "pages/cityCard/cityCardPurchase",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "dddd",
+					"pathName": "pages/business_detail/business_detail",
+					"query": "storeid=8698091"
+				},
+				{
+					"id": 7,
+					"name": "发 发 发",
+					"pathName": "pages/shop/clerkinvite",
+					"query": "uid=17314775dddd33&storeid=8581346&invitekey=8aa538a3-c6cd-4f4d-a6c1-f3bfeb46999e&timestamp=636928259505412900"
+				},
+				{
+					"id": -1,
+					"name": "发 发 发",
+					"pathName": "pages/business_detail/pay",
+					"query": "storeid=8581346"
+				},
+				{
+					"id": -1,
+					"name": "到店付",
+					"pathName": "/pages/categoryList/categoryList?typeid=304482",
+					"query": ""
+				},
+				{
+					"id": 10,
+					"name": "到店付",
+					"pathName": "pages/categoryList/categoryList",
+					"query": "typeid=304482"
+				},
+				{
+					"id": -1,
+					"name": "会员店铺",
+					"pathName": "pages/cityCard/memberStore",
+					"query": "typeid=304482"
+				},
+				{
+					"id": -1,
+					"name": "在线买单",
+					"pathName": "pages/business_detail/pay",
+					"query": "storeid=8581346"
+				},
+				{
+					"id": -1,
+					"name": "在线买单",
+					"pathName": "pages/cityCard/cityCardIndex",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "过期页面",
+					"pathName": "pages/expirePage/expirePage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "店铺错误页",
+					"pathName": "pages/storeExpirePage/storeExpirePage",
+					"query": ""
+				}
+			]
+		}
+	}
+}

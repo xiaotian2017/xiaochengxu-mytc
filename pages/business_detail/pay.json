@@ -1,0 +1,5 @@
+{
+    "usingComponents": {      
+      "city-tips": "/components/Tips/Tips"
+    }
+}

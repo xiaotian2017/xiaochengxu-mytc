@@ -1,0 +1,85 @@
+<view class="vz-flex store-discount-tab-wrap">
+    <view class="store-discount-tab vz-flex-1 {{isAll && 'base-active'}}" bindtap="allHandle">全部</view>
+    <view class="store-discount-tab vz-flex-1 {{!isAll && 'base-active'}}" bindtap="delHandle">已删除</view>
+</view>
+<view style="background: #fff;padding-bottom:140rpx;padding-top:80rpx">
+
+    <block wx:for="{{distanceList}}" wx:key="{{index}}">
+        <view style="box-shadow: 0px 5px 5px #efefef;">
+            <view style="padding: 40rpx 20rpx 0" class="store-discount-list-wrap vz-flex">
+                <view style="padding-right:20rpx">
+                    <view style="position: relative;margin-bottom:40rpx;">
+                        <image style="width: 180rpx;height:180rpx;vertical-align: middle;" src="{{item.StoreAddress}}"></image>
+                        <view class='re-coupons'  wx:if='{{!!item.Voucher}}'>返{{item.Voucher.VoucherMoney}}元劵</view>
+                    </view>
+
+                    <view class="dsh">
+                        {{item.State==0 && '待审核' || (item.State==1 && !item.isInvalid) && '已通过' || item.State==-1 && '已删除' || item.isInvalid && '已失效'}}
+                    </view>
+                </view>
+                <view>
+                    <view class="vpcTil wzsl">
+                        {{item.CouponName}}
+                    </view>
+                    <view class="vpc_b1">
+                        <text class="vpc_b1-1">购买</text>
+                        <text class="vpc_b1-2">￥{{item.BuyPrice/100}}</text>
+                        <text class="vpc_b1-3" style="margin-right:4rpx">到店付</text>
+                        <text class="vpc_b1-4">{{(item.NewPayCash != 'null' && item.NewPayCash) ? item.NewPayCash:''}}</text>
+                    </view>
+                    <view class="vpc_b2">
+                        <text>原价</text>
+                        <text class="yaunjia">￥{{item.CouponMoney/100}}</text>
+                    </view>
+                    <view class="shengyu">
+                        已售{{item.CreateNum-item.RemainNum}}份 还剩{{item.RemainNum}}份
+                    </view>
+                    <view class="shijian">
+                        <icon class="icon-font icon-time"></icon> 抢购开始 {{item.ShowTimeValidStart}}</view>
+                    <view class="shijian">
+                        <icon class="icon-font icon-time"></icon> 抢购结束 {{item.ShowTimeValidEnd}}</view>
+                    <view class="shijian">
+                        <icon class="icon-font icon-time"></icon> 消费开始 {{item.ShowTimeUseStart}}</view>
+                    <view class="shijian">
+                        <icon class="icon-font icon-time"></icon> 消费截至 {{item.ShowTimeUseEnd}}</view>
+                </view>
+            </view>
+            <view style="padding:0 20rpx;" class="vTIn vz-flex flex-between">
+                <view class="vTIn-inner vz-flex flex-center">
+                    <view wx:if="{{!item.RefundUse}}">
+                        <icon type="clear" size="12" style="vertical-align:middle" />
+                        <text style="vertical-align:middle;margin-left:6rpx">不可退款</text>
+                    </view>
+                    <view wx:else style="color:#fe3d49;margin-left:20rpx">
+                        <icon type="success" size="12" color="#fe3d49" style="vertical-align:middle" />
+                        <text style="vertical-align:middle;margin-left:6rpx">可退款</text>
+                    </view>
+                    <view wx:if="{{!item.RepeatUse}}" style="margin-left:20rpx">
+                        <icon type="clear" size="12" style="vertical-align:middle" />
+                        <text style="vertical-align:middle;margin-left:6rpx">不可叠加</text>
+                    </view>
+                    <view wx:else style="color:#fe3d49;margin-left:20rpx">
+                        <icon type="success" size="12" color="#fe3d49" style="vertical-align:middle" />
+                        <text style="vertical-align:middle;margin-left:6rpx">可叠加</text>
+                    </view>
+                </view>
+                <view class="vTIn-inner vz-flex flex-center" style="color:#fe3d49 ">
+                    <icon type="warn" size="12" />
+                    <text style="margin-left:6rpx">优惠收益归店铺</text>
+                </view>
+            </view>
+            <view style="text-align:right;padding:0 20rpx;">
+                <!-- <text class="bot-btn" data-sid="{{item.StoreId}}" data-csid="{{item.Id}}" bindtap="toReleaseDiscount">{{(item.State==1 || item.State==-1) && '再发一个' || '编辑'}}</text> -->
+                <text class="bot-btn" data-sid="{{item.StoreId}}" data-csid="{{item.Id}}" bindtap="toReleaseDiscount">编辑</text>
+                <text class="bot-btn" data-sid="{{item.StoreId}}" data-csid="{{item.Id}}" bindtap="stopDiscountItem" wx:if="{{item.State==1 && !item.isInvalid}}">提前结束</text>
+                <text class="bot-btn" data-csid="{{item.Id}}" data-index='{{index}}' bindtap="delDiscountItem" wx:if="{{item.State!==-1}}">删除</text>
+                <text class="bot-btn" bindtap="toBuyHistory" data-scid="{{item.Id}}">购买记录</text>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{isDone}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;margin-top:20rpx">— — 数据显示完了 — —</view>
+</view>
+
+<view class="announcement-bt" bindtap="toReleaseDiscount" bindtap="toReleaseDiscountByAddBtn">
+    <icon class="iconfont icon-guanbi add-btn"></icon> 添加
+</view>

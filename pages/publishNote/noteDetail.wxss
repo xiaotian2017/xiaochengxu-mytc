@@ -1,0 +1,481 @@
+@import "./detailComment.wxss";
+@import "../../public/navigatorCommon.wxss";
+view {
+    line-height: 1;
+}
+
+.note-detail-container {
+    padding-top: 20rpx;
+    padding-bottom: 120rpx;
+}
+
+.note-detail-avatar {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 100%;
+}
+
+.note-detail-username {
+    font-size: 28rpx;
+    color: #5e5e5e;
+    padding-left: 20rpx;
+    width: 400rpx;
+}
+
+.title-wrapper {
+    height: 120rpx;
+    background: #fff;
+    padding: 0 30rpx;
+    margin-bottom:20rpx;
+}
+
+.note-detail-type {
+    font-size: 28rpx;
+    color: #fff;
+    width: 160rpx;
+    text-align: center;
+    height: 50rpx;
+    line-height: 50rpx;
+    background: #fa0f20;
+    border-radius: 25rpx;
+}
+
+.note-detail-address {
+    font-size: 32rpx;
+    background: #fff;
+    padding: 0 0 0 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.left-title {
+    width: 17%;
+    white-space: nowrap;
+    padding-right: 20rpx;
+}
+
+.address-item {
+    height: 80rpx;
+}
+
+.address-icon {
+    text-align: center;
+    padding: 0 30rpx;
+    white-space: nowrap;
+    position: relative;
+}
+
+.address-icon::before {
+    content: "";
+    position: absolute;
+    height: 40rpx;
+    border-left: 1rpx solid #eaeaea;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.description {
+    background: #fff;
+    padding: 30rpx;
+    font-size: 32rpx;
+    margin-bottom: 20rpx;
+}
+
+.description-title {
+    font-weight: 700;
+    padding-bottom: 30rpx;
+}
+
+.description-tips {
+    font-size: 24rpx;
+    padding-top: 30rpx;
+}
+
+.report-wrapper {
+    font-size: 24rpx;
+    background: #fff;
+    padding: 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.city-post-imgList image {
+    display: block;
+    margin: 0 auto;
+    width: auto
+}
+
+.city-post-imgList image:not(:last-of-type) {
+    margin-bottom: 10rpx
+}
+
+.city-post-imgList image, .city-post-content .tips {
+    margin-top: 10rpx
+}
+
+.post_img {
+    width: 100%;
+    height: 100%;
+}
+
+.note-detail-title {
+    font-size: 32rpx;
+    background: #fff;
+    padding: 0 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.note-detail-price {
+    color: #fa0f20;
+    font-size: 32rpx;
+}
+
+.icon-report::before {
+    font-size: 24rpx;
+    color: #f4ea2a;
+    padding-right: 16rpx;
+}
+
+/* 评论 */
+
+.city-post-comment {
+    color: #101010;
+    font-size: 28rpx;
+    background: #fff;
+}
+
+.city-post-comment-title {
+    padding: 30rpx 20rpx;
+    border-bottom: 1rpx solid #f2f2f2;
+}
+
+.comment-status {
+    text-align: center;
+    padding: 40rpx 0;
+    font-size: 12px;
+    color: #666
+}
+
+.comment-status:last-of-type text {
+    color: #fe3d49
+}
+
+.footer-bar {
+    position: fixed;
+    bottom: 0;
+    border-top: 1rpx solid #f2f2f2;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100rpx;
+    background: #fff
+}
+
+.city-btn {
+    margin-left: auto;
+    width: 200rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #fff;
+    background: #fe3d49
+}
+
+.note-detail-footer {
+    height: 98rpx;
+    color: #fff;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1rpx solid #eaeaea;
+}
+
+.note-detail-footer-left {
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.note-detail-footer-right {
+    font-size: 32rpx;
+    width: 360rpx;
+    text-align: center;
+    background: linear-gradient(to right, #fa0f20, #fa0f73);
+    height: 100%;
+    line-height: 98rpx;
+}
+
+.icon-index-home::before, .icon-publish::before, .icon-my-publish::before {
+    font-size: 48rpx;
+}
+
+/* 评论 */
+
+.comment-item {
+    padding: 20rpx
+}
+
+.comment-item:first-of-type {
+    margin-top: 0
+}
+
+.comment-item:not(:last-of-type) {
+    border-bottom: 1rpx solid #f0f0f0
+}
+
+.comment-item .comment-userInfo {
+    font-size: 28rpx;
+}
+
+.comment-item .comment-userInfo .avatar {
+    width: 70rpx;
+    height: 70rpx;
+    margin-right: 20rpx;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+.comment-item .comment-userInfo .avatar image {
+    width: 100%;
+    height: 100%
+}
+
+.comment-item .comment-userInfo .username {
+    max-width: 40%;
+    font-size: 28rpx;
+    color: #333;
+    padding-bottom: 12rpx;
+}
+
+.comment-item .comment-userInfo .deliver-time {
+    font-size: 24rpx;
+    color: #999
+}
+
+.comment-like {
+    color: #999
+}
+
+.comment-like .icon {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.comment-content {
+    padding: 0 0 20rpx 90rpx
+}
+
+.comment-phase {
+    margin-top: 16rpx;
+    line-height: 1.5;
+    word-break: break-all;
+    color: #333
+}
+
+.comment-phase text {
+    vertical-align: middle
+}
+
+.comment-pic {
+    margin-top: 16rpx
+}
+
+.comment-pic image {
+    width: 120rpx;
+    height: 120rpx
+}
+
+.comment-btn {
+    margin-left: auto;
+    margin-top: 20rpx;
+    width: 54px;
+    text-align: right;
+    line-height: 1;
+    color: #999
+}
+
+.comment-btn image {
+    margin-right: 10rpx;
+    width: 32rpx;
+    height: 32rpx;
+    vertical-align: middle
+}
+
+.top-border {
+    border-width: calc(100vw - 40rpx);
+    border-top: 1rpx solid #f2f2f2;
+}
+
+.comment-subList {
+    margin-left: 90rpx;
+    font-size: 28rpx;
+    background: #f2f5f7;
+}
+
+.comment-subItem, .seeAllSubComments {
+    line-height: 1.85;
+}
+
+.comment-subItem-tap {
+    background: rgba(0, 0, 0, 0.08)
+}
+
+.comment-subItem text {
+    vertical-align: middle
+}
+
+.comment-subItem .comment-subItem-username {
+    color: #fe3d49;
+    padding-left: 20rpx;
+}
+
+.comment-gif {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle
+}
+
+.post_img {
+    width: 100%;
+    height: 100%;
+}
+
+.icon-person-svg {
+    background: url('data:image/svg+xml,<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M924 233v-6l-1-1v-1h-1l-1-1v-1l-2-1v-1l-1-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-5l-1 1h-1v1h-3L113 516c-11 4-16 15-12 26 3 6 7 9 12 11l236 95 25 135c2 11 12 18 22 17 5-1 9-4 11-7l88-87 178 71c10 4 21-1 25-10l224-524h1v-7l1-3zM364 611l-190-76 604-231-414 307zm41 127l-13-74 63 25-50 49zm265-5L407 628l452-334-189 439z" /></svg>') no-repeat !important;
+}
+
+.icon-jiahao-svg {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M821 807H214V199h607v608zm-575-32h543V231H246v544z"/><path d="M701 518H333c-9 0-16-7-16-16s7-16 16-16h368c9 0 16 7 16 16s-7 16-16 16z"/><path d="M518 696c-9 0-16-7-16-16V326c0-9 7-16 16-16s16 7 16 16v354c0 8-7 16-16 16z"/></svg>') no-repeat !important;
+}
+
+.bt_li.active .icon_fenleixinxi {
+    background-position: -195px -122px;
+}
+
+.house-detail {
+    background: #fff;
+    padding: 30rpx;
+    margin-bottom: 20rpx;
+    font-size: 28rpx;
+}
+
+.house-detail-title {
+    font-size: 32rpx;
+    font-weight: 700;
+    padding-bottom: 40rpx;
+}
+
+.house-detail-main {
+    text-align: center;
+}
+
+.report {
+    width: 28rpx;
+    height: 26rpx;
+    padding-right: 20rpx
+}
+
+.car-detail {
+    background: #fff;
+    font-size: 32rpx;
+    margin: 0 0 20rpx;
+    padding: 0 30rpx;
+}
+
+.car-detail-item {
+    height: 100rpx;
+    line-height: 100rpx;
+    border-top: 1rpx solid #eaeaea;
+}
+
+.car-detail-main {
+    background: #FFF;
+    margin-bottom: 20rpx;
+    padding: 30rpx;
+}
+
+.car-detail-title {
+    font-size: 32rpx;
+    color: #101010;
+    font-weight: 700;
+    padding-bottom: 30rpx;
+}
+
+.car-detail-content {
+    font-size: 28rpx;
+    position: relative;
+}
+
+.car-detail-content-top {
+    padding-top: 30rpx;
+}
+
+.car-detail-content-right {
+    padding-right: 32rpx;
+}
+
+.wxParse-inline {
+    line-height: 1.4;
+    font-size: 32rpx;
+    color: #5E5E5E;
+}
+
+.note-detail-jobwanted-title {
+    font-size: 32rpx;
+    color: #101010;
+    font-weight: 700;
+    line-height: 1.2;
+    width: 500rpx;
+}
+
+.personal-info {
+    font-size: 24rpx;
+    padding-bottom: 20rpx;
+}
+
+.salary-wrapper {
+    font-size: 24rpx;
+    color: #101010;
+    padding-top: 20rpx;
+}
+
+.poster-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 100%;
+    margin-right: 20rpx;
+}
+
+.floor {
+    font-size: 24rpx;
+    color: #FA0F20;
+    white-space: nowrap;
+    padding: 0 20rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    background: rgba(250, 15, 32, 0.1);
+    border: 1rpx solid rgba(250, 15, 32, 1);
+    opacity: 0.3;
+    border-radius: 16rpx;
+    text-align: center;
+    margin-bottom: 20rpx;
+}
+
+.floor {
+    margin-right: 20rpx;
+}
+
+.floor-wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.car-status {
+    width: 100rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}
+
+.note-detail-type-name {
+    font-size: 32rpx;
+    margin-bottom: 24rpx;
+}

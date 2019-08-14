@@ -1,0 +1,57 @@
+<template name="children-day">
+    <view class="_div data-v-6964e4eb children-wrapper">
+      <view class="_p data-v-6964e4eb child-title">{{fromNikeName}}
+        <view class="_br data-v-6964e4eb"></view>祝{{toNikeName}}儿童节快乐!</view>
+      <image bindtap="toSendCard" class="_img data-v-6964e4eb js-blessing-btn blessing-btn" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-01.png"></image>
+      <image class="_img data-v-6964e4eb child-pic02 rotato" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-02.png"></image>
+      <view class="_p data-v-6964e4eb child-blessing"> 人老心不老，热情是宝
+        <view class="_br data-v-6964e4eb"></view> 身老容不老，青春永葆
+        <view class="_br data-v-6964e4eb"></view> 岁老天难老，爱比天高
+        <view class="_br data-v-6964e4eb"></view> 有童心，没烦恼
+        <view class="_br data-v-6964e4eb"></view> 六一儿童节就到，祝福把你关照
+        <view class="_br data-v-6964e4eb"></view> 愿你一生都做大龄儿童
+        <view class="_br data-v-6964e4eb"></view> 天天都美!
+        <view class="_br data-v-6964e4eb"></view>
+      </view>
+      <image class="_img data-v-6964e4eb child-pic03" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-03.png"></image>
+      <view class="_p data-v-6964e4eb child-blessing"> 每当儿童节到来
+        <view class="_br data-v-6964e4eb"></view> 我总会意识到
+        <view class="_br data-v-6964e4eb"></view> 原来我已经长大
+        <view class="_br data-v-6964e4eb"></view> 今天又是儿童节
+        <view class="_br data-v-6964e4eb"></view> 在这个纯真的日子
+        <view class="_br data-v-6964e4eb"></view> 真心祝愿同样已经长大的你
+        <view class="_br data-v-6964e4eb"></view> 快乐似小孩，年轻永不老。
+        <view class="_br data-v-6964e4eb"></view> 节日快乐
+        <view class="_br data-v-6964e4eb"></view>
+      </view>
+      <image class="_img data-v-6964e4eb child-pic04" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-04.png"></image>
+      <view class="_p data-v-6964e4eb child-blessing"> 烦恼时，学会自我解脱
+        <view class="_br data-v-6964e4eb"></view> 困难时，学会自我鼓励
+        <view class="_br data-v-6964e4eb"></view> 郁闷时,学会自我宣泄
+        <view class="_br data-v-6964e4eb"></view> 失意时，学会自我安慰
+        <view class="_br data-v-6964e4eb"></view> 人老时，学会自我老小
+        <view class="_br data-v-6964e4eb"></view> 儿童节了，祝你快乐美好!
+        <view class="_br data-v-6964e4eb"></view>
+      </view>
+      <image class="_img data-v-6964e4eb child-pic05" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-05.png"></image>
+      <view class="_p data-v-6964e4eb child-blessing"> 忘不了童年的欢笑
+        <view class="_br data-v-6964e4eb"></view> 忘不了儿时的趣闻
+        <view class="_br data-v-6964e4eb"></view> 那里承载着永恒的记忆
+        <view class="_br data-v-6964e4eb"></view> 那里有着美好的回忆
+        <view class="_br data-v-6964e4eb"></view> 六一到，真诚地道一声
+        <view class="_br data-v-6964e4eb"></view> 儿童节快乐!愿你永远开心
+        <view class="_br data-v-6964e4eb"></view>
+      </view>
+      <image class="_img data-v-6964e4eb child-pic05" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/child-06.png"></image>
+      <view class="_p data-v-6964e4eb child-blessing" style="padding-bottom: 200rpx"> 儿童的生活是游戏
+        <view class="_br data-v-6964e4eb"></view> 大人的游戏是生活
+        <view class="_br data-v-6964e4eb"></view> 小时候玩过家家
+        <view class="_br data-v-6964e4eb"></view> 长大了玩爱情游戏
+        <view class="_br data-v-6964e4eb"></view> 小时候玩捉迷藏
+        <view class="_br data-v-6964e4eb"></view> 长大了玩游戏
+        <view class="_br data-v-6964e4eb"></view> 游戏人间，童趣无限
+        <view class="_br data-v-6964e4eb"></view> 六一儿童节快乐
+        <view class="_br data-v-6964e4eb"></view>
+      </view>
+    </view>
+  </template>

@@ -1,0 +1,6 @@
+
+.icon-phone{width: 16px;height: 16px;display: inline-block;background-position: 0 0; vertical-align: -3px;}
+
+.icon-zhiding{width: 1.5rem;height: 1.5rem;display: inline-block;top: 0;right: 0;background-position: -18px 0;}
+
+.icon-gantan{width: 16px;height: 16px;display: inline-block;background-position: -45px 0; vertical-align: -3px;}

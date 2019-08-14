@@ -1,0 +1,16 @@
+.orange-bg {
+  background: linear-gradient(to right, #ff911f, #ea490e);
+}
+.clamp1,
+.clamp2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+.clamp1 {
+  -webkit-line-clamp: 1;
+}
+.clamp2 {
+  -webkit-line-clamp: 2;
+}

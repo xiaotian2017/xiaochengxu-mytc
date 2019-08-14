@@ -1,0 +1,65 @@
+<view class="container">
+  <view class='write_cells' catchtap='chooseImage' data-row='0'>
+    <view class='d-flex-center write_cell'>
+      <view class='flex left width'>头像</view>
+      <view class="head">
+        <image src="{{items[0].content.imageList.length>0?items[0].content.imageList[0]:userInfo.headImgUrl}}" mode="aspectFill" ></image>
+      </view>
+    </view>
+  </view>
+  <view class='write_cells mt-1'>
+    <view class='d-flex-center write_cell'>
+      <view class='left width'>姓名</view>
+      <view class='flex right'>
+        <input class='write_input' placeholder='请填写' value='{{userInfo.nickName}}' bindinput='nameinput'></input>
+      </view>
+    </view>
+    <view class='d-flex-center write_cell'>
+      <view class='left width'>性别</view>
+      <view class='flex right radio-group"'>
+        <label bindtap='xingbie' data-gender='1'>
+          <icon wx:if="{{xingbie==true}}" type="success" size="15" color='#fe3d49' />
+          <icon wx:else type="circle" size="15" color='#333' />
+          <text>先生</text>
+        </label>
+        <label bindtap='xingbie' data-gender='0'>
+          <icon wx:if="{{xingbie==false}}" type="success" size="15" color='#fe3d49' />
+          <icon wx:else type="circle" size="15" color='#333' />
+          <text>女士</text>
+        </label>
+      </view>
+    </view>
+    <view class='d-flex-center write_cell'>
+      <view class='left width'>手机</view>
+      <view class='flex right'>
+        <input type="number" class='write_input' placeholder='请填写(未绑定)' maxlength='11' bindinput='phoneinput' value='{{phone}}'></input>
+      </view>
+      <button class="yanzheng_bt {{isReducetime?'gray':' '}}" hidden='{{IsValidTelePhone}}' hover-class="none" bindtap="getcode">{{Reciprocal || "获取验证码"}}</button>
+    </view>
+    <view class='d-flex-center write_cell' hidden='{{IsValidTelePhone}}'>
+      <view class='left width'>验证码</view>
+      <view class='flex right'>
+        <input type="number" class='write_input' placeholder='请填写' maxlength='4' bindinput='codeinput'></input>
+      </view>
+    </view>
+  </view>
+  <view  hidden='{{1==buyversion}}' class="d-flex d-flex-center index_title_cell person_center" catchtap='clickToMyAddress'>
+    <view class="flex f15">我的地址</view>
+    <view hover-class="none" class="right">
+      <label class="right_arrow"></label>
+    </view>
+  </view>
+  <view class='write_cells mt-1'>
+    <view class='d-flex-center write_cell'>
+      <view style='color:#fd8f45;line-height:1.5;'>
+        <icon class='icon_warn' type='warn' size='20' color='#fd8f45'></icon>
+        <text decode='true'>&nbsp;若网页版已绑定手机，在小程序再次绑定同一手机，可同步网页版信息</text>
+      </view>
+    </view>
+  </view>
+
+  <!--确认预订-->
+  <view class='sure_bt_all'>
+    <button class='sure_bt' catchtap='save'>保存</button>
+  </view>
+</view>

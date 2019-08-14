@@ -1,0 +1,164 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="person-center-container" style="background: #fff;">
+  <view style="position: relative;height: 284rpx;width: 100%">  
+    <view class="person-center-info">
+      <view>
+        <view class="vz-flex flex-center" style="margin-bottom:28rpx;">
+          <image class="person-center-avatar" src="{{userInfo.headImgUrl}}"></image>
+          <view>
+            <view class="user-name vz-flex flex-center" style="max-width: 400rpx">
+              <view class="clamp1" style="max-width: 100%;line-height: 1.3">{{userInfo.nickName}}</view>
+              <image class="member-vip-label" wx:if="{{memberuser}}" src="https://j.vzan.cc/content/city/member/img0322/tc-vip-8888.png"></image>  
+            </view>
+            <view class="user-id">ID:{{userInfo.Id}}</view>
+          </view>
+        </view>
+        <view class="vz-flex flex-center flex"> 
+          <view class="flex person-center-data-item" bindtap="toCouponList">
+            <view class="data-num">{{vCount}}</view>
+            <view class="data-name">代金券</view>
+          </view>
+        </view>
+      </view>
+      <view hidden='{{1==buyversion}}' class="person-center-sj-btn" bindtap='myshop'>
+        <text>商家中心</text>
+        <text class="iconfont icon-left-arrow"></text>
+      </view>
+    </view>
+  </view>
+ 
+  <view class="ad-banner vz-flex flex-center" wx:if="{{openMemberPrice}}">
+    <image class="ad-img" src="https://j.vzan.cc/content/city/member/img0322/city-card-bg.png"></image>
+    <view class="vz-flex flex-center flex-between" style="position: relative;z-index: 1000;">
+      <view class="vz-flex flex-center">
+        <image class="member-label" src="https://j.vzan.cc/content/city/member/img0322/city-card-signs.png"></image>
+        <view class="ad-slogan">同城会员，享遍全城</view>
+      </view>
+      <view class="right-open-btn" wx:if="{{!memberuser}}" bindtap="toGetCityCardRights">立即开通</view>
+      <view class="right-open-btn" wx:else bindtap="toGetCityCardIndex">查看详情</view>
+    </view>
+  </view>
+  <view class="order-list">
+    <view class="vz-flex flex-center flex-between" style="padding-bottom:30rpx;">
+      <view class="vz-flex flex-center">
+        <view class="line-1"></view>
+        <view class="order-item-name">我的订单</view>
+      </view>
+      <view class="all-roder" data-url="/pages/cutlist/cutlist" bindtap='redirecto' hidden='{{1==buyversion}}'>
+        <text>全部订单</text>
+        <text class="iconfont icon-left-arrow"></text>
+      </view>
+    </view>
+    <view class="vz-flex flex-center person-center-flex-wrap">
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=goods&state=1" bindtap='redirecto'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-dfk-99.png"></image>
+        <view class="order-text">待付款</view>
+        <view hidden='{{0==dfknum}}' class="small-tag">{{dfknum}}</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=goods&state=2" bindtap='redirecto'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-dfh-99.png"></image>
+        <view class="order-text">待发货</view>
+        <view hidden='{{0==dfhnum}}' class="small-tag">{{dfhnum}}</view>
+      </view>
+      <view class="order-item-option">
+        <image class="order-img" data-url="/pages/cutlist/cutlist?type=goods&state=3" bindtap='redirecto' mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-dsh-99.png"></image>
+        <view class="order-text">待收货</view>
+        <view hidden='{{0==dshnum}}' class="small-tag">{{dshnum}}</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=goods&state=0"bindtap='redirecto'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-ywc-99.png"></image>
+        <view class="order-text">已完成</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=goods&state=4"bindtap='redirecto'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-tk-1000.png"></image>
+        <view class="order-text">退款/售后</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist" bindtap='redirecto' hidden='{{1==buyversion}}'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-qyh-99.png"></image>
+        <view class="order-text">抢优惠</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=cut" bindtap='redirecto' hidden='{{1==buyversion}}'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-jj-99.png"></image>
+        <view class="order-text">减价</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=group" bindtap='redirecto' hidden='{{1==buyversion}}'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-pt-99.png"></image>
+        <view class="order-text">拼团</view>
+      </view>
+      <view class="order-item-option" data-url="/pages/cutlist/cutlist?type=love" bindtap='redirecto' hidden='{{1==buyversion}}'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-axj-99.png"></image>
+        <view class="order-text">爱心价</view>
+      </view>
+    </view>
+  </view>
+  <view class="order-list">
+    <view class="vz-flex flex-center" style="padding-bottom:30rpx;">
+      <view class="vz-flex flex-center">
+        <view class="line-1"></view>
+        <view class="order-item-name">我的同城</view>
+      </view>
+    </view>
+    <view class="vz-flex flex-center person-center-flex-wrap">
+      <view class="order-item-option-1" hidden='{{2==buyversion}}' bindtap='myposts'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-tz-99.png"></image>
+        <view class="order-text">分类信息</view>
+      </view>
+      <view class="order-item-option-1" bindtap='toTc114'>
+        <image class="order-img" mode="widthFixed" src="https://j.vzan.cc/content/city/member/img0322/tc-pic-114-99.png"></image>
+        <view class="order-text">114</view>
+      </view>  
+    </view>
+  </view>
+
+  <view class="mt-1 person-center-item" style="padding-top:160rpx;">
+    <view hidden='{{1!=adminlevel}}' class="d-flex d-flex-center index_title_cell person_center" catchtap='clickToAminMgr'>
+      <view class="flex f15">管理员设置</view>
+      <view hover-class="none" class="right">
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+    <view hidden='{{1==buyversion}}' class="d-flex d-flex-center index_title_cell person_center" catchtap='clickToMyIncome'>
+      <view class="flex f15">收益支出</view>
+      <view hover-class="none" class="right">
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+    <view hidden='{{1==buyversion}}' class="d-flex d-flex-center index_title_cell person_center" bindtap='myfx'>
+      <view class="flex f15">我的分销</view>
+      <view hover-class="none" class="right">
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+    <view hidden='{{1==buyversion}}' class="d-flex d-flex-center index_title_cell person_center" bindtap='myVoucher'>
+      <view class="flex f15">我的代金券</view>
+      <view hover-class="none" class="right">
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+
+    <view class="d-flex d-flex-center index_title_cell person_center" bindtap='receiveStoreApp'>
+      <view class="flex f15">独立小程序</view>
+      <view hover-class="none" class="right">
+        <text class="masked">NEW</text>
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center index_title_cell person_center" catchtap='clickToEdit'>
+        <view class="flex f15">设置</view>
+        <view hover-class="none" class="right">
+          <label class="right_arrow"></label>
+        </view>
+      </view>
+    <view class="d-flex d-flex-center index_title_cell person_center" bindtap='bindtap_erweima'>
+      <view class="flex f15">联系客服</view>
+      <view hover-class="none" class="right">
+        <label class="right_arrow"></label>
+      </view>
+    </view>
+  </view>
+</view>
+
+  
+  <template is="city_kefu_win" data="{{city_kefu_hidden:city_kefu_hidden,cityphone:cityphone,QrCodeUrl:QrCodeUrl}}"></template>
+
+<city-bottomnav cur-tab="6"></city-bottomnav>

@@ -1,0 +1,10 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "兑换码",
+    "usingComponents": { 
+        "city-tips":"/components/Tips/Tips"   
+
+    }  
+}

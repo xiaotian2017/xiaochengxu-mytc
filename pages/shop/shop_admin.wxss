@@ -1,0 +1,227 @@
+@import "../../css/cell.wxss";
+.shop_qr_dialog .pic01 {
+    width: 350rpx;
+    margin: 50rpx auto 100rpx;
+    display: block;
+}
+
+.shop_qr_dialog .jietu_f {
+    font-size: 35rpx;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    padding-top: 150rpx;
+}
+
+.shop_qr_dialog .bt01 {
+    height: 80rpx;
+    line-height: 80rpx;
+    color: #fe3d49;
+    font-size: 32rpx;
+    border-radius: 10rpx;
+    border: 1px solid #fe3d49;
+    margin: 0 100rpx;
+    text-align: center;
+    margin-top: 30rpx;
+}
+
+.shop_qr_dialog .bt02 {
+    height: 80rpx;
+    line-height: 80rpx;
+    color: #fff;
+    font-size: 32rpx;
+    border-radius: 10rpx;
+    background: #fe3d49;
+    margin: 0 100rpx;
+    text-align: center;
+    margin-top: 40rpx;
+}
+
+.icon_pc01_kanjia {
+    background-size: 500px;
+    background-position: -302px 0;
+}
+
+.icon_pc01_qiangyouhui {
+    background-size: 500px;
+    background-position: -267px 0;
+}
+
+.pc_ul_two icon {
+    width: 26px;
+    height: 26px;
+    background-image: url(https://j.vzan.cc/content/city/love/images/tc_person_center_01.png?=1);
+    background-repeat: no-repeat;
+}
+
+.icon_pc01_dianpubianji {
+    background-size: 500px;
+    background-position: -27px -60px;
+}
+
+.icon_pc01_gerenxinxibianji {
+    background-size: 500px;
+    background-position: -59px -31px;
+}
+
+.icon_pc01_aixinjia {
+    background-size: 500px;
+    background-position: -279px -60px;
+}
+
+.icon_pc01_city-card {
+    background-size: 500px;
+    background-position: -374px 0;
+}
+
+.icon_pc01_hongbaoguanli {
+    background-size: 500px;
+    background-position: -303px -29.5px;
+}
+
+.book::before {
+    content: '';
+    display: block;
+    padding: 2px;
+    width: 22px;
+    height: 22px;
+    box-sizing: border-box;
+    margin: 0 auto 8px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAbFBMVEUAAAD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgD/WgC72+kWAAAAI3RSTlMAX3oPScF/z8p4+eV0tD4Y4KWXkYtRJh3p2cS7tWxcOysLCuirrTsAAACySURBVCjPlZLXDoMwDEUNhLDCXt3r/v8/lpggtdRU4rxEVydSbMe0oOHQ9EEwodF6TAttMwsVwZKTI+cYqckgtJfDtAiYIp0zFGUxWcoIjqgkS5wRDM30HtO7aEBISCQBwZeVv1c9N1WSPjaUxiX4UsFiOtSrt87VyGeDhlbqhqOdQo3ut8I70oFyaKn4AocTrnJfQwVvq+XXuGdQsvr/KUZWBrwAEnHGayMQQvGyCcSK3n/BEksC3bz4AAAAAElFTkSuQmCC) no-repeat;
+    background-size: contain
+}
+
+.icon_group {
+    background-size: 500px;
+    background-position: -338px 0
+}
+
+canvas {
+    position: fixed;
+    left: 7.5%;
+    top: 10%;
+}
+
+.dialog-black-mask {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.basewrap {
+    min-width: 320px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.maskblack {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 14px 10px;
+    box-sizing: border-box;
+    z-index: 998;
+}
+
+.bpro {
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    background: #000;
+    padding-top: 40rpx;
+}
+
+.Bcolor {
+    color: #ff5d38;
+}
+
+.maskbtn {
+    margin: 0;
+    width: 44.93%;
+    color: #333;
+    background-color: #ffb638;
+    display: block;
+    line-height: 2.125;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+    border: solid 1px #333;
+    border-radius: 42rpx;
+}
+
+.maskbtnparent {
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+}
+
+.flex-between {
+    -webkit-box-pack: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.d-flex {
+    display: -webkit-box;
+    display: flex;
+}
+
+.icon-tupian::before {
+    font-size: 22px;
+    color: #ff5a00;
+    top: -12rpx;
+}
+
+.icon-kanjia::before {
+    font-size: 24px;
+    color: purple;
+    top: -8rpx;
+}
+
+.store-top {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    color: #fff;
+    font-size: 24rpx;
+    z-index: 10000;
+    padding: 8rpx 20rpx;
+    box-sizing: border-box;
+}
+
+.receive-btn {
+    padding: 7rpx 20rpx;
+    border: 1rpx solid #fe3d49;
+    border-radius: 8rpx;
+    background: #fe3d49;
+}
+
+.top-item {
+    height: 88rpx;
+    line-height: 88rpx;
+    padding: 0 20rpx;
+    background: #fff;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.expire-box {
+    font-size: 28rpx;
+    background: #FF5D3E;
+    color: #fff;
+    padding: 0 30rpx;
+    height: 60rpx;
+}
+
+.expire-btn {
+    height: 40rpx;
+    width: 80rpx;
+    text-align: center;
+    line-height: 40rpx;
+    border: 1rpx solid #fff;
+}

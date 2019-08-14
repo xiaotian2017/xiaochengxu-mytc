@@ -1,0 +1,131 @@
+<!-- 2019/7/9  修改布局 -->
+<view class="page">
+  <!-- tab -->
+  <view class="tab-wrap vz-flex vz-flex-center flex-between">
+    <view class="flex {{currenttab==0?'tab-active':''}}" data-tabindex="0" bindtap='tab'>分类信息</view>
+    <view class="flex {{currenttab==1?'tab-active':''}}" data-tabindex="1" bindtap='tab'>头条爆料</view>
+  </view>
+
+  <!-- list -->
+  <view class="list-wrap" hidden='{{currenttab == 1}}' catchtap='hiddenMore'>
+    <view class="itemList" wx:for="{{newposts[0]}}" wx:key='item'>
+      <view class="listTop" bindtap='bottomItemClick' data-id="{{item.Id}}" data-state="{{item.State}}">
+        <view class="title">{{item.Title}}</view>
+        <view class="listType">{{item.TypeName}}</view>
+        <view class="listStatus vz-flex  flex-center flex-between">
+          <block wx:if='{{item.State == 0}}'>
+            <view class="vz-flex-1">状态：审核中</view>
+          </block>
+          <block wx:if='{{item.State == 1}}'>
+            <view class="vz-flex-1">状态: 通过</view>
+          </block>
+          <block wx:if='{{item.State == -1 || item.State == -2}}'>
+            <view class="vz-flex-1">状态：已删除</view>
+          </block>
+          <block wx:if='{{item.State == -3}}'>
+            <view class="vz-flex-1">状态：草稿</view>
+          </block>
+          <block wx:if='{{item.State == -4}}'>
+            <view class="vz-flex-1">状态：已过期</view>
+          </block>
+          <block wx:if='{{item.State == -5}}'>
+            <view class="vz-flex-1">状态：不通过</view>
+          </block>
+          <view class="vz-flex-1">发布：{{item.ShowTime}}</view>
+        </view>
+      </view>
+      <view class="listBottom vz-flex flex-center flex-between">
+        <view class="more" wx:if='{{item.showMore}}'>
+          <text catchtap='more' data-state='{{item.State}}' data-index='{{index}}'>更多</text>
+          <view class="moreBtn vz-flex flex-center" wx:if='{{item.showMoreBtn}}'>
+            <text class="vz-flex-1 vz-flex flex-center" catchtap="delpost" data-id="{{item.Id}}">删除</text>
+            <text class="vz-flex-1 vz-flex flex-center" bindtap='goSuggest' data-postid='{{item.Id}}'
+              data-typeid='{{item.TypeId}}' wx:if='{{item.State==1}}'>投诉</text>
+          </view>
+        </view>
+        <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == 0}}'>
+          <view class="btn" catchtap="refreshpost" data-id="{{item.Id}}" data-sx="1" wx:if="{{!isIos}}">刷新</view>
+          <view class="btn" bindtap='moreService' data-id="{{item.Id}}" data-index="{{index}}" bindtap='goZD'>置顶</view>
+        </view>
+        <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == 1}}'>
+          <view class="btn" catchtap="refreshpost" data-id="{{item.Id}}" data-sx="1" wx:if="{{!isIos}}">刷新</view>
+          <view class="btn" bindtap='moreService' data-id="{{item.Id}}" data-index="{{index}}" bindtap='goZD'>置顶</view>
+        </view>
+        <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == -3}}'>
+          <view class="btn" catchtap="editpost" data-id="{{item.Id}}" data-typeid="{{item.TypeId}}"
+            data-cname="{{item.cname}}" data-ctypeid="{{item.SaleType}}">编辑</view>
+          <view class="btn" catchtap="continuepostpay" data-postid="{{item.Id}}" data-top="{{item.TopStatus}}"
+            wx:if="{{!isIos}}">继续支付</view>
+        </view>
+        <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == -4}}'>
+          <view class="btn" catchtap="addPay" data-index="{{index}}" data-postid="{{item.Id}}"
+            data-typeid="{{item.TypeId}}">续费</view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view
+        style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:26rpx;color:#999999;background-color:#fff;">
+        {{havemore[0] == true ? '下拉加载更多' : '都显示完了'}}
+      </view>
+    </view>
+  </view>
+</view>
+<view class="list-wrap" hidden='{{currenttab == 0}}' catchtap='hiddenMore'>
+  <view class="itemList" wx:for="{{newposts[1]}}" wx:key='item'>
+    <view class="listTop" bindtap='bottomItemClick' data-id="{{item.Id}}" data-state="{{item.State}}">
+      <view class="title">{{item.Description}}</view>
+      <view class="listType">{{item.pname}}</view>
+      <view class="listStatus vz-flex  flex-center flex-between">
+        <block wx:if='{{item.State == 0}}'>
+          <view class="vz-flex-1">状态：审核中</view>
+        </block>
+        <block wx:elif='{{item.State == -3}}'>
+          <view class="vz-flex-1">状态：草稿</view>
+        </block>
+        <view class="vz-flex-1">发布：{{item.FromNowTime}}</view>
+      </view>
+    </view>
+    <view class="listBottom vz-flex flex-center flex-between">
+      <view class="more">
+        <text catchtap='more' data-state='{{item.State}}' data-index='{{index}}'>更多</text>
+        <view class="moreBtn vz-flex flex-center" wx:if='{{showMoreBtn}}'>
+          <text class="vz-flex-1 vz-flex flex-center" catchtap="delpost" data-id="{{item.Id}}">删除</text>
+          <text class="vz-flex-1 vz-flex flex-center" bindtap='goSuggest' data-postid='{{item.Id}}'
+            data-typeid='{{item.TypeId}}' wx:if='{{item.State==1}}'>投诉</text>
+        </view>
+      </view>
+      <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == 0}}'>
+        <view class="btn" catchtap="refreshpost" data-id="{{item.Id}}" data-sx="1" wx:if="{{!isIos}}">刷新</view>
+        <view class="btn" bindtap='moreService' data-id="{{item.Id}}" data-index="{{index}}" bindtap='goZD'>置顶</view>
+      </view>
+      <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == 1}}'>
+        <view class="btn" catchtap="refreshpost" data-id="{{item.Id}}" data-sx="1" wx:if="{{!isIos}}">刷新</view>
+        <view class="btn" bindtap='moreService' data-id="{{item.Id}}" data-index="{{index}}" bindtap='goZD'>置顶</view>
+      </view>
+      <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == -3}}'>
+        <view class="btn" catchtap="editpost" data-id="{{item.Id}}" data-typeid="{{item.TypeId}}"
+          data-cname="{{item.cname}}" data-ctypeid="{{item.SaleType}}">编辑</view>
+        <view class="btn" catchtap="continuepostpay" data-postid="{{item.Id}}" data-top="{{item.TopStatus}}"
+          wx:if="{{!isIos}}">继续支付</view>
+      </view>
+      <view class="rightBtns vz-flex-1 vz-flex flex-col-end" wx:if='{{item.State == -4}}'>
+        <view class="btn" catchtap="addPay" data-index="{{index}}" data-postid="{{item.Id}}"
+          data-top="{{item.TopStatus}}">续费</view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view
+      style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:26rpx;color:#999999;background-color:#fff;">
+      {{havemore[1] == true ? '下拉加载更多' : '都显示完了'}}
+    </view>
+  </view>
+</view>
+
+<!-- 侧边栏 -->
+<city-navigator wx:if="{{showpath}}">
+  <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">
+    获取链接
+  </view>
+</city-navigator>

@@ -1,0 +1,12 @@
+
+<view style='height:150px;text-align:center' wx:if='{{""!=headimg}}'>
+      <image  style="width:80px;height:80px;border-radius:8px;margin:40px auto" src='{{headimg}}'></image>
+</view>
+
+<view  wx:if='{{""!=headimg}}' class="vz-flex flex-center" style='height:50px;text-align:center;border-top:1px solid #e7e7e7;padding:5px;width:60%;margin:0 auto;font-size:14px;color:#a9a9a9'>
+ <view style="width:12rpx;height:12rpx;border-radius:50%;background:#a9a9a9;margin-right:10px"></view>
+ <view>获取你的公开信息(头像、昵称等)</view>
+ </view>
+
+<button  wx:if='{{""!=headimg}}' bindgetuserinfo="handle" open-type="getUserInfo" type="warn"  style="margin:50px 70px;background:rgba(0, 204, 0, 1);border-radius:8px"> 确认授权 </button>
+

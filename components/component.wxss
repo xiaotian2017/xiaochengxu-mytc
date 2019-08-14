@@ -1,0 +1,110 @@
+.flex{ 
+    display: -webkit-box;
+    display: flex
+  }
+  
+.flex-1{
+    -webkit-box-flex: 1; 
+    -webkit-flex: 1;
+    flex: 1
+}
+.flex-col{
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+ flex-direction: column
+}
+
+.flex-center{
+   -webkit-box-align: center;
+   -webkit-align-items: center;
+   align-items: center
+}
+.flex-end{
+   -webkit-box-align:flex-end;
+   -webkit-align-items:flex-end;
+   align-items:flex-end;
+}
+.flex-between{
+   -webkit-box-pack: space-between;
+   -webkit-justify-content: space-between;
+   justify-content: space-between;
+}
+.flex-around{
+   -webkit-box-pack: space-around;
+   -webkit-justify-content: space-around;
+   justify-content: space-around
+}
+.flex-wrap{
+   -webkit-box-lines:multiple;
+   flex-flow: wrap
+}
+.justify-center{
+   -webkit-box-pack:center;
+   -webkit-justify-content:center;
+   justify-content: center
+}
+
+.justify-end{
+   -webkit-box-pack: flex-end;
+   -webkit-justify-content: flex-end;
+   justify-content: flex-end
+}
+
+.flex-reverse {
+    -webkit-flex-direction: row-reverse; /* Safari */
+    flex-direction:         row-reverse;
+}
+
+.clamp1,.clamp2,.clamp4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical; 
+    display: -webkit-box
+}
+
+.clamp1 {-webkit-line-clamp: 1}
+.clamp2 {-webkit-line-clamp: 2}
+.clamp4 {-webkit-line-clamp: 4}
+
+.c9 { color: #999}
+.c6 { color: #666}
+.c3 { color: #333}
+
+.item{
+    padding: 20rpx 20rpx 0;
+    background: #fff;    
+}
+
+.top-label-left {
+    width: 36rpx;
+    height: 34rpx;
+    background: #fa0f31;
+    font-size: 24rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 34rpx;
+}
+
+.top-arrow {
+    width: 0;
+    height: 0;
+    border-top: 17rpx solid #fa0f31;
+    border-right: 8rpx solid transparent;	
+}
+
+.bottom-arrow {
+    width: 0;
+    height: 0;
+    border-bottom: 17rpx solid #fa0f31;
+    border-right: 8rpx solid transparent;	
+}
+
+.top-label {
+    position: absolute;
+    left: -10rpx;
+    top: -12rpx;
+}
+
+.container {
+    padding: 20rpx 20rpx 0;
+}

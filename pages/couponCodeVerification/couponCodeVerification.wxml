@@ -1,0 +1,9 @@
+<view id="wrapper">
+    <view class="common-default-ft">请输入券号</view>
+    <input type="number" bindinput="getNumber" placeholder="请输入券号" class="check-input"/>
+    <view class="check-status check-error" wx:if="{{checkError}}">
+        <icon type="clear" size="14" color="#e61616" class="icon"></icon>
+        <text>{{checkErrText}}</text>
+    </view>
+    <view class="check-btn" bindtap="csvnum">点击验证</view>   
+</view>

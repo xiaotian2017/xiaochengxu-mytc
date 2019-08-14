@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "base-time-picker": "/components/BaseTimePicker",
+        "city-tips":"/components/Tips/Tips"
+    },
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+}

@@ -1,0 +1,8 @@
+<view class="container">
+    <icon class="iconfont icon-city-store store-logo"></icon>
+    <view class="err-tips">找不到店铺</view>
+    <view>
+            <button bindtap="toIndex" style="border-radius: 12rpx;width:90%;margin-bottom:40rpx;" type="primary">返回同城首页</button>    
+            <button bindtap="toPerson" style="border-radius: 12rpx;width:90%;" type="default">返回个人中心</button>    
+    </view>
+</view>

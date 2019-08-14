@@ -1,0 +1,24 @@
+{
+    "usingComponents": {
+        "city-navigator":"/components/Navigator/Navigator",        
+        "share-poster": "/components/shareposter",
+        "base-video": "/components/BaseVideo/BaseVideo"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

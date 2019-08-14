@@ -1,0 +1,7 @@
+{   
+    "navigationBarTitleText": "投票详情",
+    "usingComponents": {
+        "city-vote-detail": "/components/VoteDetail/VoteDetail",
+        "city-navigator":"/components/Navigator/Navigator"
+    }
+} 

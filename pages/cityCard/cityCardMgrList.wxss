@@ -1,0 +1,74 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.city-card-mgl-list-tab {
+     text-align: center;
+     font-size: 32rpx;
+     background: #fff;
+     line-height: 80rpx;
+     height: 80rpx;
+     color: #333;
+     border-bottom: 1rpx solid #F0F0F0; 
+     position: fixed;
+     width: 100%;
+}
+
+.active {
+    border-bottom: 1rpx solid #fe3d49;    
+}
+
+.p {
+    height: 64rpx;
+    line-height: 64rpx;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.city-card-mgl-list-wrap {
+     background: #fff;
+     padding: 20rpx;
+}
+
+.p1 {
+    color: #999;
+    height: 64rpx;
+    line-height: 64rpx;
+    font-size: 28rpx;
+}  
+
+.announcement-bt {
+    height: 90rpx;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fe3d49;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+    z-index:10
+}
+
+.add-btn {
+    transform: rotate(45deg);
+    font-size: 32rpx;
+}
+
+.common-btn {
+    font-size:26rpx;
+    color:#fe3d49;
+    border:1rpx solid #fe3d49;
+    border-radius:6rpx;
+    line-height:48rpx;
+    margin-left:12rpx;
+    padding:4rpx 16rpx;
+    
+}
+
+.city-card-mgl-list-wrap  {
+    border-bottom: 1rpx solid #f0f0f0;
+} 
+

@@ -1,0 +1,205 @@
+<view class="container" style="padding-bottom:20px;">
+  <!-- <view class="vz-flex flex-center flex-between store-top" wx:if="{{showStoreTip}}">
+        <view>专属店铺小程序免费送,赶紧领取！</view>
+        <view class="receive-btn" catchtap="receiveStoreApp">点击领取</view>
+        <icon class="iconfont icon-cha" catchtap="hideStoreTips"></icon>
+    </view> -->
+  <view wx:if="{{store.Status==-3}}" class="expire-box vz-flex flex-center flex-between">
+    <view>{{IsShowOwner?'店铺已到期关闭，请及时续费':'店铺已到期关闭，请联系店主续费'}}</view>
+    <view class="expire-btn" bindtap="continupay">续费</view>
+  </view>
+  <view class="d-flex d-flex-center shop-admin-cell shop" style="margin-bottom:20rpx">
+    <view class="head">
+      <image src="{{store.LogoUrl}}"></image>
+      <!-- <label class="yingye">正常营业</label> -->
+    </view>
+    <view class="flex content">
+      <view class="title clamp1">{{store.SName}}</view>
+      <view bindtap="showCityRate" class="f01">
+        店铺交易手续费
+        <label style='color:#ff5a00'>{{store.CityRate}}%</label>
+        <label class="iconfont icon-wenhao"></label>
+      </view>
+    </view>
+  </view>
+  <view>
+    <!-- wx:if="{{store.ExpireTime}}" -->
+    <view class="vz-flex flex-center flex-between top-item" v-if="{{store.InExpireTime}}">
+      <view class="c666">入驻信息</view>
+      <!-- <picker bindchange="renewChange" value="{{index}}" range="{{ruzhuPayArray}}" range-key="name"> -->
+      <view class="vz-flex" bindtap="continupay">
+        <view class="picker">{{store.InExpireTime}}到期,续期</view>
+        <icon class='iconfont icon-jiantou'></icon>
+      </view>
+      <!-- </picker> -->
+    </view>
+    <view class="vz-flex flex-center flex-between top-item" bindtap="toSetTop">
+      <view class="c666">店铺置顶</view>
+      <view class="vz-flex">
+        <view class="picker">
+          <!-- 已置顶 2030230到期 -->
+          {{store.TopStatus>0?'已置顶 ': '未置顶'}} {{store.ExpireTime?store.ExpireTime+'到期,续期':''}}
+        </view>
+        <icon class='iconfont icon-jiantou'></icon>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center pc01_header_line" bindtap='turnpayonline'>
+      <view class="flex item">
+        <view class="c666 payqrcode">
+          在线买单功能
+          <em>[{{OpenPayOnLine?"买单二维码":"已关闭"}}]</em>
+        </view>
+      </view>
+      <view class='bt'>
+        {{OpenPayOnLine?"点击关闭":"点击开启"}}
+        <icon class='iconfont icon-jiantou'></icon>
+      </view>
+    </view>
+  </view>
+  <view class="pc01_header_line mt-1" bindtap='gotodetail'>
+    <view class="flex item">
+      <label class="rightline"></label>
+      <text>我的店铺</text>
+    </view>
+    <view class='bt'>
+      进入详情页
+      <icon class='iconfont icon-jiantou'></icon>
+    </view>
+  </view>
+  <view class="pc01_header_line mt-1">
+    <view class="flex item">
+      <label class="rightline"></label>
+      <text>店铺推广</text>
+    </view>
+  </view>
+  <view class="pc_ul_two" hidden='{{1!=IsShowOwner||1!=store.XcxVipVer}}'>
+    <label data-url="../cutmgr/cutmgr?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon_pc01_kanjia' style='color:#ff5a00;'></icon>
+      <text style='font-size:12px;'>减价管理</text>
+    </label>
+    <label data-url="../releaseDiscount/storeDiscount?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon_pc01_qiangyouhui' style='color:#ff5a00;'></icon>
+      <text style='font-size:12px;'>优惠管理</text>
+    </label>
+    <label data-url="../lovemgr/lovemgr?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon_pc01_aixinjia' style='color:#ff5a00;'></icon>
+      <text style='font-size:12px;'>爱心价管理</text>
+    </label>
+    <!-- <label data-url="../cityCard/cityCardMgrList?storeid={{storeid}}" bindtap='redirecto'>  
+                <icon class='iconfont icon_pc01_city-card' style='color:#ff5a00;'></icon>             
+                <text style='font-size:12px;'>同城卡管理</text>
+            </label> -->
+    <label data-url="../group_purchase/group_admin/group_admin?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon_group' style='color:#ff5a00;'></icon>
+      <text style='font-size:12px;'>拼团管理</text>
+    </label>
+    <label data-url="/pages/voucherManage/voucherManage?sid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon-good-order-refun' style='color:#ff5a00;background:none'></icon>
+      <text style='font-size:12px;'>代金券管理</text>
+    </label>
+    <!-- <label data-url="../redpackmgr/redpacklist?storeid={{storeid}}" bindtap='redirecto'>  
+                <icon class='iconfont icon_pc01_hongbaoguanli' style='color:#ff5a00;'></icon>             
+                <text style='font-size:12px;'>赏金管理</text>
+            </label> -->
+  </view>
+  <view class="pc01_header_line mt-1">
+    <view class="flex item">
+      <label class="rightline"></label>
+      <text>商城管理</text>
+    </view>
+  </view>
+  <view class="pc_ul_two" hidden='{{1!=IsShowOwner||1!=store.XcxVipVer}}'>
+    <label style="width:25%" data-url="/pages/goods/goodsReleaseList?storeid={{storeid}}&state=0" bindtap='redirecto'>
+      <icon class='iconfont icon-good-mgr' style='color:#ff5a00;background:none'></icon>
+      <text style='font-size:12px;'>商品管理</text>
+    </label>
+    <label style="width:25%" data-url="/pages/goods/goodsReleaseFareList?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon-good-fare' style='color:#ff5a00;;background:none'></icon>
+      <text style='font-size:12px;'>运费模板</text>
+    </label>
+    <label style="width:25%" data-url="/pages/goods/goodsReleaseCateManagement?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon-good-cate' style='color:#ff5a00;background:none'></icon>
+      <text style='font-size:12px;'>商品分类</text>
+    </label>
+    <label style="width:25%" data-url="/pages/goods/goodsMerchantOrder?storeid={{storeid}}" bindtap='redirecto'>
+      <icon class='iconfont icon-good-order' style='color:#ff5a00;background:none'></icon>
+      <text style='font-size:12px;'>商品订单</text>
+    </label>
+  </view>
+  <view class="pc01_header_line mt-1" bindtap='createposter'>
+    <view class="flex item">
+      <label class="rightline"></label>
+      <text>店铺二维码</text>
+    </view>
+    <view class='bt'>
+      点击即可查看
+      <icon class='iconfont icon-jiantou'></icon>
+    </view>
+  </view>
+  <view>
+    <view class="pc01_header_line mt-1">
+      <view class="flex item">
+        <label class="rightline"></label>
+        <text>我的服务</text>
+      </view>
+      <view class='bt' bindtap='gongzhonghao'>
+        去公众号使用
+        <icon class='iconfont icon-jiantou'></icon>
+      </view>
+    </view>
+    <view class="pc_ul_two" hidden='{{1!=IsShowOwner}}'>
+      <label data-url="../business_ruzhu/business_ruzhu?storeid={{storeid}}" bindtap='redirecto'>
+        <icon class='icon_pc01_dianpubianji' style='color:#ff5a00;'></icon>
+        <text style='font-size:12px;'>店铺编辑</text>
+      </label>
+      <label data-url="../shop/clerkmgr?storeid={{storeid}}&storeName={{store.SName}}" bindtap='redirecto'>
+        <icon class='icon_pc01_gerenxinxibianji' style='color:#ff5a00;'></icon>
+        <text style='font-size:12px;'>店员管理</text>
+      </label>
+      <label data-url="/pages/storeAlbum/storeAlbum?storeid={{storeid}}" bindtap='redirecto'>
+        <icon class='iconfont icon-tupian' style='color:#ff5a00;background:none'></icon>
+        <text style='font-size:12px;'>店铺相册</text>
+      </label>
+      <label data-url="/pages/business_detail/businessDetailEdit?storeid={{storeid}}" bindtap='redirecto'>
+        <icon class='iconfont icon-kanjia' style='color:#ff5a00;background:none'></icon>
+        <text style='font-size:12px;'>店铺换肤</text>
+      </label>
+      <label data-url="/pages/couponCodeVerification/couponCodeVerification" bindtap='redirecto'>
+        <icon class='iconfont icon-good-order-done' style='color:#ff5a00;background:none'></icon>
+        <text style='font-size:12px;'>券号核销</text>
+      </label>
+    </view>
+  </view>
+  <!-- 去公众号使用 -->
+  <view class='fix-tl-100 {{gongzhonghao_tk}}' style='background:rgba(0,0,0,.8)'>
+    <image src='http://j.vzan.cc/content/city/xcx/images/Entertainment_05.png' mode='widthFix' style='width:100%;'></image>
+    <view class='iknow_bt' bindtap='iknow_bt'>
+      <text>我知道了</text>
+    </view>
+  </view>
+  <view class="maskblack" style="overflow: auto;" hidden='{{maskhide}}'>
+    <view class="fix-tl-100 fenxiang_tk_js none" style="display: block;">
+      <view class="bpro">
+        <i class="Bcolor">保存图片到相册</i>
+        ，发送到朋友圈或群聊
+      </view>
+      <view class="basewrap dialog-black-mask" style="background: rgba(0,0,0,.9);"></view>
+      <view class="dialog-content kanjia_share" style="margin-top: 0px;width:80%;">
+        <view class='d-flex flex-between maskbtnparent'>
+          <button class='maskbtn' bindtap='closemsk'>关闭</button>
+          <button class='maskbtn' bindtap='savetophone'>保存到手机相册</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='fix-tl-100' style='background:#f5f5f5;' hidden='{{showqrcode}}'>
+    <view class='shop_qr_dialog'>
+      <image class='pic01' src='http://j.vzan.cc/content/city/xcx/images/Entertainment_21.png' mode="widthFix" style="margin:150rpx auto 50rpx;"></image>
+      <view style="font-size:28rpx;color:#333;padding:0 30rpx 30rpx;text-align:center;">
+        暂无二维码，需升级为高级版本方可拥有店铺二维码
+      </view>
+      <view class="bt01" bindtap='closeshopqrcode'>返回</view>
+    </view>
+  </view>
+</view>
+<canvas hidden='{{canvahide}}' style="width: {{canwidth}}px; height: {{canheight}}px;z-index:99999" canvas-id="firstCanvas"></canvas>

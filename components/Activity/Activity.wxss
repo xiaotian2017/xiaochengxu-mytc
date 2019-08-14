@@ -1,0 +1,39 @@
+@import  '../component.wxss';
+.index-activity{
+    margin: 20rpx 0;
+    font-size: 0;
+    font-weight: 700;
+    text-align: center;
+    background: #fff;
+    padding: 20rpx 20rpx 0;    
+  }
+.active-item{
+    /* display: inline-block; */
+    padding-top: 24rpx;
+    width: 23%;
+    height: 160rpx;
+    font-size: 28rpx;
+    box-sizing: border-box;
+    border: 1rpx solid #eaeaea;
+    border-radius: 12rpx;
+    margin-bottom: 20rpx;
+    /* border-right: 1rpx solid #f2f2f2;
+    border-bottom: 1rpx solid #f2f2f2 */
+}
+.active-title{
+    margin-bottom: 8rpx;
+}
+.active-item image{
+    width:80rpx;
+    height:80rpx;
+}
+/* .active-item:nth-child(4n),.active-item:last-of-type{
+    border-right: none
+} */
+.empty-icon{
+    vertical-align: top
+}
+.empty-icon image{
+    margin-top:20rpx;
+    width: 85%;
+}

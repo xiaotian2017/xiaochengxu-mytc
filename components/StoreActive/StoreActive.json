@@ -1,0 +1,8 @@
+{
+    "component":true,
+    "usingComponents":{
+        "city-video":"/components/BaseVideo/BaseVideo",
+        "city-previewPicture":"/components/PreviewPicture/PreviewPicture",
+        "city-postInfo":"/components/PostInfo/PostInfo"
+    }
+}

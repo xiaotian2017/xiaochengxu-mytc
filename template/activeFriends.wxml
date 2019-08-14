@@ -1,0 +1,27 @@
+ <template name="activeFriends">
+    <view class='mt-1' hidden='{{buid==0?true:false}}'>
+        <view class='pintuan_commodity_title' style='border-bottom:0;'>
+            <view class='name'>
+                <view class='clamp1'>支持{{userName}}</view>
+            </view>
+            <view class='title flex'>的小伙伴</view>
+            <navigator class='more01 c666' url='../activity_record/activity_record?buid={{buid}}&t={{type}}'>更多
+                <view class='iconfont icon-jiantou' style='display:inline-block;'></view>
+            </navigator>
+        </view>
+        <view class='jizan_people' style='padding:0 0 0 10px;' hidden='{{1==type}}'>
+            <block wx:for="{{helpers}}">
+              <view class='head'>
+                 <image src='{{item.UserLogo}}'></image> 
+              </view>
+            </block>
+        </view>
+          <view class='jizan_people' style='padding:0 0 0 10px;' hidden='{{0==type}}'>
+            <block wx:for="{{helpers}}">
+              <view class='head'>
+                 <image src='{{item.userImg}}'></image> 
+              </view>
+            </block>
+        </view>
+    </view>
+</template> 

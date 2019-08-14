@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "礼物赠送确认",
+    "usingComponents": {
+        "city-tips":"/components/Tips/Tips"
+    }
+}

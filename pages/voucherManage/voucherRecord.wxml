@@ -1,0 +1,44 @@
+<view class="vz-flex flex flex-betweet voucher-tab-wrap">
+    <view class="flex voucher-tab-item {{state==0?'active':''}}" data-state="0" bindtap="changeTab">领取情况</view>
+    <view class="flex voucher-tab-item {{state==1?'active':''}}" data-state="1" bindtap="changeTab">使用情况</view>
+</view>
+<!-- 溢出省略 -->
+<view>
+    <view class="no-data" wx:if="{{voucherRecordList.length==0}}">暂无数据</view>
+    <block wx:for="{{voucherRecordList}}">
+        <view style="background: #fff;margin-bottom:20rpx" class="">
+            <view class="vz-flex flex-center flex-between" style="border-bottom:1rpx solid #f0f0f0;padding:20rpx">
+                <view class="vz-flex flex-center">
+                    <image class="avatar" src="{{item.UserInfo.HeadImgUrl}}"></image>
+                    <view style="font-size: 24rpx;margin-left:20rpx">
+                        <view class="clamp1" style="width: 160rpx">{{item.UserInfo.NickName}}</view>
+                        <view>{{item.UserInfo.TelePhone}}</view>
+                    </view>
+                </view>
+                <view bindtap="showOrder" data-idx="{{index}}" wx:if="{{item.Order!=null}}" style="font-size: 24rpx;" class="c666">
+                    <view>{{item.UseDateStr}}</view>
+                    <view class="vz-flex flex-center">
+                    <view style="padding-right: 20rpx" wx:if="{{item.UseItemType==1}}">抢优惠订单</view>
+                    <view wx:if="{{item.UseItemType==2}}">拼团订单</view>
+                    <view wx:if="{{item.UseItemType==3}}">爱心价订单</view>
+                    <view wx:if="{{item.UseItemType==4}}">减价订单</view>
+                    <view wx:if="{{item.UseItemType==5}}">商品订单</view>
+                    <view wx:if="{{item.UseItemType==6}}">店铺在线买单订单</view>      
+                     <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                </view>
+            </view>
+         
+                <view class="vz-flex flex-center" wx:if="{{item.Order!=null&&item.isShow}}" style="padding:20rpx">
+                    <image class="avatar" src="{{item.UserInfo.HeadImgUrl}}"></image>
+                    <view style="font-size: 24rpx;margin-left:20rpx">
+                        <view>{{(item.UseItemName==''||item.UseItemName==null)&&item.UseItemType==7?'在线买单':item.UseItemName}}</view>
+                        <view>实付：<text style="color:#fe3d49">￥{{item.Order.payment_free*1000/100000}}</text></view>
+                    </view>
+                </view>
+    
+            <view>
+            </view>
+        </view>
+    </block>
+</view>

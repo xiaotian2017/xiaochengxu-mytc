@@ -1,0 +1,94 @@
+.weui_msg {
+    padding-top: 36px;
+    text-align: center;
+}.weui_msg .weui_icon_area {
+    margin-bottom: 30px;
+}
+.weui_icon_msg:before {
+    font-size: 104px;
+}.weui_icon_info:before {
+    font-size: 23px;
+    color: #10aeff;
+}[class*=" weui_icon_"]:before, [class^=weui_icon_]:before {
+    margin: 0;
+}
+.weui_icon_info:before {
+    content: "\EA03";
+}
+[class*=" weui_icon_"]:before, [class^=weui_icon_]:before {
+    font-family: weui;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+}.weui_msg .weui_text_area {
+    margin-bottom: 25px;
+    padding: 0 20px;
+}.weui_msg .weui_msg_title {
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 20px;
+}.weui_msg .weui_msg_desc {
+    font-size: 14px;
+    color: #888;
+}.weui_msg .weui_opr_area {
+    margin-bottom: 25px;
+}.weui_btn_area {
+    margin: 1.17647059em 15px .3em;
+}.weui_btn_primary {
+    background-color: #04be02;
+}.weui_btn_primary:not(.weui_btn_disabled):visited {
+    color: #fff;
+}.weui_btn {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    line-height: 2.33333333;
+    border-radius: 5px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    overflow: hidden;
+}.weui_btn_default {
+    background-color: #f7f7f7;
+    color: #454545;
+}.weui_btn+.weui_btn {
+    margin-top: 15px;
+}.weui_btn_default:not(.weui_btn_disabled):visited {
+    color: #454545;
+}.weui_btn:after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+}.weui_icon_msg:before {
+    font-size: 104px;
+}.weui_icon_warn:before {
+    content: "\EA0B";
+}.weui_icon_warn.weui_icon_msg:before {
+    color: #f76260;
+}

@@ -1,0 +1,2 @@
+<import src='/template/qrcodeUseState.wxml' />
+<template is="qrcodeusestate" data="{{loadall:loadall,success:success,reason:reason}}"></template>

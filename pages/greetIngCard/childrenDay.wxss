@@ -1,0 +1,144 @@
+
+.children-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  background: #ffe953;
+  text-align: center;
+  overflow-x: hidden;
+}
+.blessing-btn {
+  margin: 0 auto;
+  margin-top: 10rpx;
+  width: 40%;
+  animation: move 2s ease-in infinite;
+  -webkit-animation: move 2s ease-in infinite;
+}
+.child-pic01,
+.child-pic02,
+.child-pic03,
+.child-pic04,
+.child-pic05,
+.child-pic06,
+.child-pic07 {
+  width: 100%;
+}
+.child-pic02 {
+  margin-top: 50rpx;
+  -webkit-animation: titlerotato 1s 2s;
+  animation: titlerotato 1s 2s;
+}
+@-webkit-keyframes rotato {
+0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+}
+@keyframes rotato {
+0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+}
+.child-blessing {
+  font-size: 32rpx;
+  line-height: 1.8;
+  color: #333;
+  position: relative;
+  z-index: 20;
+}
+@-webkit-keyframes titlerotato {
+0% {
+    -webkit-transform: rotate(0) scale(0.2);
+    transform: rotate(0) scale(0.2);
+}
+100% {
+    -webkit-transform: rotate(360deg) scale(1);
+    transform: rotate(360deg) scale(1);
+}
+}
+@keyframes titlerotato {
+0% {
+    -webkit-transform: rotate(0) scale(0.2);
+    transform: rotate(0) scale(0.2);
+}
+100% {
+    -webkit-transform: rotate(360deg) scale(1);
+    transform: rotate(360deg) scale(1);
+}
+}
+@-webkit-keyframes move {
+0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+5% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+10% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+15% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+20% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+100% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+}
+@keyframes move {
+0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+5% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+10% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+15% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+20% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+100% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+}
+.child-title {
+  color: #6c00ff;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 50rpx;
+  padding: 50rpx 20rpx 0;
+  line-height: 1.35;
+}

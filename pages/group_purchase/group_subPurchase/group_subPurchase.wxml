@@ -1,0 +1,252 @@
+<import src="../../../utils/wxParse/wxParse.wxml" />
+<import src="../../../public/floatbbtntpl.wxml"/>
+<view id="wrapper" hidden="{{!init}}">
+    <scroll-view scroll-y="true" enable-back-to-top="true" bindscroll="getRecommand" class="scrollContent">
+        <view class="d-flex groupInfo">
+            <view class="groupInfoCover">
+                <image src="{{mainmodel.ImgUrl}}"></image>
+            </view>
+            <view class="flex groupInfoCon d-flex flex-col flex-between">
+                <view class="title clamp2">{{mainmodel.GroupName}}</view>
+                <view class="storeName clamp1">{{Store.SName}}</view>
+                <view class=".groupCondition d-flex flex-center">
+                    <view class="groupNeed">{{mainmodel.GroupSize}}人团</view>
+                    <view class="groupNow">已经团<text style="color:#fe3d49">{{GroupUserList.length}}</text>人</view>
+                </view>
+                <view class="d-flex groupPrice flex-end">
+                    <view class="big_money">{{mainmodel.DiscountPrice*1000/100000}}</view>
+                    <view class="small_money">￥{{mainmodel.OriginalPrice}}</view>
+                    <view>开团减{{mainmodel.HeadDeduct}}</view>
+                </view>
+                <view class="time" style="font-size:28rpx">使用截止日期：<text style="color:#fe3d49">{{mainmodel.UserDateEnd}}</text></view>
+            </view>
+            <view class="groupSuccess" wx:if="{{totalNum >= mainmodel.GroupSize}}">
+                拼团成功
+            </view>
+            <view class="groupFail" wx:if="{{totalNum < mainmodel.GroupSize && timeOver}}">
+                拼团失败
+            </view>
+        </view>
+        <view class="groupMainInfo">
+            <view class="d-flex flex-around">
+                <view class="groupAvatar">
+                    <view class="avatars">
+                        <image src="{{GroupUserList[0].ShopLogoUrl}}"></image>
+                        <view class="tag">团长</view>
+                    </view>
+                    <view class="username clamp1">{{GroupUserList[0].ShopName}}</view>
+                </view>
+                <!-- 默认头像 -->
+                <view wx:if="{{totalNum < mainmodel.GroupSize}}" class="groupAvatar">
+                    <view class="avatars">
+                        <image src="https://j.vzan.cc/content/city/images/pintuan/12.png"></image>
+                    </view>
+                    <view class="username" style="color:#999">等待拼团</view>
+                </view>
+                <view wx:if="{{GroupUserList.length > 1}}"class="groupAvatar">
+                    <view class="avatars">
+                        <image src="{{GroupUserList[1].ShopLogoUrl}}"></image>
+                        <view class="tag">沙发</view>
+                    </view>
+                    <view class="username clamp1">{{GroupUserList[1].ShopName}}</view>
+                </view>
+            </view>
+            <view class="groupAccount c333"  wx:if="{{totalNum < mainmodel.GroupSize&&1==mainmodel.State}}">还差<text style="color:#fe3d49">{{mainmodel.GroupSize - totalNum}}</text>人，快来一起拼团</view>
+            <view wx:if="{{totalNum >= mainmodel.GroupSize}}" style="color:#fe3d49" class="groupAccount">组团成功,该团已结束</view>
+            <view wx:if="{{timeOver && totalNum < mainmodel.GroupSize}}" style="color:#fe3d49" class="groupAccount">组团失败,已过期</view>
+            <view class="countTime d-flex justify-center flex-center" hidden="{{totalNum >= mainmodel.GroupSize || timeOver||1!=mainmodel.State }}">
+                <text>剩余</text>
+                <view class="times">{{countTime.days}}</view>天
+                <view class="times">{{countTime.hours}}</view>：
+                <view class="times">{{countTime.minutes}}</view>：
+                <view class="times">{{countTime.seconds}}</view>：
+                <text>结束</text>
+            </view>
+        </view>
+        <view class="memList">
+            <view catchtap="seeAllMem" class="seeAllMem">查看全部成员 <i class="iconfont {{showAllMem?'icon-jiantou-up':'icon-jiantou-down'}}"></i></view>
+            <view class="groupMemberList" wx:if="{{showAllMem}}">
+                <block wx:for="{{GroupUserList}}">
+                    <view class="groupMemberItem d-flex flex-center">
+                        <view class="head">
+                            <image src="{{item.ShopLogoUrl}}"></image>
+                        </view>
+                        <view class="flex d-flex flex-between" style="margin-right:20rpx">
+                            <text>{{item.ShopName}}</text>
+                            <text style="color:#fe3d49">{{item.ShowTime}}</text>
+                        </view>
+                        <text class="c666">开团</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!-- 地址导航 -->
+        <view class="d-flex business_detail_address mt-1">
+            <view class="head">
+                <image src="{{Store.LogoUrl}}" mode="aspectFill" catchtap="goStoreDtl"></image>
+            </view>
+            <view class="flex content">
+                <view class="title clamp1">{{Store.SName}}</view>
+                <view class="f01">
+                    <icon class="icon_time" wx:if="{{store.Shop_hours != ''}}"></icon>营业时间：
+                </view>
+                <view class="f01 clamp2" style="color:#999" catchtap="getLocation">
+                    <icon class="icon_local"></icon>{{Store.Address}}
+                    <text style='color:#fe3d49;'>(点击导航)</text>
+                </view>
+            </view>
+            <!-- 打电话 -->
+            <button class="callphone d-flex" catchtap='call' data-phone="{{Store.TelePhone}}">
+            </button>
+        </view>
+        <!-- 团购详情 -->
+        <view class="groupDtl">
+            <!-- 标题 -->
+            <view class="groupDtlTitle">拼团详情</view>
+            <!-- 详情轮播 -->
+            <!-- <swiper ndicator-dots="true" indicator-color="#d9d9d9" indicator-active-color="#fe3d49" autoplay="true" interval="3000" duration="500"
+                class="dtlSwiper">
+                <block wx:for="{{navList}}">
+                    <swiper-item>
+
+                    </swiper-item>
+                </block>
+            </swiper> -->
+            <template is="wxParse" data="{{wxParseData:Description.nodes}}"/>
+            <!-- 猜你喜欢 -->
+            <view class="recommand">
+                <view class="likeTitle">
+                    猜你喜欢
+                </view>
+                <!--推荐列表-->
+                <view class="likeList d-flex flex-wrap flex-between">
+                    <block wx:for="{{recommandList}}">
+                        <view class="likeItem d-flex flex-col" data-Id="{{item.Id}}" data-storeid="{{item.StoreId}}" catchtap="goGroupDtl">
+                            <view class="likeItemCover">
+                                <image src="{{item.ImgUrl}}"></image>
+                            </view>
+                            <view class="likeItemTitle clamp1">{{item.GroupName}}</view>
+                            <view class="likeItemInfo clamp2">{{item.Description}}</view>
+                            <view class="likeItemPrice d-flex ">
+                                <view class="currentPrice">￥{{item.UnitPrice}}</view>
+                                <view class="originPrice">￥{{item.OriginalPrice}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <!-- 支付按钮 -->
+    <view id="footer" class="d-flex">
+        <view class="moreGroup d-flex flex-col justify-center flex-center" catchtap='goGroupList'>
+            <view class="dot">
+                <view class="dot1"></view>
+            </view>
+            <view style="margin-top:8rpx">全部拼团</view>
+        </view>
+        <view wx:if="{{timeOver}}" class="flex footerTips">
+            该拼团已结束
+        </view>
+        <view class="footerActive flex d-flex" wx:if="{{!timeOver && totalNum < mainmodel.GroupSize}}">
+                    <button wx:if='{{-1==mainmodel.State||1==mainmodel.IsExpire}}' class="d-flex flex-col justify-center flex-center flex singlePurchase" >
+                拼团超时失败
+            </button>
+                                <button wx:if='{{mainmodel.RemainNum<=0}}' class="d-flex flex-col justify-center flex-center flex singlePurchase" >
+                拼团超时失败
+            </button>
+              <button wx:elif='{{2==mainmodel.State}}' class="d-flex flex-col justify-center flex-center flex singlePurchase" >
+                已拼团成功
+            </button>
+            <button wx:else class="d-flex flex-col justify-center flex-center flex singlePurchase" open-type="share">
+                邀请小伙伴
+            </button>
+
+            <view wx:if='{{1==mainmodel.State&&0==mainmodel.IsExpire&&mainmodel.RemainNum>0}}' class="d-flex flex-col justify-center flex-center flex groupPurchase" catchtap="openPay" data-index="1">
+                <view>￥{{mainmodel.DiscountPrice*1000/100000}}</view>
+                <view class="tag">我要参团</view>
+            </view>
+        </view>
+        <view class="footerActive flex d-flex" wx:if="{{totalNum >= mainmodel.GroupSize && !timeOver}}">
+            <view class="groupBtnSuccess flex d-flex flex-col justify-center flex-center">
+                该团已满人
+            </view>
+            <view class="d-flex flex-col justify-center flex-center flex groupPurchase" catchtap="openNewGroup">
+                我要开新团
+            </view>
+        </view>
+    </view>
+    <!-- 弹窗 -->
+    <template is="shopnotcanentertip" data="{{...storeInfo}}"></template>
+     <!-- 支付弹层-->
+    <view class="paymentLayer d-flex" wx:if="{{openLayer}}">
+        <view class="paymentContent">
+            <span class="close" catchtap="cancle"></span>
+            <view class="paymentTitle c3333 d-flex flex-center">
+                <text>购买数量：</text>
+                <!-- 支付数量 -->
+                <view class="paymentNum d-flex">
+                    <view class="minus flex" catchtap="minus"></view>
+                    <view class="num flex">{{payNum}}</view>
+                    <view class="add flex" catchtap="add"></view>
+                </view>
+            </view>
+            <view class="phone">
+                联系电话：
+                <text style="color:#fe3d49">{{Phone}}</text>
+            </view>
+            <view wx:if="{{listvoucher.length>0}}" class="voucher-box vz-flex flex-between" bindtap="showVoucher">
+                    <view wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+                    <view wx:else>减
+                        <text style="color:#ff5a00">{{voucherMoney*1000/100000}}</text>元
+                    </view>
+                    <icon class="iconfont icon-jiantou"></icon>
+            </view>
+            <view class="exchangeTime">兑换时间：
+                <text style="color:#fe3d49">{{mainmodel.UserDateEnd}}</text><text style="margin-right:20rpx">前到店兑换</text></view>
+            <view class="d-flex paymentBtn">
+                <view class="shouldPay flex">应付款
+                    <text style="color:#fe3d49">￥{{((mainmodel.DiscountPrice*payNum)-voucherMoney)*1000/100000}}</text>   
+                </view>
+                <view class="surePay" catchtap="finishPay">付款</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 首页 -->
+<view class="smallIcon backHome" catchtap="backHome">首页</view>
+<!-- 我的团购 -->
+<view class="smallIcon myGroup" catchtap="goMyGroup"><text>我的</text><text>团购</text></view>
+
+<view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+        <view class="re-coupon-body">
+            <view class="re-coupon-body-title">
+                选择代金券
+                <icon class="iconfont icon-cha" bindtap="hideVoucher"></icon>
+            </view>
+            <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+                <view class="re-coupon-item-wrap">
+                    <block wx:for="{{listvoucher}}" wx:key="{{index}}">
+                        <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+                            <view class="re-coupon-price">
+                                <text>￥</text>
+                                <text>{{item.Money}}</text>
+                            </view>
+                            <view class="re-coupon-right">
+                                <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+                                <view wx:else>无门槛</view>
+                                <view class="c666">
+                                    <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                                        <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                                        <text>{{Store.SName}}</text>
+                                    </view>
+                                    <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+                                </view>
+                            </view>
+                            <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>

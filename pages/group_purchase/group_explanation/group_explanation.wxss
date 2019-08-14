@@ -1,0 +1,73 @@
+page{
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+}
+#wrapper{
+    width: 100%;
+    height: 100%
+}
+.nav{
+    width: 100%;
+    height: 88rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.navItem{
+    line-height: 88rpx;
+    text-align: center;
+    position: relative;
+    font-size: 28rpx;
+    color: #333
+}
+.navActive{
+    color: #fe3d49;
+}
+.navActive::after{
+    content: "";
+    display: block;
+    width: 40%;
+    height: 4rpx;
+    background: #fe3d49;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto
+}
+swiper{
+    height: 100%;
+    font-size: 28rpx;
+    color: #333;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+swiper-item{
+    padding: 0 28rpx;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+.title{
+    padding: 20rpx;
+    text-align: center;
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #333
+}
+.mark{
+    color: #fe3d49
+}
+.pub,.att{
+    width: 100%;
+    height: 640rpx
+}
+.content{
+    padding-bottom: 30rpx
+}
+.content view{
+    line-height: 1.65
+}
+.content view:not(:last-of-type){
+    margin-bottom: 20rpx
+}

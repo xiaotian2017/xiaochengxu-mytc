@@ -1,0 +1,37 @@
+.set-top-item {
+    display: block;
+}
+  
+.set-top-item radio {
+    display: block;
+}
+
+.set-top-input {
+    
+}
+
+.publish-btn {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.publish-btn view {
+    padding: 30rpx 0;
+}
+
+.set-top-container {
+    padding:0 24rpx;
+    font-size:28rpx;
+    background:#fff;
+}
+
+.publish-btn { 
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:9999;    
+}
+    

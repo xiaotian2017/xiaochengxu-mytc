@@ -1,0 +1,42 @@
+<view style="padding-bottom: 140rpx;background: #fff">
+    <view class="top">
+        <view class="top-mid">
+            <image class="top-avatar" src="{{avatarUrl}}"></image>
+            <view class="top-nickname">
+                {{nickName}}的贺卡
+            </view>
+        </view>
+    </view>
+<view>    
+    <block wx:for="{{cardList}}" wx:key="{{index}}">
+        <view class="outter-wrap" bindtap="toCard" data-cardid="{{item.gctype}}" data-id="{{item.Id}}">
+            <view class="vz-flex flex-center card-list-wrap">
+                <view class="avatar-wrap">
+                    <image class="avatar" src="{{item.Headimgurl}}"></image>
+                </view>
+                <view class="vz-flex flex-between right-wrap">
+                    <view>
+                        <view class="same-text" style="width:80%">{{item.Title}}</view>
+                        <view class="time" style="padding-top:16rpx">{{item.Time}}</view>
+                    </view>
+                    <view class="same-text" style="width:30%;text-align: right">
+                        {{item.TempletName}}
+                    </view>
+                </view>
+            </view>
+            <view class="red-desp vz-flex flex-between">
+                <view style="color:{{item.red.State==2?'#e60000':'#333'}}" wx:if="{{item.red}}">{{item.red.State==2?'红包已领完':'红包共'+item.red.TotalCount+'个，已领'+item.red.Count_current+'个'}}</view>
+                <view data-rid="{{item.red.Id}}" data-display-amount="{{item.red.DisplayAmount}}" data-total-count="{{item.red.TotalCount}}" wx:if="{{item.red}}" class="to-red-detail" style="color:#333" catchtap="toRedDetail">查看详情</view>
+            </view>
+        </view>
+    </block>
+  
+    <!-- wx:if="{{isNoData}}" -->
+        <view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>
+        <view wx:if="{{isNoData}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 暂无数据 — —</view>
+    <view class="to-send-card" bindtap="toSendCard">
+        发送祝福贺卡
+    </view>
+</view>
+</view>
+

@@ -1,0 +1,86 @@
+<view id="wrapper">
+    <view id="grid" class="d-flex flex-wrap">
+        <view class="gridItem ">
+            <view class="title">已发放</view>
+            <view>
+                <text style="color:#ff5a00;font-size:36rpx;margin-right:10rpx">￥{{verifyNum.totalamount}}</text>
+                <text>{{verifyNum.creatnum}}份</text>
+            </view>
+        </view>
+        <view class="gridItem">
+            <view class="title">已销售</view>
+            <view class="c999">
+                {{verifyNum.sellnum}}份
+            </view>
+        </view>
+        <view class="gridItem">
+            <view class="title">已核销</view>
+            <view style="margin-top:4rpx" class="c999">{{verifyNum.usecount}}份</view>   
+        </view>
+        <view class="gridItem">
+            <view class="title">已入账</view>
+            <view style="font-size:36rpx;color:#fe3d49">￥{{verifyNum.totalincome*1000/100000}}</view>
+        </view>
+    </view>
+    <view class="tips d-flex c999">
+       <text>收益说明:</text>
+       <view class="flex">
+           <view>1.不可退款的立即入账，可退款的核销入账</view>
+           <view style="margin-top:10rpx">2.入账数值已扣除{{verifyNum.payrate}}%手续费，提现请到<text style="color:#fe3d49" catchtap="goMyEarns">我的收益</text></view>
+       </view>
+    </view>
+    <view class="groupList">
+        <block wx:for="{{recordList}}">
+            <view class="groupStatus" wx:if="{{item.State==4}}">
+            此团已完成并核销
+            </view>
+            <view class="groupStatus" wx:elif="{{item.State==3}}">
+            单买商品
+            </view>
+             <view class="groupStatus" wx:elif="{{item.State==2}}">
+            此拼团已成功
+            </view>
+             <view class="groupStatus" wx:elif="{{item.State==1}}">
+            此拼团正在进行
+            </view>
+            <view class="groupStatus" wx:else>
+            此拼团未成功，等待用户退款
+            </view>
+            <view class="groupItem" wx:for="{{item.GroupUserList}}"  wx:for-item="groupuser">
+                <view class="groupItemCon d-flex flex-center">
+                    <view class="times c999">{{groupuser.ShowDate}}</view>
+                    <view class="avatar">
+                        <image src="{{groupuser.ShopLogoUrl}}"></image>
+                    </view>
+                    <view class="flex groupItemInfo">
+                        <view class="name">
+                            {{groupuser.NickName}}<text class="c999" style="margin-left:20rpx" hidden='{{null==groupuser.QrCodeUrl}}'>{{groupuser.QrCodeUrl}}</text>
+                        </view>
+                        <view class="num">
+                            购买数量：<text class="c999">{{groupuser.BuyNum}}</text>
+                        </view>
+                         <view class="num">
+                            购买价格<text class="c999">{{groupuser.BuyPrice* 1000 / 100000}}</text>
+                        </view>
+                        <view class="num" wx:if="{{groupuser.State==-1||groupuser.State==-3}}">
+                            核销人：<text class="c999">{{groupuser.ValidUserNickName}}</text>
+                        </view>
+                         <view class="num" wx:if="{{groupuser.State==-1||groupuser.State==-3}}">
+                            核销时间：<text class="c999">{{groupuser.ValidShowTime}}</text>
+                        </view>
+                        <view class="num"  wx:elif="{{groupuser.State==-2}}">
+                         已退款
+                        </view>
+                        <view class="num" wx:elif="{{groupuser.IsExpire==1}}">
+                         已过期
+                        </view>
+                        
+                        <view class="status" style='margin-top:5px' wx:else>未核销</view>
+                    </view>
+                    <view  hidden='{{null==groupuser.QrCodeUrl}}' class="contact" data-phone="{{groupuser.QrCodeUrl}}" catchtap="call">联系</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view wx:if="{{loadingAll}}" class="loadingAll c999">已加载全部数据</view>
+</view>

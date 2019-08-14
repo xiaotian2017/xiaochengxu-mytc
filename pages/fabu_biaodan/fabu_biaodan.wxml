@@ -1,0 +1,225 @@
+<import src="../../public/template.wxml" />
+<import src="../../public/floatbtntpl.wxml" />
+<view style="padding-bottom:80px;">
+  <view class="write-infor-cells">
+    <view class="d-flex d-flex-center write-infor-cell" hidden='{{!(typeid2==295254 && ctypeid2==7)}}'>
+      <radio-group class="radio-group radiojob" bindchange="radioChange" data-type="job">
+        <label class="radio">
+          <view class="radioone">
+            <radio value="1" checked="{{radiochecked==1}}" />求全职
+          </view>
+          <view class="radioone">
+            <radio value="2" checked="{{radiochecked==2}}" />求兼职
+          </view>
+        </label>
+      </radio-group>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" hidden='{{!(typeid2==295254 && ctypeid2==7)}}'>
+      <view style="margin:0px auto;">
+        <view class="headclass" bindtap="chooseImage" data-index='0'  data-row="{{items[1].content.row}}">
+          <image class="person-head" style="margin:0 auto" src="{{items[1].content.imageList.length>1?items[1].content.imageList[1]:items[1].content.imageList[0]}}"></image>
+        </view>
+        <view>点击上传个人照片</view>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="write-title">标题</view>
+      <view class="flex01 write">
+        <input type="text" maxlength="35" bindinput="inputclick" data-type="title" class="shuru-input ta-r" placeholder="请输标题" value='{{title}}' />
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" wx:if="{{showtype}}">
+      <view class="write-title">类型
+        <i class="fabubiaodan_star">*</i>
+      </view>
+      <view class="flex01 write arrow">
+        <div class="right-arrow"></div>
+        <picker mode="selector" bindchange="Selecttype" value="0" range="{{array}}">
+          <view class="picker shuru-input">
+            {{selectname!=''?selectname:'请选择类型'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{typeid2!=304595}}">
+      <view class="write-title">联系地址<i class="fabubiaodan_star">*</i></view>
+      <view class="flex01 write">
+        <input type="text" maxlength="100" bindinput="inputclick" data-type="address" style="width:85%;display:inline-block;" placeholder="请输入联系地址" value='{{address}}' />
+        <i catchtap="clickToLocate" style="width:30px;height:30px;display:inline-block;background: url({{tongcheng_new_02}})no-repeat ;background-size: 562px;background-position-x: -160px;background-position-y: -430px;"></i>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" wx:if="{{typeid2==304595 || typeid2 == 295252}}">
+      <view class="write-title">联系人<i class="fabubiaodan_star">*</i></view>
+      <view class="flex01 write">
+        <input type="text" maxlength="40" bindinput="inputclick" data-type="linkname" class="shuru-input ta-r" placeholder="请输入联系人" value='{{linkname}}' />
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" wx:elif="{{typeid2==295254 && ctypeid2==7}}">
+        <view class="write-title">姓名<i class="fabubiaodan_star">*</i></view>
+      <view class="flex01 write">
+        <input type="text" maxlength="40" bindinput="inputclick" data-type="linkname" style="display:inline-block;margin-right:10px;" placeholder="请输入姓名" value='{{linkname}}' />
+        </view>
+          </view>
+  <view class="d-flex d-flex-center write-infor-cell" wx:if="{{typeid2==295254 && ctypeid2==7}}">
+        <view class="write-title">性别<i class="fabubiaodan_star">*</i></view>
+            <view class="flex01 write">
+        <radio-group class="radio-group" bindchange="radioChange" data-type="gender" style="float:right;">
+          <label class="radio">
+            <radio value="1" checked="{{genderchecked==1}}" />男
+            <radio value="2" checked="{{genderchecked==2}}" />女
+          </label>
+        </radio-group>
+        </view>
+    
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="write-title">手机号<i class="fabubiaodan_star">*</i></view>
+      <view class="flex01 write">
+        <input type="number" maxlength="11" bindinput="inputclick" data-type="tel" class="shuru-input ta-r" placeholder="请输入手机号" value="{{tel}}" />
+      </view>
+    </view>
+  </view>
+  <view class="write-infor-cells mar-t">
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="write-title">详细信息<i class="fabubiaodan_star">*</i>
+      </view>
+    </view>
+  </view>
+  <view class="bg-f" wx:if="{{!isknow}}">
+    <textarea class="miaoshu-textarea" maxlength='1000' bindinput="inputclick" data-type="desc" placeholder="请具体描述" value="{{desc}}" hidden="{{!conditiontime}}" />
+  </view>
+  <!--上传照片-->
+  <view class="clearfix shop-ruzhu-pic-ul bg-f">
+    <template is="item_image_pinglun" data="{{content:items[0].content,index:1}}"></template>
+  </view>
+  <!-- 求职高级选项-->
+  <view class="applyForJobs" wx:if="{{saletype == 7 && typeid2 == 295254}}">
+      <view class="applyAreaTitle">
+          <view catchtap="showApplyItems">
+            <text>{{showApplyItems?'展开':'收起'}}</text>高级选项
+            <i class="iconfont {{showApplyItems?'icon-jiantou-down':'icon-jiantou-up'}}"></i>
+          </view>
+          <view class="applyAreaTips">补充详细信息可增加求职成功率</view>
+      </view>
+      <view hidden="{{showApplyItems}}">
+        <!-- 输入 -->
+        <block wx:for="{{applyInput}}">
+          <view class="d-flex applyItems flex-center">
+            <text class="tag">{{item.tag}}</text>：
+            <input type="{{item.type}}" class="flex" data-index="{{index}}" placeholder="{{item.placeholder}}" placeholder-style="color:#999" bindinput="getApplyInput" value="{{applyInputVal['val'+index]}}"/>
+          </view>
+        </block>
+        <!-- 选择器-->
+        <block wx:for="{{applyPicker}}">
+          <view class="d-flex applyItems flex-center">
+            <text class="tag">{{item.tag}} <text wx:if="{{index == 1}}" style="color:#fe3d49">*</text></text>：
+            <picker mode="selector" bindchange="applyPicker" range="{{item.picker}}" class="applyPicker" data-index="{{index}}">
+                <view class="{{applyMultiArr[index] == '0'?'c999':''}}">{{item.picker[applyMultiArr[index]]}}</view>
+            </picker>
+            <i class="iconfont icon-jiantou"></i>
+          </view>
+        </block>
+        <!-- 工作经验 -->
+        <view class="workExp">
+          <view class="tag">工作经历</view>
+          <textarea  max-length="-1" bindblur="getExp" placeholder="请填写工作经历" placeholder-style="color:#999" bindblur="getApplyDescription"></textarea>
+        </view>
+      </view>
+  </view>
+  <!--招聘高级选项-->
+  <view class="recruit" style="display:none">
+    <!-- 选择器-->
+    <block wx:for="{{recruitArr}}">
+        <view class="d-flex flex-center applyItems">
+          <text class="tag">{{item.tag}}</text>：
+          <picker mode="selector" bindchange="recruitPicker" range="{{item.picker}}" class="applyPicker" data-index="{{index}}">
+              <view class="{{recruitMultiArr[index] == '0'?'c999':''}}">{{item.picker[recruitMultiArr[index]]}}</view>
+          </picker>
+          <i class="iconfont icon-jiantou"></i>
+        </view>
+     </block>
+    <!-- <view>福利</view> -->
+    <view class="recruitWelfare d-flex flex-wrap">
+      <block wx:for="{{welfare}}">
+        <view class="welfareItems {{welfareArr[index]?'welfareActive':''}}" data-index="{{index}}" catchtap="chooseWelfare">
+            {{item}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 房产租售高级选项 "-->
+  <view class="housingMarket" >
+      <view wx:if="{{typeid2 == 295252}}">
+        <block wx:for="{{housingMarket}}">
+          <view class="d-flex housingMarketItems flex-center">
+              <text class="tag">{{item.tag}}</text>：
+              <input maxlength="{{index==1||0==index?5:20}}" type="{{item.type}}" id="{{index == 0?'housingMarket0':''}}" data-index="{{index}}" placeholder="{{item.placeholder}}" placeholder-style="color:#999" bindinput="getHousingMarketInput" class="flex" disabled="{{item.checked?item.checked:false}}" value="{{housingMarketInputVal['val'+index]}}"/>
+             <checkbox-group class="housePriceLabel" wx:if="{{index == 0}}" bindchange="chooseHousingPrice">
+              <label for="housingMarket0">
+                <checkbox checked="{{housingMarket[0].checked}}"></checkbox>{{housingMarket[0].value}}
+              </label>
+             </checkbox-group>
+              <text wx:if="{{index == 1}}">平方米</text>
+              <i catchtap="chooseHouseLocation" class="location" wx:if="{{index == 3}}">
+              </i>
+          </view>
+        </block>
+      </view>
+  </view>
+  <!-- 收费预告 -->
+  <view wx:if="{{!isIos}}">
+  <view class="write-infor-cells mar-t" hidden="{{postid>0}}">
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{toplist.length<=0}}">
+      <view class="write-title flex01">我要置顶</view>
+      <view class="write">
+        <switch color="#fe3d49" bindchange="switch1Change"/>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{!istop || toplist.length<=0}}">
+      <view class="write-title">选择置顶类型
+        <icon class="required-sign"></icon>
+      </view>
+      <view class="flex01 write arrow">
+        <picker mode="selector" range="{{toplist}}" index='0' bindchange="ListenerPickerSelected">
+          <view class="picker">
+            {{toptime}}
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
+  <view class="agreement-f" wx:if="{{typeid2==304069}}" catchtap="zhidaoclick">
+    <icon type="success" size="18" color="#009cff" />我已阅读并同意
+    <text class="c-09cf">《平台分类信息管理条款》</text>
+  </view>
+  <view class="agreement-f" wx:if="{{!isIos}}">  
+    <i class="dianclass"></i>
+    <text class="c-09cf" style="color:#fe3d49;">置顶信息可有效提升浏览量</text>
+  </view>
+  <view class="agreement-f" hidden='{{!(hstore>0)}}'>
+    <i class="dianclass"></i>
+    <text class="c-09cf" style="color:#fe3d49;">您是商家，免费发布</text>
+  </view>
+
+  <!--底部栏-->
+  <view class="fix-tb">
+    <view class="d-flex d-flex-center write-bottom-nav ta-c">
+      <view class="flex01" style='display:{{isadmin==1?none:""}}'>
+        <block wx:if="{{allprice>0&&0==isadmin&&!isIos}}">
+          <label class="f01">需付款</label>
+          <label class="f02">{{allprice}}</label>
+        </block>
+      </view>
+      <!-- <view class="bt" catchtap="addpost">{{allprice>0&&0==isadmin?"确认付款":"确认发布"}}</view> -->
+      <view class="bt" catchtap="addpost">确认发布</view>
+    </view>
+  </view>
+</view>
+<!-- 时间选择器 -->
+<template is="timePicker" wx:if="{{!conditiontime}}" data="{{value:value,years:years,months:months,days:days,ours:ours,minues:minues}}"></template>
+<!-- 显示链接图标 -->
+ <city-navigator wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" >获取链接</view>
+</city-navigator>

@@ -1,0 +1,9 @@
+<import src="../../public/template.wxml" />
+<view >
+  <view class="discriptionView" style='font-size:14px;padding:10px;color:#999'>投诉描述</view>
+  <view class="textareView border-box">
+    <textarea class="reportTextarea f-14rem border-box" fixed='false' placeholder="" auto-focus bindinput="reportinput" value="{{temporaryStorageInput}}" />
+  </view>
+  <button class="commitBtn f-15rem" catchtap="reportBtnDidClick">提交</button>
+</view> 
+<template is="remind-layout" data="{{content:remindBean}}"/>

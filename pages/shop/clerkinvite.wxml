@@ -1,0 +1,26 @@
+<view class="weui_msg" hidden='{{1!=result}}'>
+    <view class="weui_icon_area"><view class="weui_icon_info weui_icon_msg"></view></view>
+    <view class="weui_text_area">
+        <view class="weui_msg_title">店员邀请</view>
+        <view class="weui_msg_desc"> {{mainmodel.AreaName}} 邀请您成为[{{mainmodel.StoreDefImgUrl}}]的店员</view>
+    </view>
+    <view class="weui_opr_area">
+        <view class="weui_btn_area">
+            <view  class="weui_btn weui_btn_primary" bindtap='agree' >同意</view>
+            <view  class="weui_btn weui_btn_default" data-storeid='{{storeid}}' bindtap='gotodetail'>忽略 , 直接进入店铺</view>
+        </view>
+    </view>
+</view>
+<view class="msg" hidden='{{-1!=result}}'>
+            <view class="weui_msg">
+                <view class="weui_icon_area"><view class="weui_icon_warn weui_icon_msg"></view></view>
+                <view class="weui_text_area">
+                    <view class="weui_msg_title"></view>
+                    <view class="weui_msg_desc">{{reason}}</view>
+                </view>
+                <view class="weui_opr_area">
+                    <view class="weui_btn_area">
+                    </view>
+                </view>
+            </view>
+  </view>

@@ -1,0 +1,130 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view style="padding-bottom:100rpx">
+    <!-- swiper -->
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#d9d9d9" indicator-active-color="#fe3d49" autoplay="{{autoplay}}"
+        interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{bannerUrls}}" wx:key="{{index}}">
+            <swiper-item class="swiper-item">
+                <image class="swiper-img" src="{{item.thumbnail}}" />
+            </swiper-item>
+        </block>
+        <view class="swiper-title wzsl">
+            {{halfService && halfService.Title || ''}}
+        </view>
+    </swiper>
+    <view style="background: #fff">
+        <view class="vz-flex flex-between flex-center" style="padding:20rpx; border-bottom: 1rpx solid #f0f0f0;">
+            <view>
+                <text style="font-size:68rpx;color:#ff5a00">{{halfService && halfService.Discount || ''}}</text>
+                <text style="color: #999;font-size: 32rpx">折</text>
+                <view class="city-card-discount-tips wzsl" style="padding-top:8rpx" wx:if="{{!(halfService.DiscountType==1)}}">
+                                    <text space="true" wx:if="{{0==halfService.DiscountPrice}}" style="color:#ff5a00;font-size: 68rpx;">免费领 </text>
+                   
+                    <text wx:else space="true" style="color:#ff5a00;font-size: 68rpx;">￥{{halfService && halfService.DiscountPrice*1000/100000 || ''}} </text>
+                    <text wx:if="{{0!=halfService.OriginalPrice}}" style="font-size: 32rpx;color:#666;text-decoration:line-through">￥{{halfService && halfService.OriginalPrice*1000/100000 || ''}}</text>
+                </view>
+            </view>
+
+            <!-- 也可能是立即购买 -->
+            <view>
+                <view wx:if="{{halfService}}">
+                    <view class="buy-or-receive-btn" wx:if="{{halfService && !halfService.Number || halfService.Number-halfService.PurchaseCount}}"
+                        bindtap="reseiveOrBuy">
+                        {{halfService.DiscountType==1||0==halfService.DiscountPrice ?'立即领取' : '立即购买'}}
+                    </view>
+                    <view class="buy-or-receive-btn" style="background:#ccc" wx:else>
+                        已售馨
+                    </view>
+                </view>
+
+                <view class="buying-tips" wx:if="{{halfService && (halfService.Number!=0)}}">
+                    <!-- 0的话不限分数 -->
+                    限{{halfService.Number}}份/剩{{halfService.Number-halfService.PurchaseCount}}份
+                </view>
+            </view>
+        </view>
+        <view class="vz-flex flex-between flex-center" style="padding:20rpx">
+            <view class="discount-date">
+                <text>
+                    <text decode="true">折扣日期&nbsp;</text>
+                    <text style="color:#fe3d49">{{halfService.ServicesTime || ''}}</text>
+                </text>
+            </view>
+            <view class="focus-num">
+                {{halfService.BrowseCount}}人关注
+            </view>
+        </view>
+
+        <view class="city-card-label-wrap vz-flex flex-center">
+            <block>
+                <view class="city-card-label">{{!halfService.IsReservation && '免预约' || '需要预约'}}</view>
+                <view class="city-card-label" hidden="{{halfService.isNumber}}">不限人数</view>
+            </block>
+        </view>
+    </view>
+    <view class="city-card-guide">
+        <text style="padding-right:24rpx">购买同城卡</text>
+        <icon class="iconfont icon-city-arrow"></icon>
+        <text style="padding:0 24rpx">选择服务</text>
+        <icon class="iconfont icon-city-arrow"></icon>
+        <text style="padding-left:24rpx">到店消费</text>
+    </view>
+    <view class="city-card-service-detail-wrap">
+        <view class="city-card-service-detail-title vz-flex">
+            <icon class="iconfont icon-city-fenlei" style="margin-right:8rpx;"></icon>
+            <text style="padding-left:10rpx">商家详情</text>
+        </view>
+        <view class="vz-flex flex-between flex-center city-card-service-detail-body">
+            <view style="margin-top:-20rpx;width:70%" class="wzsl">
+                <icon class="iconfont icon-city-store"></icon>
+                <text style="padding-left:10rpx">{{storeInfo.SName}}</text>
+            </view>
+            <view style="color:#fe3d49;font-size:26rpx;" bindtap="toStore">
+                进店看看
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+        </view>
+        <view style="margin-bottom: 20rpx" class="vz-flex flex-between city-card-service-info">
+            <view>营业时间</view>
+            <view>{{storeInfo.Shop_hours && storeInfo.Shop_hours!='null' && storeInfo.Shop_hours || '' }}</view>
+        </view>
+        <view style="padding-bottom: 20rpx;border-bottom:1rpx solid #f0f0f0" class="vz-flex flex-between city-card-service-info" bindtap="openmap">
+            <view>商家地址</view>
+            <view class="wzsl" style="width:70%;text-align:right">{{storeInfo.Address}}</view>
+        </view>
+        <view class="vz-flex flex-between flex-center city-card-service-tel" data-tel="{{storeInfo.TelePhone}}" bindtap="vzMakePhone">
+            <view>
+                <text style="color:#333" data-tel="{{storeInfo.TelePhone}}" decode>联系电话&nbsp;</text>
+                <text style="color:#fe3d49" data-tel="{{storeInfo.TelePhone}}">{{storeInfo.TelePhone}}</text>
+            </view>
+            <icon class="iconfont icon-dianhua" data-tel="{{storeInfo.TelePhone}}"></icon>
+        </view>
+    </view>
+    <view class="city-card-store-ad-wrap">
+     
+        <view class="city-card-store-ad-body">
+            <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+        </view>
+        <image style='width:100%;margin-top:3px' wx:for='{{botBannerUrls}}' src='{{item.filepath}}'></image>
+    </view>
+</view>
+
+<!--footer bar -->
+<view class="footer vz-flex">
+    <view class="footer-item" bindtap="toIndex">
+        <icon class="iconfont icon-index footer-icon"></icon>
+        <text>首页</text>
+    </view>
+    <view class="footer-item footer-active">
+        <icon class="iconfont icon-city-vip footer-icon"></icon>
+        <text>同城卡</text>
+    </view>
+    <view class="footer-item" bindtap="toCutlist">
+        <icon class="iconfont icon-order footer-icon"></icon>
+        <text>我的订单</text>
+    </view>
+    <view class="footer-item" bindtap="toMine">
+        <icon class="iconfont icon-person footer-icon"></icon>
+        <text>我的</text>
+    </view>
+</view>

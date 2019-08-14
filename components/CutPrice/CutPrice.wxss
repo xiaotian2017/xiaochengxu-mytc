@@ -1,0 +1,13 @@
+@import  '../Template/CutPrice-Group.wxss';
+.lowest{
+    color: #ff5a00
+}
+.vip{
+    color: #ffde00;
+    font-size: 12px;
+    background: #333;
+    line-height:12px;
+    padding: 0 6px;
+    border-radius: 12px;
+    margin-left: 10px;
+}

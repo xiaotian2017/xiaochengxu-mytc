@@ -1,0 +1,195 @@
+<view class="online-pay-container">
+    <view>
+        <view class="online-pay-top vz-flex flex-center flex-between" catchtap='gotostore' data-storeid='{{store.Id}}'>
+            <view class="vz-flex flex-center">
+                <view class="iconfont icon-city-store"></view>
+                <view class="store-name">{{store.SName}}</view>
+            </view>
+            <view class="iconfont icon-jiantou"></view>
+        </view>
+        <view class="pay-main vz-flex flex-center flex-between">
+            <view class="pay-main-tips">消费金额(元)</view>
+            <view class="pay-input" catchtap='showcaculate'>{{amount==0?'请与服务人员核对金额':amount}}</view>
+            <!-- <input bindfocus='showcaculate' cursor-spacing="1000px"  class="pay-input" type="digit" placeholder="请与服务人员核对金额" value='{{amount}}'/> -->
+        </view>
+        <view class="vz-flex flex-center flex-between coupon-wrp" wx:if="{{CanPayMember&&MemberState}}">
+            <view class="vz-flex flex-center">
+                <view class="coupon-label" style="background: rgb(7, 6, 6);">折</view>
+                <view class="coupon-label-text">同城会员卡享
+                    <text style="color:red">{{MemberDisCount}}</text>折</view>
+            </view>
+            <view class="nothing-use vz-flex flex-center" wx:if="{{!OpenMemberPrice}}" bindtap="toGetMember">
+                <view style="color: #999">立即开通</view>
+                <view class="iconfont icon-jiantou"></view>
+            </view>
+        </view>
+        <view class="vz-flex flex-center flex-between coupon-wrp" catchtap='showmycoupon'>
+            <view class="vz-flex flex-center">
+                <view class="coupon-label">券</view>
+                <view class="coupon-label-text">代金券</view>
+            </view>
+            <view class="nothing-use vz-flex flex-center">
+                <view style="color: #999" wx:if='{{hasget.length==0}}'>暂无可用</view>
+                <view style="color: #999" wx:if='{{userVoucher!=null&&userVoucher.Voucher.IsDiscount==1}}'>{{userVoucher.Voucher.Discount*100/1000}}折</view>
+                <view style="color: #999" wx:elif='{{userVoucher!=null&&userVoucher.Voucher.Deducting>0}}'>满{{userVoucher.Voucher.Deducting}}减{{userVoucher.Voucher.VoucherMoney}}元</view>
+                <view style="color: #999" wx:elif='{{userVoucher!=null}}'>减{{userVoucher.Voucher.VoucherMoney}}元</view>
+                <view wx:else class="iconfont icon-jiantou"></view>
+            </view>
+        </view>
+        <view style="text-align: right;padding:20rpx 30rpx 30rpx 30rpx;">
+            <text class="pay-amount-text">合计：</text>
+            <text class="pay-money">
+                <text>￥</text>
+                <text style="font-size:32rpx;">{{needpay}}</text>
+            </text>
+        </view>
+        <view class="use-tips" wx:if="{{OpenMemberPrice&&MemberState&&discountDays}}">
+            <view style="padding-top:20rpx;border-top: 1rpx solid #f0f0f0;">
+                使用须知：本店{{discountDays}}可用
+            </view>
+        </view>
+    </view>
+    <!--键盘-->
+    <view class='fix-bl keyboard-layer-js'>
+        <view class='bg-f basewrap top-line'>
+            <view wx:if="{{miniCouponList.length>0&&showcc}}" bindtap="showCouponList" class="d-flex d-flex-center bg-f receive-coupons-cell">
+                <view class="f14 flex clamp1">
+                    <view class="swiper-container swiper-container-vertical local-life-swiper" style="height:118rpx;">
+                        <ul class="swiper-wrapper" style="height: 118rpx; line-height:118rpx;">
+                            <li class="swiper-slide swiper-slide-active" style="height: 118rpx;">
+                                <i class="tag" style="width: 2rem;">券</i>您有{{miniCouponList.length}}张代金券
+                            </li>
+                        </ul>
+                    </view>
+                </view>
+            </view>
+            <view class="d-flex keyboard-layer" wx:if='{{showcc}}'>
+                <view class="flex ta-c keyboard-number">
+                    <view class="number li" catchtap='caculate' data-num='1'>1</view>
+                    <view class="number li" catchtap='caculate' data-num='2'>2</view>
+                    <view class="number li" catchtap='caculate' data-num='3'>3</view>
+                    <view class="number li" catchtap='caculate' data-num='4'>4</view>
+                    <view class="number li" catchtap='caculate' data-num='5'>5</view>
+                    <view class="number li" catchtap='caculate' data-num='6'>6</view>
+                    <view class="number li" catchtap='caculate' data-num='7'>7</view>
+                    <view class="number li" catchtap='caculate' data-num='8'>8</view>
+                    <view class="number li" catchtap='caculate' data-num='9'>9</view>
+                    <view class="close li" catchtap='closecaculate'>
+                        <i></i>
+                    </view>
+                    <view class="number li" catchtap='caculate' data-num='0'>0</view>
+                    <view class="dot li" catchtap='caculate' data-num='.'>
+                        <i></i>
+                    </view>
+                </view>
+                <view class="d-flex flex-col bz" style="width:27.2%;border-top: 1px solid #f2f2f2;">
+                    <view class="bz cancel-bt" id="remove" catchtap='clearnum'>
+                        <i class="cancel"></i>
+                    </view>
+                    <view class="flex pay-bt" style='color: rgb(255, 255, 255);' catchtap='clickToPay'>
+                        <a data-state="0" style="color:#fff">
+                            <p class="f01"> 确认
+                                <br />支付</p>
+                        </a>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+    </view>
+
+
+    <view class="mask" style="z-index: 10000;" wx:if="{{isShowCouponBot}}">
+        <view class="coupon-list-wrp">
+            <view class="coupon-title vz-flex flex-center flex-between">
+                <view>领券</view>
+                <view class="iconfont icon-cha" bindtap="showCouponList"></view>
+            </view>
+            <scroll-view scroll-y style="height:400rpx">
+                <block wx:for="{{miniCouponList}}" wx:key="{{index}}">
+                    <view class="vz-flex flex-center coupon-item">
+                        <view class="coupon-list-left">
+                            <view class="price-amount-wrp">
+                                <view wx:if="{{item.IsDiscount==0}}">
+                                    <text class="money-label">￥</text>
+                                    <text class="money-amount">{{item.VoucherMoney}}</text>
+                                </view>
+                                <view wx:else style="color: #fff">
+                                    {{item.Discount*100/1000}}折
+                                </view>
+                                <view wx:if="{{item.Deducting>0}}" class="coupon-condition">
+                                    满{{item.Deducting}}可用
+                                </view>
+                                <view wx:else class="coupon-condition">
+                                    无门槛
+                                </view>
+                            </view>
+                        </view>
+                        <view class="coupon-list-right">
+                            <view class="vz-flex flex-center">
+                                <view class="only-tip" wx:if="{{item.IsCityMember>0}}">会员专属</view>
+                                <view class="coupon-name clamp1">{{item.StoreName}}</view>
+                            </view>
+                            <view class="coupon-tips" wx:if="{{item.UseEndDateStr!=''&&item.UseStartDateStr!=''}}">{{item.UseEndDateStr}}过期</view>
+                            <view class="coupon-tips" wx:else> 长期可领取
+                                <text wx:if="{{item.ValidDays>0}}">,领取后{{item.ValidDays}}天有效</text>
+                            </view>
+                            <view class="use-condition" wx:if="{{item.IsDiscount==1}}">限在线买单用</view>
+                            <view class="fresh-man" wx:if="{{item.IsNewUser>0}}">限店铺新人</view>
+                            <view class="receive-btn" wx:if="{{item.IsHaving==0}}" data-vid="{{item.id}}" data-idx="{{index}}" bindtap="drawVoucher">立即领取</view>
+                            <view class="receive-btn" wx:else style="opacity: .5">已领取</view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+
+    <view class="mask" style="z-index: 10000;" wx:if="{{isShowCouponAot}}">
+        <view class="coupon-list-wrp">
+            <view class="coupon-title vz-flex flex-center flex-between">
+                <view>领券</view>
+                <view class="iconfont icon-cha" bindtap="showmycoupon"></view>
+            </view>
+            <scroll-view scroll-y style="height:400rpx">
+                <block wx:for="{{hasget}}" wx:key="{{index}}">
+                    <view class="vz-flex flex-center coupon-item">
+                        <view class="coupon-list-left">
+                            <view class="price-amount-wrp">
+                                <view wx:if="{{item.Voucher.IsDiscount==0}}">
+                                    <text class="money-label">￥</text>
+                                    <text class="money-amount">{{item.Voucher.VoucherMoney}}</text>
+                                </view>
+                                <view wx:else style="color: #fff">
+                                    {{item.Voucher.Discount*100/1000}}折
+                                </view>
+                                <view wx:if="{{item.Voucher.Deducting>0}}" class="coupon-condition">
+                                    满{{item.Voucher.Deducting}}可用
+                                </view>
+                                <view wx:else class="coupon-condition">
+                                    无门槛
+                                </view>
+                            </view>
+                        </view>
+                        <view class="coupon-list-right">
+                            <view class="vz-flex flex-center">
+                                <view class="only-tip" wx:if="{{item.Voucher.IsCityMember>0}}">会员专属</view>
+                                <view class="coupon-name clamp1">{{store.SName}}</view>
+                            </view>
+                            <view class="coupon-tips" wx:if="{{item.Voucher.UseEndDateStr!=''&&item.Voucher.UseStartDateStr!=''}}">{{item.Voucher.UseEndDateStr}}过期</view>
+                            <view class="coupon-tips" wx:else> 长期可领取
+
+                            </view>
+                            <view class="use-condition" wx:if="{{item.Voucher.IsDiscount==1}}">限在线买单用</view>
+                            <view class="fresh-man" wx:if="{{item.Voucher.IsNewUser>0}}">限店铺新人</view>
+
+                            <view class="receive-btn" wx:if="{{index==drawCurrent}}" style="opacity: .5">已选择</view>
+                            <view class="receive-btn" wx:else style="opacity: .5" catchtap='mycouponuse' data-target='{{item}}' data-idx='{{index}}'>使用</view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

@@ -1,0 +1,90 @@
+  <main class="flex d-flex flex-col">
+ <view class="checkStatus">
+ <view>
+       <view class="mynav rel" style='z-index:3'>
+          <view class="d-flex d-flex-center shaixuan114_cell bottom-line">
+              <!-- <view class="flex">
+                  <view style='display:inline-block'>红包类型</view>
+                  <view style='display:inline-block' class="iconfont icon-arrow-top-copy"></view>
+              </view> -->
+              <view class="flex" data-state='1' bindtap='selredbagstate'>
+                <view style='display:inline-block' >状态</view>
+                <view style='display:inline-block' class="iconfont icon-arrow-top-copy"></view>
+              </view>
+          </view>
+</view> 
+      <view class="shaixuan_114_js ">
+            <view class="dialog" hidden='{{0==showstateselbar}}'><view class="kind shaixuankind114_js" style="max-height: 50%; z-index: 3; height: auto;margin-top:45px">
+            <!-- <view class="block none">
+              <view class="d-flex">
+                <view class="flex">
+                  <view>全部</view>
+                  <view>普通红包</view>
+                  <view>赏金红包</view>
+                </view> 
+              </view>
+            </view> -->
+            <view class="block" style="z-index:202;"><view class="d-flex"><view class="flex"><view data-state='0' catchtap='setredbagstate' class='span'>全部</view><view  class='span' data-state='1'  catchtap='setredbagstate'>进行中</view><view  class='span' catchtap='setredbagstate'  data-state='-1'>已结束</view></view> </view></view></view> <view class="shaixuan_114_black_mask" data-state='0' bindtap='selredbagstate'></view></view></view></view></view>
+        <view hidden='{{redbaglist.length==0}}'>
+            <view wx:for="{{redbaglist}}" class="d-flex flex-col redItem bz">
+                <view wx:if="{{item.State==1}}" class="icon-status tagActive">进行中</view>
+                <view wx:elif="{{item.State==-2}}" class="icon-status tagOver">已退款</view>
+                <view wx:else class="icon-status tagOver">已结束</view>
+                <view wx:if="{{item.RedPacketType==2}}">                    
+                    <view class="titleInfo">
+                        <view class="d-flex d-flex-center">
+                            <view class="c333"><icon class='iconfont icon-bracket'></icon>赏金<icon class='iconfont icon-bracket turn'></icon></view>
+                            <view class="title textmore">{{item.RedPacketShare.ShareItemTitle}}</view>
+                            <view class="totalMoney">￥{{item.Amount*100/10000}}</view>
+                        </view>
+                    </view>
+                    <view class="statusInfo d-flex flex-between bottom-line">
+                        <view class="totalRed"  v-if="item.State!=-2">
+                            已抢<view class="current">{{item.Count_current}}</view>/{{item.TotalCount}}，
+                            共<view class="current">{{item.Amount_current*100/10000}}</view>/{{item.Amount*100/10000}} 元
+                        </view>
+                        <view class="time c999">{{item.UpdateDateTimeStr}}</view>
+                    </view>
+                    <view class="detailInfo d-flex d-flex-center c333">
+                         <view class="btn" data-redbagid="{{item.Id}}" catchtap='editmodel'>编辑</view> 
+                        <!-- <view class="btn goOn">退款</view> -->
+                        <view class="redPockedtDetail btn" data-redbagid="{{item.Id}}" data-totalamount="{{item.Amount}}"  data-totalcount="{{item.TotalCount}}" catchtap='seerecords'>领取详情</view> 
+                    </view>
+                </view>
+                <view wx:else>
+                    <view class="titleInfo">
+                        <view class="d-flex d-flex-center">
+                          <view class="c333"><icon class='iconfont icon-bracket'></icon>普通赏金<icon class='iconfont icon-bracket turn'></icon></view>
+                            <view class="title textmore">{{item.Content}}</view>
+                            <view class="totalMoney">￥{{item.Amount*100/10000}}</view>
+                        </view>
+                    </view>
+                    <view class="statusInfo d-flex flex-between bottom-line">
+                        <view class="totalRed" v-if="item.State!=-2" >
+                            已抢<view class="current">{{item.Count_current}}</view>/{{item.TotalCount}}，
+                            共<view class="current">{{item.Amount_current*100/10000}}</view>/{{item.Amount*100/10000}} 元
+                        </view>
+                        <view class="time c999">{{item.UpdateDateTimeStr}}</view>
+                    </view>
+                    <view style="margin:0 15px;line-height:30px;font-size:12px" class="d-flex flex-center">                       
+                        <image  src="https://j.vzan.cc/content/city/images/secretpassword.png" style="width:18px;height:18px;margin-right:10px" ></image>
+                        口令：{{item.ValidateCode}}
+                    </view>
+                    <view class="detailInfo d-flex d-flex-center c333">
+                        <view  class="btn goOn">编辑</view>
+                        <view  class="btn goOn">退款</view>
+                        <view  class="redPockedtDetail btn">领取详情</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="classname">
+      <view style="width:100%;text-align:center;font-size:14px;color:#aaa;background-color:#fff;height:40px;vertical-align:middle;line-height:40px;margin-bottom:60px">
+        <image hidden='{{!isLoadData}}' style='width:50px;height:40px;vertical-align:middle' src='http://j.vzan.cc/content/city/xcx/images/cityxcxloading.gif'></image>{{isLoadData ? '正在加载 . .' : havemore ? '上拉加载更多' : '— — 已加载全部 — —'}}</view>
+    </view>
+        
+    </main>
+    <view  style="position:fixed;bottom:0;width:100%;" bindtap='gotoadd'>
+        <view class="deliverRedBtn">发赏金</view>
+    </view>
+  

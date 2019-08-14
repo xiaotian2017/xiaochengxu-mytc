@@ -1,0 +1,52 @@
+<view style="background:#fff;margin-bottom: 30rpx;">
+    <view class="vz-flex flex-center flex-between address-item">
+        <view>
+            收货人
+            <text style="color:#fe3d49">*</text>
+        </view>
+        <input bindinput="getAcceptName" value="{{acceptName}}" type="text" placeholder="收货人姓名" />
+    </view>
+    <view class="vz-flex flex-center flex-between address-item">
+        <view>
+            联系电话
+            <text style="color:#fe3d49">*</text>
+        </view>
+        <input type="number" bindinput="getAcceptPhone" value="{{acceptPhone}}" placeholder="联系电话" />
+    </view>
+    <view class="vz-flex flex-center flex-between address-item">
+        <view style="width:30%">
+            所在区域
+            <text style="color:#fe3d49">*</text>
+        </view>
+        <view style="width:78%">
+            <picker style="width:100%" mode="multiSelector" bindcolumnchange="areaColumnchange" value="{{rangeIdxArr}}" bindchange="bindRegionChange" range="{{range}}" range-key="Name">
+                <view class="picker" bindtap="openPicker"  style="width:100%;text-align:right">
+                   {{areaText==null?'':areaText}}
+                </view>
+            </picker>
+        </view>
+    </view>
+    <view class="vz-flex flex-center flex-between address-item">
+        <view style="width:34%">
+            详细地址
+            <text style="color:#fe3d49">*</text>
+        </view>
+        <input style="text-align:right;width:100%" type="text" bindinput="getAcceptAddress" value="{{acceptAddress}}" placeholder="详细地址" />
+    </view>
+    <view class="vz-flex flex-center flex-between address-item">
+        <view>
+            邮政编码
+        </view>
+        <input type="text" bindinput="getPostNum" value="{{postNum}}" placeholder="邮政编码" />
+    </view>
+</view>
+
+<view class="vz-flex flex-center flex-between address-item">
+    <view>默认地址</view>
+    <switch bindchange="switchChange" checked="{{defaultState}}"/>
+</view>
+
+<view class="add-btn-wrap" bindtap="addAddress">
+        <icon class="iconfont icon-guanbi add-btn"></icon>
+       添加
+</view>

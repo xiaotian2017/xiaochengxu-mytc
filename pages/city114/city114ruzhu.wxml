@@ -1,0 +1,146 @@
+<import src="../../public/shoptemplate.wxml" />
+<view class="{{isOpenCategory && 'container' || ''}}">
+    <view style="background:#fff;padding-left:20rpx;margin-bottom:20rpx;padding-top:20rpx">
+        <view style="text-align:center;position:relative;">
+            <image class="temp-img {{uploadimgobjects['bossWx'].config.imageList.length !== 0 && 'temp-img-hide'}}" src="https://j.vzan.cc/content/city/city114/images/tc-yh-72.jpg"></image>
+            <image class="upload-img" src="{{uploadimgobjects['bossWx'].config.imageList[uploadimgobjects['bossWx'].config.imageList.length-1]}}"
+                data-which="bossWx" data-itemid='{{ruzhuId}}' bindtap="uploadLogoImg" mode="aspectFit"></image>
+            <view class="upload-tips">
+                上传老板微信二维码
+            </view>
+        </view>
+        <view style="text-align:center;position:relative;margin-top:40rpx;margin-bottom:20rpx">
+            <image class="temp-img {{uploadimgobjects['bossWeapp'].config.imageList.length !== 0 && 'temp-img-hide'}}" src="https://j.vzan.cc/content/city/city114/images/tc-yh-72.jpg"></image>
+            <image class="upload-img" src="{{uploadimgobjects['bossWeapp'].config.imageList[uploadimgobjects['bossWeapp'].config.imageList.length-1]}}"
+                data-which="bossWeapp" data-itemid='{{ruzhuId}}' bindtap="uploadLogoImg" mode="aspectFit"></image>
+            <view class="upload-tips">
+                小程序二维码
+            </view>
+        </view>
+        <view class="vz-flex flex-center common-item border-1px">
+            <view class="left-title">
+                公司名
+                <text class="dot">*</text>
+            </view>
+            <input style="width:100%;padding-right:20rpx;" type="text" placeholder="请输入公司名称" bindinput="getCompanyName" value="{{companyName}}" />
+        </view>
+        <view class="vz-flex flex-center flex-between common-item border-1px" bindtap="getCategory">
+            <view class="vz-flex flex-center">
+                <view class="left-title">
+                    行业分类
+                    <text class="dot">*</text>
+                </view>
+                <view sttyle="line-height:40px;height:40px;width:200px">{{category}}</view>
+            </view>
+
+            <icon class="iconfont icon-jiantou" style="padding-right:20rpx"></icon>
+        </view>
+        <view style="padding:40rpx 20rpx 0 0;">
+            <textarea maxlength="50" value="{{intro}}" wx:if="{{!isOpenCategory}}" placeholder="请输入一句话简介(限50个字)" bindinput="getIntro"
+                class="intro-textarea" />
+            <view class="label">
+                <text>标签</text>
+                <text style="padding-left:6rpx;color:#999">(填写公司的特色词语)</text>
+            </view>
+            <view class="vz-flex" style="position:relative">
+                <input class="label-input" value="{{labelContent}}" bindinput="getLabel" maxlength="4" type="text" placeholder="请输入标签(限4个字)"/>
+                <icon class="iconfont  icon-guanbi add-btn" bindtap="addLabel"></icon>
+            </view>
+            <view class="label-tag">
+                <view class="vz-flex flex-center tap-wrap">
+                    <block wx:for="{{labelTagArr}}" wx:key="{{index}}">
+                        <view style="position:relative;padding-right:80rpx;margin-bottom:6rpx">
+                            <view class="tag-item">
+                                {{item}}
+                            </view>
+                            <icon class="iconfont icon-guanbi remove-btn" style="color:#fe3d49;padding-left:8rpx;" data-idx="{{index}}" bindtap="removeLabel"></icon>
+                        </view>
+                    </block>
+
+                </view>
+
+            </view>
+        </view>
+    </view>
+
+    <view style="background:#fff;padding-left:20rpx;margin-bottom:20rpx">
+        <view class="vz-flex flex-between flex-center common-item border-1px">
+            <view class="vz-flex flex-center">
+                <view class="left-title">
+                    所属地区
+                    <text class="dot">*</text>
+                </view>
+                <picker mode="multiSelector" bindcolumnchange="changeArea" bindchange="changeAreaVal" range-key="Name" range="{{multiArray}}">
+                    <view class="picker wzsl" style="line-height:80rpx;height:80rpx;width:506rpx">
+                        {{companyArea}}
+                    </view>
+                </picker>
+            </view>
+            <icon class="iconfont icon-jiantou" style="padding-right:20rpx"></icon>
+        </view>
+        <view class="vz-flex flex-center flex-between common-item border-1px">
+            <view class="vz-flex flex-center">
+                <view class="left-title">
+                    公司地址
+                    <text class="dot">*</text>
+                </view>
+                <input type="text" style="width:420rpx" value="{{companyAddress}}" bindinput="getCompanyAddress" placeholder="请输入详细地址" />
+            </view>
+            <view style="padding-right:20rpx;border-left:1rpx solid #f0f0f0;padding-left:6rpx" bindtap="getCompanyPosition">
+                <icon class="iconfont icon-position"></icon> 位置
+            </view>
+
+
+        </view>
+        <view class="vz-flex flex-center common-item border-1px">
+            <view class="left-title">
+                商铺链接
+            </view>
+            <input type="text" bindinput="getCompanyLink" placeholder="请输入商铺链接" value="{{storeInfo}}" />
+
+        </view>
+        <view class="vz-flex flex-center common-item border-1px">
+            <view class="left-title" style="white-space: nowrap;">
+                联系电话1
+                <text class="dot">*</text>
+            </view>
+            <input type="number" maxlength="11" bindinput="getTelNum1" maxplaceholder="请输入联系电话1" value="{{linkPhone}}" />
+        </view>
+        <view class="vz-flex flex-center common-item border-1px">
+            <view class="left-title">
+                联系电话2
+            </view>
+            <input type="number" bindinput="getTelNum2" maxlength="11" placeholder="请输入联系电话2" value="{{linkEmail}}" />
+        </view>
+
+    </view>
+    <view wx:if="{{ruzhuId==0 && paysArray.length > 0 && true}}" class="vz-flex flex-between flex-center common-item border-1px ruzhu-pays">
+        <view class="vz-flex flex-center">
+            <view class="left-title">
+                入驻收费
+                <text class="dot">*</text>
+            </view>
+            <picker mode="selector" bindchange="bindPickerPayChange" range="{{paysArray}}">
+                <view class="picker wzsl" style="line-height:40px;height:40px;width:506rpx">
+                    {{paysArray[paysArrayIdx]}}
+                </view>
+            </picker>
+        </view>
+        <icon class="iconfont icon-jiantou" style="padding-right:20rpx"></icon>
+    </view>
+
+    <view class="ruzhu-btn" bindtap="savaRuzhu">
+        {{ruzhuId == 0 && '申请入驻' || '修改信息'}}
+    </view>
+
+    <view class="category-wrap" wx:if="{{isOpenCategory}}" catchtap="closeCategory" capture-catch:touchmove="">
+        <view class="category-main">
+            <block wx:for="{{categoryArray}}" wx:key="{{index}}">
+                <view class="category-item" data-tid="{{item.Id}}" data-idx="{{index}}" data-name="{{item.Name}}" catchtap="getSubCategory">
+                    {{item.Name}}
+                </view>
+            </block>
+        </view>
+        <view class="category-cancel" catchtap="closeCategory">取消</view>
+    </view>
+</view>

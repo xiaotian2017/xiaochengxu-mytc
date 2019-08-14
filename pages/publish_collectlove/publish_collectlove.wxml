@@ -1,0 +1,320 @@
+<import src="../../public/shoptemplate.wxml"/>
+<!-- <view id="wrapper" class="d-flex flex-col"> -->
+    <view class="container">
+        <view class="a-describe-cells"  data-which="activeCover" data-itemid='{{love.Id}}' bindtap="uploadLogoImg"  style="position:relative">
+            <view class="kanjia-upload-pic">
+                <text class="f01">{{uploadimgobjects['activeCover'].config.imageList.length != 0 ? "" :"点击上传主图(640x360)最佳"}}</text>
+            </view>
+            <image src="{{uploadimgobjects['activeCover'].config.imageList[uploadimgobjects['activeCover'].config.imageList.length-1]}}" class="activeCover"  mode="aspectFit"></image>
+        </view>
+        <view class='ruzhu_cells mt-1'>
+            <view class="d-flex d-flex-center ruzhu_cell">
+               <label style="color:#ff6a00;">*</label>
+                <view class="flex">
+                 <input placeholder-style="color:#999" value='{{love.Title}}' placeholder='请填写活动名称' bindinput='getActivityName'></input>
+                </view>
+            </view>
+        </view>
+
+<view class='ruzhu_cells mt-1 c999' style='line-height:1'>
+           <!-- <view class='d-flex flex-between  flex-center ruzhu_cell write-infor-cell' >
+               <view class='flex' style='text-align:center'>
+                  <label class="mbtn {{buytab==0?'btnhover':''}}" style="margin-right:-5px;" data-index='0' bindtap='buymodesel' >购买模式</label>
+                  <label class="mbtn {{buytab==1?'btnhover':''}}" style="border-left: none;"  data-index='1' bindtap='buymodesel'>免费领模式</label>
+               </view>
+            </view> -->
+             <view class='d-flex flex-between  flex-center ruzhu_cell write-infor-cell' >
+               <view class='flex' style='text-align:center'>
+                  <label class="mbtn {{repotab==0?'btnhover':''}}" style="margin-right:-5px;" data-index='0' bindtap='repomodesel'>统一库存</label>
+                  <label class="mbtn {{repotab==1?'btnhover':''}}" style="border-left: none;" data-index='1' bindtap='repomodesel'>不同库存</label>
+               </view>
+            </view>
+
+          <!--购买模式统一库存-->
+           <view hidden='{{0!=repotab}}'>
+                         <!--商品份数  -->
+            <view class='d-flex flex-center ruzhu_cell'>
+                  <label style="color:#ff6a00;">*</label> 本期商品
+                <input type="number" class="kuang-input"  value='{{love.CreateNum}}' bindinput="getGoodsTotal"></input>份
+            </view>
+            <view class='d-flex d-flex-center ruzhu_cell'>
+              如有用户报名，奖品数量可增不可减，请谨慎填写。
+            </view>
+              <view class='d-flex  flex-center ruzhu_cell'>
+              <label style="color:#ff6a00;">*</label> 
+                    原价
+                      <input type="text" class="kuang-input"  value='{{love.OriginalPrice}}'  bindinput="getOriginPrice"></input>元
+                
+              </view>
+              <view class='d-flex flex-between  flex-center ruzhu_cell' wx:for="{{likeconfig}}">
+                  <view  class='flex'>
+                    {{index+1}}.爱心数
+                      <input type="text"  disabled='{{love.Id>0?true:false}}' class="kuang-input" value='{{item.NeedNum}}'  data-index='{{index}}'  bindinput="getNeedNum"></input>
+                  </view>
+                  <view  class='flex'>
+                      价格
+                      <input type="text"   disabled='{{love.Id>0?true:false}}' class="kuang-input" value='{{item.BuyPrice}}'  data-index='{{index}}'  bindinput="getBuyPrice"></input>元
+                  </view>
+              </view>
+           </view>
+          <!--购买模式不同库存-->
+           <view hidden='{{1!=repotab}}'>
+              <view class='d-flex  flex-center ruzhu_cell'>
+              <label style="color:#ff6a00;">*</label> 
+                    原价
+                      <input type="text" class="kuang-input"  value='{{love.OriginalPrice}}'  bindinput="getOriginPrice"></input>元
+                
+              </view>
+             <view wx:for="{{likeconfig}}">
+                  <view class='d-flex flex-between  flex-center ruzhu_cell' style='font-size:12px'>
+                        <view  class='flex'>
+                          {{index+1}}.爱心数
+                            <input type="text"  disabled='{{love.Id>0?true:false}}' class="kuang-input" value='{{item.NeedNum}}' data-index='{{index}}' bindinput="getNeedNum"></input>
+                        </view>
+                        <view  class='flex'>
+                            价格
+                            <input type="text"  disabled='{{love.Id>0?true:false}}' class="kuang-input" value='{{item.BuyPrice}}'  data-index='{{index}}'  bindinput="getBuyPrice"></input>元
+                        </view>
+                        <view  class='flex'>
+                            库存
+                            <input type="text" class="kuang-input" value='{{item.Stock}}'  data-index='{{index}}'  bindinput="getStock"></input>
+                        </view>
+                  </view>
+                  <view class="d-flex remark_cell" >
+                    <label style="color:#ff6a00;">*</label><view class='c999'>备注</view>
+                    <input  class="c333" placeholder='请填写备注' value='{{item.Memo}}' placeholder-style="color:#999;margin-left:16px"  data-index='{{index}}'  bindinput="getMemo"  ></input>
+                 </view>
+            </view>
+          </view>
+                  
+           <view class="ruzhu_cell c999" style='height:auto;padding:15rpx 20rpx;line-height:1.5'>
+                <view>爱心价价格建议以由高到低阶梯式填写，最少填写一项，每人每个活动仅可点一次</view>
+           </view>
+            <view class='d-flex flex-center ruzhu_cell'>
+                <view class=''>
+                    每个人最多帮点人数
+                    <input type="number" class="kuang-input" value='{{love.SetMaxCount}}' bindinput="getMaxCount"></input>次
+                </view>
+            </view>
+            <view class="ruzhu_cell c999" style='height:auto;padding:15rpx 20rpx;line-height:1.5'>
+                <view>帮点人数0代表无限制，排除自己</view>
+                <view>帮点阶梯设计好可以有效提升活跃哦~</view>
+            </view>
+        </view>
+
+        <view class='ruzhu_cells mt-1'>
+            <view class="d-flex d-flex-center ruzhu_cell">
+                <view class="flex c999">活动时间建议5-7天</view>
+            </view>
+            <view class="d-flex d-flex-center ruzhu_cell">
+            <label style="color:#ff6a00;">*</label>
+                <view class='flex rel d-flex flex-center'>
+                    <picker mode="date" start="2016-12-01" value="{{XcxStartDate}}" bindchange="getStartTime">
+                        <view class="{{XcxStartDate != ''?'c333':'c999'}}">{{XcxStartDate != ''?XcxStartDate:"请选择开始日期"}}</view>
+                    </picker>
+                </view>
+                <!--开始具体时间  -->
+                <view class='flex rel d-flex'>
+                    <picker mode="time" value="{{XcxStartTime}}" bindchange="getStartDtlTime">
+                        <view class="{{XcxStartTime != ''?'c333':'c999'}}">{{XcxStartTime != ''?XcxStartTime:"请选择开始时间"}}</view>
+                    </picker>
+                </view>
+            </view>
+          
+            <view class="d-flex d-flex-center ruzhu_cell">
+              <label style="color:#ff6a00;">*</label>
+                <view class='flex rel d-flex'>
+                    <picker mode="date" value="{{XcxEndDate}}" start="2016-12-01" bindchange="getEndTime">
+                        <view class="{{XcxEndDate != ''?'c333':'c999'}}">{{XcxEndDate != ''?XcxEndDate:"请选择结束日期"}}</view>
+                    </picker>
+                </view>
+                <!--结束具体时间 -->
+                <view class='flex rel d-flex'>
+                    <picker mode="time" value="{{XcxEndTime}}" bindchange="getEndDtlTime">
+                        <view class="{{XcxEndTime != ''?'c333':'c999'}}">{{XcxEndTime != ''?XcxEndTime:"请选择结束时间"}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <!--商品描述  -->
+        <view class='ruzhu_cells mt-1 description'>
+            <view class="d-flex d-flex-center ruzhu_cell c999">
+                <label style="color:#ff6a00;">*</label>商品描述
+            </view>
+            <view class='write_cell bg-f c333' style='border:none'>
+                <textarea style="cursor: text;" auto-height="true" value='{{love.Description}}' class='write_textarea' placeholder='快来描述你的商品吧~' placeholder-style="#999" bindinput="getDescription"/>
+            </view>
+            <view class="shop-ruzhu-pic-ul">
+                <template is="item_image_shop" data="{{config:uploadimgobjects['goodsDecri'].config,which:'goodsDecri',itemid:love.Id}}"></template>
+            </view>
+        </view>
+        <!--领取信息-->
+        <view class='ruzhu_cells mt-1' style="margin-bottom:20rpx">
+         
+            <view class="d-flex d-flex-center ruzhu_cell">
+                <view class="flex c666"> <label style="color:#ff6a00;">*</label>领取信息</view>
+            </view>
+            <view class='lingqu'>
+                <!--领取开始时间  -->                
+                <view class="d-flex d-flex-center ruzhu_cell">
+                      <label style="color:#ff6a00;">*</label><view class='c999'>领取开始时间：</view>
+                    <view class='flex rel d-flex'>
+                        <picker mode="date" value="{{XcxGetStartDate}}" start="2016-12-01" bindchange="getExStartTime">
+                            <view class="{{XcxGetStartDate != ''?'c333':'c999'}}">{{XcxGetStartDate != ''?XcxGetStartDate:"请选择开始日期"}}</view>
+                        </picker>
+                    </view>
+                    <!--结束具体时间 -->
+                    <view class='flex rel d-flex'>
+                        <picker mode="time" value="{{XcxGetStartTime}}" bindchange="getExStartDtlTime">
+                        <view class="{{XcxGetStartTime != ''?'c333':'c999'}}">{{XcxGetStartTime != ''?XcxGetStartTime:"请选择开始时间"}}</view>
+                        </picker>
+                    </view>
+                </view>
+                <!--领取结束时间  -->               
+                <view class="d-flex d-flex-center ruzhu_cell">
+                       <label style="color:#ff6a00;">*</label><view class='c999'>领取结束时间：</view>
+                    <view class='flex rel d-flex'>
+                        <picker mode="date" value="{{XcxGetEndDate}}" start="2016-12-01" bindchange="getExEndTime">
+                            <view class="{{XcxGetEndDate != ''?'c333':'c999'}}">{{XcxGetEndDate != ''? XcxGetEndDate:"请选择结束日期"}}</view>
+                        </picker>
+                    </view>
+                    <!--结束具体时间 -->
+                    <view class='flex rel d-flex'>
+                        <picker mode="time" value="{{XcxGetEndTime}}" bindchange="getExEndDtlTime">
+                        <view class="{{XcxGetEndTime != ''?'c333':'c999'}}">{{XcxGetEndTime != ''?XcxGetEndTime:"请选择结束时间"}}</view>
+                        </picker>
+                    </view>
+                </view>
+                
+                <view class="d-flex ruzhu_cell">
+                     <label style="color:#ff6a00;">*</label> <view class='c999'>领取地址：</view>
+                    <view class='icon_local'></view>
+                    <view class="flex {{locationGet?'c333':'c999'}}" value='{{love.ValidAddress}}' bindtap='getLocation'>{{love.ValidAddress}}</view>
+                </view>
+                 
+                <view class="d-flex ruzhu_cell">
+                     <label style="color:#ff6a00;">*</label><view class='c999'>领取联系电话：</view>
+                    <input type='' class="c333" placeholder='请填写领取电话' value='{{love.ValidPhone}}' placeholder-style="color:#999" bindinput="getPhone"  maxlength='11'></input>
+                </view>
+            </view>
+        </view>
+<view>
+         <view class="distribution-wrap">
+            <view class="vz-flex vz-flex-center flex-between voucher-item">
+                <view>
+                    人人分销          
+                </view>
+                <switch bindchange="distributionToggle" checked="{{isShowDistribution}}" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center flex-between" wx:if="{{isShowDistribution}}">
+                    <view class="voucher-item-left">分成比例
+                        <text class="required">*</text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                    <input type="number" placeholder="0" maxlength="3" value="{{distribution}}" style="text-align:right" bindinput="getDistribution" />
+                    <text>%</text>
+                   </view>
+            </view>
+    </view>
+  </view>
+         <!-- 购买返券 -->
+        <view class="voucher-wrapper" wx:if="{{!loveId}}">
+            <view class="vz-flex vz-flex-center flex-between voucher-item ">
+                <view>
+                    返现代金券
+                    <text class="instructions">（刺激二次消费）</text>
+                </view>
+                <switch bindchange="voucherToggle" />
+            </view>
+            <view hidden="{{!isVoucher}}">
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">券的面额
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherPrice}}" bindinput="getVoucherPrice" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">发放数量
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherNum}}" bindinput="getVoucherNum" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        使用范围
+                    </view>
+                    <view class="vz-flex vz-flex-center voucher-use-scope">
+                        <view class="{{voucherScopeIdx==1?'active':''}}" data-idx="1" bindtap="changeVoucherScope">无门槛</view>
+                        <view class="{{voucherScopeIdx==2?'active':''}}" data-idx="2" bindtap="changeVoucherScope">满 减</view>
+                    </view>
+                </view>
+                <view wx:if="{{voucherScopeIdx==2}}" class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        满减金额
+                    </view>
+                    <input type="number" maxlength="2" placeholder="0" value="{{fullSubtraction}}" bindinput="getFullSubtraction"/>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                 <view>使用开始时间：</view>
+                 <view class='flex rel d-flex'>
+                     <picker mode="date" value="{{voucherBeginDate}}" start="2016-12-01" bindchange="getBeginUseDate">
+                         <view>{{voucherBeginDate}}</view>
+                     </picker>
+                 </view>
+                 <!--结束具体时间 -->
+                 <view class='flex rel d-flex'>
+                     <picker mode="time" value="{{voucherBeginTime}}" bindchange="getBeginUseTime">
+                     <view class="{{voucherBeginTime != ''?'c333':'c999'}}">{{voucherBeginTime != ''?voucherBeginTime:""}}</view>
+                     </picker>
+                 </view>
+             </view>    
+             <view class="voucher-item vz-flex vz-flex-center">
+                <view>使用结束时间：</view>
+                <view class='flex rel d-flex'>
+                    <picker mode="date" value="{{voucherBeginDate}}" start="2016-12-01" bindchange="getEndUseDate">
+                        <view>{{voucherEndDate}}</view>
+                    </picker>
+                </view>
+                <!--结束具体时间 -->
+                <view class='flex rel d-flex'>
+                    <picker mode="time" value="{{voucherBeginTime}}" bindchange="getEndUseTime">
+                    <view>{{voucherEndTime != ''?voucherEndTime:""}}</view>
+                    </picker>
+                </view>
+            </view> 
+                <view class="voucher-item vz-flex vz-flex-center">
+                        <view class="voucher-item-left">领取有效天数
+                            <text class="required">*</text>
+                        </view>
+                        <input type="number" placeholder="0" maxlength="5" value="{{voucherValidDay}}" bindinput="getValidDay" />
+                </view>
+            </view>
+        </view>
+
+        <!--集赞规则-->
+        <view class='ruzhu_cells mt-1'>
+            <view class="d-flex d-flex-center ruzhu_cell c999">
+                爱心价规则
+            </view>
+            <view class='jizan_rules'>
+                <image class='pic01' mode='widthFix' src='http://j.vzan.cc/content/city/love/images/tc-yh-87.png'></image>
+                <view class='jizan_shuoming_f'>
+                    <text>1、点击底部按钮“我要参加”按钮参加活动。</text>
+                    <text>2、每人每个活动只能参加一次。。</text>
+                    <text>3、每人只能帮忙点一次。</text>
+                    <text>4、奖品份数有限，不一定非要爱心价到最低价，收集到您觉得划算就赶紧付款抢下哦；</text>
+                    <text>5、付款后奖品份数自动减少，领完则无法继续报名和爱心价，请速度哦</text>
+                    <text>6、爱心价成功并在线支付后，即可前往活动商铺进行消费，详情请看领奖信息和商家信息</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--按钮-->
+    <view class='fix-bl'>
+        <view class='d-flex pay_bottom_nav'>
+            <view class='bt flex' style='z-index:9999' bindtap='submit'>发布爱心价</view>
+        </view>
+    </view>
+
+
+<!-- </view> -->

@@ -1,0 +1,47 @@
+
+    <!-- <view wx:if="{{!memberCouponList.length}}" style="font-size: 24rpx;color: #333;text-align: center;padding-top:100rpx">无更多数据</view> -->
+<view class="member-store-container">
+    <view style="padding-top: 24rpx;">     
+        <block wx:for="{{memberCouponList}}" wx:key="{{index}}">
+            <view class="vz-flex flex-center coupon-item" data-vid="{{item.id}}" bindtap="toCityCardCouponDetail">
+                <view class="coupon-list-left">
+                    <view class="price-amount-wrp">
+                        <view wx:if="{{item.IsDiscount==0}}">
+                            <text class="money-label">￥</text>
+                            <text class="money-amount">{{item.VoucherMoney}}</text>
+                        </view>
+                        <view wx:else class="vz-flex flex-center justify-center">
+                            <text style="color:#FF0000;font-weight: 700;font-size: 50rpx;">{{item.Discount*100/1000}}</text>
+                            <text style="font-size: 28rpx;">折</text>
+                        </view>
+                        <view wx:if="{{item.Deducting>0}}" class="coupon-condition">
+                            满{{item.Deducting}}可用
+                        </view>
+                        <view wx:else class="coupon-condition">
+                            无门槛
+                        </view>
+                    </view>
+                </view>
+                <view class="coupon-list-right">
+                    <view class="vz-flex flex-center">                  
+                        <view class="member-store-label" style="margin:0 20rpx 0 0" wx:if="{{item.IsCityMember>0}}">
+                                会员
+                            </view>
+                        <view class="coupon-name clamp1">{{item.StoreName}}</view>
+                    </view>
+                    <view class="coupon-tips" wx:if="{{item.UseEndDateStr!=''&&item.UseStartDateStr!=''}}">{{item.UseEndDate}}过期</view>
+                    <view class="coupon-tips" wx:else> 长期可领取
+                        <text wx:if="{{item.ValidDays>0}}">,领取后{{item.ValidDays}}天有效</text>
+                    </view>
+                    <view class="use-condition" wx:if="{{item.IsDiscount==1}}">限在线买单用</view>
+                    <view class="fresh-man" wx:if="{{item.IsNewUser>0}}">限店铺新人</view>
+                    <view class="receive-btn" wx:if="{{item.IsHaving==0}}" data-vid="{{item.id}}" catchtap="drawVoucher">立即领取</view>
+                    <view class="receive-btn" wx:else style="opacity: .5">已领取</view>
+                </view>
+            </view>
+        </block>
+  
+    </view>
+</view>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

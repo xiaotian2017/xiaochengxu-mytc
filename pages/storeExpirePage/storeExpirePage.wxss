@@ -1,0 +1,38 @@
+view {
+    /* background: green; */
+    color: #333;
+}
+
+
+.container {
+    background: #FFF;
+    padding-bottom: 100rpx;
+}
+
+
+.err-tips {
+    font-size: 30rpx;
+    text-align: center;
+    margin-bottom: 200rpx;
+    padding-top: 160rpx;
+}
+
+.store-logo {
+    font-size: 200rpx;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100rpx;
+}
+
+.back-btn {
+    width: 400rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.back-btn-1 {
+    background: 
+}

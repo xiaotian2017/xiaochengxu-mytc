@@ -1,0 +1,20 @@
+@import '/components/component.wxss';
+.times,.viewer{
+    font-size:26rpx
+}
+.viewer{
+    margin-left: 40rpx;
+}
+.viewer image{
+    margin-right:10rpx;
+    width:32rpx;
+    height:32rpx;
+    vertical-align:middle
+}
+.viewer text{
+    vertical-align:middle
+}
+
+.account  {
+    /* padding-bottom: 16rpx; */
+}

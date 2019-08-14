@@ -1,0 +1,39 @@
+<view class="container">
+    <block wx:for="{{recommandStoreList}}" wx:key="{{index}}">
+        <view class="item flex" data-qrcode='{{item.Qrcode}}' data-vip='{{item.XcxVipVer}}' data-id="{{item.StoreId}}" data-phone='{{item.ShopOwernPhone}}'
+            catchtap="goStoreDtl">
+            <view class="cover">
+                <image src="{{''!=item.StoreLogoUrl?item.StoreLogoUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"
+                    class="cover-img"></image>               
+            </view>
+            <view class="content flex flex-1 flex-between flex-col">
+                <view class="title-status flex flex-center">
+                    <view class="title c3 clamp1">{{item.StoreSName}}</view>
+                    <view class="active-tag tag-fast" wx:if="{{item.StoreCouponId > 0}}">抢</view>
+                    <view class="active-tag tag-group" wx:if="{{item.StoreGroupsId > 0}}">团</view>
+                    <view class="active-tag tag-cut" wx:if="{{item.BargainId > 0}}">减</view>
+                    <view class="active-tag tag-city" wx:if="{{item.HalfOffServicesId > 0}}">城</view>
+                    <view class="active-tag tag-red" wx:if="{{item.RedPacketId > 0}}">
+                        <image src="http://j.vzan.cc/content/city/xcx/images/red.svg"></image>
+                    </view>
+                </view>
+                <view class="type" hidden='{{null==item.StoreTag||"NaN"==item.StoreTag}}'>
+                    <text>{{item.StoreTag}}</text>
+                </view>
+                <view class="address c9 clamp1" wx:if="{{!!item.StoreAddress}}">
+                    {{item.StoreAddress}}
+                </view>
+            </view>
+            <view class="account c9">
+                {{item.StoreCheckin_Num}}人来过
+            </view>            
+            <view class="top-label flex" wx:if="{{item.StoreTopStatus >0}}">
+                <view class="top-label-left">顶</view>
+                <view class="top-label-right">
+                    <view class="top-arrow"></view>
+                    <view class="bottom-arrow"></view>
+                </view>                    
+            </view>
+        </view>
+    </block>
+</view>

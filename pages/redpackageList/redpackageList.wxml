@@ -1,0 +1,48 @@
+
+
+<view class="redpackage-list-constainer">
+    <!-- <view>
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{imgUrls}}">
+                <swiper-item>
+                    <image src="{{item}}" class="slide-image" width="355" height="150" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view> -->
+
+    <block wx:for="{{redpackageList}}" wx:key="{{index}}">
+        <view class="vz-flex redpackage-list-wrap flex-between" catchtap="toRedpackagePage" data-idx="{{index}}">
+            <view class="redpackage-list-left vz-flex">
+                <image class="avatar" src="{{item.LogoUrl}}"></image>
+                <view class="redpackage-list-left-bottom">
+                    <view class="redpackage-list-wrap-nickName wzsl">{{item.NickName}}</view>
+                    <view class="redpackage-list-wrap-cash">
+                        <image class="redpackage-list-gold-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAoCAYAAACSN4jeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpiZDY1M2EyZS02YTE3LTg5NDYtOTc5OS00YjYyOThjYjJiZWUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTFGRDA4MzMwNEMxMTFFOEE3OTI4QUNCQ0ZDNUM1MTIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTFGRDA4MzIwNEMxMTFFOEE3OTI4QUNCQ0ZDNUM1MTIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZWExNTcxNGUtYzhlYy1lMDQwLTgxZmMtZTYzNzAzOWQ2MjI0IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjUzMDNGOTIyNDlDMTExRTc4OENERDlENDhDRUM2RTdBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+dozcKAAABMlJREFUeNrMmGlsVFUUxztd0I7FVsCtYhCp1eDSKlg3gkYwrlHauIIiREOi4pJgFD4YF0xqogQSTUwUjIkKGEQN6gc1ipGmEqJiXCiLFnVcgMrWQSqb9X8mv0eOL9NhpnM/cJJfZvr67nvnnnvWSfT29pYcjpLIKPbNyaGfWyYuE+PEaDFCDBbVYo/oFr+IteJz8b748+DqxlRwxUyh6eIRUVvAugPiHTFT/GSKlQa20ttiXoFKRWtvFF+LMXYhpGJ3iOuLfMbRYkFoxaoDPeeY0Iq9hkMXK0+FVmybuEh80M/1XWKyeCG0YpeKreI6cY54Vnwp9udYs0ksFbeLYVj9itB5rFWcLaaIv9z1Cl5qeWyg2Cd2il+xspdbxXyli6rywIn1WrFBvCiWiG9R5EfIJseK8eLeKFWYhFQsytw1YhbsEO0oa8e2FwsmxSlilBhpJxd/TkjFXiXrn+aumZLXFPAMK9yPh3Z+q38Xi0Xi336sN59rES+HVqyZAj1R1IsnOMZdfdxvym8Ur4sJok68y/rgUXm5mJTF0U8Qx+FfJURlio14f39QPKOorAgdlU3iByLSLPGZ+AfH39THmjqsPY3vwaOyk88BWG0SqWINR7YFP6wkn9kxnYklvWwMfZRJmr5RRTxjX2ZDjaklcYvVkiQvFKfjG9WE8Q5yjFngC2riVrd2txgrHhMPoGghYs+cwedBi1n2nUtJKMvzQXvonR4l8qbSInexmRaC4XwxnCP2soVNthGNX3F9hiw2J1JspS5c0E/zL6X7tKi8SdyN03spRdkq0QN/x+6xZDw7k6QbU4noKE8qwi9OdN9t6FiOr70hPsaZLWdtBy9HYZBmOoyaeFRaS7yYxFiIrBZ38n2duz4Woj6tk44jzTsHYYzhWVxnvVcsQTG9AZrYfUVs0V4UWMng8aFocB1sc5a+fxDkW9bu8s6fJprmuxJSRo6pdFG3mQiNevyHyFf1bs19BERR41ukWNSO7MI/VonvOIbtOK8NCUPoTps4qiNoaeqx1HKOq4yOdhxROQKr1VAJ0swHHWJFbOCdKMUWRoqZtZ6M9UX57vQeOoJctTIfKecEWq1WRt3Fc+xuGTs6lKQJliZ8K14rF4qrnRvkknom9w7mhHLv/CtIrub4R9qvByzwmX8n5u5wLXMDyfGqWK28DeK1Mo2yVdTKs2it+6yVvUwzy3hRu8s/cXObwpcQgVeK3xg2Ktlg0Fr5CUfZAtFNm0kRJVjy+Cx5J8ryPSFrZanrPp/n4X7sGipOhdqYUt1MzdP4eyrtzCzunYL/rYk1hH6m/JQyNJq23JR62B/lbIaAJAOnTdRn4GMDOdK06y7asfIBHtQKN5Mg47UyQapIulrZk6VWPp3Jg6qV3sdWM56/hTVyyWCcezq+NQzFZvL/NmrlRy4oskkVtXLC/2qlK+K/i3NpY14i5K30/OHSR5L6NpIAiNxgFZ9r3QvHuOF1G4HUhdUrSNZDmS3jPrvOH6Xlnze5sRD5nuPrcD/cFfMbWXemUW1MtfldW8d6C0fQ6WpiPNObZV5BgQaUiv5nEX0/li60gpgLnYcb5Oz5B+D8lSi5m0jan8eLSqmV48lrda5W9lCTf2aTlvveIzXFfhw+DOU/AQYAuPeB+Eq5NZcAAAAASUVORK5CYII="></image>
+                        撒了
+                        <text style="color:#fe3d49;">￥{{m1.toFixed(item.Amount/100)}}</text>
+                        元红包
+                    </view>
+                </view>
+            </view>
+            <view class="redpackage-list-right">
+                <view class="redpackage-attention" wx:if="{{item.State==2}}" style="color:#ccc">已抢完</view>
+                <view class="redpackage-attention" wx:else>哄抢中</view>
+                <view class="redpackage-attention-label">
+                    赏金
+                </view>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{isAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>
+</view>
+<!-- 返回首页 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="backIndex">首页</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-earn" bindtap="goToMyEarn">我的收益</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+
+<wxs module="m1">
+    module.exports.toFixed = function(num) {return num.toFixed(2) }
+</wxs>

@@ -1,0 +1,53 @@
+<view class="weui_msg" hidden='{{1!=result}}'>
+    <view class="weui_icon_area"><view class="weui_icon_info weui_icon_msg"></view></view>
+    <view class="weui_text_area">
+        <view class="weui_msg_title">管理员邀请</view>
+        <view class="weui_msg_desc"> 邀请您成为同城副管理员</view>
+    </view>
+    <view hidden='{{0==showbindphone}}'>
+     <view class="section">
+        <view style="margin-top:10px">
+      <button class="flex01 dengdu-bt-wechat" open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber">
+        <icon class="wechaticon"></icon>微信绑定手机快速授权
+      </button>
+    </view>
+    <view style='height:50px;text-align:center;line-height:50px' class='weui_msg_desc'>手动填写手机号码进行绑定</view>
+  <view class="write-infor-cells">
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="flex01 write">
+        <input type="tel" class="shuru-input ta-l" maxlength="11" type="number" bindinput="inputphone" placeholder="请输入手机号" />
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="flex01 write">
+        <input type="tel" class="shuru-input ta-l" maxlength="4" type="number" bindinput="inputcode" placeholder="请输入验证码" />
+      </view>
+      <view class="bt">
+        <!--<input class="code-input" catchtap="getCode" value="{{content}}" />-->
+        <span class="code-input {{content=='获取验证码'?'change':'backchange'}}" catchtap="getCode">{{content}}             </span>
+      </view>
+    </view>
+  </view>
+    </view>
+
+</view>
+    <view class="weui_opr_area">
+        <view class="weui_btn_area">
+            <view  class="weui_btn weui_btn_primary" bindtap='agree' >同意</view>
+            <view  class="weui_btn weui_btn_default"  bindtap='gotodetail'>忽略 , 直接进入同城</view>
+        </view>
+    </view>
+</view>
+<view class="msg" hidden='{{-1!=result}}'>
+            <view class="weui_msg">
+                <view class="weui_icon_area"><view class="weui_icon_warn weui_icon_msg"></view></view>
+                <view class="weui_text_area">
+                    <view class="weui_msg_title"></view>
+                    <view class="weui_msg_desc">{{reason}}</view>
+                </view>
+                <view class="weui_opr_area">
+                    <view class="weui_btn_area">
+                    </view>
+                </view>
+            </view>
+  </view>

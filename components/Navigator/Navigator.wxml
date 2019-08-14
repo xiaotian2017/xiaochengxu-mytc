@@ -1,0 +1,20 @@
+<view class="navigator-wrapper">
+    <view class="navigator-container {{show?'showNavigator':''}}">
+        <view class="navigator-btn flex flex-center" catchtap="showNavigator">
+            <view class="icon-arrow {{show?'rotateArrow':''}}"></view>
+            <view class="tag">{{show?'收起':'快捷导航'}}</view>
+        </view>
+        <view class="navigator-content flex flex-wrap" >
+            <slot bind:touchstart="hideLayer" name="slot1"></slot>
+            <slot bind:touchstart="hideLayer" name="slot2"></slot>
+            <slot bind:touchstart="hideLayer" name="slot3"></slot>
+            <slot bind:touchstart="hideLayer" name="slot4"></slot>
+            <slot bind:touchstart="hideLayer" name="slot5"></slot>
+            <slot bind:touchstart="hideLayer" name="slot6"></slot>
+            <slot bind:touchstart="hideLayer" name="slot8"></slot>
+           
+        </view>
+      
+    </view>
+</view>
+<city-maskLayer  show="{{show}}"></city-maskLayer>

@@ -1,0 +1,138 @@
+<view style="padding-bottom:100rpx" wx:if='{{0==fxratelay}}'>
+  <view class="distribution-container" wx:if='{{opencityfx&&0==hasopen}}'>
+    <view class="vz-flex flex-center distribution-top">
+      <image class="goods-img" src="{{item.HeadImgUrl==''||item.HeadImgUrl==null?'http://oss.vzan.cc/image/jpg/2016/11/25/11401033c63cc82c2d4dfd8ad722ade7f8add4.jpg':item.HeadImgUrl}}"></image>
+      <view>
+        <view class="goods-name">成为同城分销员</view>
+        <view class="distribution-type"></view>
+      </view>
+    </view>
+    <view class="vz-flex flex-center distribution-bottom">
+      <view class="distribution-state"></view>
+      <view class="vz-flex flex-center distribution-btn" catchtap='turnfxrate' data-itemid='{{item.ItemId}}'>
+        <view style='border:1rpx solid #fa0f20;color:#fa0f20'>分销比例</view>
+      </view>
+      <view class="vz-flex flex-center distribution-btn" catchtap='applycityfx' data-itemid='{{item.ItemId}}' style="opacity: {{isFxer?0.5:1}};">
+        <view style='border:1rpx solid #fa0f20;color:#fa0f20'>申请分销</view>
+      </view>
+    </view>
+  </view>
+  <block wx:for="{{fxlist}}" wx:key="{{index}}">
+    <view class="distribution-container" bindtap="toGoodsDetail" data-gid="{{item.ItemId}}" data-goodtype="{{item.ItemType}}">
+      <view class="vz-flex flex-center distribution-top">
+        <image class="goods-img" src="{{item.HeadImgUrl==''||item.HeadImgUrl==null?'http://oss.vzan.cc/image/jpg/2016/11/25/11401033c63cc82c2d4dfd8ad722ade7f8add4.jpg':item.HeadImgUrl}}"></image>
+        <view>
+          <view class="goods-name">{{item.NickName}}</view>
+          <view wx:if="{{item.FxType>=3}}" class="distribution-type">商品分销员</view>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between distribution-bottom" wx:if='{{item.FxType>=3}}'>
+        <view class="distribution-state" wx:if="{{item.State > 0}}">正常</view>
+        <view class="distribution-state" wx:else>已删除</view>
+        <view class="vz-flex flex-center distribution-btn" catchtap='seeearns' data-itemtype='{{item.ItemType}}' data-itemid='{{item.ItemId}}' data-subcityid='0'>
+          <view>分销收益</view>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between distribution-bottom" wx:else>
+        <view class="distribution-state" wx:if="{{item.State >= 0}}">正常</view>
+        <view class="distribution-state" wx:elif="{{item.State ==-3}}">待审核</view>
+        <view class="distribution-state" wx:else>已删除</view>
+        <view class="vz-flex flex-center distribution-btn" data-subcityid='{{item.Id}}' catchtap='seeearns' data-itemtype='0' data-itemid='0'>
+          <view>分销收益</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="show-rule" bindtap="showDistribution">规则</view>
+<view class="mask" style="z-index: 20000;" wx:if="{{showDistribution}}">
+  <view class="distribution-rule">
+    <view class="title">收益规则</view>
+    <view>
+      <view class="item">1.分销消费者为进入分销员链接，进行消费的用户</view>
+      <view class="item">2.分销消费者已付款但未核销时，收益状态为待结算</view>
+      <view class="item">3.分销消费者已付款且已核销时，收益状态为已结算</view>
+      <view class="item">4.分销消费者已付款但已退款时，收益状态为已退款</view>
+      <view class="item" style="padding-bottom:20rpx;">5.已结算的收益可以在【个人中心-我的收益】提现</view>
+    </view>
+    <view class="distribution-rule-btn" catchtap="showDistribution">知道了</view>
+  </view>
+</view>
+<view style="text-align: center;font-size: 20px;font-family: 'Microsoft YaHei',Arial;font-weight: bold;margin-top: 10px;margin-top: 20px;" wx:if='{{1==fxratelay}}'>
+  各项分成比例
+</view>
+<view id="panel" class="flex-column" wx:if='{{1==fxratelay}}'>
+  <view class="flex-cell flex-row">
+    <text class="flex-cell flex-row">消费类型</text>
+    <text class="flex-cell flex-row">分成比例</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">付费发帖</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.AddPostRate}}%</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">信息置顶</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.TopPostRate}}%</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户入驻</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.AddStoreRate}}%</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户置顶</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.TopStoreRate}}%</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">商户认领</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.ShopClaimUnitRate}}%</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">申请分销</text>
+    <text class="flex-cell flex-row">{{fxrateconfig.ApplyCitySubRate}}%</text>
+  </view>
+</view>
+<view style='margin:30px auto;white-space: nowrap;font-size:12px;text-decoration:underline;color:blue;text-align:center ' bindtap='turnfxrate' wx:if='{{1==fxratelay}}'>
+  返回
+</view>
+<view class='vBlack controldiv' wx:if='{{1==surelay}}' bindtap='applycityfx'>
+  <view class="vblack clickdiv" style="cursor: pointer;"></view>
+  <view class="vbIn">
+    <view class="vbBottom splitor">
+      <ul class="vb_bot">
+        <view class="vb_b_left li">
+          <label>申请成为分销同城</label>
+        </view>
+      </ul>
+    </view>
+    <view class="vbBottom splitor">
+      <ul class="vb_bot">
+        <view class="vb_b_left li">
+          <label>申请分销费用 : ¥</label>
+          <label id="">{{payprice*1000/100000}}</label>
+        </view>
+      </ul>
+    </view>
+    <view class="vbBottom">
+      <ul class="vb_bot">
+        <view class="vb_b_right li" style="width: 100%;">
+          <a id="validtelephone" style="border-radius: 0 0 5px 5px;" catchtap='sureapply'>确认申请</a>
+        </view>
+      </ul>
+    </view>
+  </view>
+</view>
+<!-- footer bar -->
+<!-- <view class="footer vz-flex">
+    <view class="footer-item" bindtap="toBack">
+        <icon class="icon-font icon-market footer-icon"></icon>
+        <text>分销市场</text>
+    </view>
+    <view class="footer-item" bindtap="openQr">
+        <icon class="icon-font icon-ranking footer-icon"></icon>
+        <text>分销排行</text>
+    </view>
+    <view class="footer-item footer-active" bindtap="makePhone">
+        <icon class="iconfont icon-person footer-icon"></icon>
+        <text>我的分销</text>
+    </view>
+</view> -->

@@ -1,0 +1,131 @@
+.szHeader {
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    padding: 12px;
+    box-sizing: border-box;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 10px;
+    
+}
+.szHL {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333333;
+    line-height:20px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.szbth {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    margin-top: 40px;
+}.szName {
+    font-size: 15px;
+    color: #333;
+}.szIdcard {
+    font-size: 13px;
+    color: #999;
+}.szIdcard {
+    font-size: 13px;
+    color: #999;
+}.szRight {
+    width: 30%;
+    text-align: left;
+    font-size:14px;
+    color: #3fbe00;
+}.szdelect {
+    width: 10%;
+}.szbtnIn {
+    width: 100%;
+    height: 45px;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #fe3d49;
+    text-align: center;
+    line-height: 45px;
+}.szpro {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    margin-top: 10px;
+    overflow: auto;
+}.szpro .ul {
+    width: 100%;
+    height: auto;
+    padding: 0 12px;
+    box-sizing: border-box;
+}.szpro .ul .li {
+    width: 100%;
+    height: auto;
+    height: 65px;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}.szpro .ul .li .sztitle {
+    width: 30%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}.sztitle {
+    font-size:15px;
+    color: #333;
+}.sztitleBottom {
+    font-size:13px;
+    color: #999;
+}.sztell {
+    width: 40%;
+    font-size:14px;
+    color: #999;
+}.lahei-bt {
+    color: #333;
+    display: block;
+    border-radius: 2px;
+    width: 40px;
+    height: 20px;
+    text-align: center;
+    position: relative;
+    line-height: 20px;
+    font-size: 12px;
+}.lahei-bt:before {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #121212;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    z-index: 2;
+}

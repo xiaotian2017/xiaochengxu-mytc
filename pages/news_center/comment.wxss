@@ -1,0 +1,135 @@
+.mask{
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.48)
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0
+    }
+    100%{
+        opacity:1
+    }
+}
+.fadeIn{
+    display: block;
+    animation: fadeIn .16s linear both
+}
+@keyframes fadeOut{
+    0%{
+        opacity: 1
+    }
+    100%{
+        opacity:0
+    }
+}
+.fadeOut{
+    display:block;
+    animation: fadeOut .2s linear both
+}
+
+.button-hover {
+    background-color:transparent;
+}
+.comment{
+    position: fixed;
+    bottom: 0;
+    padding: 10rpx;
+    width: 100vw;
+    min-height: 50px;
+    border-top: 1rpx solid #f2f2f2;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 999
+}
+.comment-area{
+    width:100%;
+    padding:0 10px;
+    min-height:40px;
+    box-sizing: border-box;
+    border-radius: 24px;
+    font-size:14px;
+    background:#f2f2f2
+}
+.comment-input{
+    width:100%;
+    line-height:1.4285714285;
+    max-height:300rpx;
+    word-break: break-all
+}
+.comment-input-placeholder{
+    font-size:14px;
+    color: #999
+}
+.deliver-pic{
+    position: relative;
+    margin: 12rpx 0 0 10rpx;
+    width: 60px;
+    height:60px;
+    border-radius: 8rpx;
+    overflow: hidden
+}
+.deliver-pic image{
+    width: 100%;
+    height: 100%
+}
+.deliver-pic .close{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background: rgba(0, 0, 0, .48)
+}
+.deliver-pic .close::before,.deliver-pic .close::after{
+    background: #fff
+}
+.comment-action{
+    padding: 0 10rpx 0 20rpx
+}
+.comment-action-deliver{
+    margin-top: auto
+}
+.comment-action image{
+    width: 100%;
+    height: 100%
+}
+.comment-action .icon:not(:last-of-type){
+    margin-right: 20rpx
+}
+.icon{
+    width:52rpx;
+    height:52rpx
+}
+.icon-reward{
+    box-sizing: border-box;
+    padding: 2rpx;
+}
+.icon-repost{
+    margin-left: 20rpx;
+    box-sizing:unset;
+    width: 44rpx;
+    height: 44rpx;
+    line-height:1;
+}
+.icon-deliver{
+    overflow:hidden
+}
+.icon-deliver .deliver{
+    position:relative;
+    width:52rpx;
+    height:52rpx;
+    background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M942 118L71 455c-50 19-48 46 2 61l211 63 85 254c12 34 41 41 66 16l110-109 219 159c28 21 57 10 65-24l159-717c7-35-13-52-46-40zM810 280L438 612c-7 6-13 17-14 26l-16 155c-2 17-8 18-14 1l-71-217c-3-8 1-19 8-23l472-283c30-18 33-14 7 9z" fill="#999"/></svg>') no-repeat;
+    background-size:100%;
+    -webkit-filter: drop-shadow(#fe3d49 52rpx 0);
+    filter: drop-shadow(#fe3d49 52rpx 0);
+}
+.icon-deliver .active{
+    left:-52rpx;
+    border-right:52rpx solid transparent;  
+}
+

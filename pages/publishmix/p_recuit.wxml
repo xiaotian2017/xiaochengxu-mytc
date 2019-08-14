@@ -1,0 +1,367 @@
+<import src="../../public/shoptemplate.wxml" />
+<view class="main">
+  <view class="type-choose vz-flex flex-center" wx:if="{{typeid!=295255}}">
+    <view style="font-size:32rpx;color:#101010">招聘类型</view>
+    <view class="vz-flex flex-center">
+      <view class="type-item {{positionType==1?'type-item-active':''}}" bindtap="getPositionType" data-val="1"
+        style="margin-left: 60rpx">
+        全职
+      </view>
+      <view class="type-item {{positionType==2?'type-item-active':''}}" bindtap="getPositionType" data-val="2"
+        style="margin-left: 60rpx">
+        兼职
+      </view>
+    </view>
+  </view>
+  <view class="vz-flex flex-center filling-personal-info">
+    <view class="personnal-info-title">填写信息</view>
+    <view class="personnal-info-label">必填</view>
+  </view>
+  <view class="cl_con con_ul" style="padding:0 30rpx 30rpx;">
+    <view style="background: #fff">
+      <view class="vz-flex flex-center position-title">
+        <view style="width: 90px">职位名称</view>
+        <input type="text" style="padding-left:20rpx;width: 100%;text-align: right" placeholder="请输入职位名称"
+          bindinput="getTitle" value="{{positionTitle}}" />
+      </view>
+    </view>
+    <!-- <view class='li vz-flex flex-center flex-between'>
+                    <view class="li_title" >薪资待遇</view>                
+                    <picker style='width:70%' mode='selector' bindchange="salarysel" value="{{pikersalaryindex}}" range="{{listsalary}}">
+                        <view class="picker" style="text-align: right">
+                           {{listsalary[pikersalaryindex]}}
+                           <icon class="arrow"></icon>
+                        </view>                       
+                    </picker>                                                     
+            </view> -->
+    <view class='li' style='border-bottom: none'>
+      <view class="li_title">薪资待遇</view>
+      <view class="li_center">
+        <input disabled='{{expectmoneydisable}}' style="text-align:right;font-size: 32rpx;" placeholder="请输入薪资待遇"
+          bindinput="inputPayUnit" value="{{post.PayUnit}}" />
+      </view>
+      <view class="li_right">
+        <checkbox-group bindchange="expectmoneychange">
+          <span>
+            <checkbox value="1" checked="{{post.Pay===1}}" />
+            面议
+          </span>
+        </checkbox-group>
+      </view>
+    </view>
+    <view class="li">
+      <view class="li_title">职业类别</view>
+      <picker style='width:80%' mode='selector' range-key='Title' bindchange="worktypesel"
+        value="{{pikerworktypeindex}}" range="{{worktype}}">
+        <view class="picker" style="text-align: right">
+          {{worktype[pikerworktypeindex].Title}}
+          <icon class="arrow"></icon>
+        </view>
+      </picker>
+    </view>
+    <view class='li' style='border-bottom: none'>
+      <view class="li_title">招聘人数</view>
+      <view class="li_center">
+        <input disabled='{{recruitnumberdisable}}' type="number" style="text-align:right;font-size: 32rpx;"
+          placeholder="请输入招聘人数(0为若干人数)" bindinput="inputNumber" value="{{post.Number}}" />
+      </view>
+    </view>
+    <view class="job-requirements">
+      <view class="cl_d_title" style="font-size:32rpx;height:88rpx;line-height: 88rpx">任职要求</view>
+      <textarea maxlength="-1" class="textarea-box" placeholder="请输入岗位职责与要求" bindinput="inputDescription"
+        value="{{post.Description}}" />
+      <view style="margin-left:-10px;padding-bottom:10rpx">
+        <!-- <template is="item_image_shop" data="{{config:uploadimgobjects['jobrequire'].config,which:'jobrequire'}}"></template> -->
+        <template is="item_image_shop" data="{{config:uploadimgobjects['jobrequire'].config,which:'jobrequire',itemid:postid}}"></template>
+      </view>
+    </view>
+    <view style="height: 20rpx;background:#F2F5F7;margin:0 -30rpx"></view>
+    <view class="vz-flex flex-center filling-personal-info" style="padding-left:0">
+      <view class="personnal-info-title">公司信息</view>
+      <view class="personnal-info-label">必填</view>
+    </view>
+    <view class="con_ul" style="padding: 0 0">
+      <view class='li'>
+        <view class="li_title">单位名称</view>
+        <view class="li_center">
+          <input bindinput="inputCompanyName" placeholder="请输入单位名称" value="{{post.CompanyName}}" style="text-align: right;font-size: 32rpx;" />
+        </view>
+      </view>
+      <view class='li'>
+        <view class="li_title">联系人</view>
+        <view class="li_center">
+          <input bindinput="getLinkMan" placeholder="请输入联系人姓名" style="text-align: right;font-size: 32rpx;" value="{{post.LinkMan}}" />
+        </view>
+      </view>
+      <view class="li">
+        <view class="li_title">联系电话</view>
+        <view class="li_center">
+          <input bindinput="inputLinkPhone" type="number" maxlength="11" placeholder="请输入联系人电话号码" style="text-align: right;font-size: 32rpx;" value="{{post.LinkPhone}}" />
+        </view>
+      </view>
+    </view>
+    <view style="height: 20rpx;background:#F2F5F7;margin:0 -30rpx"></view>
+    <view class="vz-flex flex-center filling-personal-info" style="padding-left:0">
+      <view class="personnal-info-title">位置</view>
+      <view class="personnal-info-label">选填</view>
+    </view>
+    <view class="li flex-between" hidden='{{post.Id>0}}'>
+      <view class="li_title">所在区域</view>
+      <picker mode="multiSelector" value="{{regionindex}}" bindchange="bindRegionPickerChange" bindcolumnchange="bindRegionPickerColumnChange" range="{{region}}" range-key="{{'Name'}}">
+        <view class="picker clamp1" style="width: 100%; text-align: right">
+          {{region[0][multiIndex[0]].Name}}
+          <icon class="arrow"></icon>
+          <text style="padding-left: 4rpx;padding-right: 4rpx">
+            {{region[1][multiIndex[1]].Name}}
+            <text class="arrow"></text>
+          </text>
+        </view>
+      </picker>
+    </view>
+    <view class='li vz-flex flex-between'>
+      <view class="li_title">详细地址</view>
+      <view class="vz-flex flex-center">
+        <view class="li_center">
+          <input placeholder="请填写单位地址" bindinput="inputAddress" style="text-align: right;position: relative;left:-20rpx;font-size: 32rpx;" value="{{post.Address}}"></input>
+        </view>
+        <view style="font-size: 28rpx;position: relative;padding-left:40rpx" bindtap='getLocation'>
+          <icon class="icon-font icon-new-position"></icon>
+          <text style="vertical-align: center;">定位</text>
+        </view>
+      </view>
+    </view>
+    <view style="height: 20rpx;background:#F2F5F7;margin:0 -30rpx"></view>
+    <view class="vz-flex flex-center filling-personal-info" style="padding-left:0">
+      <view class="personnal-info-title">其他要求</view>
+      <view class="personnal-info-label">选填</view>
+    </view>
+    <view class='li'>
+      <view class="li_title">性别要求</view>
+      <view class="li_center">
+        <radio-group class="radio-group vz-flex flex-between" style="text-align: center" bindchange="genderChange">
+          <label style="width:100rpx;white-space: nowrap;">
+            <radio color="#fa0f20" value="0" checked="{{post.Gender==0}}" />
+            不限
+          </label>
+          <label style="padding-left:20rpx">
+            <radio color="#fa0f20" value="1" checked="{{post.Gender==1}}" />
+            男
+          </label>
+          <label style="padding-left:20rpx">
+            <radio color="#fa0f20" value="2" checked="{{post.Gender==2}}" />
+            女
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='li'>
+      <view class="li_title">年龄要求</view>
+      <view class="cl_s_center">
+        <picker mode="selector" bindchange="selAge" value="{{ageindex}}" range="{{listage}}">
+          <view class="picker" style="text-align: right">
+            <text>{{listage[ageindex]}}</text>
+          </view>
+        </picker>
+      </view>
+      <view class="cl_s_arrow">
+        <i class="arrow"></i>
+      </view>
+    </view>
+    <view class='li'>
+      <view class="li_title">学历要求</view>
+      <view class="cl_s_center">
+        <picker mode="selector" bindchange="selEducation" value="{{educationindex}}" range="{{listeducation}}">
+          <view class="picker" style="text-align: right">
+            <text>{{listeducation[educationindex]}}</text>
+          </view>
+        </picker>
+      </view>
+      <view class="cl_s_arrow">
+        <i class="arrow"></i>
+      </view>
+    </view>
+    <view class='li'>
+      <view class="li_title">工作经验</view>
+      <view class="cl_s_center">
+        <picker mode="selector" bindchange="selExperience" value="{{experienceindex}}" range="{{listexperience}}">
+          <view class="picker" style="text-align: right">
+            <text>{{listexperience[experienceindex]}}</text>
+          </view>
+        </picker>
+      </view>
+      <view class="cl_s_arrow">
+        <i class="arrow"></i>
+      </view>
+    </view>
+    <view class="">
+      <view class="zk_w_title">福利</view>
+      <view class="zk_txt FLul">
+        <checkbox-group class="zp_ul" bindchange="benifitschange">
+          <label class='li {{item.checked?"active":""}}' wx:for="{{benifits}}">
+            <checkbox hidden='true' value="{{item.name}}" checked="{{item.checked}}" />
+            {{item.value}}
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+    <!-- <view class="cl_detail">
+            <view class="cl_d_title">任职要求<i class="sign"></i></view>
+            <view class="cl_d_txt">
+                <textarea maxlength="-1" class="txt_txt" placeholder="请输入岗位职责与要求" bindinput="inputDescription" value="{{post.Description}}"/>
+            </view>
+            <view class="cl_d_img postimg">
+              <view class='ul'>
+            <template is="item_image_shop" data="{{config:uploadimgobjects['jobrequire'].config,which:'jobrequire'}}"></template>
+            </view>
+             </view>
+        </view> -->
+    <!-- <view class="zk_Title">
+            <view class="zk_top" bindtap='opendetail'><em>展开高级选项</em><i class="down" style="right:auto;"></i></view>
+            <view class="zk_pro">填写公司福利、公司信息、其他招聘要求</view>
+        </view>
+      <view class="Zk" hidden='{{hidedetail}}'>
+            <view class="con_ul con_zk ul" style="padding: 0 0">
+                <view class='li'>
+                    <view class="li_title">单位名称</view>
+                    <view class="li_center">
+                       <input  bindinput="inputCompanyName"   value="{{post.CompanyName}}"  ></input>
+                    </view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">薪资待遇</view>
+                    <view class="cl_s_center">
+                    <picker style='width:80%' mode='selector'   bindchange="salarysel"  value="{{pikersalaryindex}}"   range="{{listsalary}}">
+     <view class="picker" >
+    {{listsalary[pikersalaryindex]}}
+    </view>
+  </picker>                    
+                    </view>
+                    <view class="cl_s_arrow"><i class="arrow"></i></view>
+                </view>
+                <view class='li '>
+                    <view class="li_title">详细地址</view>
+                    <view class="li_center">
+                        <input placeholder="请填写单位地址"  bindinput="inputAddress"   value="{{post.Address}}" ></input>
+                    </view>
+                    <view class="li_right"  bindtap='getLocation'>
+                        <view class="zp_span" style="width:7rem;"><a ><i class="address"></i>定位</a></view>
+                    </view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">工作时间</view>
+                    <view class="li_center">
+                        <input  placeholder="请填写工作时间" bindinput="inputWorkHours"   value="{{post.WorkHours}}" ></input>
+                    </view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">性别要求</view>
+                    <view class="li_center">
+                    <radio-group class="radio-group" bindchange="genderChange">
+                        <label style="width:100rpx">
+                            <radio  value="0" checked="{{post.Gender==0}}" />不限
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio value="1" checked="{{post.Gender==1}}" />男
+                        </label>
+                         <label style="padding-left:20rpx">
+                            <radio  value="2" checked="{{post.Gender==2}}" />女
+                        </label>
+                    </radio-group>
+                      
+                    </view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">
+                        年龄要求
+                    </view>
+                    <view class="cl_s_center">
+                     <picker mode="selector" bindchange="selAge" value="{{ageindex}}" range="{{listage}}">
+                        <view class="picker">
+                            <text>  {{listage[ageindex]}}</text>
+                        </view>
+                     </picker>
+                    </view>
+                    <view class="cl_s_arrow"><i class="arrow"></i></view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">
+                        学历要求
+                    </view>
+                    <view class="cl_s_center">
+                        <picker mode="selector" bindchange="selEducation" value="{{educationindex}}" range="{{listeducation}}">
+                          <view class="picker">
+                              <text> {{listeducation[educationindex]}}</text>
+                          </view>
+                        </picker>
+                    </view>
+                    <view class="cl_s_arrow"><i class="arrow"></i></view>
+                </view>
+                <view class='li'>
+                    <view class="li_title">
+                        工作经验
+                    </view>
+                    <view class="cl_s_center">
+                       <picker mode="selector" bindchange="selExperience" value="{{experienceindex}}" range="{{listexperience}}">
+                          <view class="picker">
+                              <text>{{listexperience[experienceindex]}}</text>
+                          </view>
+                        </picker>
+                    </view>
+                    <view class="cl_s_arrow"><i class="arrow"></i></view>
+                </view>
+                <view class='li' style='border-bottom: none'>
+                    <view class="li_title">招聘人数</view>
+                    <view class="li_center">
+                        <input disabled='{{recruitnumberdisable}}' placeholder="请输入招聘人数"  bindinput="inputNumber" value="{{post.Number}}" ></input>
+                    </view>
+                    <view class="li_right">                                               
+                      <checkbox-group bindchange="recruitnumberchange">
+                        <text><checkbox value="1" checked="{{post.Number===0}}" />若干
+                        </text>
+                    </checkbox-group>
+                    </view>
+                </view>
+            </view>
+              <view class="zk_work">
+                  <view class="zk_w_title">福利</view>
+                  <view class="zk_txt FLul">
+                  <checkbox-group  class="zp_ul" bindchange="benifitschange">
+    <label class='li {{item.checked?"active":""}}' wx:for="{{benifits}}">
+      <checkbox hidden='true' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+  </checkbox-group>
+              </view>
+            </view>
+        </view> -->
+    <!-- <view class="tip">
+                  <i></i>您是商家或已经入驻企业，免费发布的招聘信息有 3 条，剩余 1条。  
+          </view> -->
+  </view>
+  <view style="padding-bottom: 200rpx">
+    <view class="tip" wx:if="{{!isIos}}" style="color:#FA0F20">
+      <text class="dot"></text>
+      置顶信息可有效提升浏览量。
+    </view>
+  </view>
+  <view class="buttom">
+    <view class="infoTop vz-flex vz-flex-center flex-between" wx:if="{{!isIos}}">
+      <view>信息置顶</view>
+      <view class="topStatus {{topStatus?'openTop':'closeTop'}}" bindtap='changeTopStatus'></view>
+    </view>
+    <view class="saveBtn" bindtap='save'>
+      {{isFree?'发布':'下一步'}}
+    </view>
+    <!-- <view class="but_ul ul">
+      <view style='line-height:100rpx;text-align: center;width: 70%;' wx:if="{{post.Id<=0 && !isIos}}">
+        <text wx:if="{{needpay>0}}">
+          <text class="c999" style="font-size: 24rpx">需付款</text>
+          <text class="main-color" style="font-size: 32rpx;font-weight: 700">￥{{needpay}}</text>
+        </text>
+      </view>
+      <view class="pay li vz-flex flex-center" style='line-height:100rpx' wx:else></view>
+      <view class="confirm-btn" style="text-align: center" bindtap='save'>
+        {{post.Id==0?"确认发布":"保存修改"}}
+      </view>
+    </view> -->
+  </view>
+</view>

@@ -1,0 +1,209 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+<view style="padding:30rpx 0;background:#fff" wx:if="{{isShowTab}}">
+    <view class="goods-order-nav d-flex">
+        <block wx:for="{{navList}}" wx:key="unique">
+            <view class="nav-item flex {{index == navActive?'active':''}}" data-index="{{index}}" catchtap="switchNav">{{item}}</view>
+        </block>
+    </view>
+</view>
+<view class="goods-order-content">
+    <!-- 商家配送 -->
+    <view class="goods-deliver" wx:if="{{navActive == 0}}">
+        <!-- 填写收货地址 -->
+        <view class="goods-accept-address d-flex">
+            <view class="d-flex">
+                <image src="http://j.vzan.cc/content/city/xcx/images/location.svg" class="icon-location"></image>
+            </view>
+            <view class="flex fill-address">
+                <view wx:if="{{!hasAddress}}" bindtap="toAddAddress">
+                    新增收货地址
+                </view>
+                <view wx:if="{{hasAddress}}" bindtap="showAddAddress">
+                    <view style="margin-bottom:20rpx" class="vz-flex flex-center flex-between">
+                        <view>收货人：{{addressArr[addressIdx].NickName}}</view>
+                        <view>{{addressArr[addressIdx].TelePhone}}</view>
+                    </view>
+                    <view>
+                        收货地址：{{(addressArr[addressIdx].AreaText==null?'':addressArr[addressIdx].AreaText)+addressArr[addressIdx].Address}}
+                    </view>
+                </view>
+            </view>
+            <image class="icon-arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg"></image>
+        </view>
+        <view class="goods-order-item d-flex flex-between">
+            <view style="width:20%">配送方式：</view>
+            <picker range="{{deliverRange}}" range-key="Name" value="{{deliverIndex}}" bindchange="selectDeliver">
+                <view class="picker vz-flex flex-between flex-center" style="width:100%">
+                    <view style="width:90%;line-height:1.2">
+                            {{deliverRange[deliverIndex].Name}}
+                    </view>                                     
+                        <image class="icon-arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg"></image>                                        
+                </view>
+            </picker>
+        </view>
+    </view>
+    <!-- 到店自提 -->
+    <view class="goods-liftBySelf" wx:if="{{navActive == 1}}">
+        <view class="goods-order-item d-flex flex-between">
+            <view style="width:20%">提货人:</view>
+            <input style="width:100%" type="text" value="{{liftUserName}}" bindinput="getLiftUserName" />
+        </view>
+        <view class="goods-order-item d-flex flex-between flex-center">
+            <view style="width:30%">手机号码：</view>
+            <input style="width:100%" type="number" value="{{liftUserPhone}}" bindinput="getLiftUserPhone" bindblur="testLiftUserPhone"
+            />
+        </view>
+        <view class="goods-order-item d-flex flex-between flex-center">
+            <view>提货方式：</view>
+            <view>到店自提</view>
+        </view>
+        <view class="goods-lift-info">
+            <view class="clmap2 goods-lift-location">
+                <image src="http://j.vzan.cc/content/city/xcx/images/location.svg" class="icon-location"></image>
+                自提地址：{{mainmodel.StoreAddress!=null && mainmodel.StoreAddress || ''}}
+            </view>
+            <view style="padding-left:40rpx">
+                联系电话：{{mainmodel.StoreAddress!=null && mainmodel.CStore.TelePhone || ''}}
+            </view>
+        </view>
+    </view>
+</view>
+
+<view wx:if="{{listvoucher.length>0}}" class='d-flex-center flex-between vz-flex voucher-cell' bindtap="showVoucher">
+        <view class='flex left width' wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+        <view wx:else>减{{voucherMoney}}元</view>
+        <icon class="iconfont icon-jiantou"></icon>
+</view>
+<!-- 商品信息 -->
+<view class="goods-order-info">
+    <view class="goods-order-store wzsl">{{mainmodel.CStore.SName}}</view>
+    <block wx:for="{{cartList}}" wx:key="{{index}}">
+        <view class="d-flex goods-order-detail" data-id="{{item.Goods.Id}}" bindtap="toGoodsdetail" style="position:relative">
+            <view class="goods-order-cover">
+                <image src="{{item.Goods.ImgUrl?item.Goods.ImgUrl:'http://oss.vzan.cc/image/jpg/2016/11/25/11401033c63cc82c2d4dfd8ad722ade7f8add4.jpg'}}"
+                />
+            </view>
+            <view class="flex" style="position:relative">
+                <view class="goods-name clamp2">{{item.Goods.GoodsName}}</view>
+                <view class="goods-type clamp2" style="line-height:1.2" wx:if="{{item.GoodsAttr}}">{{item.GoodsAttr.AttrName}}</view>
+           
+                    <view class="city-card vz-flex flex-center" wx:if="{{item.Goods.IsHalfCard}}">
+                        <view class="wzsl" style="max-width:140rpx;margin-right:8rpx;">{{item.Goods.ctname}}</view>
+                        <view>{{item.Goods.discount}}折优惠</view>
+                    </view>
+          
+            </view>
+            <view class="d-flex flex-col flex-between" style="margin-left:20rpx">                
+                <!-- 无同城卡 -->
+                <view class="goods-price" wx:if="{{item.AttrId==0}}">
+                    <!--单独购买进来可能需要 istgoodscart.OpenMemberPrice 直接设为false 明天跟瑞泽沟通-->
+                        <text wx:if="{{isMemberUser&&listgoodscart.OpenMemberPrice&&item.Goods.MemberPrice>0}}">{{item.Goods.MemberPrice*1000/100000}}</text> 
+                        <text wx:else>{{item.Goods.Price*1000/100000}}</text>                
+                </view>
+                <view class="goods-price" wx:if="{{item.AttrId!=0}}">
+                        <text wx:if="{{isMemberUser&&listgoodscart.OpenMemberPrice&&item.GoodsAttr.MemberPrice>0}}">{{item.GoodsAttr.MemberPrice*1000/100000}}</text>
+                        <text wx:else>{{item.GoodsAttr.Price*1000/100000}}</text>
+                </view>
+
+                <view class="goods-puchase-num">×{{item.BuyNum}}</view>
+            </view>
+
+        </view>
+    </block>
+</view>
+<view style="padding-bottom:50rpx;background:#fff">
+    <view class="goods-order-item d-flex flex-between">
+        <view style="width:20%">店铺地址：</view>
+        <view style="width:80%;text-align:right">{{mainmodel.StoreAddress && mainmodel.StoreAddress || ''}}</view>
+    </view>
+    <view class="goods-order-item d-flex flex-between flex-center">
+        <view>买家留言：</view>
+        <input type="text" hidden="{{isShowAddressPanel}}" placeholder="选填:对本次交易的说明" class="flex" bindinput="getLeaveMessage" value="{{leaveMessage}}"/>
+    </view>
+    <view class="goods-order-item d-flex flex-end">
+        <view style="margin-left:auto">
+            共
+            <text style="color:#fe3d49">{{cartList.length}}</text>
+            种商品
+        </view>
+        <view style="margin-left:30rpx">
+            小计：
+            <view class="goods-price goods-price-calc">{{price}}</view>
+        </view>
+    </view>
+
+    <view class="goods-order-item d-flex flex-between deliver-fee">
+        <view style="margin-left:auto">运费：</view>
+        <view class="goods-price">{{navActive == 1 ? '0.00':fee}}</view>
+    </view>
+</view>
+<view class="goods-order-tips">
+    tips:代金券不能抵扣运费
+</view>
+<cover-view class="goods-payment d-flex">
+    <cover-view class="goods-total-price flex">
+        <cover-view style="display: inline; line-height: 100rpx">总计：</cover-view>
+        <cover-view style="display: inline; line-height: 100rpx" class="goods-price">{{common.toFixed((price-voucherMoney)+fee)}}</cover-view>
+    </cover-view>
+    <cover-view class="goods-pay" bindtap="goodsPay" style="line-height: 100rpx;">
+        提交订单
+    </cover-view>
+</cover-view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+
+<view class="mask" bindtap="closeAddressPanel" wx:if="{{isShowAddressPanel}}">
+    <view class="goods-release-fare-template" style="background:#FFF">
+        <view class="goods-release-fare-template-title">
+            收货地址
+        </view>
+        <view class="cate-wrap">
+            <label catchtap="chooseAddress" data-idx="{{index}}" class="goods-release-fare-template-item" wx:for="{{addressArr}}" wx:key="{{index}}">
+                <view style="padding:20rpx 0;" class="vz-flex flex-center flex-between">
+                    <view style="width:80%">
+                        <text style="display:block">{{item.NickName}} {{item.TelePhone}}</text>
+                        <text style="display:block">{{item.AreaText+item.Address}}</text>
+                    </view>
+
+                    <checkbox checked="{{index==addressIdx}}" />
+                </view>
+            </label>
+        </view>
+        <view class="goods-release-fare-btn-wrap" bindtap="toAddAddress">
+            添加收货地址
+        </view>
+    </view>
+</view>
+
+<view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+        <view class="re-coupon-body">
+          <view class="re-coupon-body-title">
+            选择代金券
+            <icon class="iconfont icon-cha" bindtap="hideVoucher"></icon>
+          </view>
+          <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+            <view class="re-coupon-item-wrap">
+              <block wx:for="{{listvoucher}}" wx:key="{{index}}">
+                <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+                  <view class="re-coupon-price">
+                    <text>￥</text>
+                    <text>{{item.Money}}</text>
+                  </view>
+                  <view class="re-coupon-right">
+                    <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+                    <view wx:else>无门槛</view>
+                    <view class="c666">
+                      <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                        <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                        <text>{{mainmodel.CStore.SName}}</text>             
+                      </view>
+                      <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+                    </view>
+                  </view>
+                  <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+                </view>
+              </block>
+            </view>
+          </scroll-view>
+        </view>
+      </view>

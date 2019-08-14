@@ -1,0 +1,236 @@
+.write-infor-cell .write.arrow:after {
+  content: " ";
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-width: 1px 1px 0 0;
+  border-color: #666;
+  border-style: solid;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%) rotate(45deg);
+  -webkit-transform: translate(0, -50%) rotate(45deg);
+}
+
+.write-infor-cell .write.arrow {
+  padding-right: 10px;
+}
+
+.write-infor-cells {
+  background: #fff;
+  padding-left: 15px;
+}
+
+.write-infor-cells {
+  background: #fff;
+  padding-left: 15px;
+}
+
+.write-infor-cell {
+  background: #fff;
+  position: relative;
+  padding: 10px 15px 10px 0;
+  color: #121212;
+  font-size: 15px;
+  line-height: 1.25;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.write-infor-cell .write-title {
+  line-height: 25px;
+  margin-right: 15px;
+}
+
+.write-infor-cell .write {
+  color: #666;
+  text-align: right;
+  position: relative;
+}
+
+.write-infor-cell .shuru-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 25px;
+  display: block;
+  color: #666;
+  font-size:15px;
+  line-height:25px;
+}
+
+.write-infor-cell .bt {
+  box-sizing: border-box;
+  margin-left: 10px;
+  position: relative;
+  height: 25px;
+}
+
+.write-infor-cell .bt .code-input{
+  font-size: 13px;
+  border-radius: 2px;
+  display: block;
+  width:75px;
+  text-align: center;
+  height: 25px;
+  min-height:25px;
+  line-height:25px;
+}
+
+.change {
+  color: #fe3d49;
+  border: 1rpx solid #fe3d49;
+}
+
+.backchange {
+  color: #808080;
+  border: 1rpx solid #808080;
+}
+
+.tips-f {
+  padding: 10px 15px;
+  color: #999;
+  font-size: 13px;
+  line-height: 1.25;
+  display: block;
+}
+
+.big-bt-all {
+  padding: 15px;
+}
+
+.dengdu-bt {
+  color: #fff;
+  background: #fe3d49;
+  height: 45px;
+  text-align: center;
+  border: 1rpx solid #fe3d49;
+  font-size: 15px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  line-height: 45px;
+  display: block;
+  margin: 0 auto;
+}
+
+.required-sign {
+  margin-left: 1px;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  vertical-align: 2px;
+}
+
+.write-infor-cell .write.arrow:after {
+  content: " ";
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-width: 1px 1px 0 0;
+  border-color: #666;
+  border-style: solid;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%) rotate(45deg);
+  -webkit-transform: translate(0, -50%) rotate(45deg);
+}
+
+.write-infor-cell .write.arrow {
+  padding-right: 10px;
+}
+
+.miaoshu-textarea {
+  padding: 0 15px;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #666;
+  height: 100px;
+  width: 100%;
+  outline: none;
+  line-height: 1.25;
+  overflow: auto;
+  z-index:0;
+}
+
+.shop-ruzhu-pic-ul {
+  padding: 0 15px;
+  overflow: auto;
+  padding-bottom: 15px;
+}
+
+.shop-ruzhu-pic-ul label button {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: block;
+  border-radius: 0;
+}
+
+.shop-ruzhu-pic-ul label image {
+  width: 100%;
+  height: 100%;
+}
+
+.shop-ruzhu-pic-ul label {
+  width: 150rpx;
+  height: 150rpx;
+  display: block;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: left;
+  position: relative;
+}
+
+.shop-ruzhu-pic-ul label button:after {
+  display: none;
+}
+
+.agreement-f {
+  padding: 10px 15px;
+  font-size: 12px;
+}
+
+.agreement-f icon {
+  margin-right: 5px;
+  vertical-align: -4px;
+  display: inline-block;
+}
+
+.write-bottom-nav {
+  height: 50px;
+  background: #fff;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.write-bottom-nav .f01 {
+  vertical-align: 4px;
+  color: #666;
+  font-size: 13px;
+}
+
+.write-bottom-nav .f02 {
+  font-size: 25px;
+  color: #fe3d49;
+}
+
+.write-bottom-nav .f02:before {
+  content: "￥";
+  font-size: 15px;
+}
+
+.write-bottom-nav .bt {
+  line-height: 50px;
+  color: #fff;
+  height: 50px;
+  background: #fe3d49;
+  width: 125px;
+  font-size: 16px;
+}
+
+.person-head {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: block;
+}

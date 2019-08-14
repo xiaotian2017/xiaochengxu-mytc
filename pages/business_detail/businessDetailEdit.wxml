@@ -1,0 +1,98 @@
+<view style="margin-bottom:20rpx">
+    <view class="common-title">店铺皮肤编辑</view>
+    <block wx:for="{{themeColorArr}}" wx:key="{{index}}">
+        <label class="theme-item vz-flex flex-center flex-between" bindtap="setThemeColor" data-idx="{{index}}">
+            <view class="vz-flex flex-center">
+                <view style="background:{{item.color}}" class="color-block"></view>
+                <view class="color-name">{{item.name}}</view>
+            </view>
+            <radio checked="{{index==themeIdx}}" />
+        </label>
+    </block>
+</view>
+
+<view style="margin-bottom:20rpx">
+    <view class="common-title">导航栏编辑</view>
+    <block wx:for="{{tabArr}}" wx:key="{{index}}">
+        <view class="vz-flex flex-center flex-between tab-item">
+            <view>
+                <text>{{item.navname}}</text>
+                <text>{{item.navtype==0 && '(商家)'||''}}{{item.navtype==1 && '(商品)'||''}}{{item.navtype==2 && '(动态)'||''}}</text>
+            </view>
+            <view class="vz-flex flex-center">
+                <view class="tab-item-btn" data-idx="{{index}}" data-sort="{{item.sort}}" bindtap="showSort">
+                    {{item.sort==''?0:item.sort}}排序
+                </view>
+                <view class="tab-item-btn" data-idx="{{index}}" data-name="{{item.navname}}" catchtap="showEdit">
+                    编辑
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+
+<view>
+    <view class="common-title">特色标签编辑</view>
+    <view class="vz-flex flex-center flex-wrap label-wrap">
+            <view class="label-item {{labelObj.WiFi?'active':''}}"  data-flag="WiFi" bindtap="chooseLabel">
+                <image class="label-img" src="../../images/wifi.svg"></image>
+                <view>WiFi</view>
+            </view>
+            <view class="label-item {{labelObj.Wired?'active':''}}" data-flag="Wired" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/youxian.svg"></image>
+                <view>有线上网</view>
+            </view>
+            <view class="label-item {{labelObj.Parking?'active':''}}" data-flag="Parking" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/tingche.svg"></image>
+                <view>停车场</view>
+            </view>
+            <view class="label-item {{labelObj.WC?'active':''}}" data-flag="WC" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/wc.svg"></image>
+                <view>卫生间</view>
+            </view>
+            <view class="label-item {{labelObj.Shower?'active':''}}" data-flag="Shower" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/xizao.svg"></image>
+                <view>热水淋浴</view>
+            </view>
+            <view class="label-item {{labelObj.Check?'active':''}}" data-flag="Check" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/xingli.svg"></image>
+                <view>行李寄存</view>
+            </view>
+            <view class="label-item {{labelObj.Shuttle?'active':''}}" data-flag="Shuttle" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/jiesong.svg"></image>
+                <view>接送服务</view>
+            </view>
+            <view class="label-item {{labelObj.Visit?'active':''}}" data-flag="Visit" bindtap="chooseLabel">
+                <image class="label-img"  src="../../images/songhuo.svg"></image>
+                <view>送货上门</view>
+            </view>
+    </view>
+</view>
+
+<view class="submit-wrap" bindtap="submitUpdate">
+    提交
+</view>
+
+<view class="mask" style="z-index:1000" wx:if="{{isShowSort}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">导航栏排序</view>        
+        <input type="number" maxlength="3" value="{{sortVal}}" bindinput="getSort"  />
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" data-cancel="1" catchtap="showSort">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmSetSort">确定</view>
+        </view>
+    </view>
+</view>
+
+<view class="mask" style="z-index:1000" wx:if="{{isShowEdit}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">导航栏编辑</view>        
+        <input type="text" maxlength="5" value="{{tabName}}" bindinput="getTabName" />
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" data-cancel="1" catchtap="showEdit">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmSetTabName">确定</view>
+        </view>
+    </view>
+</view>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

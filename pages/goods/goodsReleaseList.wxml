@@ -1,0 +1,62 @@
+<view class="vz-flex flex-center flex tab-wrap">
+    <view class="flex {{index===tabIdx&&'tab-active'}}" data-idx="{{index}}" bindtap="changeTab" wx:for="{{tabArr}}" wx:key="{{index}}">
+        {{item}}
+    </view>
+</view>
+
+<view class="goods-list-wrap">
+    <view wx:for="{{goodsListArr}}" class="goods-list-inner-wrap" wx:key="{{index}}">
+        <view class="vz-flex flex-center goods-list-item">
+            <view class="w-30">
+                <image src="{{item.ImgUrl?item.ImgUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}" class="goods-img" />
+            </view>
+
+            <view class="vz-flex flex-center flex-between w-70" data-id="{{item.Id}}" bindtap="toGoodsDetail">
+                <view>
+                    <view class="wzsl" style="width:400rpx;font-size:28rpx;color:#333;padding-bottom:{{item.discount!=0?'32rpx':'72rpx'}}">{{item.GoodsName}}</view>
+                    <view wx:if="{{item.discount!=0}}" class="discount-tap" style="margin-bottom:12rpx;margin-top:8rpx;">{{item.ctname}} {{item.discount}}折优惠</view>
+                    <view style="font-size:34rpx;color:#fe3d49;margin-bottom:16rpx">
+                        ￥{{item.Price*10000/1000000}}
+                        <text style="font-size:24rpx">{{item.IntegrationState!=0 ? '积分抵'+ item.IntegrationPrice*10000/1000000 : ''}}</text>
+                    </view>
+                    <view style="font-size:24rpx;color:#999;">
+                        {{item.OriginalPrice ? '原价：'+item.OriginalPrice*10000/1000000 : ''}} 库存：{{item.Stock}}
+                    </view>
+                </view>
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+            <view class="del-btn" wx:if="{{item.State==1&&item.IsSell==0}}" bindtap="delGoods" data-id="{{item.Id}}">
+                <icon class="iconfont icon-cha"></icon>
+            </view>
+        </view>
+        <view class="goods-list-item-bot vz-flex flex-center flex-between">
+            <view class="sales">销量: {{item.Inventory-item.Stock}}</view>
+            <view class="goods-list-item-bot-btn-wrap vz-flex flex-center">
+                <view class="goods-list-item-bot-btn" data-id="{{item.Id}}" bindtap="toSellRecord">销售记录</view>
+                <view class="goods-list-item-bot-btn" hidden="{{item.State==0 || item.State==-1}}" data-id="{{item.Id}}" bindtap="showSortLayer">排序{{item.Sort}}</view>
+                <view class="goods-list-item-bot-btn" wx:if="{{item.State==1}}" data-issell="{{item.IsSell}}" data-id="{{item.Id}}" bindtap="setGoodIsSell">{{item.IsSell==1?'下':'上'}}架</view>
+                <view class="goods-list-item-bot-btn" wx:if="{{item.State!=-1}}" data-id="{{item.Id}}" data-state="{{tabIdx}}" bindtap="toEditGoods">编辑</view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:if="{{isHasData}}" style="margin-top:20rpx;width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">暂无数据</view>
+    <view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+</view>
+
+<view class="add-btn-wrap" bindtap="toGoodsRelease">
+    <icon class="iconfont icon-guanbi add-btn"></icon>
+    添加
+</view>
+
+<!-- 分类排序 -->
+<view class="mask" style="z-index:1000" wx:if="{{isShowSortLayer}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">分类排序</view>
+        <input type="number" placeholder="排序值" maxlength="3" bindblur="getSort" value="{{sortNum}}" />
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" catchtap="closeSortLayer">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmSortLayer">确定</view>
+        </view>
+    </view>
+</view>

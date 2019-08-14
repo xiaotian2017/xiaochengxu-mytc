@@ -1,0 +1,96 @@
+<import src="../../public/template.wxml" />
+<import src="../../public/floatbtntpl.wxml" />
+  <view class="section">
+    <view class="flex-wrp top_nav">
+      <view class="hearder_sou">
+        <view class="search_box" style='padding:0 20px'  >
+          <i class="search_icon" catchtap="runsousuoclick" style="background: url({{tongcheng_new_02}})no-repeat ;background-size: 30rem;background-position-x: -11.3rem;background-position-y: -3.2rem;float:right"></i>
+          <input bindblur='bindKeyInput' placeholder='请输入关键词'  class="search-input" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page__bd">
+    <view class="weui-tab" style="overflow:hidden;">
+          <!-- 分类选择 -->
+      <view class="headerSort" >
+        <block wx:for="{{Sort}}" wx:if="{{Sort[2]!=''}}" data-type="aa">
+          <view class="sortItem" style="width:{{Sort[2]==''?'33.3%':'50%'}};border-bottom: 4rpx solid {{condition==index?'#fe3d49':'white'}}" id="{{index}}" bindtap="changeCondition" data-type="{{item.TypeId}}" hidden="{{item==null}}">{{item}}</view>
+        </block>
+        <block wx:for="{{Sort}}" wx:if="{{Sort[2]==''}}">
+          <view class="sortItem" style="width:{{Sort[2]==''?'50%':'33.3%'}};border-bottom: 4rpx solid {{condition==index?'#fe3d49':'white'}}" id="{{index}}" bindtap="changeCondition">{{item}}</view>
+        </block>
+      </view>
+      <!-- 分类1  -->
+      <view class="body_choose" wx:if="{{condition==0}}">
+        <view class="body_choose1" style="width:100%;">
+          <scroll-view scroll-y style="height:44vh;background-color: white">
+            <block wx:for="{{FirstTypeList}}" wx:key='unique'>
+              <view class="chooseitem" bindtap="setChoose" data-type="{{item.Id}}" id="{{index}}" data-index="{{index}}">{{item.Title}}</view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+      <!-- 分类2  -->
+      <view class="body_choose" wx:if="{{condition==1}}">
+        <view class="body_choose1" style="width:100%;">
+          <scroll-view scroll-y style="height:44vh;background-color: white">
+            <block wx:for="{{ChileTypeList}}" wx:key='unique'>
+              <view class="chooseitem" bindtap="setChile" id="{{index}}" hidden="{{item.Title=='分类'||item.Title=='筛选'}}">{{item.Title}}</view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+      <!-- 分类3 -->
+      <view class="body_choose" wx:if="{{condition==2}}">
+        <view class="body_choose1" style="width:100%;">
+          <scroll-view scroll-y style="height:44vh;background-color: white">
+            <block wx:for="{{PostFilterList}}" wx:key='unique'>
+              <view class="chooseitem" bindtap="setFilter" id="{{index}}" hidden="{{item.TypeText=='筛选'}}">{{item.TypeText}}</view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+       <view class="bg" wx:if="{{condition!=99&&condition!=98&&condition!=97}}" bindtap="cancelChoose"></view> 
+      <!-- 分类选择 end! -->
+      <view style="height:100%;">
+              <scroll-view scroll-y  style="height:100%;">
+                <view class="weui-tab__content">
+                    <!-- 便民信息 -->
+          <city-convenientInfo  post="{{postlist}}" showpath="{{showpath}}" repost="{{repost}}"></city-convenientInfo>
+                  <view class="classname">
+                    <view wx:if="{{sousuovalue.length>0}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:26rpx;color:#999999;background-color:#fff;display:{{havemore==false?'':'none'}}">{{(postlistitem[2] == true ? '下拉加载更多' : (postlistitem[0].length>0?'———————— 都显示完了 ————————':'———————— 没有搜索结果 ————————'))}}</view>
+                    <view wx:else style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:26rpx;color:#999999;background-color:#fff;display:{{havemore==false?'':'none'}}">{{(postlistitem[2] == true ? '下拉加载更多' : '———————— 都显示完了 ————————')}}</view>
+                  </view>
+                </view>
+              </scroll-view>
+      </view>
+    </view>
+  </view>
+
+  <view class="fix-bl d-flex shangjia_bottom_nav index">
+      <view class="flex bt_li" hover-class='none' bindtap='bottomnavswitch' data-url='{{buyversion==3?"/pages/index/index":buyversion==2?"/pages/shopindex/shopindex":"/pages/postindex/postindex"}}'>
+          <icon class="iconfont icon-index" style="background-image:none"></icon>
+          <text>首页</text>
+      </view>
+      <view class="flex bt_li active">
+          <icon class="iconfont icon_fenleixinxi"></icon>
+          <text>分类信息</text>
+      </view>
+      <view class="flex bt_li" hover-class='none' data-url='/pages/addpost/addenter' bindtap='bottomnavswitch'>
+          <icon class="iconfont icon-jiahao-svg" style="background-image:none"></icon>
+          <text>发布</text>
+      </view>
+      <view class="flex bt_li" hover-class='none' data-url='/pages/mypublish/mypublish' bindtap='bottomnavswitch'>
+          <icon class="iconfont icon-person-svg"></icon>
+          <text>我的发布</text>
+      </view>
+  </view>
+
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="toIndexPage">首页</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-publish" bindtap="toaddpage" hidden='{{1==buyVersion}}'>发布</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+  

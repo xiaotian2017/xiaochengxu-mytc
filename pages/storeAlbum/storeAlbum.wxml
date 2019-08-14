@@ -1,0 +1,46 @@
+<import src="../../public/shoptemplate.wxml" />
+
+<view class="vz-flex flex-center flex-between flex-wrap" style="padding: 0 30rpx 180rpx 30rpx;">
+     <block wx:for="{{albumList}}" wx:key="{{index}}">
+        <view class="ablum-box" data-id="{{item.Id}}" data-name="{{item.name}}" catchtap="toAlbumPhoto">
+            <image src="{{item.coverImg}}"></image>
+            <view class="ablum-name">
+                {{item.name}}
+            </view>
+            <view class="photo-num">
+                {{item.picCount}}
+            </view>    
+            <radio class="album-radio" style="padding:20rpx" wx:if="{{isShowDelBtn}}" data-idx="{{index}}" checked="{{m.findIdx(index, radioIdx)}}" catchtap="getRadioIdx"></radio>
+        </view>
+     </block>
+</view>
+
+<view class="del-album-btn" bindtap="delAlbum" wx:if="{{isOwner}}">删除</view>
+
+<view wx:if="{{!isShowDelBtn && isOwner}}" class="add-btn-wrap" bindtap="showCreateLayer">新建相册</view>    
+
+<view class="add-btn-wrap vz-flex flex flex-center" wx:if="{{isShowDelBtn}}">
+        <view class="flex del-btn" bindtap="cancelDelAlbum">取消</view>    
+        <view class="flex add-album-btn" bindtap="confirmDelAlbum">确认删除</view>
+</view>
+
+<view class="mask" style="z-index:1001" wx:if="{{isShowCreateLayer}}">
+    <view class="create-cate-name-wrap">
+        <view class="create-cate-name-title">新建相册</view>
+        <input type="text" placeholder="请输入相册名字" maxlength="5" bindinput="getAblumName" value="{{cateName}}" />
+        <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+            <view class="flex create-cate-name-btn" style="color:#999;" catchtap="showCreateLayer">取消</view>
+            <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmCreateAblum">确定</view>
+        </view>
+    </view>
+</view>
+
+<!-- 提示弹层 -->
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<wxs module="m">
+    function findIdx (idx, param) {
+        return (param.indexOf(idx)>-1)   
+    }    
+    module.exports.findIdx = findIdx;
+</wxs>

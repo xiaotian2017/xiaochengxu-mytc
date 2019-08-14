@@ -1,0 +1,7 @@
+{
+    "enablePullDownRefresh":false,
+    "usingComponents": {
+ 
+      "city-navigator": "/components/Navigator/Navigator"
+    }
+}

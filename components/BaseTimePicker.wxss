@@ -1,0 +1,33 @@
+@import '/components/component.wxss';
+.time-picker {
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.time-picker view {
+    line-height: 80rpx; 
+    width: 120rpx;
+    text-align: center;       
+}
+
+.time-picker-container {
+    font-size: 28rpx;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.time-picker-mask {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99999999;
+}
+
+.time-picker-confirm {
+    color: #fe3d49;
+}

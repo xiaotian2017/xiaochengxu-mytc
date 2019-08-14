@@ -1,0 +1,18 @@
+
+<template name="companyInfo">
+    <view class='d-flex jizan_dianpu_infor mt-1' data-storeid='{{shop.Id}}' bindtap='gotoshopdetail'>
+        <view class='head'>
+            <image src='{{shop.companyAvatar}}'></image>
+        </view>
+        <view class='flex content'>
+            <text class='f01 clamp1'>{{shop.companyName}}</text>
+            <view class='locationInfo' hidden='{{shop.companyLocation==null}}'>
+                <view class='icon_local'></view>
+                <text class='f02'>{{shop.companyLocation}}</text>
+            </view>
+        </view>
+        <view class="bt" data-phone='{{shop.companyPhone}}' catchtap='makephone' hidden='{{null==shop.companyPhone}}'>
+            <icon class="iconfont icon-dianhua"></icon>
+        </view>
+    </view>
+</template>

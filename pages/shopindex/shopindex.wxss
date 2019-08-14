@@ -1,0 +1,79 @@
+@import "../../public/floatbtntpl.wxss";
+@import "../../public/navigatorCommon.wxss";
+/*公告*/
+.index_gonggao_all{
+    margin:-20rpx 0 20rpx;
+    padding:7px 10px;
+    background:#fff
+}
+
+.index_gonggao_all .shangjia_ruzhu{
+    margin-left:30rpx;
+    background: #fa0f20;
+    color: #fff;
+    padding: 8rpx 12rpx;
+    border-radius: 20rpx;
+}
+
+.swiper_index_gonggao{
+    height:34px;
+    line-height: 1.35;
+    align-items: center;
+    -webkit-align-items: center
+}
+
+.swiper_index_gonggao swiper-item text{
+    position:absolute;
+    top: 50%;
+    transform: translate(0,-50%)
+}
+
+.top-label-left {
+    width: 36rpx;
+    height: 34rpx;
+    background: #fa0f31;
+    font-size: 24rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 34rpx;
+}
+
+.top-arrow {
+    width: 0;
+    height: 0;
+    border-top: 17rpx solid #fa0f31;
+    border-right: 8rpx solid transparent;	
+}
+
+.bottom-arrow {
+    width: 0;
+    height: 0;
+    border-bottom: 17rpx solid #fa0f31;
+    border-right: 8rpx solid transparent;	
+}
+
+.top-label {
+    position: absolute;
+    left: -10rpx;
+    top: -12rpx;
+}
+
+.notice-wrap {
+    /* position: absolute;
+    z-index: 9999; */
+    padding: 0 20rpx;   
+    height: 34rpx;
+    /* background: #fff6f6; */
+    border-right: 1rpx solid #fa0f20;
+    top:50%;
+    transform: translateY(-50%);
+  }
+  
+  .notice-icon {
+    width: 64rpx; 
+    height: 42.rpx;
+    margin-top: -2rpx;
+    padding-right: 20rpx;    
+    border-right: 1rpx solid #eaeaea;
+    margin-right: 20rpx;
+  }

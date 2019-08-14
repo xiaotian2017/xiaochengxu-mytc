@@ -1,0 +1,15 @@
+.loading{
+    width: 64rpx;
+    height: 64rpx;
+    margin:20rpx auto
+}
+.loading image{
+    width: 100%;
+    height: 100%
+}
+.loading-all,.loading-err{
+    padding:30rpx 0;
+    color: #999;
+    font-size: 24rpx;
+    text-align: center
+}

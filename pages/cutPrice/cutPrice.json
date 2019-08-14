@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+      "city-navigator": "/components/Navigator/Navigator",
+    "share-poster": "/components/shareposter"
+  }
+}

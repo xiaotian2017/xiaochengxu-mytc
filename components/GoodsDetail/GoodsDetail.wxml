@@ -1,0 +1,96 @@
+<import src="/utils/wxParse/wxParse.wxml" />
+
+<scroll-view class="wrapper" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" scrollTop="{{scrollTop[currentNav]}}">
+    <swiper class="goods-banner" wx:if="{{mainmodel.mainmodel.ImgList.length > 0}}">
+        <block wx:for="{{mainmodel.mainmodel.ImgList}}" wx:key="unique">
+            <swiper-item>
+                <image src="{{item.filepath}}" data-src="{{item.filepath}}" mode="aspectFill" class="slide-image" catchtap="viewFullPicture"
+                    data-type="banner" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <!-- 商品信息 -->
+    <view class="goods-info">
+        <view class="goods-title">
+            {{mainmodel.mainmodel.GoodsName}}
+        </view>
+        <view class="flex flex-between">
+            <view class="goods-origin-price" style="margin:0;font-size: 24rpx;" wx:if="{{!(mainmodel.mainmodel.GoodsAttrList.length > 0)}}">原价￥{{mainmodel.mainmodel.OriginalPrice * 1000 / 100000}}</view>
+            <view class="re-coupon-label" wx:if="{{mainmodel.GoodVoucher}}">返{{mainmodel.GoodVoucher.VoucherMoney}}元代金券</view>
+        </view>
+        <view class="flex flex-end" style="line-height:1">
+            <view>
+                <text style="color:#FF0000;font-size: 28rpx" wx:if="{{mainmodel.mainmodel.GoodsAttrList&&mainmodel.mainmodel.GoodsAttrList.length}}">￥{{mainmodel.mainmodel.Price*1000/100000}}-{{mainmodel.mainmodel.MaxPrice*1000/100000}}</text>
+                <text style="color:#FF0000;font-size: 28rpx" wx:else>￥{{mainmodel.mainmodel.Price*1000/100000}}</text>
+                <view wx:if="{{mainmodel.OpenMemberPrice}}" style="padding-top:4rpx">
+                    <view style="color:#FF0000;font-size: 28rpx" class="flex flex-center" wx:if="{{mainmodel.mainmodel.GoodsAttrList&&mainmodel.mainmodel.GoodsAttrList.length}}">
+                        <view wx:if="{{mainmodel.mainmodel.MemberPrice>0}}">￥<text>{{mainmodel.mainmodel.MemberPrice*1000/100000}}-{{mainmodel.mainmodel.MaxMemberPrice*1000/100000}}</text>
+                        </view>
+                        <view style="width: 80rpx;height: 38rpx;line-height: 38rpx;text-align: center;background: #FF0000;color: #fff;font-size: 24rpx;border-radius: 8rpx;margin-left:8rpx">会员价</view>
+                    </view>
+                    <view class="flex flex-center" style="font-size: 28rpx;color:#FF0000" wx:if="{{mainmodel.mainmodel.GoodsAttrList&&!mainmodel.mainmodel.GoodsAttrList.length&&mainmodel.mainmodel.MemberPrice>0}}">
+                        <view wx:if="{{mainmodel.mainmodel.MemberPrice>0}}">￥<text>{{mainmodel.mainmodel.MemberPrice*1000/100000}}</text>
+                        </view>
+                        <view style="width: 80rpx;height: 38rpx;line-height: 38rpx;text-align: center;background: #FF0000;color: #fff;font-size: 24rpx;border-radius: 8rpx;margin-left:8rpx">会员价</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="goods-limit" wx:if="{{mainmodel.mainmodel.LimitNum > 0}}">每人限购{{mainmodel.mainmodel.LimitNum}}份</view>
+
+            <view class="goods-sales">销量：{{mainmodel.mainmodel.Inventory - mainmodel.mainmodel.Stock > 0 ?mainmodel.mainmodel.Inventory - mainmodel.mainmodel.Stock
+                : 0}}</view>
+        </view>
+    </view>
+    <!-- 开通同城卡 -->
+    <view class="flex flex-between open-cityCard" wx:if="{{mainmodel.ishalfcard !== undefined && mainmodel.ishalfcard === 0}}">
+        <view>
+            开通 {{!!mainmodel.mainmodel.ctname?mainmodel.mainmodel.ctname:'同城卡'}}尊享
+            <text class="main-color">{{mainmodel.mainmodel.discount}}折</text>
+            优惠
+        </view>
+        <view class="main-color" catchtap="goToOpenCityCard" data-hctId="{{mainmodel.mainmodel.hctId}}">
+            去开通
+            <image class="arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg" />
+        </view>
+    </view>
+    <!-- 已经开通-->
+    <view class="flex flex-between open-cityCard" wx:if="{{mainmodel.ishalfcard === 1}}">
+        <view>
+            已开通{{mainmodel.card.Name}}尊享
+            <text class="main-color">{{mainmodel.mainmodel.discount}}折</text>
+            优惠
+        </view>
+    </view>
+    <!-- 店铺名称 -->
+    <view class="store">
+        <view class="flex flex-center">
+            <view class="store-avatar">
+                <image src="{{mainmodel.mainmodel.Store.LogoUrl}}"></image>
+            </view>
+            <view class="store-name clamp1">{{mainmodel.mainmodel.Store.SName}}</view>
+        </view>
+        <view class="store-location clamp1" wx:if="{{!!mainmodel.mainmodel.Store.Address}}">{{mainmodel.mainmodel.Store.Address}}</view>
+        <view class="enter-store" data-storeId="{{mainmodel.mainmodel.Store.Id}}" catchtap="goToStore">
+            进入店铺
+            <image class="arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg" />
+        </view>
+    </view>
+    <!-- 商品描述 -->
+    <view class="goods-description-tag">商品介绍</view>
+    <view class="goods-description">
+        <view wx:if="{{!!mainmodel.video}}" class="goods-video">
+            <city-video video-params="{{mainmodel.video}}"></city-video>
+        </view>
+
+        <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+
+        <view class="goods-descriImgList" wx:if="{{mainmodel.mainmodel.DescImgList.length > 0}}">
+            <block wx:for="{{mainmodel.mainmodel.DescImgList}}">
+                <image mode="widthFix" src="{{item.thumbnail}}" data-src="{{item.filepath}}" catchtap="viewFullPicture" data-type="desc"></image>
+            </block>
+        </view>
+    </view>
+</scroll-view>
+<!--返回顶部-->
+<city-backTop show="{{showBackTop[currentNav]}}" bindtap="backTop"></city-backTop>

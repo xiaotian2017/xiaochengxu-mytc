@@ -1,0 +1,180 @@
+/* pages/fabu_biaodan/fabu_biaodan.wxss */
+@import "../../public/common.wxss";
+@import "../../public/write_infor_cell.wxss";
+@import "../../public/floatbtntpl.wxss";
+@import "../../public/template.wxss";
+@import "../../public/navigatorCommon.wxss";
+.dianclass {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #ff5d38;
+  margin-right: 5px;
+}
+
+.gonggaoclass {
+  overflow: hidden;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0px;
+  z-index: 20;
+  height: 100%;
+}
+
+.gonggaobox {
+  max-height: 360px;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 100px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #999;
+  padding: 30px 20px;
+}
+
+.gongaobox2 {
+  text-align: left;
+  height: 300px;
+  overflow: auto;
+}
+
+.carSM {
+  display: block;
+}
+
+.carSMTitle {
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+  color: black;
+}
+
+.gonggaozhidao {
+  color: #40affe;
+  font-size: 15px;
+  background-color: #f2f2f2;
+  border-radius: 0 0 5px 5px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.radiojob {
+  width: 100%;
+  text-align: center;
+}
+
+.radioone {
+  display: inline-block;
+  width: 50%;
+}
+
+.headclass {
+  margin: 0;
+  float: none;
+  margin-right: 0;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+.dianclass{
+  vertical-align: middle
+}
+.fabubiaodan_star{
+  color: red;
+}
+
+/* 2018/1/27 求职高级选项*/
+.welfareItems{
+  padding:10rpx 14rpx;
+  font-size:28rpx;
+  border: 1rpx solid #f2f2f2;
+  border-radius:30rpx;
+}
+.welfareActive{
+  color:#25cea8;
+  border-color:#25cea8
+}
+.recruit,.applyForJobs,.housingMarket{
+  margin-top:20rpx;
+  color: #333;
+  font-size: 28rpx;
+  background: #fff
+}
+.applyAreaTitle,.housingMarketTitle{
+  text-align: center;
+  padding: 20rpx 0
+}
+.applyAreaTitle .iconfont,.housingMarketTitle .iconfont{
+  display: inline-block;
+  vertical-align: middle
+}
+.applyAreaTips,.housingMarketTips{
+  margin-top: 10rpx;
+  color: #fe3d49
+}
+.applyForJobs .applyItems,.housingMarket .housingMarketItems{
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f2f2f2
+}
+.welfareItems .tag,.applyItems .tag,.housingMarketItems .tag{
+  width: 140rpx
+}
+.applyPicker{
+  margin-left: auto
+}
+.applyItems .flex,.housingMarketItems .flex{
+  -webkit-box-flex:1;
+  -webkit-flex:1;
+  flex:1;
+  width: 100%
+}
+/* 工作经验 */
+.workExp .tag{
+  padding: 20rpx
+}
+.workExp textarea{
+  padding: 0 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 300rpx
+}
+/* 房产租售 */
+.housingMarketTips{
+  margin-top: 10rpx;
+  color: #fe3d49
+}
+.housePriceLabel{
+  color: #999
+}
+checkbox .wx-checkbox-input{
+   border-radius: 50%;
+   width: 40rpx;
+   height: 40rpx;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border: none;
+   background:#fe3d49;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 50%;
+   width: 40rpx;
+   height: 40rpx;
+   line-height: 40rpx;
+   text-align: center;
+   font-size:30rpx;
+   color:#fff;
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+.location{
+  width:30px;
+  height:30px;
+  background: url(https://j.vzan.cc/content/city/img/VzanInfomation.png?v=2) no-repeat -160px -430px;
+  background-size: 562px 
+}

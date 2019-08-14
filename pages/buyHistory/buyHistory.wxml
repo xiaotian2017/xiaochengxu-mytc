@@ -1,0 +1,79 @@
+<view>
+    <view class="store-wrap">
+        店铺名称： 哈哈哈
+    </view>
+    <view class="main">
+        <view class="vz-flex vz-flex-1" style="border-bottom:1rpx solid #f0f0f0">
+            <view class="vz-flex-1 main-inner">
+                <view style="border-right:1rpx solid #f0f0f0">
+                    <view style="padding-bottom:20rpx;">
+                        已发放
+                    </view>
+                    <view>
+                        <text class="money">￥22222</text>
+                        <text>1111份</text>
+                    </view>
+                </view>
+            </view>
+            <view class="vz-flex-1 main-inner">
+                <view>
+                    <view style="padding-bottom:20rpx;">
+                        已销售
+                    </view>
+                    <view>
+                        <text>0份</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="vz-flex vz-flex-1">
+            <view class="vz-flex-1 main-inner">
+                <view style="padding-bottom:20rpx;">
+                    已核销
+                </view>
+                <view>
+                    <text>9份</text>
+                </view>
+            </view>
+            <view class="vz-flex-1 main-inner">
+                <view>
+                    <view style="border-left:1rpx solid #f0f0f0">
+                        <view style="padding-bottom:20rpx;">
+                            已入账
+                        </view>
+                        <view class="money">
+                            <text>￥222</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="vz-flex des">
+        <view>收益说明：</view>
+        <view>
+            <view style="margin-bottom:6rpx">不可退款的立即入账，可退款的核销入账</view>
+            <view>入账数值已扣除2.6%手续费，提现请到
+                <text style="text-decoration:underline">我的收益</text>
+            </view>
+        </view>
+    </view>
+    <block wx:for="{{historyList}}">
+        <view style="padding:20rpx;background:#fff" class="hexiaoren-wrap vz-flex flex-center flex-between">
+            <view style="font-size: 24rpx;color: #666;"> 12-09</view>
+            <image class="hexiaoren" src="{{item.ShopLogoUrl}}"></image>
+            <view>
+                <view class="p1">{{item.NickName}}</view>
+                <view class="p1">{{item.Phone}}</view>
+                <view class="p2">核销人:{{item.ValidUserNickName}}</view>
+                <view class="p2">核销时间:{{item.validtime}}</view>
+            </view>
+            <view class="lianxi" style="height: 60rpx;width:120rpx;line-height:60rpx;">
+                联系
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{isAll}}"  style="padding-bottom:100rpx;padding-top:100rpx;font-size:24rpx;text-align:center">
+        已无更多数据
+    </view>
+</view>

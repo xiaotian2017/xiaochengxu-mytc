@@ -1,0 +1,257 @@
+<import src="../../public/shoptemplate.wxml" />
+<!-- <view id="wrapper" class="d-flex flex-col"> -->
+<view class="container">  
+    <view class="a-describe-cells" style="position:relative">
+        <view class="kanjia-upload-pic">
+            <text class="f01">{{uploadimgobjects['activeCover'].config.imageList.length != 0 ? "" :"点击上传主图(640x360)最佳"}}</text>
+        </view>
+        <image src="{{uploadimgobjects['activeCover'].config.imageList[uploadimgobjects['activeCover'].config.imageList.length-1]}}"
+            data-which="activeCover" data-itemid='{{cut.Id}}' bindtap="uploadLogoImg" class="activeCover"></image>
+    </view>
+    <view class='ruzhu_cells mt-1'>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <label style="color:#ff6a00;">*</label>
+            <view class="flex">
+                <input placeholder-style="color:#999" value='{{cut.BName}}' placeholder='请填写活动名称' bindinput='getActivityName'></input>
+            </view>
+        </view>
+    </view>
+    <view class='ruzhu_cells mt-1'>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="flex c999">活动时间建议5-7天</view>
+        </view>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <label style="color:#ff6a00;">*</label>
+            <view class='flex rel d-flex flex-center'>          
+                    <view data-type="0" bindtap="commontDateFn" class="{{XcxStartDate != ''?'c333':'c999'}}">{{XcxStartDate != ''?XcxStartDate:"请选择开始时间"}}</view>               
+            </view>
+        </view>
+
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <label style="color:#ff6a00;">*</label>
+            <view class='flex rel d-flex'>         
+                    <view data-type="1" bindtap="commontDateFn" class="{{XcxEndDate != ''?'c333':'c999'}}">{{XcxEndDate != ''?XcxEndDate:"请选择结束时间"}}</view>            
+            </view>
+        </view>
+    </view>
+    <!--商品份数  -->
+    <view class='ruzhu_cells mt-1 c999'>
+
+        <view class='d-flex flex-center ruzhu_cell' wx:if="{{!isTimePicker}}">
+            <label style="color:#ff6a00;">*</label> 本期商品
+            <input type="number" class="kuang-input" value='{{cut.CreateNum}}' bindinput="getGoodsTotal"></input>份
+        </view>
+        <view class='d-flex d-flex-center ruzhu_cell'>
+            发布后不可修改，请谨慎填写。
+        </view>
+    </view>
+    <!--砍价设置-->
+    <view class='ruzhu_cells mt-1 c999' style='line-height:1' wx:if="{{!isTimePicker}}">
+        <view class='d-flex  flex-center ruzhu_cell'>
+
+            <label style="color:#ff6a00;">*</label>
+            <view>
+                原价
+                <input type="text" class="kuang-input" value='{{cut.OriginalPrice}}' bindinput="getOriginPrice"></input>元
+            </view>
+            <label style="color:#ff6a00;margin-left:40rpx">*</label>
+            <view>
+                底价
+                <input type="text" disabled='{{cut.Id>0?true:false}}' class="kuang-input" value='{{cut.FloorPrice}}' bindinput="getLastPrice"></input>元
+            </view>
+        </view>
+
+        <view class='d-flex flex-center ruzhu_cell'>
+            <label style="color:#ff6a00;">*</label>
+            <view class='' style="white-space:nowrap">
+                每次减价 
+                <text style="margin-left:10rpx">最少</text>
+                <input type="text" class="kuang-input" value='{{cut.ReduceMin}}' bindinput="getEachMin"></input>元
+            </view>
+            <view style="white-space:nowrap;margin-left:30rpx">
+                最多
+                <input type="text" class="kuang-input" value='{{cut.ReduceMax}}' bindinput="getEachMax"></input>元
+            </view>
+        </view>
+
+        <view class='d-flex flex-center ruzhu_cell'>
+            <view class=''>
+                每个人最多帮减人数
+                <input type="number" class="kuang-input" value='{{cut.CutMaxCount}}' bindinput="getEachCount"></input>次
+            </view>
+        </view>
+        <view class="ruzhu_cell c999" style='height:auto;padding:15rpx 20rpx;line-height:1.5'>
+            <view>帮减人数0代表无限制，排除自己</view>
+            <view>最少帮减人数=（原价-底价）÷每次减价最多值；最多帮减人数=（原价-底价）÷每次减价最少值。建议帮减人数在30-40人。</view>
+        </view>
+    </view>
+    <!--自己砍价 -->
+    <view class='ruzhu_cells mt-1' wx:if="{{!isTimePicker}}">
+        <view class='d-flex flex-center ruzhu_cell c999'>
+            <view>
+                <label style="color:#ff6a00;">*</label> 报名者每隔
+                <input type="number" class="kuang-input" bindinput="getSelfFrequency" value='{{cut.IntervalHour}}'></input>小时可再次给自己减价
+            </view>
+        </view>
+        <view class="ruzhu_cell c999" style='height:auto;padding:15rpx 20rpx;line-height:1.5'>
+            <view>每个报名者可在活动时间内多次自己减价，帮忙者仅有一次机会； 发布后不可修改，请谨慎填写</view>
+        </view>
+    </view>
+    <!--商品描述  -->
+
+    <view class='ruzhu_cells mt-1 description' wx:if="{{!isTimePicker}}">
+        <view class="d-flex d-flex-center ruzhu_cell c999">
+            <label style="color:#ff6a00;">*</label>商品描述
+        </view>
+        <view class='write_cell bg-f c333' style='border:none'>
+            <textarea  style="cursor: text;" auto-height="true" value='{{cut.Description}}' class='write_textarea'
+                placeholder='快来描述你的商品吧~' placeholder-style="#999" bindinput="getDescription" />
+        </view>
+        <view class="shop-ruzhu-pic-ul">
+            <template is="item_image_shop" data="{{config:uploadimgobjects['goodsDecri'].config,which:'goodsDecri',itemid:cut.Id}}"></template>
+        </view>
+    </view>
+    <!--领取信息-->
+    <view class='ruzhu_cells mt-1 mb-1'>
+
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="flex c666">
+                <label style="color:#ff6a00;">*</label>领取信息</view>
+        </view>
+        <view class='lingqu' style="padding:0">
+            <!--领取开始时间  -->
+            <view class="d-flex d-flex-center ruzhu_cell">
+                <label style="color:#ff6a00;">*</label>
+                <view class='c999'>领取开始时间：</view>
+                <view class='flex rel d-flex'>                  
+                        <view data-type="2" bindtap="commontDateFn" class="{{XcxGetStartDate != ''?'c333':'c999'}}">{{XcxGetStartDate != ''?XcxGetStartDate:"请选择开始时间"}}</view>                  
+                </view>
+            </view>
+            <!--领取结束时间  -->
+            <view class="d-flex d-flex-center ruzhu_cell">
+                <label style="color:#ff6a00;">*</label>
+                <view class='c999'>领取结束时间：</view>
+                <view class='flex rel d-flex'>                   
+                        <view  data-type="3" bindtap="commontDateFn"  class="{{XcxGetEndDate != ''?'c333':'c999'}}">{{XcxGetEndDate != ''? XcxGetEndDate:"请选择开始时间"}}</view>                  
+                </view>
+            </view>
+
+            <view class="d-flex ruzhu_cell">
+                <label style="color:#ff6a00;">*</label>
+                <view class='c999'>领取地址：</view>
+                <view class='icon_local'></view>
+                <view class="flex {{locationGet?'c333':'c999'}}" value='{{cut.ValidAddress}}' bindtap='getLocation'>{{cut.ValidAddress}}</view>
+            </view>
+
+            <view class="d-flex ruzhu_cell">
+                <label style="color:#ff6a00;">*</label>
+                <view class='c999' style="white-space: nowrap">领取电话：</view>
+                <input wx:if="{{!isTimePicker}}" type='' class="c333" placeholder='请填写领取电话' value='{{cut.ValidPhone}}' placeholder-style="color:#999" bindinput="getPhone"
+                    maxlength='11'></input>
+            </view>
+        </view>
+    </view>
+ <view>
+         <view class="distribution-wrap">
+            <view class="vz-flex vz-flex-center flex-between voucher-item">
+                <view>
+                    人人分销          
+                </view>
+                <switch bindchange="distributionToggle" checked="{{isShowDistribution}}" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center flex-between" wx:if="{{isShowDistribution}}">
+                    <view class="voucher-item-left">分成比例
+                        <text class="required">*</text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                    <input type="number" placeholder="0" maxlength="3" value="{{distribution}}" style="text-align:right" bindinput="getDistribution" />
+                    <text>%</text>
+                   </view>
+            </view>
+    </view>
+  </view>
+    <!-- 购买返券 -->
+    <view class="voucher-wrapper" wx:if="{{!cutId}}">
+        <view class="vz-flex vz-flex-center flex-between voucher-item ">
+            <view>
+                返现代金券
+                <text class="instructions">（刺激二次消费）</text>
+            </view>
+            <switch bindchange="voucherToggle" />
+        </view>
+        <view hidden="{{!isVoucher}}">
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">券的面额
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherPrice}}" bindinput="getVoucherPrice" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">发放数量
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherNum}}" bindinput="getVoucherNum" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">
+                    使用范围
+                </view>
+                <view class="vz-flex vz-flex-center voucher-use-scope">
+                    <view class="{{voucherScopeIdx==1?'active':''}}" data-idx="1" bindtap="changeVoucherScope">无门槛</view>
+                    <view class="{{voucherScopeIdx==2?'active':''}}" data-idx="2" bindtap="changeVoucherScope">满 减</view>
+                </view>
+            </view>
+            <view wx:if="{{voucherScopeIdx==2}}" class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">
+                    满减金额
+                </view>
+                <input type="number" maxlength="2" placeholder="0" value="{{fullSubtraction}}" bindinput="getFullSubtraction" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view>使用开始时间：</view>
+                <view class='flex rel d-flex' data-type="4" bindtap="commontDateFn">                  
+                      {{voucherBeginDate}}                   
+                </view>              
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view>使用结束时间：</view>
+                <view class='flex rel d-flex' data-type="5" bindtap="commontDateFn">                    
+                        {{voucherEndDate}}                   
+                </view>
+             
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center" wx:if="{{!isTimePicker}}">
+                <view class="voucher-item-left">领取有效天数
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherValidDay}}" bindinput="getValidDay" />
+            </view>
+        </view>
+    </view>
+
+    <!--集赞规则-->
+    <view class='ruzhu_cells mt-1'>
+        <view class="d-flex d-flex-center ruzhu_cell c999">
+            砍价规则
+        </view>
+        <view class='jizan_rules'>
+            <image class='pic01' mode='widthFix' src='http://j.vzan.cc/content/city/xcx/images/cutPrice.png'></image>
+            <view class='jizan_shuoming_f'>
+                <text>1.点击顶上“我也参加”按钮参加活动。</text>
+                <text>2.报名者自己每隔一段时间可以点击“自己减价”随机减少价格。</text>
+                <text>3.奖品份数有限，不一定非要减到低价，减到您觉得划算就赶紧付款抢下哦。</text>
+                <text>4.付款后奖品份数自动减少，领完则无法继续报名和减价，请速度哦。</text>
+                <text>5.减价成功并在线支付后，即可前往活动店铺进行消费，详情请看领取信息和商家信息。</text>
+            </view>
+        </view>
+    </view>
+</view>
+<!--按钮-->
+<view class='fix-bl'>
+    <view class='d-flex pay_bottom_nav'>
+        <view class='bt flex' style='z-index:9999' bindtap='submit'>发布减价</view>
+    </view>
+</view>
+<!-- </view> -->
+
+<base-time-picker id='timerPicker' bindtimerpickercancel="timerPickerCancel" bindtimerpickerconfirm="timerPickerConfirm" timer-value-arr-idx="{{timerValueArrIdx}}" is-time-picker="{{isTimePicker}}"></base-time-picker>

@@ -1,0 +1,287 @@
+<import src="../../public/shoptemplate.wxml" />
+<!-- 上传图片 -->
+<view style="width:100%;height:max-height:{{isShowCate||isShowFareTemplate?'100vh':'300vh'}};postion:{{isShowCate||isShowFareTemplate?'fixed':'static'}};overflow:{{isShowCate?'hidden':'scroll'}}">
+    <view class="release-img-wrap">
+        <template is="item_image_shop" data="{{config:uploadimgobjects['mainGoodsImg'].config,which:'mainGoodsImg',itemid:goodsId}}"></template>
+    </view>
+
+    <view class="goods-release-detail">
+        <view class="goods-release-title-wrap vz-flex flex-center">
+            <view class="goods-release-title-tips">
+                商品标题
+            </view>
+            <input hidden="{{isShowCate||isShowFareTemplate}}" class="goods-release-title-input" type="text" maxlength="30" placeholder="请输入商品标题"
+                value="{{goodsName}}" bindinput="getGoodsName" />
+        </view>
+        <textarea hidden="{{isShowCate||isShowFareTemplate}}" class="goods-release-desc" maxlength="-1" placeholder="请描述下你的宝贝" value="{{goodsDesp}}"
+            bindinput="getGoodsDesp"> </textarea>
+    </view>
+
+    <view class="release-img-wrap">
+        <template is="item_image_shop" data="{{config:uploadimgobjects['despGoodsImg'].config,which:'despGoodsImg',itemid:goodsId}}"></template>
+        <view class="goods-release-desp-img-tip">详情图片最多上传8张</view>
+    </view>
+
+    <view>
+        <view class="goods-release-init-size-wrap" wx:if="{{!isAddGoodsSize}}" hidden="{{isShowCate||isShowFareTemplate}}">
+            <view class="vz-flex flex-center goods-release-init-size-item">
+                <view class="goods-release-title-tips">
+                    价格
+                </view>
+                <input class="goods-release-title-input" type="digit" placeholder="请输入售卖价格" maxlength="6" bindinput="getPrice" value="{{price}}"
+                />
+            </view>
+            <view class="vz-flex flex-center goods-release-origin-price goods-release-init-size-item">
+                <view class="goods-release-title-tips">
+                    原价
+                </view>
+                <input class="goods-release-title-input" type="digit" placeholder="商品原价，选填" maxlength="6" bindinput="getOriginPrice" value="{{originPrice}}"
+                />
+            </view>
+            <view class="vz-flex flex-center goods-release-init-size-item">
+                <view class="goods-release-title-tips">
+                    库存
+                </view>
+                <input class="goods-release-title-input" type="number" placeholder="库存数量1-9999" maxlength="4" bindinput="getStock" value="{{stock}}"
+                />
+            </view>
+        </view>
+        <block wx:for="{{sizeNodeArr}}" wx:key="{{index}}" wx:if="{{isAddGoodsSize}}">
+            <view class="goods-release-new-size-wrap vz-flex flex-center" hidden="{{isShowCate||isShowFareTemplate}}">
+                <view class="goods-release-new-size-left">
+                    <view class="vz-flex flex-center goods-release-new-size-item">
+                        <view class="goods-release-new-size-tip">规格</view>
+                        <input type="text" placeholder="如款式/颜色/尺码" maxlength="20" data-idx="{{index}}" bindinput="getSize" value="{{item.AttrName}}"
+                        />
+                    </view>
+                    <view class="vz-flex flex-center goods-release-new-size-item goods-release-origin-price ">
+                        <view class="goods-release-new-size-tip">价格</view>
+                        <input type="digit" placeholder="请输入商品价格" maxlength="6" data-idx="{{index}}" bindinput="getSizePrice" value="{{item.Price}}"
+                        />
+                    </view>
+                    <view class="vz-flex flex-center goods-release-new-size-item">
+                        <view class="goods-release-new-size-tip">库存</view>
+                        <input type="number" placeholder="库存数量1-9999" maxlength="4" data-idx="{{index}}" bindinput="getSizeStock" value="{{item.Stock}}"
+                        />
+                    </view>
+                </view>
+                <view class="goods-release-new-size-right" bindtap="delGoodsSizeNode" data-idx="{{index}}">
+                    <icon class="iconfont icon-cha"></icon>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view bindtap="addGoodsSizeNode" class="goods-release-add-size-btn">
+        <icon class="iconfont icon-guanbi"></icon>
+        <text>添加商品型号</text>
+    </view>
+
+    <view class="goods-release-options-wrap">
+        <view class="vz-flex flex-center flex-between goods-release-options-item">
+            <view>到店自提</view>
+            <switch checked="{{isFare}}" bindchange="fareChange" />
+        </view>
+        <view class="release-discount-name-item vz-flex vz-flex-center" wx:if="{{isFare}}">
+            <view class="release-discount-name-left">
+                <view>到店付</view>
+                <text style="color:#fe3d49" bindtap="showPayInStore">什么是到店付?</text>
+            </view>
+            <input type="number" style="text-align: right" class="release-discount-name-input" bindinput="getDiscountPayInStore" value="{{discountPayInStore}}"
+                placeholder="请输入到店付金额" />
+            <view>元</view>
+        </view>
+        <view class="vz-flex flex-center flex-between goods-release-options-item goods-release-origin-price" bindtap="openCate">
+            <view>分类至</view>
+            <view>
+                <text>{{cateName}}</text>
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+        </view>
+        <!-- <view class="vz-flex flex-center flex-between goods-release-options-item">
+            <text>积分抵用</text>
+            <switch checked="{{isUseIntegral}}" bindchange="integralChange" />
+        </view> -->
+        <view wx:if="{{isUseIntegral}}" class="vz-flex flex-center flex-between  goods-release-options-item goods-release-integral-item">
+            <text>抵用金额</text>
+            <view class="vz-flex flex-center  flex-between">
+                <input hidden="{{isShowCate||isShowFareTemplate}}" type="digit" style="width:420rpx;text-align:right" bindinput="getIntegral"
+                    value="{{integrationPrice}}" placeholder="单件最大抵扣金额不填默认为1" />
+                <text>元</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- <view class="goods-release-add-size-btn" bindtap="toggleCityCard" wx:if="{{isShowCityCardBtn}}">
+        <text>{{!isShowCityCard?'启用同城卡优惠':'关闭同城卡优惠'}}</text>
+    </view> -->
+
+    <view class="city-card">
+        <view wx:if="{{isShowCityCard}}" style="margin-bottom:20rpx">
+            <view class="vz-flex flex-center city-card-item">
+                <view class="w-30">适用类型</view>
+                <view class="vz-flex flex-center flex-between w-100" style="padding-right:20rpx;">
+                    <view class="w-100">
+                        <picker class="w-100" bindchange="getCityCardSize" value="{{cityCardSizeIdx}}" range-key="Name" range="{{cityCardSizeArr}}">
+                            <view>
+                                {{cityCardSizeArr[cityCardSizeIdx].Name}}
+                            </view>
+                        </picker>
+                    </view>
+                    <icon class="iconfont icon-jiantou"></icon>
+                </view>
+            </view>
+            <view class="vz-flex flex-center city-card-item" wx:if="{{cityCardCateArr.length > 0}}">
+                <view class="w-30">类型分类</view>
+                <view class="vz-flex flex-center flex-between w-100" style="padding-right:20rpx;">
+                    <view class="w-100">
+                        <picker class="w-100" bindchange="getCityCardCate" value="{{cityCardCateIdx}}" range-key="Name" range="{{cityCardCateArr}}">
+                            <view>
+                                {{cityCardCateArr[cityCardCateIdx].Name}}
+                            </view>
+                        </picker>
+                    </view>
+                    <icon class="iconfont icon-jiantou"></icon>
+                </view>
+            </view>
+            <view class="vz-flex flex-center city-card-item">
+                <view class="w-30">折扣力度</view>
+                <input hidden="{{isShowCate||isShowFareTemplate}}" class="w-100 city-card-input" placeholder="0" bindinput="getCityCardDiscount"
+                    type="digit" maxlength="3" style="text-align:right" value="{{cityCardDiscount}}" />
+            </view>
+        </view>
+    </view>
+   <view style="padding-bottom:300rpx">
+         <view class="distribution-wrap">
+            <view class="vz-flex vz-flex-center flex-between voucher-item">
+                <view>
+                    人人分销          
+                </view>
+                <switch bindchange="distributionToggle" checked="{{isShowDistribution}}" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center flex-between" wx:if="{{isShowDistribution}}">
+                    <view class="voucher-item-left">分成比例
+                        <text class="required">*</text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                    <input type="number" placeholder="0" maxlength="3" value="{{distribution}}" style="text-align:right" bindinput="getDistribution" />
+                    <text>%</text>
+                   </view>
+            </view>
+    </view>
+        <view class="vz-flex flex-center city-card-limit-buy-item city-card-item" style="padding:0 20rpx;background: #fff;margin-bottom:20rpx">
+            <view class="w-30">
+                每人限购数
+            </view>
+            <input hidden="{{isShowCate||isShowFareTemplate}}" class="w-100 city-card-input" bindblur="getLimitNum" value="{{cityCardLimitNum}}"
+                style="text-align:right" maxlength="2" type="number" placeholder="每人限购数量，0不限制" />
+        </view>
+
+        <view class="voucher-wrapper" wx:if="{{goodsId==0}}">
+            <view class="vz-flex vz-flex-center flex-between voucher-item ">
+                <view>
+                    返现代金券
+                    <text class="instructions">（刺激二次消费）</text>
+                </view>
+                <switch bindchange="voucherToggle" />
+            </view>
+            <view hidden="{{!isVoucher}}">
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">券的面额
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherPrice}}" bindinput="getVoucherPrice" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">发放数量
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherNum}}" bindinput="getVoucherNum" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        使用范围
+                    </view>
+                    <view class="vz-flex vz-flex-center voucher-use-scope">
+                        <view class="{{voucherScopeIdx==1?'active':''}}" data-idx="1" bindtap="changeVoucherScope">无门槛</view>
+                        <view class="{{voucherScopeIdx==2?'active':''}}" data-idx="2" bindtap="changeVoucherScope">满 减</view>
+                    </view>
+                </view>
+                <view wx:if="{{voucherScopeIdx==2}}" class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">
+                        满减金额
+                    </view>
+                    <input type="number" maxlength="2" placeholder="0" value="{{fullSubtraction}}" bindinput="getFullSubtraction" />
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center flex-between" style="padding-right: 20rpx">
+                    <view>使用开始时间</view>
+                    <view data-type="0" bindtap="commontDateFn" class="c333'}}">{{voucherBeginTime}}
+                        <text style="font-family:consolas">></text>
+                    </view>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center flex-between" style="padding-right: 20rpx">
+                    <view>使用结束时间</view>
+                    <view data-type="1" bindtap="commontDateFn" class="c333'}}">{{voucherEndTime}}
+                        <text style="font-family:consolas">></text>
+                    </view>
+                </view>
+                <view class="voucher-item vz-flex vz-flex-center">
+                    <view class="voucher-item-left">领取有效天数
+                        <text class="required">*</text>
+                    </view>
+                    <input type="number" placeholder="0" maxlength="5" value="{{voucherValidDay}}" bindinput="getValidDay" />
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="release-goods-btn" bindtap="releaseGoods">
+        发布商品
+    </view>
+
+    <view class="mask" wx:if="{{isShowCate}}">
+        <view class="goods-release-fare-template">
+            <view class="goods-release-fare-template-title">
+                分类至(按分类展示商品，方便买家选择)
+            </view>
+            <view class="cate-wrap">
+                <view style="padding-left: 20rpx;box-sizing:border-box">
+                    <label bindtap="cateRadioChange" style="padding:0" class="goods-release-fare-template-item vz-flex" wx:for="{{cateArr}}"
+                        wx:key="{{index}}" data-idx="{{index}}">
+                        <radio value="{{index}}" checked="{{index===cateIdx}}" />{{item.Name}}
+                    </label>
+                </view>
+            </view>
+            <view class="create-cate-btn-wrap" catchtap="openCreateCateNameLayer">
+                <view>
+                    新建分类
+                </view>
+            </view>
+            <view class="vz-flex flex-center flex goods-release-fare-btn-wrap">
+                <view style="color:#fe3d49" catchtap="closeCate" class="flex goods-release-fare-template-btn">
+                    取消
+                </view>
+                <view catchtap="confirmCate" style="background:#fe3d49;color:#fff" class="flex goods-release-fare-template-btn">
+                    确定
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="mask" style="z-index:1000" wx:if="{{isShowCreateCateName}}">
+        <view class="create-cate-name-wrap">
+            <view class="create-cate-name-title">新建分类名称</view>
+            <input type="text" bindinput="getCreateCateName" placeholder="名称小于8个字" maxlength="8" value="{{createCateName}}" />
+            <view class="vz-flex flex flex-center create-cate-name-btn-wrap">
+                <view class="flex create-cate-name-btn" style="color:#999;" catchtap="closeCreateCateNameLayer">取消</view>
+                <view class="flex create-cate-name-btn" style="color: #fe3d49" catchtap="confirmCreateCateName">确定</view>
+            </view>
+        </view>
+    </view>
+        </view>
+        <base-time-picker id='timerPicker' bindtimerpickercancel="timerPickerCancel" bindtimerpickerconfirm="timerPickerConfirm" timer-value-arr-idx="{{timerValueArrIdx}}" is-time-picker="{{isTimePicker}}"></base-time-picker>
+        <wxs module="m">
+            var chooseFare = function(chooseArr,curIdx) { 
+                if(chooseArr.indexOf(curIdx) > -1) 
+                    {return true}; } 
+            module.exports.chooseFare=chooseFare;
+        </wxs>

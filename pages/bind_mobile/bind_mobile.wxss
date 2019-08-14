@@ -1,0 +1,40 @@
+
+@import "../../public/common.wxss";
+@import "../../public/write_infor_cell.wxss";
+
+.code-input {
+  font-size: 13px;
+  border-radius: 2px;
+  display: block;
+  width: 75px;
+  text-align: center;
+  height: 14px;
+  min-height: 14px;
+  line-height: 14px;
+}
+.dengdu-bt-wechat
+{
+color:#fff;
+background:#36ae37;
+height:45px;
+text-align:center;
+border:1rpx solid #36ae37;
+font-size:15px;
+box-sizing:border-box;
+border-radius:2px;
+line-height:45px;
+display:block;
+margin:0 auto;
+
+}.wechaticon{
+padding-right: 10px;
+ width:15px;
+ height:20px;
+ display: inline-block;
+ background-image: url("https://j.vzan.cc/content/city/images/smallapp_entertainment_01.png?v=0.03");
+ background-repeat:no-repeat;
+ background-position:-250px -25px;
+ background-size: 500px;
+}button::after{
+  border: none;
+}

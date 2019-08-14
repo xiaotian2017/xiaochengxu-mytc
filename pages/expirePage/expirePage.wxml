@@ -1,0 +1,9 @@
+<view class="container">
+    <icon type="info" class="vz-icon-info" size="100" color=""/>
+    <view class="expire-text">
+        【{{cityName}}】已停止运营，更多平台创业请关注公众号【微赞】
+    </view>
+    <image class="c-qrcode" src="https://j.vzan.cc/content/city/images/qrcode.jpg"></image>    
+    <button bindtap="toPersonCenter" style="border-radius: 12rpx;width:90%;margin-bottom:40rpx;" type="primary">个人中心</button>    
+    <button bindtap="refresh" style="border-radius: 12rpx;width:90%;" type="default">刷新</button>    
+</view>

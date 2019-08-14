@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents":{
+        "city-previewPicture":"/components/PreviewPicture/PreviewPicture"
+    }
+}

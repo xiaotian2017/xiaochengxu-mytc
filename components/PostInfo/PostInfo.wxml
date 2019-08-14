@@ -1,0 +1,7 @@
+<view class="account flex flex-center {{flexBetween?'flex-between':''}}">
+    <view class="times c9">{{date}}</view>
+    <view class="viewer c9">
+        <image src="http://j.vzan.cc/content/city/xcx/images/viewer.svg"></image>
+        <text>{{viewer}}</text>
+    </view>
+</view>

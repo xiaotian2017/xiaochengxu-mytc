@@ -1,0 +1,26 @@
+@import '/components/component.wxss';
+.count-time{
+    padding: 6rpx 8rpx;
+    color: #fff;
+    font-size: 24rpx;
+    border-radius: 4rpx
+}
+.count-item{
+    margin:0 2rpx;
+    padding:2rpx 4rpx 2rpx;
+    min-width: 32rpx;
+    text-align: center;
+    background: #fff;
+    border-radius: 4rpx
+}
+.count-over{
+    padding:0 30rpx;
+    width: 128rpx;
+    line-height:30rpx;
+    color:#fff;
+    background:#ccc;
+    text-align:center;
+    border-radius:30rpx;
+    font-size:14px;
+    height: 30rpx
+}

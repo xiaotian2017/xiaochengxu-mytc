@@ -1,0 +1,14 @@
+<view class="page">
+  <!-- icon -->
+  <view class='con'>
+    <icon type='success' size='48' color='#000'></icon>
+    <view class='conTip'>发帖成功</view>
+    <view class='vz-flex vz-flex-center justify-center' wx:if='{{payType==0||payType==200}}'>
+      <view>信息置顶可获得更多曝光量</view>
+      <view class='topBtn' bindtap='goSetTop'>置顶</view>
+    </view>
+  </view>
+
+  <!-- btn -->
+  <view class='btn' bindtap='goDetail'>查看帖子详情</view>
+</view>

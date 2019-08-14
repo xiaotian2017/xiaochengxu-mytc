@@ -1,0 +1,17 @@
+
+<template name="shareposter">
+  <view class="maskblack" style="overflow: auto;" hidden='{{maskhide}}'>
+    <view class="fix-tl-100 fenxiang_tk_js none" style="display: block;">
+        <view class="bpro"><i class="Bcolor">保存图片到相册</i>，发送到朋友圈或群聊</view>
+        <view class="basewrap dialog-black-mask" style="background: rgba(0,0,0,.9);"></view>
+        <view class="dialog-content kanjia_share" style="margin-top: 0px;width:80%;">
+            <canvas style="width: {{canwidth}}px; height: {{canheight}}px;z-index:999" canvas-id="firstCanvas"></canvas> 
+         <view  class='d-flex flex-between maskbtnparent' style='width: 92.96%;margin:0 auto'>
+                <button class='maskbtn' bindtap='closemsk'>关闭</button>
+                <button class='maskbtn' bindtap='savetophone'>保存到手机相册</button>
+            </view>
+        </view>
+    </view>
+</view>
+
+</template>

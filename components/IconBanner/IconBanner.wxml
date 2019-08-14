@@ -1,0 +1,20 @@
+<swiper wx:if="{{indexItemList.length>0}}" class="icon-swiper {{indexItemList[0].length<=5?'icon-swiper-inline':''}}" indicator-dots="{{indexItemList.length>1}}" indicator-color="#d9d9d9" indicator-active-color="#fe3d49">
+    <block wx:for="{{indexItemList}}" wx:for-item="typeitem" wx:key='{{typeitem.Id}}'>
+        <swiper-item class="icon-swiper-page">
+            <block wx:for="{{typeitem}}" wx:for-item="pageitem" wx:key='{{pageitem.Id}}'>
+                <view wx:if="{{!pageitem.LogoUrl}}" class='icon-swiper-item' wx:key='unique' catchtap="IndexItemclick" data-itemid='{{pageitem.ItemId}}' data-itemtype='{{pageitem.ItemType}}' data-typeid="{{!!pageitem.TypeId?pageitem.TypeId:pageitem.Id}}" data-typename="{{pageitem.Title}}" data-selfurl='{{pageitem.LinkUrl}}'>
+                    <view class="icon-item {{pageitem.ClassName}}-p">
+                        <icon class="icon {{pageitem.ClassName}}"/>
+                    </view>
+                    <view class="icon-tag">{{pageitem.Title || pageitem.Name}}</view>
+                </view>
+                <view wx:else class='icon-swiper-item' catchtap="IndexItemclick" data-itemid='{{pageitem.ItemId}}' data-itemtype='{{pageitem.ItemType}}' data-typeid="{{!!pageitem.TypeId?pageitem.TypeId:pageitem.Id}}" data-typename="{{pageitem.Title}}" data-selfurl='{{pageitem.LinkUrl}}'>
+                  <view class="icon-item">
+                      <image class="custom-img" src="{{pageitem.LogoUrl}}"/>
+                  </view>
+                  <view class="icon-tag">{{pageitem.Title || pageitem.Name}}</view>
+              </view>
+            </block>
+        </swiper-item>
+    </block>
+  </swiper>

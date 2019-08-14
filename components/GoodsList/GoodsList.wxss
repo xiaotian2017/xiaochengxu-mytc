@@ -1,0 +1,169 @@
+@import '/components/component.wxss';
+
+view{
+    --cover-w:calc(50vw - 6rpx);
+    --font-color:#333;
+    --main-color:#fe3d49
+}
+.icon-arrow{
+    width: 28rpx;
+    height: 28rpx;
+    margin-left: -12rpx;
+    vertical-align: middle
+}
+.content{
+    padding:70rpx 0 50px;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: scroll
+ }
+.goods-discount{
+     position: absolute;
+     width:100rpx;
+     color:#fff;
+     font-size:24rpx;
+     line-height:1.35;
+     text-align: center;
+     background:linear-gradient(to right,#fea100,#f51d2a)
+ }
+ .goods-cover{
+     position: relative
+ }
+ .goods-cover image{
+     width: 100%;
+     height: 100%
+ }
+ .goods-price{
+     font-size:32rpx;
+     color: var(--main-color)
+ }
+ .goods-price::before{
+     content: "￥";
+     font-size: 24rpx;
+     color: var(--main-color)
+ }
+ .goods-title{
+     word-break: break-all
+ }
+ /* goods-column */
+ .goods-column{
+     padding-bottom: 30rpx;
+     font-size: 0
+ }
+ .goods-column .goods-column-item{
+     display: inline-block;
+     margin-top: 12rpx;
+     width:var(--cover-w);
+     background: #fff
+ }
+ .goods-column .goods-column-item:nth-of-type(2n-1){
+     margin-right: 10rpx
+ }
+ .goods-column .goods-cover{
+     position: relative;
+     width:100%;
+     height: var(--cover-w)
+ }
+ .goods-column .goods-discount{
+     top:0;
+     left:0 
+ }
+ .goods-column .goods-info{
+     padding:12rpx;
+     width:100%;
+     height: 140rpx;
+     box-sizing: border-box
+ }
+ .goods-column .goods-title{
+     height: 64rpx;
+     margin-bottom: 10rpx;
+     color: var(--font-color);
+     line-height: 1.35;
+     font-size: 24rpx
+ }
+ .btn{
+     padding:0 10rpx;
+     font-size:24rpx;
+     line-height: 1.833333333333;
+     color: #fff;
+     background: var(--main-color);
+     border-radius:3px
+ }
+ /* goods-list */
+ .goods-list{
+    margin-top: 10rpx
+ }
+ .goods-list-item{
+     background: #fff
+ }
+ .goods-list .goods-cover{
+     padding: 2rpx 0 2rpx 10rpx;
+     width: 220rpx;
+     height:220rpx
+ }
+ .goods-list .goods-discount{
+     top: 2rpx;
+     left: 12rpx
+ }
+ .goods-list .goods-content{
+     height:222rpx; 
+     margin-left: 24rpx;
+     padding:20rpx 14rpx 20rpx 0;
+     border-bottom: 1rpx solid #f2f2f2;
+     box-sizing: border-box
+ }
+ .goods-list .goods-title{
+     color:var(--font-color);
+     font-size: 28rpx
+ }
+ .goods-list .goods-info{
+     margin-top: auto
+ }
+ .goods-list .goods-price{
+     margin-right: 20rpx
+ }
+ .goods-list .goods-origin-price{
+     color:#666;
+     text-decoration: line-through;
+     font-size: 28rpx
+ }
+.goods-store{
+    margin-top:14rpx;
+    font-size: 0
+}
+ .goods-list .store-name{
+     max-width: 60%;
+     font-size: 28rpx;
+     color: #333;
+     word-break: break-all;
+     margin-right: 20rpx;
+ }
+ .goods-list .enter-store{
+     font-size: 28rpx;
+     color: #999
+ }
+.isLoading{
+    width: 64rpx;
+    height: 64rpx;
+    margin:20rpx auto
+}
+.isLoading image{
+    width: 100%;
+    height: 100%
+}
+.loading-all,.loading-error,.loading-time-out{
+    text-align: center;
+    font-size: 24rpx;
+    color: #666;
+    padding: 30rpx 0
+}
+
+.re-coupons {
+    font-size: 24rpx;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff; 
+    position: absolute;
+    right: 0;
+    padding: 4rpx 8rpx;
+    top:8rpx;  
+  }

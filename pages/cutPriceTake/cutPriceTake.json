@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "city-navigator":"/components/Navigator/Navigator",        
+        "share-poster": "/components/shareposter",
+        "base-audio": "/components/BaseAudio/BaseAudio",
+        "base-video": "/components/BaseVideo/BaseVideo"
+    }
+}

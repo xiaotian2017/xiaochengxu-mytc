@@ -1,0 +1,290 @@
+@import "../../public/floatbtntpl.wxss";
+@import "../../public/navigatorCommon.wxss";
+
+.activeAccount .activeAccountItem{
+    line-height: 1.13333333
+}
+.activeAccount .activeAccountItem:not(:last-of-type){
+    position: relative;
+    margin-right: 10rpx;
+    padding-right: 10rpx
+}
+.activeAccount .activeAccountItem:not(:last-of-type)::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
+    width: 1rpx;
+    height:94%;
+    background: #fff
+}
+.pintuan_commodity .time em {
+    background: #fe3d49
+}
+.jizan_commodity_infor .price .i_price01 {
+    color: #fe3d49
+}
+.jizan_commodity_infor .sheng {
+    color: #fe3d49
+}
+.jizan_commodity_infor .date{
+    position:relative;
+    padding-bottom:20rpx; 
+    color:#fe3d49;
+    border-bottom: 1rpx solid #f0f0f0
+}
+.invite_account{
+    padding-top:31rpx
+}
+.invite_account .num{
+    margin-bottom: 42rpx;
+    height: 25rpx;
+    font-size:32rpx;
+    text-align: center;
+    color: #e94545
+}
+.avatarContent .avatar{
+    display: block;
+    margin: 0 auto;
+    width:150rpx;
+    height:150rpx;
+    border:none;
+    border-radius: 50%;
+    margin-bottom:34rpx
+}
+.avatarContent .avatar img{
+    width:100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 50%
+}
+.avatarContent .userName{
+    padding:0 14rpx;
+    max-width:240rpx;
+    line-height: 1.62962929;
+    text-align: center;
+    font-size:28rpx;
+    color: #333;
+    background: #ffb638;
+    border: solid 1px #333;
+    border-radius: 10rpx
+}
+.invite_account .tagName{
+    font-size:28rpx;
+    font-weight: 500;
+    text-align: center;
+    color: #333
+}
+.startCut,.inviteFriends,.buyThisPrice,.cutMyself{
+    display: block;
+    line-height: 3.125;
+    font-size:32rpx;
+    text-align: center;
+    font-weight: 500;  
+    border-radius:23rpx
+}
+.startCut,.inviteFriends{
+    width: 92.96%;
+    margin:36rpx auto 0;
+    color: #fff;
+    background-color: #fe3d49       
+}
+.inviteFriends{
+    margin-bottom:30rpx
+}
+.buyThisPrice,.cutMyself{
+    margin:0;
+    width: 44.93%;
+    color: #333;
+    background-color: #ffb638
+}
+.icon-location{
+    width:32rpx;
+    height:32rpx;
+    margin-right: 10rpx;
+    vertical-align: middle
+}
+.goShop{
+    font-size: 28rpx;
+    height: 28rpx;
+    line-height: 1;
+    margin: auto 0;
+    padding: 12rpx 12rpx;
+    color: #fff;
+    background: #ff6600;
+    border-radius:6rpx;
+}
+.jizan_shuoming_f p{
+    line-height: 1.29
+}
+.tabBar{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    z-index: 10
+}
+.emptyBlock{
+    background: #fff;
+    margin-top:20rpx;
+    width: 100%;
+  
+}
+.tabBarFixed{
+    position: fixed;
+    top: 0;
+    margin-top: 0    
+}
+.tabBar view{
+    height: 100%;
+    line-height: 88rpx;
+    font-size:32rpx;
+    text-align: center;
+    color: #333
+}
+.tabBar .tabItemActive{
+    color: #ff5a00
+}
+.kanjia-ranking{
+    padding: 0 20rpx;
+    background: #fff
+}
+.kanjia-ranking .headTitle{
+    padding-top:29rpx;
+    font-size:32rpx;
+    line-height: 1.13;
+    color: #333;
+    padding-bottom:30rpx;
+
+}
+.ranking-item{
+    padding:15.5rpx 0;
+    font-size:28rpx
+}
+.kanjia-ranking .xunzhang_size{
+    width:64rpx;
+    height:64rpx
+}
+.ranking-item .head{
+    width:70rpx;
+    height:70rpx;
+    border-radius: 50%;
+    margin-left:8.45%
+}
+.ranking-item .userName{
+    max-width:170rpx;
+    overflow: hidden;
+    margin-left:20.42%;    
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical; 
+    display: -webkit-box
+}
+.ranking-item .endPrice{
+    width: 110rpx;
+    text-align: center;
+    margin-left: auto;
+    color:#fe3d49;
+    line-height: 1.29
+}
+/*音乐按钮*/
+.musicmove{
+    animation: musicmove 1.1s infinite linear;
+    -webkit-animation: musicmove 1.1s infinite linear
+}  
+@-webkit-keyframes musicmove{ 
+    0%{-webkit-transform: rotate(0)}
+    100% {transform:rotate(360deg)}
+}
+@keyframes musicmove{
+    0%{transform:rotate(0)}    
+    100% {transform:rotate(360deg)}
+}
+
+/*我也要制作*/
+.kanjia_make_cell {
+    padding: 0 20rpx;
+    height:88rpx;
+    font-size:28rpx;
+    line-height:1;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box
+}
+.kanjia_make_cell .f01{
+    color: #fff
+}
+.kanjia_make_cell .close{
+    width: 40rpx;
+    height: 40rpx
+}
+.kanjia_make_cell .close::before,.kanjia_make_cell .close::after{
+    background: #fff
+}
+.dialog_tk .icon-guanbi {
+  position: absolute;
+  bottom: -180rpx;
+  left: 50%;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  font-size: 80rpx;
+  z-index: 2001;
+}
+
+.get-love-price-btn {
+    width:320rpx;
+    height:68rpx;
+    font-size:32rpx;
+    line-height:68rpx;
+    text-align:center;
+    background:#fe3d49;
+    display:block;
+    margin:30rpx auto 0;
+    color:#fff;
+    border-radius:32rpx;
+    animation:move 1s ease-in infinite;        
+}
+
+.re-coupon-label {
+    font-size: 24rpx;
+    color:#ffb504;
+    border: 1rpx solid #ffb504;
+    font-weight: normal;
+    padding:4rpx 20rpx;
+}
+.member-price {
+    font-size: 24rpx;
+    color: #fe3d49;
+    margin-left: 20rpx;
+}
+
+.make-money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  width: 74px;
+  height: 25px;
+  border-radius: 13px 0 0 13px;
+  background: #2F2D23;
+  font-size: 12px;
+  color: #D9AE6F;
+  z-index: 2;
+}
+
+.make-money>image {
+  position: abosute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  margin-left: -10px;
+}
+
+.make-money>text {
+  margin-left: 3px;
+}

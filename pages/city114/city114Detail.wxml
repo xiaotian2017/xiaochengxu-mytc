@@ -1,0 +1,72 @@
+<view class="detail-container">
+    <!-- 上部 -->
+    <view class="top-wrap">
+        <view class="company-name wzsl">        
+            {{detaildata.Name !='null' && detaildata.Name && detaildata.Name || ''}}
+        </view>
+        <view class="position" bindtap="searchLocation">
+            <icon class="iconfont icon-position"></icon>
+            <text class="position-name wzsl"> {{detaildata.Address !='null' && detaildata.Address && detaildata.Address || ''}}</text>
+        </view>
+        <view class="service vz-flex flex-center">
+            <text class="wzsl" style="display:inline-block;width:500rpx">{{detaildata.Trade && detaildata.Trade}}</text>
+            <view>
+                <icon class="iconfont icon-eye"></icon>
+                <text class="visited-num">{{detaildata.clickCount}}人访问</text>
+            </view>
+        </view>
+        <view class="vz-flex vz-center flex-wrap" wx:if="{{welfare.length}}" style="border-top:1rpx solid #f0f0f0;padding-top:20rpx">
+            <blcok wx:for="{{welfare}}" wx:key="{{index}}">
+                <view class="welfare" style="margin-bottom: 8rpx">
+                   {{item}}
+                </view>
+            </blcok>
+        </view>
+
+        <view class="label" wx:if="{{detaildata.Introduce !='null' && detaildata.Introduce}}">
+            <text>{{detaildata.Introduce !='null' && detaildata.Welfare && detaildata.Introduce || ''}}</text>
+        </view>
+    </view>
+    <!-- 下部 -->
+    <view class="bottom-wrap">
+        <view class="recommend border-1px-b" style="border-bottom:1rpx solid #f0f0f0">为你推荐</view>
+        <block wx:for="{{recomList}}" wx:key="{{index}}">
+            <view class="recommend-list" data-idx="{{index}}" bindtap="showMineDetail">
+                <view class="recommend-name wzsl" data-idx="{{index}}">{{item.Name}}</view>
+                <view class="position1 border-1px-b"  catchtap="searchLocation1">
+                    <icon class="iconfont icon-position"></icon>
+                    <text data-lat="{{item.lat}}" data-name="{{item.Name}}" data-address="{{item.Address}}" data-lng="{{item.lng}}"
+                        class="position-name wzsl">{{item.Address && item.Address || '' }}</text>
+                </view>
+                <icon class="iconfont icon-left-arrow"></icon>
+            </view>
+        </block>
+    </view>
+</view>
+
+
+<view class="qr-wrap" wx:if="{{isShowQr}}" bindtap="closeQr">
+    <view class="qr-main">
+        <view class="qr-title">
+            长按二维码联系店主
+        </view>
+        <image class="qr" src="{{qrUrl}}" />
+    </view>
+</view>
+
+
+<!--footer bar -->
+<view class="footer vz-flex">
+    <view class="footer-item" bindtap="toBack">
+        <icon class="iconfont icon-tongcheng footer-icon"></icon>
+        <text>{{customName}}</text>
+    </view>
+    <view class="footer-item" bindtap="openQr">
+        <icon class="iconfont icon-wx1 footer-icon"></icon>
+        <text>微信</text>
+    </view>
+    <view class="footer-item" bindtap="makePhone">
+        <icon class="iconfont icon-dianhua footer-icon"></icon>
+        <text>电话</text>
+    </view>
+</view>

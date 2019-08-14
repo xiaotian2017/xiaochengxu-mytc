@@ -1,0 +1,159 @@
+
+    <view style="padding-bottom: 80px">
+        <view class="tips-f">注 : 用户分享页面才可领取</view>
+          <view class="write-infor-cells">
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">分享页面</view>
+                </view>
+                <view class="flex write">
+                    <label class="shuru-input ta-l"   bindtap='openselectpage' data-val='1'>{{redPacketShare.ShareItemTitle}}</label>
+                </view>
+            </view>
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">总金额</view>
+                </view>
+                <view class="flex write">
+                    <input class="shuru-input ta-l" bindinput="inputamount"   value="{{redPacket.Amount}}" placeholder="填写金额" ></input>
+                </view>
+                <view>元</view>
+            </view>
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">红包个数</view>
+                </view>
+                <view class="flex write">
+                    <input class="shuru-input ta-l" bindinput="inputaddcount"  value="{{redPacket.TotalCount}}"></input>
+                </view>
+                <view>个</view>
+            </view>
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">奖励红包最多领取数</view>
+                </view>
+                <view class="flex write">
+                    <input class="shuru-input ta-l"  bindinput="inputbonuscount" value="{{redPacket.MaxDrawCount}}"  placeholder="填写个数"></input>
+                </view>
+                <view>个</view>
+            </view>
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">分享领取时间间隔</view>
+                </view>
+                <view class="flex write">
+                    <input class="shuru-input ta-l" bindinput="inputshareinterval" value="{{redPacket.ShareTime}}"  placeholder="填写个数"></input>
+                </view>
+                <view>小时</view>
+            </view>
+         </view>
+
+        <view class="write-infor-cells">
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="write-title width">
+                    <view class="p01">红包限制</view>
+                </view>
+                <view class="flex write">
+                    <input  class="shuru-input ta-l" bindinput="inputdistance" value="{{redPacket.Distance}}"  placeholder="不填则不限"></input>
+                </view>
+                <view>km内可抢</view>
+            </view>
+            <view class="d-flex d-flex-center write-infor-cell">
+                <view class="flex" bindtap="getLocation" >
+                    <span wx:if="{{redPacket.Laction==''}}" class="location-bt orange"><i class="icon-location"></i>获取红包位置</span>
+                    <span wx:else class="location-bt orange">{{redPacket.Laction==''||redPacket.Laction==nviewl?"获取红包位置":redPacket.Laction}}</span>
+                </view>
+            </view>
+        </view>
+        <view class="postTitle" style="">
+            <view class="f_left">分配方式</view>
+           
+              <view style="width:400rpx" class="vz-flex vz-flex-center">
+                    <radio-group class="radio-group" bindchange="changedrawtype">
+                        <label style="width:100rpx">
+                            <radio color="#fe3d49" value="0" checked="{{redPacket.DrawType==0}}" />随机分配
+                        </label>
+                        <label style="padding-left:20rpx">
+                            <radio color="#fe3d49" value="1" checked="{{redPacket.DrawType==1}}" />平均分配
+                        </label>
+                    </radio-group>
+                </view>
+        </view>
+        <!-- <view  class="postTitle" style="">
+            <view class="f_left">是否启用红包分享标题</view>
+            <view class="f_center">
+                <view class="choose">
+                    <view class='li'><input type="radio" class="check"></input>不启用</view>
+                    <view class='li'><input type="radio" class="check"></input>启用</view>
+                </view>
+            </view>
+        </view> -->
+        <view class="tips-f">
+            红包发布不可退回，请适当控制红包数量
+            <br /><br />
+            红包攻略：建议平均金额不超过5毛，小额，多次抢购，红包效果更好
+        </view>
+        <view class="tips-f">红包发布后金额，个数不可编辑，请确认填写信息</view>
+        <view class="tips-f">奖励红包:其他用户通过红包用户分享链接进入分享用户可多领取一个红包，设置为0时默认不开启该功能</view>
+        <view class="tips-f">分享领取时间间隔:用户领取红包后间隔一定时间后即可再次分享领取红包，设置为0时默认不开启该功能</view>
+        <view style="color:red;padding: 0 15px;font-size:12px">注 : 微信官方需收取 ({{payrate}})% 手续费</view>
+         
+    </view>
+    <!--底部按钮-->
+    <view class="fix-bl">
+        <view class="basewrap d-flex d-flex-center write-bottom-ul">
+            <view class="flex li01">
+                <view>
+                    <i class="i01">需付款</i><i id="payamout" class="pay-money">{{payPrice==0?'0.00':payPrice}}</i>
+                </view>
+            </view>
+            <view class="li01 bt"  bindtap="editredpack"><view style='color: #fff;'>{{rid>0?"确定编辑" : "发红包"}}</view></view>
+        </view>
+    </view>
+    <view id="shareLayer" class="d-flex flex-col" style="z-index:9999;" hidden='{{showpagesel==0}}' >
+        <view class="shareLayerContent flex d-flex flex-col" style='height:100%'>
+            <!-- <view class="shareTitle">选择分享页面</view> -->
+            <view class="shareList flex-1" style="margin-top:5px;">
+                <view class="shareItem" data-tab='0' catchtap='getactivity'>
+                    <view   class="bottom-line menuItem li"  data-itemid='0'  data-stype='0'  catchtap='selectsubtab'>
+                        店铺首页
+                        <image hidden='{{currentid!=0}}'  class='selecticon' src='http://j.vzan.cc/content/city/xcx/images/select.png'></image>
+                    </view>
+                </view>
+                <view class="shareItem" data-tab='1' catchtap='getactivity'>
+                    <view   class="bottom-line menuItem">
+                        抢优惠
+                        <i class="iconfont icon-arrow-copy-copy rotate arrow">></i>
+                    </view>
+                    <view hidden='{{tabshow!=1||aclist.length==0}}'  class="shareItemList">
+                          <view class='li' wx:for="{{aclist}}" data-itemid='{{item.id}}' data-itemname='{{item.Name}}'  data-stype='1'  catchtap='selectsubtab'>{{item.Name}}  <image hidden='{{currentid!=item.id}}'  class='selecticon' src='http://j.vzan.cc/content/city/xcx/images/select.png'></image></view>
+                    </view>
+                </view>
+                  <view class="shareItem" data-tab='2' catchtap='getactivity'>
+                    <view   class="bottom-line menuItem">
+                        拼团
+                        <i class="iconfont icon-arrow-copy-copy rotate arrow">></i>
+                    </view>
+                    <view hidden='{{tabshow!=2||aclist.length==0}}'  class="shareItemList">
+                          <view class='li' wx:for="{{aclist}}" data-itemid='{{item.id}}'  data-itemname='{{item.Name}}'   data-stype='2'  catchtap='selectsubtab'>{{item.Name}}  <image hidden='{{currentid!=item.id}}'  class='selecticon' src='http://j.vzan.cc/content/city/xcx/images/select.png'></image></view>
+                    </view>
+                </view>
+                <view class="shareItem" data-tab='3' catchtap='getactivity'>
+                    <view  class="bottom-line menuItem">减价<i class="iconfont  icon-arrow-copy-copy rotate arrow">></i></view>
+                    <view hidden='{{tabshow!=3||aclist.length==0}}'  class="shareItemList">
+                        <view class='li' wx:for="{{aclist}}"  data-itemid='{{item.id}}'  data-itemname='{{item.Name}}'  data-stype='3' catchtap='selectsubtab'>{{item.Name}}  <image hidden='{{currentid!=item.id}}'  class='selecticon' src='http://j.vzan.cc/content/city/xcx/images/select.png'></image></view>
+                      
+                    </view>
+                </view>
+                <view class="shareItem" data-tab='4' catchtap='getactivity'>
+                    <view  class="bottom-line menuItem">爱心价<i class="iconfont  icon-arrow-copy-copy rotate arrow">></i></view>
+                   <view hidden='{{tabshow!=4|aclist.length==0}}'  class="shareItemList">
+                          <view class='li' wx:for="{{aclist}}" data-itemid='{{item.id}}'  data-itemname='{{item.Name}}'  data-stype='4'  catchtap='selectsubtab'>{{item.Name}}  <image hidden='{{currentid!=item.id}}' class='selecticon' src='http://j.vzan.cc/content/city/xcx/images/select.png'></image></view>
+                    </view>
+                </view>
+            </view>
+            <view  class="shareBtn" catchtap='openselectpage' data-val='0'>确定</view>
+        </view>
+        <span class="close-layer"></span>
+    </view>
+    <mapbar ref="MapBar" changeloc="ChangeLocation"></mapbar>

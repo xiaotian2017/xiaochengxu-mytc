@@ -1,0 +1,42 @@
+@import "../../css/cell.wxss";
+.use_cell{padding:15px 10px;color:#333;font-size:14px;background: #fff;border-bottom:1rpx solid #f0f0f0;}
+.use_cell .head{height: 160rpx;width: 160rpx;margin-right: 20rpx;}
+.use_cell .head image{width: 100%;height: 100%;}
+.use_cell .f01{font-size: 32rpx;}
+.use_cell .f02{font-size: 28rpx;color:#666;margin-top: 10rpx;}
+.icon_yh_call{
+background-image:url(https://j.vzan.cc/content/city/images/smallapp_entertainment_01.png?v=1.21);
+background-size:500px;
+background-repeat:no-repeat;
+}
+.icon_yh_call{
+background-position:-85px 0;
+width:29px;
+height:29px;
+display:block;
+}
+.dialog-Voucher {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    width: 600rpx;
+    height: 700rpx;
+    background: url('https://i.vzan.cc/image/jpg/2018/3/19/154053d211945907a64541bd362d2a33e81ecb.jpg') no-repeat;
+    background-size: 100%;
+    text-align: center;
+}
+
+.dialog-name {
+    color: rgb(216, 78, 67);
+    margin-top: 220rpx;
+    font-size: 32rpx;
+}
+
+.guanbi {
+    position: absolute;
+    right: 40rpx;
+    font-size: 40rpx;
+    color: #fff;
+}

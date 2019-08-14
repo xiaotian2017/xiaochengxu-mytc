@@ -1,0 +1,101 @@
+<!--pages/business_detail/order.wxml-->
+<view class="container" hidden='{{isloadall==0}}'>
+  <!--情况一-->
+  <view class="ymyh_cell order">
+    <view class="d-flex d-flex-center content">
+      <view class="head">
+        <image src="{{coupon.LogoUrl}}" style="border-radius:4px;" mode='aspectFill'></image>
+      </view>
+      <view class="flex">
+        <view class="title clamp1">{{coupon.CouponName}}</view>
+        <view class="daodian">
+          <label class="daodian-pay" wx:if="{{coupon.NewPayCash > 0}}">{{coupon.NewPayCash>0?'需到店付'+coupon.NewPayCash:''}}</label>
+        </view>
+        <view class="price">￥{{coupon.BuyPrice*1000/100000}}
+          <label class="xiexian line-through">￥{{coupon.CouponMoney*1000/100000}}</label>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='write_cells'>
+    <view class='d-flex-center write_cell'>
+      <view class='flex left width'>数量</view>
+      <view catchtap='changeBuyNum' data-range='-1'>
+        <icon class='icon_jian {{buyNum==1?"gray":""}}'></icon>
+      </view>
+      <view>
+        <input class='renshu_input' bindinput="getBuyNum" value="{{buyNum}}"></input>
+      </view>
+      <view catchtap='changeBuyNum' data-range='1'>
+        <icon class='icon_jia {{maxNum?"gray":""}}'></icon>
+      </view>
+    </view>
+    <view wx:if="{{uservoucherlist.length>0}}" class='d-flex-center flex-between write_cell' bindtap="showVoucher">
+      <view class='flex left width' wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+      <view wx:else>减{{voucherMoney}}元</view>
+      <icon class="iconfont icon-jiantou"></icon>
+    </view>
+    <view class='d-flex-center write_cell'>
+      <view class='flex left width'>支付方式</view>
+      <view class='c666'>
+        <image class='icon_weixin_pay' src='http://j.vzan.cc/content/city/xcx/images/Entertainment_02.png'></image>微信支付</view>
+    </view>
+  </view>
+  <view class='write_cells mt-1'>
+    <view class='d-flex-center write_cell'>
+      <view class='left width'>联系电话</view>
+      <view class='flex right'>
+        <input class='write_input' type='number' placeholder='请留下联系方式方便商家通知' bindinput="telePhoneInput"></input>
+      </view>
+    </view>
+    <!-- <view class='write_cell'>
+      <view class='left width'>备注</view>
+      <view class='flex right'>
+        <textarea class='write_textarea' auto-height bindinput="remarkInput" placeholder='可以填写您的附加要求，我们会尽量安排'></textarea>
+      </view>
+    </view> -->
+  </view>
+</view>
+
+<!--底部栏-->
+<view class="fix-bl d-flex shangjia_bottom_nav pay">
+  <view class='flex fukuan'>实付款：
+    <label class='price'>{{(payMoney*buyNum-voucherMoney*100)*1000/100000}}</label>
+    <text wx:if="{{voucherMoney>0}}" style="font-size: 24rpx">(已减{{uservoucherlist[voucherIdx].Money}}元)</text>
+  </view>
+  <button class="block_bt" catchtap='clickToPay'>立即支付</button>
+</view>
+
+<view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+  <view class="re-coupon-body">
+    <view class="re-coupon-body-title">
+      选择代金券
+      <icon class="iconfont icon-cha" bindtap="hideVoucher"></icon>
+    </view>
+    <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+      <view class="re-coupon-item-wrap">
+        <block wx:for="{{uservoucherlist}}" wx:key="{{index}}">
+          <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+            <view class="re-coupon-price">
+              <text>￥</text>
+              <text>{{item.Money}}</text>
+            </view>
+            <view class="re-coupon-right">
+              <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+              <view wx:else>无门槛</view>
+              <view class="c666">
+                <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                  <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                  <text>{{sname}}</text>             
+                </view>
+                <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+              </view>
+            </view>
+            <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</view>

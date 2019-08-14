@@ -1,0 +1,162 @@
+<view class="container">
+    <view class='tabBar d-flex bz' style='margin-bottom:10rpx;padding:0 20rpx;width:100%;background:#fff'>
+        <view wx:for="{{arrayNav}}" class="flex  tabItem c333 {{index==currentNav?'tabItemActive':''}}" data-index='{{index}}' wx:for-item="itemNav"
+            bindtap='click_nav'>{{itemNav}}</view>
+    </view>
+    <view class="activity_list_all" style='padding-bottom:150px'>
+        <!--砍价-->
+        <view class="activity_list" hidden='{{1!=currentNav}}'>
+            <view class='li' wx:for="{{cuts}}" wx:key="{{index}}" data-index='{{index}}' data-cutid='{{item.Id}}'  data-sid="{{item.StoreId}}"      bindtap='tocutdetail'>
+                <view class="pic">
+                    <image class="pic01" src="{{item.ImgUrl}}"></image>
+                    <label class="label">减价</label>
+                    <view  wx:if="{{item.Voucher}}" class="re-coupons">返{{item.Voucher.VoucherMoney}}元代金券</view>
+                    <view class="time" style="color: #fff;font-size: 26rpx;">
+                        <text decode='true' wx:if="{{item.ValidDateStart== true && item.ValidDateEnd == false && item.RemainNum > 0}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已结束':'距结束剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}} </text>
+                        <text decode='true' wx:if="{{item.ValidDateStart==false}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已开始':'距开始剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.ValidDateEnd == true || item.RemainNum <= 0}}">活动已结束</text>
+                    </view>
+                </view>
+                <view class="content">
+                    <view class="title">
+                        <view class="clamp2">{{item.BName !='null' && item.BName || ''}}</view>
+                    </view>
+                    <view class="d-flex price01">
+                        <view class="flex">原价:{{item.OriginalPrice*1000/100000}}元</view>
+                        <view>{{item.BrowseCount}}人围观</view>
+                    </view>
+                    <view class="d-flex d-flex-center price02 {{(item.ValidDateEnd == true || item.RemainNum <= 0)?'endState':''}}" >
+                        <view class="flex f-16rem">￥{{item.FloorPrice*1000/100000}}</view>
+                        <view class="bt" wx:if="{{!(item.ValidDateEnd == true || item.RemainNum <= 0)}}">去参与</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--抢优惠-->
+        <view class="activity_list" hidden='{{0!=currentNav}}'>
+            <view class='li' wx:for="{{coupons}}" wx:key="{{index}}" data-index='{{index}}' data-sid="{{item.StoreId}}" catchtap='clickToCouponDetail'
+                data-id='{{item.Id}}' wx:key="{{index}}">
+                <view class="pic">
+                    <image class="pic01" src="{{item.LogoUrl}}"></image>
+                    <label wx:if="{{item.EarlyBookTime == 0}}" class="label">
+                        免预约
+                    </label>
+                    <view  wx:if="{{item.Voucher}}" class="re-coupons">返{{item.Voucher.VoucherMoney}}元代金券</view>
+                    <view class="time" style="color: #fff;font-size: 26rpx;">
+                        <text decode='true' wx:if="{{item.IsStart== true && item.IsEnd == false && item.RemainNum > 0}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已结束':'距结束剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.IsStart==false}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已开始':'距开始剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.IsEnd == true || item.RemainNum <= 0}}">抢购已结束</text>
+                    </view>
+                </view>
+                <view class="content">
+                    <view class="title">
+                        <view class="clamp2">{{item.CouponName !='null' && item.CouponName || ''}}</view>
+                    </view>
+                    <view class="d-flex price01">
+                        <view class="flex">原价:{{item.CouponMoney*1000/100000}}元</view>
+                        <view>已抢{{item.CreateNum-item.RemainNum}}份</view>
+                    </view>
+                    <view class="d-flex d-flex-center price02 {{(item.IsEnd == true || item.RemainNum <= 0)?'endState':''}}">
+                        <view class="flex f-16rem">￥{{item.BuyPrice*1000/100000}}</view>
+                        <view class="bt"  wx:if="{{!(item.IsEnd == true || item.RemainNum <= 0)}}">马上抢购</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!--集爱心-->
+        <view class="activity_list" hidden='{{2!=currentNav}}'>
+            <view class='li' wx:for="{{loves}}" wx:key="{{index}}"  data-index='{{index}}' data-loveid='{{item.Id}}' data-storeid="{{item.StoreId}}"
+                bindtap='tolovedetail'>
+                <view class="pic">
+                    <image class="pic01" src="{{item.ImgUrl}}"></image>
+                    <label class="label">爱心价</label>
+                    <view  wx:if="{{item.Voucher}}" class="re-coupons">返{{item.Voucher.VoucherMoney}}元代金券</view>
+                    <view class="time" style="color: #fff;font-size: 26rpx;">
+                        <text decode='true' wx:if="{{item.ValidDateStart== true && item.ValidDateEnd == false && item.RemainNum > 0}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已结束':'距结束剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.ValidDateStart==false}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已开始':'距开始剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.ValidDateEnd == true || item.RemainNum <= 0}}">活动已结束</text>
+                    </view>
+                </view>
+                <view class="content">
+                    <view class="title">
+                        <view class="clamp2">{{item.Title}}</view>
+                    </view>
+                    <view class="d-flex price01">
+                        <view class="flex">原价:{{item.OriginalPrice*1000/100000}}元</view>
+                        <view>{{item.BrowseCount}}人围观</view>
+                    </view>
+                    <view class="d-flex d-flex-center price02 {{(item.ValidDateEnd == true || item.RemainNum <= 0)?'endState':''}}">
+                        <view class="flex f-16rem">￥{{item.LikeMaxPrice*1000 / 100000}}</view>
+                        <view class="bt" wx:if="{{!(item.ValidDateEnd == true || item.RemainNum <= 0)}}">去参与</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 拼团 -->
+        <view class="activity_list groupList" hidden="{{3!=currentNav}}">
+            <view class='li' wx:for="{{groupList}}" wx:key="{{index}}" data-index='{{index}}' data-storeid="{{item.StoreId}}" data-gid='{{item.Id}}'
+                bindtap='goGroupDtl'>
+                <view class="pic">
+                    <image class="pic01" src="{{item.ImgUrl}}"></image>
+                    <label class="label" style="background:#fe3d49;left:0">拼团</label>
+                    <view  wx:if="{{item.Voucher}}" class="re-coupons">返{{item.Voucher.VoucherMoney}}元代金券</view>
+                    <view class="time" style="color: #fff;font-size: 26rpx;">
+                        <text decode='true' wx:if="{{item.IsStart== true && item.IsEnd == false && item.RemainNum > 0}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已结束':'距结束剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.IsStart==false}}">{{wxTimerList[index] && m.findIdx(wxTimerList[index])?'抢购已开始':'距开始剩 ' + (wxTimerList[index]?wxTimerList[index]:'')}}</text>
+                        <text decode='true' wx:if="{{item.IsEnd == true || item.RemainNum <= 0}}">抢购已结束</text>
+                    </view>
+                </view>
+                <view class="content">
+                    <view class="title">
+                        <view class="clamp2">{{item.GroupName}}</view>
+                    </view>
+                    <view class="d-flex price01">
+                        <view class="flex line-through">￥{{item.OriginalPrice*1000/100000}}元</view>
+                        <view>{{item.GroupSize}}人团</view>
+                    </view>
+                    <view class="d-flex price01">
+                        <view class="flex" style='color:#ff2c31'>￥{{item.DiscountPrice*1000/100000}}</view>
+                        <view>已团{{item.CreateNum-item.RemainNum}}件</view>
+                    </view>
+                    <view class="d-flex d-flex-center price02 {{(item.IsEnd == true || item.RemainNum <= 0)?'endState':''}}" style="background:#fe3d49">
+                        <view class="flex f-16rem"></view>
+                        <view class="bt {{(item.IsEnd == true || item.RemainNum <= 0)?'endState':''}}">去开团</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="classname">
+            <view style="margin-top:20px;width:100%;text-align:center;font-size:14px;color:#aaa;background-color:#fff;height:40px;vertical-align:middle;line-height:40px">
+                <image hidden='{{!isLoadData}}' style='width:50px;height:40px;vertical-align:middle' src='http://j.vzan.cc/content/city/xcx/images/cityxcxloading.gif'></image>{{isLoadData ? '正在加载 . .' : havemore ? '上拉加载更多' : '— — 已加载全部 — —'}}</view>
+        </view>
+    </view>
+
+    <!--底部导航-->
+    <view class="fix-bl d-flex shangjia_bottom_nav index">
+        <view class="flex bt_li" hover-class='none' bindtap='bottomnavswitch' data-url='{{buyversion==3?"../index/index":buyversion==2?"../shopindex/shopindex":"../postindex/postindex"}}'>
+            <icon class="iconfont icon-index"></icon>
+            <text>首页</text>
+        </view>
+
+        <view class="flex bt_li active">
+            <icon class="iconfont icon-kanjia"></icon>
+            <text>活动</text>
+        </view>
+        <view class="flex bt_li" hover-class='none' data-url='../cutlist/cutlist' bindtap='bottomnavswitch'>
+            <icon class="iconfont icon-order"></icon>
+            <text>我的订单</text>
+        </view>
+        <view class="flex bt_li" hover-class='none' data-url='../person_center/person_center' bindtap='bottomnavswitch'>
+            <icon class="iconfont icon-person"></icon>
+            <text>我的</text>
+        </view>
+    </view>
+</view>
+<!-- 快捷导航 -->
+<city-navigator  wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>
+<wxs module="m">
+    function findIdx(param) { if (param.indexOf('-')>-1) { return true } } module.exports.findIdx = findIdx;
+</wxs>

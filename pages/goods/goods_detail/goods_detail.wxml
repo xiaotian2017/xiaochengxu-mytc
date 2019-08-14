@@ -1,0 +1,120 @@
+<view class="global-wrapper" wx:if="{{!!mainmodel.mainmodel.State && mainmodel.mainmodel.State === 1 && init}}">
+    <city-goodsDetail currentNav="0" cityNavList="['']" mainmodel="{{mainmodel}}"></city-goodsDetail>
+ <view wx:if='{{shareposterparams.isfx==1}}' class="make-money" bindtap="sharePoster" data-fx='1'>
+<image src='/images/icon-fx.png' />
+<text>分享赚钱</text>
+</view>
+<view wx:else class="make-money" bindtap="sharePoster" data-fx='0'>
+<image src='/images/icon-share.png' />
+<text>生成海报</text>
+</view>
+
+    <!--底部-->
+    <view class="foot-bar d-flex">
+        <view class="foot-service foot-icon" catchtap="openMask">客服</view>
+        <view class="foot-store foot-icon" data-storeId="{{mainmodel.mainmodel.Store.Id}}" catchtap="goToStore">店铺</view>
+        <view class="foot-goods-car foot-icon" catchtap="goToMyCar">
+            购物车
+            <view class="foot-num" wx:if="{{mainmodel.CartCount > 0}}">{{mainmodel.CartCount}}</view>
+        </view>
+        <view class="foot-add" catchtap="addToGoodsCar" wx:if="{{mainmodel.mainmodel.IsSell == 1 && mainmodel.mainmodel.Stock > 0}}">加入购物车</view>
+        <view class="foot-purchase" wx:if="{{mainmodel.mainmodel.IsSell == 1 && mainmodel.mainmodel.Stock > 0}}" catchtap="goToPay">立即购买</view>
+        <!-- 卖完了 -->
+        <view class="foot-sold flex" wx:if="{{mainmodel.mainmodel.IsSell == 1 && mainmodel.mainmodel.Stock <= 0}}">已售罄</view>
+    </view>
+
+    <!-- 购物车弹层 -->
+    <view class="goods-car-layer {{showLayer}}">
+        <view class="goods-car-wrapper {{slide}}">
+            <view class="close" catchtap="hideLayer"></view>
+            <!-- 加入购物车 -->
+            <view class="goods-base-info d-flex">
+                <view class="goods-cover">
+                    <image  src="{{mainmodel.mainmodel.ImgUrl==''?'http://oss.vzan.cc/image/jpg/2016/11/25/11401033c63cc82c2d4dfd8ad722ade7f8add4.jpg':mainmodel.mainmodel.ImgUrl}}" mode="widthFix"/>
+                </view>
+                <view>
+                    <!-- 无商品属性正常价格 -->
+                    <view class="goods-price" style='display:inline-block' wx:if="{{mainmodel.mainmodel.GoodsAttrList.length <= 0}}">
+                            <text>{{mainmodel.mainmodel.Price * 1000 / 100000}}</text>  
+                            <text wx:if="{{mainmodel.OpenMemberPrice&&mainmodel.mainmodel.MemberPrice>0}}"><text style="color:#FF0000;padding-left:20rpx;font-size: 26rpx">会员价:</text>{{mainmodel.mainmodel.MemberPrice * 1000 / 100000}}</text>                             
+                    </view>    
+                    <!-- 有商品属性设置正常价格 -->
+                    <view class="goods-price" style='display:inline-block'  wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+                        <text>{{goodsSizeActive !== ''?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Price *1000 / 100000:mainmodel.mainmodel.Price * 1000 / 100000}}</text>
+                        <text wx:if="{{mainmodel.OpenMemberPrice&&mainmodel.mainmodel.MemberPrice>0}}">
+                            <text style="color:#FF0000;padding-left:20rpx;font-size: 26rpx">会员价:</text>{{goodsSizeActive !== ''?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].MemberPrice>0?mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].MemberPrice *1000 / 100000 :mainmodel.mainmodel.Price * 1000 / 100000:mainmodel.mainmodel.Price * 1000 / 100000}}                         
+                        </text>
+                    </view>                  
+                    <view class="goods-remain">
+                        库存：{{mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Stock ? mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].Stock:mainmodel.mainmodel.Stock}}
+                    </view>
+
+                    <view class="goods-size-name" wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+                        {{goodsSizeActive !== ''?'已选：'+mainmodel.mainmodel.GoodsAttrList[goodsSizeActive].AttrName:'请选择尺码'}}
+                    </view>
+                    <view class="goods-layer-disocount" wx:if="{{mainmodel.mainmodel.hctId>0&&mainmodel.ishalfcard !== undefined && mainmodel.ishalfcard === 0}}" data-hctId="{{mainmodel.mainmodel.hctId}}" catchtap="goToOpenCityCard">(我要{{mainmodel.mainmodel.discount}}折)</view>
+                </view>
+            </view>
+            <!-- 尺寸选择 -->
+            <scroll-view class="goods-size-select" scroll-y="true">
+                <view class="goods-size" wx:if="{{mainmodel.mainmodel.GoodsAttrList.length > 0}}">
+                    <view class="goods-size-tag">请选择尺码</view>
+                    <view class="d-flex flex-wrap">
+                        <block wx:for="{{mainmodel.mainmodel.GoodsAttrList}}" wx:key="unique">
+                            <view class="goods-size-item {{index === goodsSizeActive?'goods-size-active':''}} {{item.Stock <=0 ?'goods-sold':''}}"
+                                data-index="{{index}}" catchtap="selectCurrentSize">{{item.AttrName}}</view>
+                        </block>
+                    </view>
+                </view>
+                <!-- 购买数量 -->
+                <view class="goods-quantity d-flex flex-between flex-center">
+                    <view class="goods-quantity-tag">
+                        购买数量
+                        <text wx:if="{{!!limitNum}}" class="goods-limit">(每人限购{{limitNum}}件)</text>
+                    </view>
+
+                    <view class="goods-quantity-action d-flex">
+                        <view class="goods-minus" catchtap="minusGoods">
+                            <image src="http://j.vzan.cc/content/city/xcx/images/minus.svg" />
+                        </view>
+
+                        <input type="number" bindinput="fillGoods" bindblur="testGoods" class="goods-input"
+                            value="{{goodsNum >= 1?goodsNum:''}}" confirm-type="done"></input>
+
+                        <view class="goods-add" catchtap="addGoods">
+                            <image src="http://j.vzan.cc/content/city/xcx/images/add.svg" />
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="goods-layer-btn" catchtap="selectDone" data-type="{{layerType}}">
+                确定
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 海报 -->
+<share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+
+<!--客服二维码 -->
+<city-mask contactInfo="{{contactInfo}}" open="{{openMask}}" hide="{{hideMask}}"></city-mask>
+<!-- 红包 -->
+<red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package>
+
+<!-- 提示弹层 -->
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<!-- 更多 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-poster" hidden='{{shareposterparams.isfx==1}}'  bindtap="sharePoster">海报</view>
+       
+    <view slot="slot2" class="navigatorItem navigatorItem-moreGoods" bindtap="moreGoods">更多商品</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-order" bindtap="goToMyOrder">我的订单</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-link"  bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+
+<!-- 商品被删除 -->
+<view class="goods-delete" wx:if="{{mainmodel.mainmodel.IsSell != 1 && init}}">
+    <image src="http://j.vzan.cc/content/city/xcx/images/goods-delete.png"></image>
+    <view class="little-tips">商品下架或被移动到别处,去看点<text catchtap="moreGoods">其他</text>的吧</view>
+</view>

@@ -1,0 +1,128 @@
+<view>
+    <view class="search-warp">
+        <view style="position:relative">
+            <input class="search-input" bindblur="blur" bindinput="getValue" bindconfirm="searchConfirm" placeholder="搜索商家名称" />
+            <icon class="search-icon" bindtap="search" size="18" type="search"></icon>
+        </view>
+    </view>
+    <view style="position: relative;">
+        <view class="vz-flex flex-center" style="border-bottom: 1rpx solid #f0f0f0;">
+            <view class="search-tab-item vz-flex flex-center" bindtap="toggleArea">
+                <view class="{{showArea||subAreaIdx!=null?'tab-active':''}} clamp-1">{{subAreaIdx==0&&areaList[0].name||subAreaIdx!=null&&subAreaList[subAreaIdx].name||'区域'}}</view>
+                <view class="arrow {{showArea?'arrow-active':''}}"></view>
+            </view>
+            <view class="search-tab-item vz-flex flex-center" bindtap="toggleCat">
+                <view class="{{showCat||subCompanyCategoryIdx!=null&&subCompanyCategoryIdx!=0||mainCompanyCategoryIdx!=null&&mainCompanyCategoryIdx!=0?'tab-active':''}}  clamp-1">{{subCompanyCategoryIdx!=null&&subCompanyCategoryIdx!=0&&subCompanyCategory[subCompanyCategoryIdx].Name||mainCompanyCategoryIdx!=null&&mainCompanyCategoryIdx!=0&&allCompanyCategory[mainCompanyCategoryIdx].Name||'行业'}}</view>
+                <view class="arrow {{showCat?'arrow-active':''}}"></view>
+            </view>
+            <view class="search-tab-item vz-flex flex-center" bindtap="toggleOrder">
+                <view class="{{showOrder||orderIdx==0||orderIdx==1?'tab-active':''}}">{{orderIdx==0&&'热门'||orderIdx==1&&'最新'||'排序'}}</view>
+                <view class="arrow {{showOrder?'arrow-active':''}}"></view>
+            </view>
+        </view>
+        <view class="vz-flex common-layer flex area-layer" wx:if="{{showArea}}">
+            <view class="flex">
+                <block wx:for="{{areaList}}" wx:key="{{index}}">
+                    <view class="area-item {{index==mainAreaIdx?'active-color':''}}" data-idx="{{index}}" data-pid="{{item.id}}" catchtap="getSubArea">{{item.name}}</view>
+                </block>
+            </view>
+            <scroll-view class="flex area-right" style="height: 200px;" scroll-y>
+                <block wx:for="{{subAreaList}}">
+                    <view class="area-item {{index==subAreaIdx?'active-color':''}}" data-areaid="{{item.id}}" data-idx="{{index}}" catchtap="getSubAreaIndexList">
+                        {{item.name}}
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+
+        <view class="vz-flex common-layer flex cat-layer" wx:if="{{showCat}}">
+            <scroll-view class="flex" scroll-y style="height: 200px;">
+                <block wx:for="{{allCompanyCategory}}" wx:key="{{index}}">
+                    <view class="cat-item {{mainCompanyCategoryIdx==index?'active-color':''}}" data-idx="{{index}}" bindtap="getSubCat">{{item.Name}}</view>
+                </block>
+            </scroll-view>
+            <scroll-view class="flex cat-right" style="height: 200px;" scroll-y>
+                <block wx:for="{{subCompanyCategory}}" wx:key="{{index}}">
+                    <view class="cat-item {{subCompanyCategoryIdx==index?'active-color':''}}" data-idx="{{index}}" data-id="{{item.Id}}" bindtap="getSubCatId">
+                        {{item.Name}}
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+
+        <view class="common-layer" wx:if="{{showOrder}}">
+            <view class="order {{orderIdx==0?'active-color':''}}" data-idx="0" bindtap="getOrder">
+                热门
+            </view>
+            <view class="order {{orderIdx==1?'active-color':''}}" data-idx="1" bindtap="getOrder">
+                最新
+            </view>
+        </view>
+    </view>
+
+    <view>
+        <block wx:for="{{indexList}}" wx:key="{{index}}">
+            <view class="hot-wrap" style="position: relative;">
+                <view class="hot-title clamp2" style="margin-bottom: 30rpx;word-break:break-all;">
+                    {{item.Name}}
+                </view>
+                <view wx:if="{{item.AreaName&&item.AreaName!='null'}}" class="hot-address clamp1" style="margin-bottom: 20rpx;line-height: 1.3;">
+                    地址:{{item.AreaName}}
+                </view>
+                <view class="hot-tel" style="margin-bottom: 30rpx" wx:if="{{item.LinkPhone&&item.LinkPhone!='null'}}">
+                    电话:{{item.LinkPhone}}
+                </view>
+                <view class="hot-detail"  data-detailData="{{item}}" data-cpid="{{item.Id}}" catchtap="toDetail">
+                    <text>查看详情</text>
+                    <icon class="iconfont icon-jiantou"></icon>
+                </view>
+                <view class="set-top-btn" wx:if="{{item.TopStatus <= 0 && item.OpenId==openid && !isIos}}" data-id="{{item.Id}}" catchtap="toTop">我要置顶</view>
+                <view class="set-top-btn" wx:if="{{item.TopStatus>=2 && item.OpenId==openid}}">我已置顶</view>
+                <view class="set-top-btn" wx:if="{{item.OpenId!=openid}}" catchtap="makePhone" data-telNum="{{item.LinkPhone}}">拨号</view>
+
+                <view class="top-tips" wx:if="{{item.TopStatus>0 && !isHot && isHot!==null}}">
+                    <text class="top-tips-text">顶</text>
+                </view>
+  
+                <view class="vz-flex flex-center logo-item-wrap">
+                    <image class="logo-item" wx:if="{{item.storeId}}" data-sid="{{item.storeId}}" bindtap="toStore" src="./store.png"></image>
+                    <image class="logo-item" catchtap="openQr" data-qr="{{item.xcxImgUrl}}" wx:if="{{item.xcxImgUrl}}" src="./wx.png"></image>
+                    <image class="logo-item" catchtap="openQr" data-qr="{{item.LogoUrl}}" wx:if="{{item.LogoUrl}}" src="./link.png"></image>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{indexList.length==0}}" class="no-data">暂无数据</view>
+    </view>
+</view>
+
+<view class="qr-wrap" wx:if="{{isShowQr}}" bindtap="closeQr">
+    <view class="qr-main" catchtap="">
+        <view class="qr-title">
+            截图扫码，微信访问
+        </view>
+        <image class="qr" src="{{qrUrl}}" />
+    </view>
+</view>
+
+<view class="xufei-warp" wx:if="{{isShowPay}}">
+    <view class="xufei-body">
+        <view class="xufei-title">
+            我要置顶
+        </view>
+        <block>
+            <view>
+                <radio-group class="radio-group" bindchange="payChange">
+                    <label class="radio" wx:for="{{payList}}" wx:key="{{index}}">
+                        <radio value="{{index}}" checked="{{index==0}}" />{{item}}
+                    </label>
+                </radio-group>
+            </view>
+        </block>
+        <view class="xufei-btn-warp">
+            <view class="xufei-btn" catchtap="buyIt">
+                马上购买
+            </view>
+        </view>
+        <icon class="iconfont icon-guanbi close-btn" catchtap="closeBtn"></icon>
+    </view>
+</view>

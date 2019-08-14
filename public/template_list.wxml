@@ -1,0 +1,9 @@
+<!--引入模板-->
+<import src="template.wxml"/>
+<view>
+    <block wx:for="{{items}}" wx:for-index="idx">
+        <view bindtap="onItemClick" data-id="{{idx}}">
+            <template is="{{item.item_status}}" data="{{content : item.content,index : idx}}"/>
+        </view>
+    </block>
+</view>

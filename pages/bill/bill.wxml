@@ -1,0 +1,55 @@
+<view class="container">
+      <view class='fix-tl'>
+        <view class="d-flex business_detail_nav">
+            <button class="flex active" hover-class="none" data-type='yuding' bindtap='actiontype'>我的收益</button>
+        </view> 
+      </view>
+      <view class='bill_all' hidden='{{loadall==0}}'>
+          <!--收入-->
+          <view> 
+              <view class="d-flex d-flex-center bill_cell">
+                  <view class="flex money">
+                    <text class="f02">总收入</text>
+                    <text class="f01">￥{{toatalincome*1000/100000}}</text>
+                  </view>
+                  <view class="flex money">
+                    <text class="f02">30天收入</text>
+                    <text class="f01">￥{{thirtyincome*1000/100000}}</text>
+                  </view>
+                  <view class="flex money">
+                    <text class="f02">7天收入</text>
+                    <text class="f01">￥{{sevenincome*1000/100000}}</text>
+                  </view>
+                  <view class="flex money">
+                    <text class="f02">可提现余额</text>
+                    <text class="f01">￥{{candraw*1000/100000}}</text>
+                  </view>	
+              </view> 
+
+              <!--提现按钮-->
+              <view class='withdraw_bt' bindtap='draw'><button>提现</button></view> 
+
+              <!--列表-->
+              <view class="pintuan_commodity_title mt-1">
+                <view class='shu' style='background:#fe3d49;'></view>
+                 <view class='name'>
+                      <view  class='clamp1'>账单</view>
+                  </view>
+              </view>
+              <view class='bg-f'>
+                  <view class="d-flex d-flex-center zhangdan_cell" data-cid='{{item.id}}'  wx:for="{{incomelist}}" bindtap='toincomedetail' >
+                      <view class='date'>
+                          <view class="f01">{{item.addtime}}</view>
+                      </view> 
+                      <view class="flex infor">
+                          <view class="f01">{{item.Note}}</view>
+                          <view class="name clamp1">{{item.CityPayType}}</view>
+                          <view class="f02">点击查看详情</view>
+                      </view> 
+                      <view class='money'>{{item.Cash}}</view>                               
+                  </view>
+                  <view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>		<view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showallbottomtip==true?'':'none'}}">— — 数据显示完了 — —</view>	 
+              </view>                                  
+          </view>  
+      </view>             
+ </view>

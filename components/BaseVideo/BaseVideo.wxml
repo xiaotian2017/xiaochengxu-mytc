@@ -1,0 +1,6 @@
+<view class="base-video-container"  bindtap="openVideo">
+    <image src="https://i.vzan.cc/citysource/xcx_heka/base-video-play.png" class="base-video-play-btn"/>
+    <image src="{{videoParams.videoPosterPath}}" class="poster-image" mode="aspectFit"/>
+    <video style="height:0" id="baseVideo" src="{{videoParams.convertFilePath}}" direction="90" bindfullscreenchange="fullscreenchangeHandle" controls> </video>
+</view>
+

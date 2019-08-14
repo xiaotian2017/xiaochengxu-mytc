@@ -1,0 +1,147 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="goods-order-top" style="padding:20rpx">
+    <view wx:if="{{mainmodel.GetGoodsOrder.State==1}}" style="background: #fff;text-align:center;border-bottom: 1rpx dashed #f0f0f0">
+        <view class="coupon-number">
+            券号: {{mainmodel.GId}}
+        </view>
+        <image mode="widthFix" src="{{useqrcode}}" class="coupon-qr" />
+        <view class="tip-word">
+            请服务员用微信扫面以上二维码
+        </view>
+    </view>
+    <view wx:if="{{mainmodel.GetGoodsOrder.State==0}}" style="background: #fff;text-align:center;border-bottom: 1rpx dashed #f0f0f0">
+        <view class="coupon-number">
+            您于{{mainmodel.GetGoodsOrder.CreateDate&&common.convertJSONDateToJSDate(mainmodel.GetGoodsOrder.CreateDate)||''}}下的订单
+        </view>
+        <view class="tip-word">
+            剩余{{day}}天{{hour}}时:{{min}}分:{{sec}}秒 结束
+        </view>
+    </view>
+    <block wx:for="{{mainmodel.GetGoodsOrderDetailList}}" wx:key="{{index}}">
+        <view class="vz-flex flex-center order-list" style="background: #fff;padding:20rpx" data-id="{{item.GoodsId}}" bindtap="toGoodDetail">
+            <image src="{{item.ImgUrl?item.ImgUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"
+                class="goods-img" />
+            <view style="width:520rpx">
+                <view class="goods-name">{{item.GoodsName}}</view>
+                <view class="goods-size">
+                    {{item.AttrName ? '已选:'+item.AttrName : ' '}}
+                </view>
+                <view class="goods-size" wx:if="{{item.Goods.hctId>0&&item.IsHct>0}}">
+                    {{item.Goods.ctname}} {{item.Goods.discount}}折优惠
+                </view>
+                <view class="goods-size">
+                    现价:
+                    <text style="color: #fe3d49">￥{{common.toFixed(item.Price*10000/1000000)}}</text>
+                </view>
+                <view class="goods-size">
+                    数量: {{item.BuyNum}}
+                </view>
+            </view>
+            <icon class="iconfont icon-jiantou"></icon>
+            <!-- <view class="single-refund-btn" catchtap="refundOrder" data-type="2" data-id="{{item.Id}}" wx:if="{{item.State==1||item.State==3||item.State==5}}">退 款</view> -->
+            <view class="single-refund-btn" wx:if="{{item.State==-2}}" style="color: #333;border-color:#333">已退款</view>
+        </view>
+    </block>
+    <view class="goods-num">
+        <view style="margin-bottom:20rpx;">
+            <!-- <text wx:if="{{null!=mainmodel.GetyMorders&&mainmodel.GetyMorders.Integration>0}}">积分抵
+                <text style="color:#fe3d49;">￥{{common.toFixed(mainmodel.GetyMorders.Integration*10000/1000000)}}</text>
+            </text> -->
+            共{{mainmodel.GetGoodsOrder.BuyNum}}件商品 合计:
+            <text style="color: #fe3d49">￥{{mainmodel.GetGoodsOrder&&common.toFixed(mainmodel.GetGoodsOrder.BuyPrice*10000/1000000)||''}}</text>
+            {{mainmodel.FreightMoney != '' && mainmodel.FreightMoney > 0?'(含运费'+common.toFixed(mainmodel.FreightMoney*10000/1000000)+')':''}}
+        </view>
+        <view style="margin-bottom:20rpx;" wx:if="{{!!mainmodel.GetyMorders}}">
+           实付:
+           <text style="color: #fe3d49">￥{{common.toFixed(mainmodel.GetyMorders.payment_free*10000/1000000)||''}}</text>
+        </view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==-3}}">{{mainmodel.GetGoodsOrder.State_Text}}</view>
+        <view class="refund-btn" bindtap="refundLayerToggle" data-type="1" data-id="{{mainmodel.GetGoodsOrder.Id}}" wx:if="{{mainmodel.GetGoodsOrder.State==1||mainmodel.GetGoodsOrder.State==3||mainmodel.GetGoodsOrder.State==5}}">退 款</view>
+        <view class="refund-btn" data-id="{{mainmodel.GetGoodsOrder.Id}}" bindtap="cancelOrder" wx:if="{{mainmodel.GetGoodsOrder.State==0}}">取消订单</view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==3}}" style="border-color:#fe3d49;color:#fe3d49">待发货</view>
+                <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==5}}" style="border-color:#fe3d49;color:#fe3d49">待收货</view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==6}}">已收货</view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==4}}">正在配送</view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==4||mainmodel.GetGoodsOrder.State==5}}" data-id="{{mainmodel.GetGoodsOrder.Id}}" bindtap="confirmAccept" data-tel="{{mainmodel.CStore.TelePhone}}" style="border-color:#fe3d49;color:#fe3d49">确认收货</view>
+        <view class="refund-btn" style="border-color:#fe3d49;color:#fe3d49" data-id="{{mainmodel.GetGoodsOrder.OrderId}}" data-goid="{{mainmodel.GetGoodsOrder.Id}}" bindtap="goodsPay"
+            wx:if="{{mainmodel.GetGoodsOrder.State==0}}">付款</view>
+        <view class="refund-btn" wx:if="{{mainmodel.GetGoodsOrder.State==-1}}">已取消订单</view>
+    </view>
+    <view wx:if="{{mainmodel.GetGoodsOrder.State==-3&&mainmodel.GetGoodsOrder.Refund_Left_Time}}" class="refund-time">
+        {{mainmodel.GetGoodsOrder.Refund_Left_Time}}
+    </view>
+    <view class="city-service" bindtap="showCityQr">
+    对交易订单有争议？联系同城客服>>
+    </view>
+</view>
+
+<view class="order-detail-info">
+    <view>订单编号: {{mainmodel.OrderNo}}</view>
+    <view>下单时间: {{mainmodel.GetGoodsOrder.CreateDate&&common.convertJSONDateToJSDate(mainmodel.GetGoodsOrder.CreateDate||'')}}</view>
+    <view>下单用户: {{mainmodel.GetGoodsOrder.AccepterName}}</view>
+    <view>下单电话: {{mainmodel.GetGoodsOrder.AccepterTelePhone}}</view>
+    <view>用户留言: {{mainmodel.GetGoodsOrder.Message&&mainmodel.GetGoodsOrder.Message!='null'&&mainmodel.GetGoodsOrder.Message||''}}</view>
+</view>
+
+<view class="order-store">
+    <view class="title">适用商户</view>
+    <view style="padding: 20rpx 0 20rpx 20rpx;overflow:hidden" data-sid="{{mainmodel.CStore.Id}}" bindtap="toStore">
+        <view style="float:left">
+            <image class="store-img" src="{{mainmodel.CStore.LogoUrl?mainmodel.CStore.LogoUrl:'https://i.vzan.cc/image/jpg/2017/12/25/203743e44429a9bf9940ce9df76f10ca61115a.jpg@!200x200'}}"
+            />
+        </view>
+        
+            <view style="float:left;width:62%;">
+                <view class="store-name">{{mainmodel.CStore.SName}}</view>
+                <view class="store-time" wx:if="{{mainmodel.CStore.Shop_hours}}">营业时间:{{mainmodel.CStore.Shop_hours && mainmodel.CStore.Shop_hours || ''}}</view>
+                <view class="store-time" style="line-height: 1.2" wx:if="{{mainmodel.CStore.Address}}">联系地址: {{mainmodel.CStore.Address && mainmodel.CStore.Address || ''}}</view>
+                <!-- <view class="store-des" style="width:100%;overflow:hidden">
+                    <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+                </view> -->
+            </view>           
+        
+        <icon style="float:right" data-tel="{{mainmodel.CStore.TelePhone}}" catchtap="makePhone" class="iconfont icon-tel"></icon>
+    </view>
+</view>
+<view class="mask" wx:if="{{showVoucher}}">
+        <view class="dialog-Voucher">
+            <icon class="iconfont icon-guanbi guanbi"  catchtap="closeVoucher"></icon>
+            <view class="dialog-name">购物返券</view>
+            <view>
+                <text style="color: rgb(216, 78, 67);font-size: 150rpx;line-height: 1; margin-top: 10rpx;">{{voucher.VoucherMoney}}</text>
+                <text style="color: rgb(216, 78, 67);">元</text>          
+            </view>
+            <view style="color: rgb(251, 220, 163); margin-top: 90rpx;font-size: 28rpx">          
+                <text wx:if="{{voucher.Deducting>0}}">满{{voucher.VoucherMoney}}元使用</text><text wx:if="{{voucher.ValidDays>0}}"><text wx:if="{{voucher.ValidDays>0&&voucher.Deducting>0}}">|</text>{{voucher.ValidDays}}天内有效</text>
+            </view>  
+            <view style="color: rgb(251, 220, 163); margin-top: 40rpx;font-size: 28rpx;text-decoration: underline" catchtap="tomyVoucher">
+                查看代金券
+            </view>
+        </view>
+    </view>
+
+ <view class="mask" wx:if="{{isShowRefund}}">
+     <view class="refund-massage">     
+     <view class="refund-massage-title">
+         请输入退款说明
+         <icon bindtap="refundLayerToggle" class="iconfont icon-cha"></icon>
+     </view>
+     <textarea class="refund-textarea" bindinput="getRefundMsg" placeholder="请输入退款说明" ></textarea>
+     <view class="refund-msg-btn"  bindtap="refundOrder">
+         提交申请
+     </view>
+    </view>
+ </view>   
+
+ <view wx:if='{{isShowCityQr}}'>
+        <view class="black_mask" bindtap='showCityQr'></view>
+        <view class="erweima_tk">
+            <view class='pic01'>
+                <image src='{{cityqrcode}}'></image>
+            </view>
+            <view class='f01'>截图扫码联系客服</view>
+            <view data-phone='{{cityphone}}' hidden='{{(cityphone==""||cityphone==mull)?true:false}}' catchtap='callphone' class='f01'>(点击拨打)联系商家：{{cityphone}}</view>
+            <icon class='iconfont icon-guanbi' bindtap='showCityQr'></icon>
+        </view>
+</view>

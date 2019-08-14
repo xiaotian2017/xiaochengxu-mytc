@@ -1,0 +1,12 @@
+<template name="banner">
+  <view class="swiper-container" wx:if="{{imgUrls.length>0}}">
+    <swiper class="swiper_box" indicator-dots="false" indicator-dots="false" indicator-dots="true" indicator-color="#d9d9d9" indicator-active-color="#fe3d49"
+                autoplay="true" interval="3000" duration="2000" style="background-color:#EFEFEF;height:250rpx;" >
+      <block wx:for="{{imgUrls}}" wx:key="id">
+        <swiper-item>
+          <image src="{{item.ImageUrl}}" class="slide-image"  catchtap="diaozhuanwailian" data-url='{{item.AnnouncementLink}}' lazy-load="true"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</template>

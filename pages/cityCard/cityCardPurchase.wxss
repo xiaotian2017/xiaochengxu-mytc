@@ -1,0 +1,245 @@
+view, text {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+view {
+    box-sizing: border-box;
+}
+
+.city-purchase-top {
+    height: 200rpx;
+    background: linear-gradient(45deg, rgba(45, 45, 45, 1), rgba(35, 34, 30, 1));
+}
+
+.user-avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border: 2rpx solid rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    margin: 0 21rpx 0 24rpx;
+}
+
+.user-name {
+    font-size: 32rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.city-card-title {
+    font-size: 24rpx;
+    color: #D9AE6F;
+}
+
+.city-purchase-top {
+    margin-bottom: 20rpx;
+}
+
+.city-card-name {
+    font-size: 32rpx;
+}
+
+.money-label1 {
+    font-size: 20rpx;
+}
+
+.money-label2 {
+    color: #999999;
+    font-size: 20rpx;
+    text-decoration-color: #999999;
+}
+
+.city-card-des {
+    font-size: 20rpx;
+    color: #fff;
+    width: 180rpx;
+    line-height: 36rpx;
+    border-radius: 10rpx;
+    margin: 0 auto;
+    background: #D9AE6F;
+    text-align: center;
+}
+
+.buy-money {
+    font-size: 44rpx;
+    font-weight: 700;
+}
+
+.origin-money {
+    color: #999999;
+    font-weight: 700;
+}
+
+.origin-money-wrp {
+    font-size: 20rpx;
+    text-decoration: line-through;
+    text-decoration-color: #999999;
+}
+
+.city-card-main {
+    background: #fff;
+    padding: 0 24rpx 0 0;
+}
+
+.city-card-main-title {
+    font-size: 28rpx;
+    padding: 24rpx;
+    font-weight: 700;
+}
+
+.city-buy-item {
+    border: 1px solid rgba(153, 153, 153, 1);
+    border-radius: 10rpx;
+    margin-left: 24rpx;
+    margin-bottom: 40rpx;
+    position: relative;
+    padding: 0 30rpx;
+}
+
+.money-wrp {
+    margin-left: 40rpx;
+}
+
+.radio-box {
+    width: 40rpx;
+    height: 40rpx;
+    border: 1px solid #D9AE6F;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radio-check-img {
+    width: 24rpx;
+    height: 18rpx;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.active-radio {
+    background: #D9AE6F;
+}
+
+.active-money {
+    color: #fff;
+}
+
+.active-des {
+    background: rgba(217, 174, 111, .4);
+}
+
+.active-city-buy-item {
+    background: #2F2D23;
+    border-color: #2F2D23;
+}
+
+.active-title {
+    color: #D9AE6F;
+}
+
+.right-img {
+    width: 154rpx;
+    height: 38rpx;
+}
+
+.right-text {
+    font-size: 28rpx;
+    color: #D9AE6F;
+    font-weight: 700;
+    position: absolute;
+    left: 0%;
+    z-index: 1000;
+    width: 154rpx;
+    line-height: 38rpx;
+    text-align: center;
+}
+
+.right-des-text {
+    font-size: 24rpx;
+    padding-top: 20rpx;
+}
+
+.right-des-img {
+    width: 86rpx;
+    height: 86rpx;
+}
+
+.right-label {
+    width: 154rpx;
+    height: 38rpx;
+    position: relative;
+    margin-bottom: 28rpx;
+}
+
+.right-label image {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.right-desp-wrp {
+    width: 702rpx;
+    height: 254rpx;
+    background: linear-gradient(90deg, rgba(229, 208, 149, 1), rgba(214, 189, 120, 1));
+    border-radius: 10rpx;
+    margin: 0 auto;
+    padding-top: 20rpx;
+}
+
+.buy-bar {
+    line-height: 98rpx;
+    height: 98rpx;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    padding: 0 24rpx;
+    bottom: 0;
+}
+
+.buy-btn {
+    width: 240rpx;
+    line-height: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #D9AE6F;
+    font-weight: 700;
+    background: #2F2D23;
+    border-radius: 80rpx;
+}
+
+.buy-price {
+    color: #F90606;
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.tj-label {
+    width: 84rpx;
+    height: 34rpx;
+    position: absolute;
+    left: -2rpx;
+    top: -8%;
+}
+
+.rx-label {
+    width: 104rpx;
+    height: 34rpx;
+    position: absolute;
+    right: 4rpx;
+    top: -20%;
+}
+
+.new-people-price {
+    min-width: 117rpx;
+    line-height: 35rpx;
+    border-radius: 4px;
+    font-size: 24rpx;
+    color: #fff;
+    background: #D9AE6F;
+    text-align: center;   
+    padding: 0 10rpx;
+    margin-right: 20rpx;
+}

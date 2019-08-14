@@ -1,0 +1,39 @@
+<!-- <view id="wrapper"> -->
+    
+    <city-banner imgUrls="{{imgUrls}}"></city-banner>
+    <scroll-view id="content" scroll-y="{{scroll}}" scroll-with-animation bindscrolltolower="scrollEvent" v-if="{{voteList.length > 0}}">
+        <block wx:for="{{voteList}}" wx:key="unique">
+            <view class="vote-item" catchtap="goToVote" data-id="{{item.Id}}">
+                <view class="vote-item-cover">
+                    <image class="vote-item-img" src="{{item.AdvImageUrl}}" lazy-load="true" mode="aspectFit"></image>
+                </view>
+                <view class="vote-item-content">
+                    <view class="vote-item-title .clamp1">{{item.Title}}</view>
+                        <view class="vote-item-info c666">选手<text style="color:#fe3d49">{{item.PublicVote}}</text>名({{item.VoteCount}}票)</view>
+                        <view class="vote-item-info c333 d-flex">
+                            <text>第一：</text>
+                            <view class="clamp1 vote-username">{{item.NumberOneName}}</view>({{item.NumberOneCount}}票)
+                        </view>
+                        <!-- 
+                            vote-active    进行中
+                            vote-inactive  已结束
+                         -->
+                        <view class="vote-btn {{item.IsExpire?'vote-inactive':'vote-active'}}">
+                            <image src="./voting.svg" class="voting" wx:if="{{item.IsExpire === false}}"></image>
+                        </view>
+                </view>
+            </view>
+        </block>
+        <view class="loading-all" wx:if="{{loadingAll}}">已获取全部投票</view>
+        <view class="loading-error" wx:if="{{loadingError}}">获取投票出错,<text catchtap="loadData">点击重新加载</text></view>
+    </scroll-view>  
+    <view class="status-empty" wx:if="{{voteList.length === 0}}">
+        <image class="status-empty-img" src="./vote-empty.png"></image>
+        <view style="font-size:24rpx;color:#ccc">暂时还没有投票活动哦</view>
+    </view>
+    <city-navigator>
+        <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="goIndex">首页</view>
+        <view slot="slot2" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showPath}}">获取链接</view>
+    </city-navigator>
+
+<!-- </view> -->

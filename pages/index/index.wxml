@@ -1,0 +1,105 @@
+<import src="../../public/floatbtntpl.wxml" />
+<official-account></official-account>
+<!--轮播图  -->
+<view style="position: relative">
+    <city-banner imgUrls="{{imgUrls}}"></city-banner>
+    <view class="city-qrcode-wrap" catchtap="showCityQrCode">
+        <image src="{{wxQrCodeUrl}}" mode="widthFix" class="city-qrcode"></image>
+    </view>
+</view>
+
+<!-- <view class="d-flex d-flex-center index-data-cell">
+    <image src="https://j.vzan.cc/content/city/newcity/newindex/img/tc-yh-151.gif" style='vertical-align: middle;height:18px' class="data-pic"></image> 
+     <view class="flex"><view class="data c666">商家：<i class="dc">{{shopcount}}</i>
+    </view> <view class="data c666">发布：<i class="dc">{{postcount}}</i>
+    </view> <view class="data c666">浏览：<i class="dc">{{viewcount}}</i>
+    </view></view>
+</view> -->
+
+<view class="count-wrap" wx:if='{{0!=shopcount||0!=postcount||0!=viewcount}}'>
+    <view style="border-bottom: 1rpx solid #eaeaea;height:90rpx;" class="vz-flex flex-center">
+        <image class="count-icon" src="https://j.vzan.cc/content/city/xcx/images/count.png"></image>
+        <view class="vz-flex flex" style="text-align: center">
+            <view class="flex" wx:if='{{0!=shopcount}}'>
+                <view>商家</view>
+                <view class="main-color">{{shopcount}}</view>
+            </view>
+            <view class="flex" wx:if='{{0!=postcount}}'>
+                <view>发布</view>
+                <view class="main-color">{{postcount}}</view>
+            </view>
+            <view class="flex" wx:if='{{0!=viewcount}}'>
+                <view>浏览</view>
+                <view class="main-color">{{viewcount}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 跑马灯 -->
+<view class="marquee_container" wx:if="{{marquee.text !=''}}" style="position: relative"> 
+    <view class="notice-wrap">
+            <image src="https://j.vzan.cc/content/city/xcx/images/notice.png" mode="widthFix" class="notice-icon"></image>   
+    </view>
+ 
+    <view style="background:#fff6f6">
+        <view class="marquee_text" style='--marqueeWidth:-{{marquee.width}}px;color:#fa0f20;padding:8rpx 0;'>{{marquee.text}}</view>
+    </view>    
+</view>
+<!--图标-->
+<city-iconBanner id='iconbanner' indexItemList="{{indexItemList}}"></city-iconBanner>
+
+<!--头条-->
+<view class="d-flex flex-center news" wx:if="{{!!breakNewsList.length}}">
+    <image class="icon-local" src='https://j.vzan.cc/content/city/xcx/images/local.png'></image>
+    <swiper class="news-swiper flex flex-center" vertical="false" autoplay="{{true}}"  circular interval="{{interval}}" duration="{{duration}}">
+        <swiper-item class="news-swiper-item" wx:for="{{breakNewsList}}" wx:key='{{index}}' catchtap="goToNewsCenter">
+            <view class='news-item clamp1'>{{item.Announcement}}</view>
+            <!-- <view class='news-item clamp1' wx:if="{{!!item[1]}}">{{item[1]}}</view> -->
+        </swiper-item>
+    </swiper>
+</view>
+<view style='position:relative;margin:2px' hidden='{{!advopen||""==advid}}'>
+    <ad wx:if="{{''!=advid}}" unit-id="{{advid}}"></ad>
+</view>
+<!--活动-->
+<city-activity indexItem="{{indexItem}}"></city-activity>
+
+<!-- nav -->
+<city-nav id="tabnav" bind:getNavArr="getNavArr" bind:ListenerNavChange="ListenerNavChange" currentNav="{{currentNav}}" beforeNav="{{beforeNav}}">
+</city-nav>
+
+<!-- content -->
+<city-contentList bind:ListenerNavChange="ListenerNavChange" bind:showTips="showTips" isScroll="{{isScroll}}" currentNav="{{currentNav}}"
+    beforeNav="{{beforeNav}}" cityNavList="{{cityNavList}}" currentType="{{currentType}}" repost="{{repost}}" showpath="{{showpath}}">
+</city-contentList>
+
+<!-- 底部导航 -->
+<!-- <view class='footerBar'>
+    <template is="bottom_nav" data="{{buyversion:buyversion,currenttab:currenttab}}"></template>
+</view> -->
+
+<!-- 红包 -->
+<!-- <red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package> -->
+<city-bottomnav cur-tab="1"></city-bottomnav>
+<!-- 提示 -->
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<!-- 快捷导航 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-order" bindtap="goToMyOrder">我的订单</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-myPublish" bindtap="goToMyPublish">我的发布</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-greetingCard" bindtap="toSendGreetingCard">贺卡</view>
+    <view slot="slot4" class="navigatorItem navigatorItem-service" bindtap="bindtap_showkefuwin">客服联系</view>
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+    <button slot="slot8" style='line-height:1.5;font-size:12px' open-type="contact" class="navigatorItem navigatorItem-service">在线咨询</button>
+</city-navigator>
+
+<template is="city_kefu_win" data="{{city_kefu_hidden:city_kefu_hidden,cityphone:cityphone,QrCodeUrl:QrCodeUrl}}"></template>
+<view class="mask" style="z-index: 9999;" catchtap="showCityQrCode" catchtouchmove="stopMove" hidden="{{!isShowCityQrCode}}">
+    <view class="big-qrcode-warp" catchtap="saveToPhoneAblum">
+        <image class="big-qrcode {{isShowCityQrCode?'showCode':''}}" src="{{wxQrCodeUrl}}" mode="widthFix"></image>
+        <button class="save-qrcode-tips">保存到系统相册</button>
+        <button hidden="{{!isShowAuthBtn}}" open-type="openSetting" bindopensetting="settingCb" type="primary" style="position: relative;z-index: 99999;color:#fff;font-size: 28rpx;">重新授权相册权限</button>
+    </view>
+</view>

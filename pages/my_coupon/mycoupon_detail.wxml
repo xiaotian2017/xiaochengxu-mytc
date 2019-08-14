@@ -1,0 +1,94 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="container">
+   <view class='d-flex flex-center use_cell' bindtap='gotodetail' data-storeid='{{coupon.StoreId}}' data-couponid='{{coupon.Id}}'>
+        <view class='head'>
+            <image src='{{coupon.LogoUrl}}'></image>
+        </view> 
+        <view class='flex'>
+            <view class='f01 clamp1'>{{coupon.CouponName}}</view>
+            <text class='f02'>购买价格：￥{{UserCoupon.BuyPrice * 1000/100000}}</text>
+            <text class='f02'>购买数量：{{UserCoupon.income}}</text>      
+        </view>
+        <view>
+            <icon class='iconfont icon-jiantou'></icon>
+        </view>
+    </view>
+    <view class='youhuiquan_detail_top'>
+        <view class='head'>
+            <image src='{{useqrcode}}' style='opacity:{{CouponState==0?1:0.3}};'></image>
+        </view>
+        <view class='text_f'>
+            <text class='f01'>{{coupon.CouponName}}</text>
+            <text class='f02'>券号：{{coupon.CouponGuidDisplay}}</text>
+          
+        </view>
+    </view>
+
+    <view class='youhuiquan_detail_zhong'>
+        <view class='d-flex cell'>
+            <view class='f01'>状态</view>
+            <view class='flex f02'>
+                <text style='color:#{{CouponState==0?"25cea8":"ff0000"}}'>{{CouponState==0?'可使用':CouponState==-1?'已使用':'不可使用'}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class='youhuiquan_detail_zhong'>
+        <view class='d-flex cell'>
+            <view class='f01'>原价</view>
+            <view class='flex f02'>
+                {{coupon.CouponMoney*0.01}}元</view>
+        </view>
+        <view class='d-flex cell'>
+            <view class='f01'>电话</view>
+            <view class='flex f02'>{{coupon.StoreTel==null?'未填':coupon.StoreTel}}</view>
+        </view>
+        <view class='d-flex cell'>
+            <view class='f01'>商家</view>
+            <view class='flex f02'>{{coupon.StoreName}}</view>
+        </view>
+        <view class='d-flex cell'>
+            <view class='f01'>地址</view>
+            <view class='flex f02'>{{coupon.StoreAddress==null?'未填':coupon.StoreAddress}}</view>
+        </view>
+        <view class='d-flex cell'>
+            <view class='f01'>有效时间</view>
+            <view class='flex f02'>{{coupon.ValidTimeStart}}至{{coupon.ValidTimeEnd}}</view>
+        </view>
+    </view>
+
+    <view class='youhuiquan_detail_bottom'>
+        <view class='d-flex cell' style="white-space: nowrap">优惠详情</view>
+        <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+    </view>
+</view>
+    <!--地址--> 
+    <view class="d-flex business_detail_address mt-1" bindtap='gotoshopdetail' data-storeid='{{coupon.Store.Id}}'> 
+	      <view class="head">
+	          <image src="{{coupon.Store.LogoUrl}}"></image>
+	      </view> 
+	      <view class="flex content">
+	          <view class="title clamp1">{{coupon.Store.SName}}</view>
+            <view class="f01"><icon class="icon_time"></icon>24小时营业</view> 
+	          <view class="f01" style='margin-top:4px'><icon class="icon_local"></icon>{{coupon.Store.Address}}</view>	 
+	      </view>
+        <view hidden='{{coupon.Store.TelePhone==""}}'>
+            <button class="call" data-phone='{{coupon.Store.TelePhone}}' bindtap='callphone'><icon class="icon_yh_call"></icon></button>
+        </view>        
+    </view>  
+<view class="mask" wx:if="{{showVoucher}}">
+    <view class="dialog-Voucher">
+        <icon class="iconfont icon-guanbi guanbi" catchtap="closeVoucher"></icon>
+        <view class="dialog-name">购物返券</view>
+        <view>
+            <text style="color: rgb(216, 78, 67);font-size: 150rpx;line-height: 1; margin-top: 10rpx;">{{voucher.VoucherMoney}}</text>
+            <text style="color: rgb(216, 78, 67);">元</text>          
+        </view>
+        <view style="color: rgb(251, 220, 163); margin-top: 90rpx;font-size: 28rpx">          
+                <text wx:if="{{voucher.Deducting>0}}">满{{voucher.VoucherMoney}}元使用</text><text wx:if="{{voucher.ValidDays>0}}"><text wx:if="{{voucher.ValidDays>0&&voucher.Deducting>0}}">|</text>{{voucher.ValidDays}}天内有效</text>
+            </view> 
+        <view style="color: rgb(251, 220, 163); margin-top: 40rpx;font-size: 28rpx;text-decoration: underline" catchtap="tomyVoucher">
+            查看代金券
+        </view>
+    </view>
+</view>

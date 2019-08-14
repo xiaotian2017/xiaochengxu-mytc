@@ -1,0 +1,37 @@
+<view class='page'>
+  <!-- tips -->
+  <view class="tips" hidden='{{!showTime}}'>此条信息过期时间：{{showEndTime}}</view>
+
+  <!-- days info -->
+  <view class="daysInfo" wx:if='{{rspData.top.length > 0}}'>
+    <view class="title">置顶续费</view>
+    <block wx:for='{{rspData.top}}' wx:key='item'>
+      <view class="cell vz-flex flex-center flex-col-start" data-index='{{index}}' bindtap='topTag'>
+        <icon type="{{item.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+        <view>{{item.ExtendSpan/24}}{{item.ExtentName}}收费￥{{item.Price*100/10000}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="daysInfo" wx:if='{{rspData.time.length > 0}}'>
+    <view class="title">时长续费</view>
+    <block wx:for='{{rspData.time}}' wx:key='item'>
+      <view class="cell vz-flex flex-center flex-col-start" data-index='{{index}}' bindtap='timeTag'>
+        <icon type="{{item.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+        <view>{{item.ExtendSpan/24}}{{item.ExtentName}}收费￥{{item.Price*100/10000}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- btn -->
+  <view class="btns">
+    <view class="infoTop vz-flex vz-flex-center flex-between" wx:if="{{!isIos&&showJifen}}">
+      <view>积分抵扣</view>
+      <view class="topStatus {{jifenBol?'openTop':'closeTop'}}" bindtap='jifenStatus'></view>
+    </view>
+    <view class="saveBtn vz-flex vz-flex-center flex-between">
+      <view class="showPrice vz-flex-1">需付款：<text>￥{{totalPrice*100/10000}}</text></view>
+      <view class="save vz-flex-1" bindtap='save'>确认发布</view>
+    </view>
+  </view>
+</view>

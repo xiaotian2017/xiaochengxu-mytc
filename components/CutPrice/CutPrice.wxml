@@ -1,0 +1,19 @@
+<block wx:for="{{cutPriceList}}" wx:key="unique">
+    <view class="flex item" data-cutid='{{item.Id}}' data-storeid="{{item.StoreId}}" catchtap="goCutPriceDtl">
+        <view class="cover">
+            <image src="{{item.ImgUrl}}"></image>
+        </view>
+        <view class="content flex-1 flex flex-col flex-between">
+            <view class="title clamp1">{{item.BName}}</view>
+            <view>
+                <text class="origin">原价￥{{item.OriginalPrice * 100 / 10000}}</text>
+                <text class="vip" wx:if="{{item.MemberPriceState > 0}}">VIP{{(item.FloorPrice-item.MemberPrice)*10000/1000000}}</text>
+            </view>
+            <view class="lowest">最低价￥{{item.FloorPrice * 100 / 10000}}</view>
+        </view>
+        <view class="current-info flex flex-col flex-end">
+            <view class="scan c6">{{item.BrowseCount}}</view>
+            <city-progressBar progressBg="#ffbd99" progressing="#ff5a00" createNum="{{item.CreateNum}}" isEnd="{{item.IsEnd}}" remainNum="{{item.RemainNum}}" style="margin-top: 28rpx"></city-progressBar>
+        </view>
+    </view>
+</block>

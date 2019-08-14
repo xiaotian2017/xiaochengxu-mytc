@@ -1,0 +1,46 @@
+@import  '../Template/LovePrice-Privilege.wxss';
+@import  '../Template/CutPrice-Group.wxss';
+
+.item {
+    margin-bottom: 20rpx;
+    border: none;
+    border-radius: 8rpx;
+    box-shadow: 4rpx 4rpx 10rpx #ccc;
+}
+
+.start-price {
+    color:#fe4b4b;
+    font-size:24rpx;
+    padding-top:20rpx;
+
+}
+
+.ori-price {
+    color: #666666;
+    font-size: 24rpx;
+    padding-top:20rpx;
+}
+
+.timer {
+    font-size: 24rpx;
+    color: #fff;
+    background: linear-gradient(to right, #fa0f20, #fa0f73);    
+    padding:4rpx 8rpx;
+    text-align: center;
+    border-radius:8rpx;
+    width: 180rpx;
+}
+
+.activity-logo {
+    width: 96rpx;
+    height: 40rpx;
+    position: absolute;
+    left: 0;
+    top:-8rpx;
+}
+
+.title {
+    color: #000;
+    line-height: 1.3;
+    margin-bottom: 8rpx;
+}

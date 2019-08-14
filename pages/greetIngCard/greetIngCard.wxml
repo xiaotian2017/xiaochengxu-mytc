@@ -1,0 +1,43 @@
+<import src="./newYear.wxml" />
+<import src="./lanternFestival.wxml" />
+<import src="./motherDay.wxml" />
+<import src="./childrenDay.wxml" />
+<import src="./common.wxml" />
+
+
+
+<template wx:if="{{1106==cardId}}" is="new-year-temp" data="{{toNikeName:toNikeName,fromNikeName:fromNikeName,newYearObj:newYearObj}}"></template>
+<template wx:if="{{1107==cardId}}" is="lantern-festival" data="{{toNikeName:toNikeName,fromNikeName:fromNikeName,lanternFestivalObj:lanternFestivalObj}}"/>
+<template wx:if="{{1112==cardId}}" is="monther-day" data="{{toNikeName:toNikeName,fromNikeName:fromNikeName}}"/>
+<template wx:if="{{1113==cardId}}" is="children-day" data="{{toNikeName:toNikeName,fromNikeName:fromNikeName}}"/>
+<template is="common" data="{{audioObj:audioObj,redPackageObj:redPackageObj}}"></template>
+
+
+<!-- 海报 -->
+<share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+
+<!-- 预览模板 -->
+<view bindtap="showPreview" class="show-preview-btn">
+    预览其他贺卡模板
+</view>
+
+<view class="preview-card-wrap" wx:if="{{isPreview}}">
+    <view class="preview-card-top vz-flex flex-center flex-between">
+        <view class="preview-card-btn" bindtap="cancelCard">取消</view>
+        <view>预览贺卡</view>
+        <view class="preview-card-btn" bindtap="confirmCard">确认</view>
+    </view>
+    <scroll-view scroll-x class="card-temp-wrap">
+        <block wx:for="{{cardTempList}}" wx:key="{{index}}">
+            <view class="card-temp-item" data-cardid="{{item.cardId}}" data-idx="{{index}}" bindtap="chooseCardTemp">
+                <view class="card-temp-item-img">
+                    <image src="{{item.cardImg}}" class="temp-image" />
+                    <view class="choose-icon-wrap" wx:if="{{index==previewIdx}}">
+                        <image class="choose-icon" src="https://j.vzan.cc/content/city/cardtype/img/card-type06.png" />
+                    </view>
+                </view>
+                <view>{{item.cardName}}</view>
+            </view>
+        </block>
+    </scroll-view>
+</view>

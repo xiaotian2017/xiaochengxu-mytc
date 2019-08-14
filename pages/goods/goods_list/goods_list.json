@@ -1,0 +1,8 @@
+{   
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText":"同城热卖",
+    "usingComponents": {
+        "city-goods-list":"/components/GoodsList/GoodsList",
+        "city-goods-footBar":"/components/GoodsFootBar/GoodsFootBar"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText":"商品详情",
+    "usingComponents": {
+        "city-goodsDetail":"/components/GoodsDetail/GoodsDetail",
+        "city-navigator":"/components/Navigator/Navigator",        
+        "share-poster":"/components/shareposter",
+        "city-mask":"/components/Mask/Mask",
+        "city-tips":"/components/Tips/Tips"
+    }
+}

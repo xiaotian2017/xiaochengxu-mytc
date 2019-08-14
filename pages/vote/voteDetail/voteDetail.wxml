@@ -1,0 +1,11 @@
+<view id="wrapper">
+    <city-vote-detail id="vote-detail" detailObj="{{detailObj}}" bind:getDataDone="getDataDone"></city-vote-detail>
+
+    <!-- 快捷导航 -->
+    <city-navigator>
+        <view slot="slot1" class="navigatorItem navigatorItem-index" bindtap="goIndex">首页</view>
+        <!-- 海报 -->
+        <view slot="slot3" class="navigatorItem-back" bindtap="goBack">返回</view>
+        <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showPath}}">获取链接</view>
+    </city-navigator>
+</view>

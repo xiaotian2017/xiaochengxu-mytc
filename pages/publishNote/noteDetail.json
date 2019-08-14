@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "city-navigator": "/components/Navigator/Navigator",
+    "city-tips": "/components/Tips/Tips",
+    "share-poster": "/components/shareposter"
+  }
+}

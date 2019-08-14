@@ -1,0 +1,49 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="contain">
+  <!--导航-->
+  <view class="d-flex business_detail_nav my_order">
+    <button class="flex {{currentOrderType=='-99' ? 'active':''}}" hover-class="none" data-type='-99' bindtap='actionOrderType'>全部
+      <label class="line"></label>
+    </button>
+    <button class="flex {{currentOrderType=='0' ? 'active':''}}" hover-class="none" data-type='0' bindtap='actionOrderType'>可使用
+      <label class="line"></label>
+    </button>
+    <button class="flex {{currentOrderType=='-1' ? 'active':''}}" hover-class="none" data-type='-1' bindtap='actionOrderType'>已使用
+      <label class="line"></label>
+    </button>
+    <button class="flex {{currentOrderType=='-2' ? 'active':''}}" hover-class="none" data-type='-2' bindtap='actionOrderType'>已退款
+      <label class="line"></label>
+    </button>
+    <button class="flex {{currentOrderType=='-4' ? 'active':''}}" hover-class="none" data-type='-4' bindtap='actionOrderType'>已过期
+      <label class="line"></label>
+    </button>
+  </view>
+
+  <view>
+    <!--全部-->
+    <view>
+      <view class="d-flex d-flex-center my_order_cell mb-1" wx:key='unique' wx:for='{{couponList}}' data-id='{{item.Id}}' data-csid='{{item.StoreCouponId}}' catchtap='clickToDetail'>
+        <view class="head">
+          <image src="{{item.ShopLogoUrl}}" mode="aspectFill" style='border-radius:3px'></image>
+        </view>
+        <view class="flex content">
+          <view class="flow_auto">
+            <text class="title clamp1">{{item.CouponName}}</text>
+            <text class="state">{{item.StoreValidateCode}}</text>
+          </view>
+          <view class="f01">
+            <text decode="{{true}}">{{item.ShopName}}</text>
+          </view>
+          <view class="f02">
+            <text>有效期至：{{item.ShowTime}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="classname">
+      <view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">{{isLoadData ? '正在加载 . .' : couponList.length==0 ? '— — 暂无数据 — —' : havemore ? '上拉加载更多' : '— — 已加载全部 — —'}}</view>
+    </view>
+  </view>
+
+</view>
+<template is="bottom_nav" data="{{buyversion:buyversion,currenttab:currenttab}}"></template>

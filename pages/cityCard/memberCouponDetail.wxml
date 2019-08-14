@@ -1,0 +1,37 @@
+<view class="member-coupon-detail-container">
+    <view style="background: #fff;width: 630rpx;margin:30rpx auto 0;padding:0 30rpx 40rpx;">
+        <view class="vz-flex flex-center flex-between  store-name-wrp" catchtap='gotostore' data-storeid='{{voucherDetail.StoreId}}'>
+            <view class="vz-flex flex-center">
+                <view class="iconfont icon-city-store"></view>
+                <view class="store-name clamp1" style="line-height: 1.3">{{voucherDetail.StoreName}}</view>
+            </view>
+            <view class="iconfont icon-jiantou"></view>
+        </view>
+        <view>
+            <view wx:if="{{voucherDetail.IsDiscount==0}}" class="member-label-wrp">
+                <text class="money-label">￥</text>
+                <text class="money-mum">{{voucherDetail.VoucherMoney}}</text>
+                <view class="use-condition" wx:if="{{voucherDetail.Deducting>0}}">满{{voucherDetail.Deducting}}使用</view>
+                <view class="use-condition" wx:else>无门槛</view>
+            </view>
+            <view wx:else class="discount-wrp">
+                <text class="discount-num">{{voucherDetail.Discount&&voucherDetail.Discount*100/1000||''}}</text>
+                <text class="discount-text">折</text>
+            </view>
+
+            <view class="receive-btn" bindtap="drawVoucher" data-storeid="{{voucherDetail.StoreId}}" data-vid="{{voucherDetail.id}}">{{voucherDetail.IsHaving==1?'立即使用':'立即领取'}}</view>
+            <view class="rule-list">
+                <view>优惠范围：全店通用</view>
+                <view>领用限制：{{rank}}</view>
+                <view wx:if="{{voucherDetail.IsHaving==0||!uv.EndDate}}">
+                    <view wx:if="{{voucherDetail.UseStartDate&&voucherDetail.UseEndDate}}">使用日期：{{voucherDetail.UseStartDate}}-{{voucherDetail.UseEndDate}}</view>
+                    <view wx:else>使用日期：长期可领取
+                        <text wx:if="{{voucherDetail.ValidDays>0}}">,领取当天起{{voucherDetail.ValidDays}}天内使用有效</text>
+                    </view>
+                </view>
+                <view wx:else>使用日期：{{uv.CreateDate}}-{{uv.EndDate}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

@@ -1,0 +1,84 @@
+@import "./newYear.wxss";
+@import "./lanternFestival.wxss";
+@import "./motherDay.wxss";
+@import "./childrenDay.wxss";
+.preview-card-wrap {
+    background: #fff;
+    position: relative;
+    z-index: 9999;
+}
+
+.preview-card-top {
+    height: 76rpx;
+    line-height: 76rpx;
+    font-size: 28rpx;
+    color: #333;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.preview-card-btn {
+    padding: 0 30rpx;
+}
+
+.card-temp-wrap {
+    white-space:nowrap;
+    overflow-x:scroll; 
+    width:100%;
+    font-size: 0;
+    padding:20rpx;
+}
+
+.card-temp-wrap .card-temp-item-img .temp-image {
+    width: 128rpx;
+    height: 128rpx;    
+}
+
+.card-temp-item-img {
+    margin-bottom: 12rpx;
+    position: relative;
+}
+
+.card-temp-item {
+    display: inline-block;
+    font-size: 24rpx;
+    color: #666;    
+    text-align: center;    
+}
+
+.card-temp-item + .card-temp-item {
+    margin-left: 20rpx;
+}
+
+.choose-icon {
+    width: 48rpx;
+    height: 48rpx;
+    position: absolute;    
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.choose-icon-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,.5);  
+    width: 100%;
+    height: 100%;
+}
+
+.show-preview-btn {
+    height: 60rpx;
+    width: 260rpx;
+    border-radius: 30rpx;
+    background: rgba(0, 0, 0, .3);
+    text-align: center;
+    line-height: 60rpx;
+    color: #fff;
+    font-size: 28rpx;    
+    padding:0 20rpx;
+    margin: -200rpx auto 0;
+    position: relative;
+    z-index: 100;
+    margin-bottom:142rpx;
+}

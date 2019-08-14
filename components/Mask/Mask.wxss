@@ -1,0 +1,93 @@
+.mask{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:rgba(0, 0, 0, 0.38);
+    z-index:1000
+}
+.mask-content{
+    position: absolute;
+    top:24%;
+    right: 0;
+    left: 0;
+    margin:0 auto;
+    width: 400rpx;
+    border-radius:4px;
+    padding:40rpx;
+    background:#fff;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective:1000;
+    perspective: 1000;
+    z-index:2000
+}
+.mask-code{
+    height:360rpx;
+    width:360rpx;
+    margin:0 auto;
+}
+.mask-code image{
+    width: 100%;
+    height: 100%
+}
+.mask-text{
+    margin-top:30rpx;
+    font-size:30rpx;
+    text-align:center
+}
+.mask-close{
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+    width: 30px;
+    height: 30px
+}
+.mask-close::before,.mask-close::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    width: 1px;
+    height: 70%;
+    background: #999;
+    border-radius:2rpx
+}
+.mask-close::before{
+    transform: rotate(-45deg)
+}
+.mask-close::after{
+    transform: rotate(45deg)
+}
+
+@keyframes showCode {
+    0%{
+        transform:scale(0.3); 
+        opacity: 0
+    }
+    90%{
+        transform:scale(1.05);
+        opacity: 1
+    }
+    100%{
+        transform:scale(1)
+    }
+  }
+.showCode{
+    animation:showCode .32s linear both
+}
+@keyframes hideCode{
+    0%{
+        transform:scale(1.05)
+    }
+    100%{
+        transform:scale(0.38)
+    }
+}
+.hideCode{
+    animation:hideCode .23s ease-out both
+}

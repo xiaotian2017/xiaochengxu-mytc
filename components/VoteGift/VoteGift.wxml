@@ -1,0 +1,29 @@
+<view class="flex flex-col flex-center justify-center vote-gift-wrapper" hidden="{{showGift}}">
+    <view class="vote-gift-content flex flex-col">
+        <view class="flex flex-end justify-center gift-title-1">
+            为
+            <view class="clamp1 emphasize send-name">{{Participant.ShowProductName?Participant.ProductName:Participant.NickName}}</view>
+            赠送礼物
+        </view>
+        <view class="flex emphasize gift-title-2">
+            TA获票数：
+            <view style="margin-right:6rpx">{{Participant.Poll}}</view>
+            (赠送礼物可增加票数)
+        </view>
+        <view>
+            <block wx:for="{{listGift}}" wx:key="unique">
+                <view class="vote-gift-item" catchtap="chooseGift" data-index="{{index}}">
+                    <image src="{{item.GiftImg}}" class="vote-gift-img">{{item.GiftName}}</image>
+                    <checkbox data-index="{{index}}" checked="{{choosedArr[index]}}" class="vote-checkbox" catachtap="chooseGift" color="#fe3d49"></checkbox>
+                    <view class="gift-name">{{item.GiftName}}</view>
+                    <view class="flex flex-between vote-gift-value">
+                        <text>{{item.VoteCount}}票</text>
+                        <text class="gift-price">￥{{item.GiftPrice}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="vote-btn" catchtap="goToPay">送礼物</view>
+    </view>
+    <view class="close-gift-layer" catchtap="closeGift"></view>
+</view>

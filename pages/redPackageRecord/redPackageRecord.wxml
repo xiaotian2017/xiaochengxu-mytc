@@ -1,0 +1,18 @@
+ <view style="background:#fff">
+    <view class="red-package-title">
+        红包总额为{{displayAmount*1000/100000}}元(共{{totalCount}}个，已领取{{recordList.length}}个)
+    </view>
+    <block wx:for="{{recordList}}" wx:key="{{index}}">
+        <view class="red-package-list-wrap">
+            <view class="red-package-list-item ">
+                <image src="{{item.headImg}}"></image>
+                <view>
+                    <text class="red-package-receive-nickname">{{item.NickName}}</text> <text style="vertical-align:middle;padding-left:10rpx">领取了 ￥ {{item.Amount*1000/100000}}元</text>
+                </view>
+            </view>
+
+            <view>{{item.DrawDateTime}}</view>
+        </view>       
+    </block>
+</view>
+<view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>   

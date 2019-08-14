@@ -1,0 +1,75 @@
+<template name="lantern-festival">
+    <view class="lantern-wrapper">
+        <image class="lantern-pic01" src="http://j.vzan.cc/content/city/xcx/images/lantern-01.jpg" mode="widthFix"></image>
+        <view class="star-shine"></view>
+        <view class="lantern-content">
+            <image class="lantern-pic03" src="http://j.vzan.cc/content/city/xcx/images/lantern-04.png" mode="widthFix"></image>
+            <image class="lantern-pic02" src="http://j.vzan.cc/content/city/xcx/images/lantern-03.png" mode="widthFix"></image>
+            <view class="newyear-title" style="margin-top:-1rem;">
+                <view>{{fromNikeName}}祝{{toNikeName}}</view>
+                <view style="text-align:center">元宵节快乐!</view>
+            </view>
+            <image class="js-blessing-btn blessing-btn" bindtap="toSendCard" src="http://j.vzan.cc/content/city/xcx/images/lantern-02.png" mode="widthFix"></image>
+            <view class="rel" style="margin-top:.8rem;">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.firstPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <image class="lantern-pic04" src="http://j.vzan.cc/content/city/xcx/images/lantern-05.png" mode="widthFix"></image>
+            <view class="rel" style="margin-top:.8rem;">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.secondPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <view style="overflow:hidden;">
+                <image class="lantern-pic05" src="http://j.vzan.cc/content/city/xcx/images/lantern-06.png" mode="widthFix"></image>
+            </view>
+            <view class="rel" style="margin-top:-8rem;">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.thirdPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <view class="rel">
+                <image class="lantern-pic06" src="http://j.vzan.cc/content/city/xcx/images/lantern-07.png" mode="widthFix"></image>
+                <text class="blue-light"></text>
+                <image class="lantern-pic07" src="http://j.vzan.cc/content/city/xcx/images/lantern-08.png" mode="widthFix"></image>
+            </view>
+            <view class="rel">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.fourthPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <view class="rel">
+                <image class="lantern-pic08" src="http://j.vzan.cc/content/city/xcx/images/lantern-10.png" mode="widthFix"></image>
+                <image class="lantern-pic09" src="http://j.vzan.cc/content/city/xcx/images/lantern-09.png" mode="widthFix"></image>
+            </view>
+            <view class="rel">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.fifthPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <view class="rel animate-ship">
+                <image class="lantern-pic10" src="http://j.vzan.cc/content/city/xcx/images/lantern-11.png" mode="widthFix"></image>
+                <image class="lantern-pic11" src="http://j.vzan.cc/content/city/xcx/images/lantern-12.png" mode="widthFix"></image>
+            </view>
+            <view class="rel" style="margin-top:-1rem;">
+                <view class="lantern-blessing">
+                    <text>{{lanternFestivalObj.sixthPhase}}</text>
+                    <view class="name">{{fromNikeName}}</view>
+                </view>
+                <text class="blue-light"></text>
+            </view>
+            <image class="lantern-pic12" src="http://j.vzan.cc/content/city/xcx/images/lantern-13.png" mode="widthFix"></image>
+        </view>
+    </view>
+</template>

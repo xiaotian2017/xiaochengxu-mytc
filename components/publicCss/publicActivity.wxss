@@ -1,0 +1,47 @@
+.item{
+    position: relative;
+    padding: 20rpx;
+    line-height: 1;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.cover{
+    position: relative;
+    width: 140rpx;
+    height: 140rpx;
+    margin-right: 20rpx;
+    border-radius: 12rpx;
+    overflow: hidden
+}
+.cover image{
+    width: 100%;
+    height: 100%;
+    border-radius: 12rpx
+}
+
+.title{
+    word-break: break-all;
+    line-height: 1.32;
+    font-size: 28rpx;
+    color: #333
+}
+.lowest{
+    font-size: 32rpx;
+}
+.scan{
+    font-size: 24rpx
+}
+.scan::before{
+    content: '';
+    display: inline-block;
+    vertical-align:-1px;
+    width:26rpx;
+    height:26rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEUAAACKioqLi4uPj4+KioqKioqJiYmKioqHh4eJiYmJiYmKioqKioqJiYmLi4uKioqJiYmKioqKiooEas8NAAAAEnRSTlMAwEAQ8F+gkCBw0LAwgH/g32+Tu4rMAAAA9ElEQVQ4y5WS7Y6EIAxFgba0guPu3vd/2LWJDh86JtMfRuF4aU8IXxZtlZ72FwbSw34G+Al4gSU+AKvHPwEZGg6A7G4AYF9WSAjGfAMIqj89ptzOonh5I/jdIWC5Akd7DCuIiB8BhQI069DFgdVfDYyyK4mTATsSHNw36WfoQoD6BsyBkMDWOwaaZIXHZ+S+PwXiGUrVSWNYP0AGoJN56QG/CnEym0cFJOsApO4Hnc02oKVdaukWDXwFKqSfU67Xg6k7r301eXnMKyPhnobAMhJr8cEmgrcToY2vc5HLrn8pJck8aG+xGWfVNdwWicYYVSx8Uf9R7gtAj1H3YgAAAABJRU5ErkJggg==) no-repeat;
+    background-size: 100%;
+    margin-right: 4rpx
+}
+.current-info{
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx
+}

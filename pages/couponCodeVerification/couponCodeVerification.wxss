@@ -1,0 +1,83 @@
+#wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+}
+
+.common-default-ft {
+    margin-bottom: 60rpx;
+    text-align: center;
+    font-size: 28rpx;
+    padding-top: 200rpx;
+}
+
+.check-input, .common-btn {
+    margin: 0 auto;
+    width: 540rpx;
+    line-height: 84rpx;
+    border-radius: 4rpx;
+}
+
+.check-input {
+    padding: 0 20rpx;
+    height: 84rpx;
+    box-sizing: border-box;
+    margin-bottom: 30rpx;
+    font-size: 28rpx;
+    border: 1rpx solid #e61616;
+}
+
+.icon {
+    margin-right: 8rpx;
+    vertical-align: middle;
+}
+
+.check-status {
+    font-size: 24rpx;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.check-status text {
+    vertical-align: middle;
+}
+
+.check-error {
+    color: #e61616;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.check-success {
+    text-align: center;
+    margin: 400rpx auto 0;
+}
+
+.check-success .icon {
+    display: block;
+    margin-bottom: 40rpx;
+}
+
+.home-logo {
+    position: fixed;
+    top: 20rpx;
+    right: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.common-btn {
+    margin-top: 114rpx;
+}
+
+.check-btn {    
+    margin: 114rpx auto 0;
+    width: 540rpx;
+    line-height: 84rpx;
+    border-radius: 4rpx;
+    color: #fff;
+    background: #e61616;
+    position: relative;
+    font-size: 28rpx;
+    text-align: center;
+}

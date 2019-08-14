@@ -1,0 +1,4 @@
+<view class="progressBg" style="background:{{isEnd || activeOver?'#ccc':progressBg}}">
+    <view class="progressing" style="width:{{percent}};background:{{progressing}}" hidden="{{ isEnd || activeOver}}"></view>
+    <view class="progressText">已售{{salesNum}}份</view>
+</view>

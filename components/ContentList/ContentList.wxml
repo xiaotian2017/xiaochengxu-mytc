@@ -1,0 +1,36 @@
+<swiper class="city-content flex" bindchange="contentSwiper" current="{{currentNav}}" skip-hidden-item-layout="true">
+  <block wx:for="{{cityNavList}}" wx:key="unique" wx:for-item="listItem" wx:for-index="listIndex">
+    <swiper-item>
+      <scroll-view scroll-y="{{isScroll}}" scroll-with-animation="true" bindscrolltolower="loadData" bindscroll="scroll" lower-threshold="28"
+        class="index-scroll" scrollTop="{{scrollTop[listIndex]}}">
+        <!-- 便民信息 -->        
+          <city-convenientInfo wx:if="{{listItem.Type == 'post'}}" post="{{post}}" showpath="{{showpath}}" repost="{{repost}}"></city-convenientInfo>    
+        <!-- 本地头条 -->
+        <city-localNews wx:if="{{listItem.Type == 'headlines'}}" headlines="{{headlines}}"></city-localNews>
+        <!-- 新入商家 -->
+        <city-recommandStore wx:if="{{listItem.Type == 'New'}}" store="{{New}}" bind:getContactInfo="getContactInfo"></city-recommandStore>
+        <!-- 推荐商家 -->
+        <city-recommandStore wx:if="{{listItem.Type == 'store'}}" store="{{store}}" bind:getContactInfo="getContactInfo"></city-recommandStore>
+        <!-- 商家动态 -->
+        <city-storeActive wx:if="{{listItem.Type == 'aggregate'}}" aggregate="{{aggregate}}" openid="{{openId}}"></city-storeActive>
+        <!-- 爱心价 -->
+        <!-- <city-lovePrice wx:if="{{listItem.Type == 'setlike'}}" setlike="{{setlike}}"></city-lovePrice> -->
+        <!-- 抢优惠 -->
+        <!-- 现在都集合在这里 看后台字段 -->
+        <city-privilege wx:if="{{listItem.Type == 'coupon'}}" coupon="{{coupon}}"></city-privilege>
+        <!-- 拼团-->
+        <!-- <city-group wx:if="{{listItem.Type == 'tuan'}}" tuan="{{tuan}}"></city-group> -->
+        <!--减价-->
+        <!-- <city-cutPrice wx:if="{{listItem.Type == 'bargain'}}" bargain="{{bargain}}"></city-cutPrice> -->
+        <!-- 同城卡 -->
+        <city-cityCard wx:if="{{listItem.Type == 'discount'}}" discount="{{discount}}"></city-cityCard>
+        <!-- 加载 -->
+        <city-loading isLoding="{{isLoading[listIndex]}}" loadingAll="{{loadingAll[listIndex]}}" loadingErr="{{loadingErr[listIndex]}}"></city-loading>
+      </scroll-view>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 返回顶部-->
+<city-backTop bindtap="backTop" show="{{showBackTop[currentNav]}}"></city-backTop>
+<!-- 二维码弹层 -->
+<city-mask contactInfo="{{contactInfo}}" open="{{open}}" hide="{{hide}}"></city-mask>

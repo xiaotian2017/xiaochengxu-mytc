@@ -1,0 +1,8 @@
+{
+   
+    "usingComponents":{
+        "city-navigator":"/components/Navigator/Navigator",
+        "city-video":"/components/BaseVideo/BaseVideo",
+        "city-tips":"/components/Tips/Tips"
+    }
+}

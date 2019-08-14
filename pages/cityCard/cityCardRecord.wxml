@@ -1,0 +1,25 @@
+<view style="background: #fff">
+    <block wx:for="{{recordLiset}}" wx:key="{{index}}">
+        <view class="record-warp vz-flex flex-center">
+            <view class="record-list-left">
+                <view style="font-size: 32rpx;">
+                    {{item.DayOfWeek}}
+                </view>
+                <view style="font-size: 24rpx;">
+                    {{item.datetime}}
+                </view>
+            </view>
+            <view class="record-list-mid">
+                卡
+            </view>
+            <view>
+                <view class="name">客户:{{item.NickName}}</view>
+                <view class="hexiao">{{item.State!=-1 ? '未核销': '已核销 核销人:'+item.ValidUserNickName}} </view>
+                <view class="hexiao" wx:if="{{item.State==-1}}">核销时间: {{item.validtime}}</view>
+            </view>
+        </view>
+        
+    </block>
+    <view wx:if="{{isAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>
+    <view wx:if="{{isNoData}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 暂无数据 — —</view>
+</view>

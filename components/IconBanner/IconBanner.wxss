@@ -1,0 +1,246 @@
+.orange-bg {
+    background: linear-gradient(to right, #ff911f, #ea490e)
+}
+
+/* 轮播图标 */
+.icon-swiper {
+    height: 383rpx;
+    margin-top: 20rpx;
+    background-color: #fff
+}
+
+.icon-swiper-page {
+    font-size: 0
+}
+.icon-swiper-item {
+    display: inline-block;
+    padding-top: 30rpx;
+    width: 20%;
+    font-size: 24rpx;
+    line-height: 1;
+    text-align: center;
+    overflow: hidden
+}
+.icon-swiper-inline {
+    height: 90px
+}
+.icon-item {
+    margin: 0 auto;
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%
+}
+
+.icon {
+    width: 90rpx;
+    height: 90rpx;    
+}
+
+.icon-tag {
+    display: -webkit-box;
+    width: 100%;
+    margin-top: 20rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 1.1;
+}
+
+/*2017-11-1新图标*/
+
+.icon-full-time,
+.icon-part-time {
+    background: url(https://j.vzan.cc/content/city/xcx/images/zhaopingqiuzhi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-rental {
+    background: url(https://j.vzan.cc/content/city/xcx/images/fangwuzhushou.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-car-transaction {    
+    background: url(https://j.vzan.cc/content/city/xcx/images/cheliangjiaoyi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-second-hand {
+    background: url(https://j.vzan.cc/content/city/xcx/images/ershoumaimai.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-pinche-in {
+    background: url(https://j.vzan.cc/content/city/xcx/images/pingche.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-life-service {
+    background: url(https://j.vzan.cc/content/city/xcx/images/shenghuofuwu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-NYmuyu {
+    background: url(https://j.vzan.cc/content/city/xcx/images/nonglinmuyu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-SWfuwu {
+    background: url(https://j.vzan.cc/content/city/xcx/images/shangwufuwu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-JYpeixun {
+    background: url(https://j.vzan.cc/content/city/xcx/images/jiaoyupeixun.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-pifadianshang {
+    background: url(https://j.vzan.cc/content/city/xcx/images/pifashangcheng.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-SPSY {
+    background: url(https://j.vzan.cc/content/city/xcx/images/shangpushengyi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-Chongwu {
+    background: url(https://j.vzan.cc/content/city/xcx/images/chongwu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-YHquan {
+    background: url(https://j.vzan.cc/content/city/xcx/images/youhuixinxi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-business-in {
+    background: url(https://j.vzan.cc/content/city/xcx/images/wode114.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-BJCX{
+    background: url(https://j.vzan.cc/content/city/xcx/images/xunrenxunwu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-chengshi114 {
+    background: url(https://j.vzan.cc/content/city/xcx/images/wode114.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-decorate-home {
+    background: url(https://j.vzan.cc/content/city/xcx/images/zhuangxuijiancai.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-declious-food {
+    background: url(https://j.vzan.cc/content/city/xcx/images/meishi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-entertainment {
+    background: url(https://j.vzan.cc/content/city/xcx/images/xiuxianyule.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-around {
+    background: url(https://j.vzan.cc/content/city/xcx/images/lvyouxianguan.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-love-car {
+    background: url(https://j.vzan.cc/content/city/xcx/images/qichexiangguan.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+
+.icon-hotel {
+    background: url(https://j.vzan.cc/content/city/xcx/images/jiudianzhushu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-beauty {
+    background: url(https://j.vzan.cc/content/city/xcx/images/liren.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-SYshexiang {
+    background: url(https://j.vzan.cc/content/city/xcx/images/sheyingshexiang.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-SHchaoshi {
+    background-position: -250px -150px
+}
+
+.icon-BDmaimai {
+    background: url(https://j.vzan.cc/content/city/xcx/images/fushixiebao.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-DSwanggou {
+    background: url(https://j.vzan.cc/content/city/xcx/images/gouwu.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-exercise {
+    background: url(https://j.vzan.cc/content/city/xcx/images/yundongjiansheng.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-baby {
+    background: url(https://j.vzan.cc/content/city/xcx/images/muyingzhoubian.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-HQliyi {
+    background: url(https://j.vzan.cc/content/city/xcx/images/kunqinliyi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-YYzhensuo {
+    background: url(https://j.vzan.cc/content/city/xcx/images/yiyaozhengsuo.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-FCxiangguan {
+    background: url(https://j.vzan.cc/content/city/xcx/images/fangchanzhongije.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-yangshengbaojian {
+    background-position: -100px -200px
+}
+
+.icon-cundian {
+    background: url(https://j.vzan.cc/content/city/xcx/images/cundian.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-school {
+    background: url(https://j.vzan.cc/content/city/xcx/images/xuexiao.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-jiadiantongxun {
+    background: url(https://j.vzan.cc/content/city/xcx/images/jiadiantongxun.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-huodong {
+    background-position: -300px -200px
+}
+
+.icon-bianmin {
+    background: url(https://j.vzan.cc/content/city/xcx/images/bianminxinxi.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.custom-img {
+    width: 90rpx;
+    max-width: 90rpx;
+    height: 90rpx;
+    border-radius: 100%;
+}

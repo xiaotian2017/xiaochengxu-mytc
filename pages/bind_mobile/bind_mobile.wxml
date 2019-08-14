@@ -1,0 +1,30 @@
+<view class="section">
+  <view class="write-infor-cells">
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="flex01 write">
+        <input type="tel" class="shuru-input ta-l" maxlength="11" type="number" bindinput="inputphone" placeholder="请输入手机号" />
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell">
+      <view class="flex01 write">
+        <input type="tel" class="shuru-input ta-l" maxlength="4" type="number" bindinput="inputcode" placeholder="请输入验证码" />
+      </view>
+      <view class="bt">
+        <!--<input class="code-input" catchtap="getCode" value="{{content}}" />-->
+        <span class="code-input {{content=='获取验证码'?'change':'backchange'}}" catchtap="getCode">{{content}}</span>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="tips-f">在网页版和小程序绑定同一手机可同步信息</view> -->
+  <view class="big-bt-all">
+    <view>
+      <a class="flex01 dengdu-bt" catchtap="Submitauth">保存</a>
+    </view>
+    <view style="margin-top:10px">
+      <button class="flex01 dengdu-bt-wechat" open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber">
+        <icon class="wechaticon"></icon>微信绑定手机快速授权
+      </button>
+    </view>
+    <a style="font-size:14px;text-decoration:underline;color:#999;margin-top:20px;display:block;text-align:center;" catchtap="returnhome">暂不验证手机</a>
+  </view>
+</view>

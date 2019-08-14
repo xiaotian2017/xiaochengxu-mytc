@@ -1,0 +1,56 @@
+<view class="container">
+    <block wx:for="{{storeActiveList}}" wx:key="{{index}}">
+        <view class="item">
+            <!-- 头像-->
+            <view class="head flex">
+                <image src="{{item.StoreLogoUrl?item.StoreLogoUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"
+                    data-strategeid="{{item.Id}}" class="avatar" catchtap="goToDtl"></image>
+                <view style="width:550rpx">
+                    <view class="store-name clamp1 c3">{{item.StoreSName}}</view>
+                    <view class="type" style="margin-bottom:12rpx">
+                        <text wx:if="{{item.StoreTag != null}}">{{item.StoreTag}}</text>
+                    </view>
+                    <!-- 内容 -->
+                    <view class="content">
+                        <view catchtap="goToDtl" data-strategeid="{{item.Id}}">
+                            <view class="title c3 clamp1" wx:if="{{item.Title != null}}">{{item.Title}}</view>
+                            <view class="phase clamp4" wx:if="{{item.ContentDesc != null}}">
+                                {{item.ContentDesc}}
+                            </view>
+                        </view>
+                        <!-- 图片预览 -->
+                        <city-previewPicture imgList="{{item.DescImgList}}"></city-previewPicture>
+                        <!-- 视频 -->
+                        <city-video videoParams="{{item.AttVideo}}" wx:if="{{item.AttVideo}}"></city-video>
+                        <!-- 优惠券 -->
+                        <view class="coupon" wx:if="{{item.TicketId != 0}}">
+                            <view class="coupon-tag c3">推荐优惠</view>
+                            <view class="coupon-content flex" data-ticketId="{{item.TicketId}}" data-storeId="{{item.StoreId}}" bindtap="receiveCoupon">
+                                <view class="coupon-text flex-1">
+                                    <view class="coupon-title clamp1" wx:if="{{!!item.TicketTitle}}">{{item.TicketTitle}}</view>
+                                    <view class="coupon-num">仅剩{{item.TicketReMainNum >= 0?item.TicketReMainNum : 0}}份</view>
+                                </view>
+                                <view class="coupon-btn">
+                                    立即领取
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="follow {{item.IsConcern?'followed':''}}" data-storeId="{{item.StoreId}}" data-index="{{index}}" catchtap="follow">{{item.IsConcern?'已关注':'关注'}}</view>
+                <view class="top-label flex" wx:if="{{item.CityTopStatus == 1}}">
+                    <view class="top-label-left">顶</view>
+                    <view class="top-label-right">
+                        <view class="top-arrow"></view>
+                        <view class="bottom-arrow"></view>
+                    </view>
+                </view>
+            </view>
+            <!-- 统计 -->
+            <view style="padding-top:20rpx">
+                <city-postInfo flexBetween="{{true}}" date="{{item.DispalyTime}}" viewer="{{item.PageView}}"></city-postInfo>
+            </view>
+        </view>
+    </block>
+</view>

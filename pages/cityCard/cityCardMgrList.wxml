@@ -1,0 +1,50 @@
+<view class="vz-flex flex city-card-mgl-list-tab">
+    <text class="flex" bindtap="toDiscount">优惠券</text>
+    <text class="flex active">同城折扣优惠服务</text>
+</view>
+<view style="padding-bottom:120rpx;background:#fff;padding-top:80rpx">
+    <!-- 暂无数据 || 数据已经加载完-->
+    <view>
+        <view>
+            <block wx:for="{{cityCardMgrList}}" wx:key="{{index}}">
+                <view class="city-card-mgl-list-wrap vz-flex">
+                    <view style="width: 20%">
+                        <view class="p">服务标题</view>
+                        <view class="p">同城卡类型</view>
+                        <view class="p">折扣类型</view>
+                        <view class="p" wx:if="{{item.DiscountPrice}}">服务价格</view>
+                        <view class="p" wx:if="{{item.OriginalPrice}}">服务原价</view>
+                        <view class="p">折扣力度</view>
+                        <view class="p">使用日期</view>
+                        <view class="p">已购买数量</view>
+                        <view class="p">是否预约</view>
+                    </view>
+                    <view style="width:80%; padding-left: 20rpx;">
+                        <view class="p1" style="color:#fe3d49">{{item.Title}}</view>
+                        <view class="p1">{{item.TypeName}}</view>
+                        <view class="p1">{{item.DiscountType==1 ? '全场折扣' : '单件折扣'}}</view>
+                        <view class="p1" style="color:#fe3d49" wx:if="{{item.DiscountPrice}}">￥{{item.DiscountPrice/100}}元</view>
+                        <view class="p1" style="color:#fe3d49" wx:if="{{item.OriginalPrice}}">￥{{item.OriginalPrice/100}}元</view>
+                        <view class="p1" style="color:#fe3d49">{{item.Discount}}折</view>
+                        <view class="p1 wzsl">{{item.ServicesTime}}</view>
+                        <view class="p1">{{item.PurchaseCount}}张</view>
+                        <view class="p1 vz-flex flex-center flex-between">
+                            <view>{{item.IsReservation? '是': '否'}}</view>
+                            <view class="vz-flex flex-center">
+                                <view class="common-btn" data-id="{{item.Id}}" bindtap="toBuyRecord">购买记录</view>
+                                <view class="common-btn">{{item.State==0 && '待审核' || item.State==-1 && '已删除' || '已通过'}}</view>
+                                <view class="common-btn" data-id="{{item.Id}}" bindtap="toRelease" wx:if="{{item.State!=-1 }}">编辑</view>
+                                <view class="common-btn" data-id="{{item.Id}}" bindtap="confirmDeleteHalfCard" wx:if="{{item.State!=-1 }}">删除</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view wx:if="{{isAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据已加载完 — —</view>
+        <view wx:if="{{isNoData}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 暂无数据 — —</view>
+    </view>
+    <view class="announcement-bt" bindtap="toReleaseDiscountByAddBtn">
+        <icon class="iconfont icon-guanbi add-btn"></icon> 添加
+    </view>
+</view>

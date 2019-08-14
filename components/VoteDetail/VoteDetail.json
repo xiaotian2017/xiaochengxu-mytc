@@ -1,0 +1,8 @@
+{
+    "component":true,
+    "usingComponents": {
+        "city-vote-count-down":"/components/VoteCountDown/VoteCountDown",
+        "city-gift":"/components/VoteGift/VoteGift",
+        "city-tips":"/components/Tips/Tips"
+    }
+}

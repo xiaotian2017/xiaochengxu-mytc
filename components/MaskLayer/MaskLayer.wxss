@@ -1,0 +1,34 @@
+.global-mask{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height:100vh;
+    background: rgba(0, 0, 0, .48);
+    z-index:999
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0
+    }
+    100%{
+        opacity:1
+    }
+}
+.fadeIn{
+    display: block;
+    animation: fadeIn .26s linear both
+}
+@keyframes fadeOut{
+    0%{
+        opacity: 1
+    }
+    100%{
+        opacity:0
+    }
+}
+.fadeOut{
+    display:block;
+    animation: fadeOut .28s linear both
+}

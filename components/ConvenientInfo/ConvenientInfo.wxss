@@ -1,0 +1,130 @@
+/* @import '/utils/wxParse/wxParse.wxss'; */
+@import '/components/component.wxss';
+
+.item{
+    position:relative;    
+    margin: 0 auto 20rpx;   
+    border-radius: 8rpx;  
+}
+
+.avatar{
+    margin-right: 20rpx;
+    width: 76rpx;
+    height: 76rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.avatar image{
+    width: 100%;
+    height: 100%;
+}
+
+.headInfo .userName{
+    font-size: 28rpx;
+    color: #333;
+}
+.post-status .status,.post-status .type{ 
+    height:36rpx;
+    line-height: 36rpx;
+    font-size:24rpx;
+    color:#fff;
+    border-radius:20rpx;
+    min-width: 140rpx;
+    text-align: center;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+.post-status .status{
+    margin-right: 10rpx;
+    background:#ff5a00;
+}
+.post-status .type{
+    background:#009cff
+}
+.call{
+    position: absolute;
+    top: 48rpx;
+    right: 30rpx;
+    width: 64rpx;
+    height: 64rpx;
+    background:linear-gradient(45deg,rgba(250,15,32,1),rgba(250,15,115,1));
+    border-radius: 50%;
+    box-shadow: 0 0 12rpx #FA0F20;
+}
+.call image{
+    margin: auto;
+    width: 40rpx;
+    height: 40rpx;
+}
+.phase,.description{
+    word-break: break-all;
+    margin-bottom: 10rpx;    
+    width: 100%;
+}
+.title{
+    font-size: 28rpx; 
+}
+.car-title text{
+    color: #101010;
+}
+.showall{    
+    text-align: right;
+    color: #fe3d49;
+}
+/* 时间 */
+.space{
+    padding:12rpx 0;
+    font-size: 24rpx;
+    color: #666;    
+}
+.address{
+    max-width: 60%;
+}
+.address image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 12rpx;
+    vertical-align: middle;
+}
+.address text{
+    vertical-align: middle;
+}
+.post-times{
+    margin-left: auto;
+}
+/* 转发评论 */
+.action{
+  color:#333;
+  padding:20rpx 0;  
+  border-top: 1rpx solid #eff2f4;
+}
+.action-item{
+    line-height: 1;
+    font-size: 26rpx;
+}
+.action-item image{
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+    vertical-align: middle;
+}
+.viewer image{
+    width: 36rpx;
+    height: 36rpx;
+}
+.city-owner{
+  margin-left: auto;
+}
+.viewer,.repost,.comment{
+    margin-right: 48rpx;
+}
+.action .repost{
+    margin-left: 0;
+}
+.action-item text{
+    vertical-align: middle;
+}
+.post-status .ccc{
+    background: #ccc;
+}
+

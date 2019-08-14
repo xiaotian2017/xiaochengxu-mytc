@@ -1,0 +1,53 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="container" style="margin-bottom:0;padding-top:20rpx;" hidden='{{1==buyversion}}'>
+    <view class="d-flex d-flex-center fabu-cell01"  hidden='{{!ShowAllEntrance}}'>
+				<view class='head'>
+					  <image src="https://j.vzan.cc/content/city/xcx/images/pshop.png"></image>
+				</view>
+        <view class="flex"  bindtap="gotoaddshop">
+            <text class='f01' style="font-weight: 700">我有店铺，入驻同城</text>
+            <text class="c999 f03">超低成本，本地宣传，简单有效，方便快捷！</text>
+        </view>
+        <view>
+            <icon class="iconfont icon-jiantou"></icon>
+        </view>
+    </view>
+     <view class="fabu-cell01">
+        <view class="c999 f02">您发布的消息将在本地强力曝光，覆盖本地同城大量老百姓。推广置顶效果更好。</view>
+    </view>
+</view>
+
+<view class="enter-city-title">
+    <text style="display:inline-block;position:relative"><text class="line"></text>
+    <text class="dot-l"></text><text class="line-r"></text>
+    <text class="dot-r"></text>请选择信息发布的栏目</text>
+    </view>
+<view wx:if="{{typeitems.length>0}}">
+  <view style="background-color:#fff;padding: 30rpx 0 0;">
+    <block wx:for="{{typeitems}}" wx:key='{{typeitem.Id}}' wx:for-item="typeitem">
+      <block wx:for="{{typeitem}}" wx:for-item="pageitem" wx:key='{{pageitem.Id}}'>
+        <view class="center_ul">
+          <block wx:for="{{pageitem}}" wx:key='{{item.Id}}' wx:for-item="item">
+            <view style='width:{{100/rowcount}}%;padding-top:0' class="center_li-add" catchtap="showtypelistclick" data-typeid="{{item.TypeId}}" data-typename="{{item.Title}}">
+              <i class="{{item.ClassName}} typeimg"></i> 
+              <text class="typetitleclass" style="padding-top: 20rpx;margin-bottom: 30rpx;">{{item.Title}}</text>
+            </view>
+          </block>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>
+<view class="typelistmodel" hidden="{{showtypelist}}" catchtap="cancelModel" >
+  <view class="typelistbox" style='overflow:auto'>
+    <block wx:for="{{items}}" wx:key='{{item.Id}}'>
+      <view class="typelist" data-typeid="{{item.PId}}" data-cid="{{item.Id}}"  data-stype="{{item.stype}}" catchtap="itemclick">{{item.Title}}</view>
+    </block>
+    <view class="typelist" data-typeid="0" data-cid="0" catchtap="itemclick">取消</view>
+  </view>
+</view>
+<city-navigator wx:if="{{showpath}}">
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" >获取链接</view>
+</city-navigator>
+<!-- <template is="bottom_nav" data="{{buyversion:buyversion,currenttab:currenttab}}"></template> -->
+<city-bottomnav></city-bottomnav>

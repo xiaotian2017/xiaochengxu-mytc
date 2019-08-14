@@ -1,0 +1,248 @@
+@import "../cutPrice/cutPrice.wxss";
+@import "../../public/navigatorCommon.wxss";
+.get-love-price-btn {
+    width: 320rpx;
+    height: 68rpx;
+    font-size: 32rpx;
+    line-height: 68rpx;
+    text-align: center;
+    background: #fe3d49;
+    display: block;
+    margin: 0 auto;
+    color: #fff;
+    border-radius: 32rpx;
+    animation: move 1s ease-in infinite;    
+}
+
+.chest {
+    width: 40rpx;
+    height: 40rpx;
+    position: relative;
+}
+
+.heart.top {
+    z-index: 3;
+}
+
+.left {
+    left: 28rpx;
+}
+
+.right {
+    left: 52rpx;
+}
+
+.side {
+    top: 16rpx;
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 100%;
+}
+
+.heart {
+    position: absolute;
+    z-index: 2;
+    animation: beat 0.7s ease 0s infinite normal;
+    background: #fff;    
+}
+
+.pure-heart {
+    animation: beat 0.7s ease 0s infinite normal;
+}
+
+.heart.center {
+    background: #fff;
+}
+
+.center {
+    width:30rpx;
+    height:30rpx;
+    bottom:22rpx;
+    left:40rpx;
+    transform:rotateZ(225deg);    
+}
+
+.share-btn {
+    margin: 0;
+    padding: 0;
+}
+
+.get-love-wrap {
+    width: 48%;
+    height: 80rpx;
+    position: relative;
+    background: #ff5a00;
+    color: #fff;
+    line-height: 80rpx;
+    border-radius: 42rpx;
+    font-size: 32rpx;
+    box-sizing: border-box;
+    padding-right: 10rpx;
+}
+
+.heart.active-bg { 
+    background: linear-gradient(-45deg, #B80734 0%, #d5093c 40%);
+}
+
+.heart.center.active-bg {    
+    background: linear-gradient(-45deg, #B80734 0%, #d5093c 40%);
+}
+
+
+.nick-name {
+    display: inline-block;
+    width: 60rpx;
+}
+@keyframes move {
+    0% {
+        transform: scale(0.9);
+    }
+    25% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+@keyframes beat {
+    0% {
+        transform: scale(1) rotate(225deg);
+        /* box-shadow: 0 0 40px #d5093c; */
+    }
+    50% {
+        transform: scale(1.1) rotate(225deg);
+        /* box-shadow: 0 0 70px #d5093c; */
+    }
+    100% {
+        transform: scale(1) rotate(225deg);
+        /* box-shadow: 0 0 40px #d5093c; */
+    }
+}
+
+
+.re-coupon-body {
+    width: 640rpx;
+    border-radius:8rpx;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20%;
+
+}
+
+.re-coupon-body-title {
+    padding: 20rpx;
+    font-size: 32rpx;
+    background: #fe3d49;
+    color: #fff;   
+    text-align: center;
+    position: relative;
+}
+
+.re-coupon-body-title icon {
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    transform: translateY(-60%)
+}
+
+.re-coupon-body-scroll {
+    background: #f0f0f0;
+}
+
+.re-coupon-item-wrap {
+    padding: 28rpx;
+}
+
+.re-coupon-item {
+    background: #fff;
+    border-radius: 8rpx;
+    margin-bottom: 20rpx;
+    padding: 20rpx;   
+    position: relative;
+    border-radius: 8rpx;
+}
+
+.re-coupon-price {
+    color: #fe3d49;     
+    font-size: 40rpx;    
+}
+
+.re-coupon-right {
+    font-size: 24rpx;
+    width: 360rpx;
+}
+
+.re-coupon-right :first-child {
+    padding:0 0 10rpx;
+}
+
+.re-coupon-enddays {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20rpx;
+    color: #fff;
+    background: #fe3d49;
+    border-top-right-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+    border-top-left-radius: 8rpx;
+    padding: 6rpx 12rpx;
+}
+
+.voucher-date {
+    font-size: 20rpx;    
+    color: #999;
+}
+
+.voucher-box {
+    padding-top:20rpx;
+}
+
+.re-coupon-label {
+    font-size: 24rpx;
+    color:#ffb504;
+    font-weight: normal;
+    padding:4rpx 20rpx;
+    border: 1rpx solid #ffb504;    
+}
+
+.heart-img {
+    width: 50rpx;
+    height: 50rpx;
+}
+.make-money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  width: 74px;
+  height: 25px;
+  border-radius: 13px 0 0 13px;
+  background: #2F2D23;
+  font-size: 12px;
+  color: #D9AE6F;
+  z-index: 2;
+}
+
+.make-money>image {
+  position: abosute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  margin-left: -10px;
+}
+
+.make-money>text {
+  margin-left: 3px;
+}

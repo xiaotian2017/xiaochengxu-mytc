@@ -1,0 +1,3 @@
+<view class="backTop {{show?'show':''}}">
+    <image src="http://j.vzan.cc/content/city/xcx/images/backTop.svg"></image>
+</view>

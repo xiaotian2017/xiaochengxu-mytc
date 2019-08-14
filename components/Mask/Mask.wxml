@@ -1,0 +1,14 @@
+
+<view class="mask" hidden='{{!open}}'>
+    <view class="mask-content {{open && hide?'showCode':'hideCode'}}">
+        <view class="mask-close" catchtap="closeMask"></view>
+            <view class="mask-code">
+                <image src="{{contactInfo.qrcode}}"></image>
+            </view>
+            <view class="mask-text">
+                {{contactInfo.tip}}
+            </view>
+            <view class="mask-text" data-phone='{{contactInfo.phone}}' hidden='{{!contactInfo.phone}}'  catchtap='call'>(点击拨打)联系商家：{{contactInfo.phone}}
+        </view>
+    </view>
+</view>    

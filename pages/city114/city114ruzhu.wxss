@@ -1,0 +1,180 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.temp-img {
+    height: 140rpx;
+    width:140rpx
+}
+
+.upload-img{
+    height: 140rpx;
+    width:140rpx;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);  
+}
+
+.upload-tips {
+    font-size: 28rpx;
+     color: rgb(153, 153, 153);
+     padding-top: 20rpx;
+}
+.icon-position::before{
+    color: #fe3d49;
+}
+.temp-img-hide {
+  visibility:hidden;
+}
+
+.common-font {
+    color: #333;
+    font-size: 30rpx; 
+}
+.common-item {
+    color: #333;
+    font-size: 30rpx;
+    height: 100rpx;
+}
+
+.left-title {
+    width: 180rpx;
+}
+.border-1px {
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.intro-textarea {
+    height: 160rpx;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 20rpx;
+    border: 1rpx solid #f0f0f0;
+    font-size: 30rpx;
+    color: #666;
+    width: 100%;
+}
+
+.label {
+    font-size: 28rpx;
+    color:#333;
+    padding: 20rpx 0;
+}
+
+.label-input {
+    border: 1rpx solid #f0f0f0;
+    border-radius: 8rpx;
+    padding: 0 10rpx;
+    box-sizing: border-box;    
+    font-size: 24rpx;
+    height:60rpx;
+    width:280rpx;    
+}
+.add-btn {
+
+font-size:37rpx;
+color:#fe3d49;
+position:absolute;
+top:-8%;
+transform:rotate(45deg);
+left:340rpx;
+}
+
+.label-tag {
+    padding-top: 20rpx;
+    padding-bottom: 20rpx
+}
+
+.remove-btn {
+font-size:36rpx;
+color:#fe3d49;
+position:absolute;
+top:-10%;
+right:30rpx;
+
+
+
+}
+.tag-item {
+
+padding:6rpx 10rpx;
+
+    line-height: 40rpx;
+    font-size: 26rpx;
+    border-radius: 4rpx;
+    color: #fe3d49;   
+    border:1rpx solid #fe3d49;
+}
+
+
+.dot {
+    color: #fe3d49;
+}
+
+.ruzhu-btn {
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background: #fe3d49;
+     font-size: 32rpx;
+     color:#fff;
+     margin-top: 60rpx;
+}
+.container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.category-wrap {
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     background: rgba(0,0,0,.5);
+     z-index: 10000;
+}
+
+.category-main {
+    height: 600rpx;
+    background: #fff; 
+    position: absolute;
+    bottom: 80rpx;
+    width: 100%;
+    overflow: scroll;
+}
+
+.category-item {
+    height: 90rpx;
+    line-height: 90rpx;  
+    text-align: center;  
+    font-size: 30rpx;
+}
+
+.category-item+.category-item{
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.category-cancel {
+    line-height:80rpx;
+    height:80rpx;
+    text-align:center;
+    color:#fff;
+    font-size:30rpx;
+    background:#fe3d49;
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.ruzhu-pays {
+    background: #fff;
+    padding-left: 20rpx;
+}
+
+.tap-wrap {
+    position:relative;
+    -webkit-flex-wrap:wrap;
+    flex-wrap:wrap;
+}

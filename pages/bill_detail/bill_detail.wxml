@@ -1,0 +1,38 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view class="container" hidden='{{0==loadall}}'>
+    <view class='withdraw'>
+        <view class='balance'><text class='f01'>收入：</text>￥{{amount}}</view>
+    </view>
+    <view class='youhuiquan_detail_zhong mt-1'>
+     <view class='d-flex cell'>
+             <view class='f01'>交易时间</view> 
+             <view class='flex f02'>{{trantime}}</view> 
+        </view>
+        <view class='d-flex cell'>
+             <view class='f01'>交易项目</view> 
+             <view class='flex f02'>{{tranoitem}}</view> 
+        </view>
+        <view class='d-flex cell'>
+             <view class='f01'>交易对象</view> 
+             <view class='flex f02'>{{tranobject}}</view> 
+        </view>
+        <view class='d-flex cell' hidden='{{300200==cashtype||"未知店铺"==shopname}}'>
+             <view class='f01'>交易店铺</view> 
+             <view class='flex f02'>{{shopname}}</view> 
+        </view> 
+        <view class='d-flex cell' hidden='{{300200!=cashtype}}'>
+             <view class='f01'>交易学校</view> 
+             <view class='flex f02'>{{shopname}}</view> 
+        </view> 
+        <view class='d-flex cell'>
+             <view class='f01'>交易详情</view> 
+             <view class='flex f02'>{{trandetail}}</view> 
+        </view> 
+          <view class='d-flex cell' hidden='{{""==subname}}'>
+             <view class='f01'>分销来源</view> 
+             <view class='flex f02'>{{subname}}</view> 
+        </view>                      
+    </view>                           
+
+</view>
+

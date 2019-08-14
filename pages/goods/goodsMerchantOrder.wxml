@@ -1,0 +1,143 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+<view>
+    <view style="background:#fff; padding: 20rpx 0">
+        <view class="vz-flex flex-center search-box">
+            <veiw class="search-icon">
+                <icon type="search" size="15"></icon>
+            </veiw>
+            <input type="text" placeholder="搜索订单" bindinput="getSearchWord" />
+            <view class="search-btn" bindtap="searchOrder">搜索</view>
+        </view>
+    </view>
+
+    <view class="vz-flex flex-center flex merchant-order-tab">
+        <block wx:for="{{['全部','未付款','待发货','待收货','退款售后']}}" wx:key="{{index}}">
+            <view class="flex {{index==tabIdx?'active-tab':''}}" data-idx="{{index}}" bindtap="changeTab"> {{item}}</view>
+        </block>
+    </view>
+    <block wx:for="{{ordersListArr}}" wx:key="{{index}}">
+        <view style="background:#fff;padding: 0 30rpx;margin-bottom:20rpx;">
+            <view class="vz-flex flex-center order-num flex-between">
+                <view style="margin-left:30rpx;">订单号:{{item.OrderNo}}</view>
+                <view style="color:#fe3d49;margin-right:30rpx">{{m.getState(item.GetGoodsOrder.State)}}</view>
+            </view>
+            <block wx:for="{{item.GetGoodsOrderDetailList}}" wx:key="{{index}}">
+                <view class="vz-flex flex-center goods-info">
+                    <image src="{{item.ImgUrl?item.ImgUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"
+                        class="goods-img" />
+                    <view style="margin-left: 30rpx; width:64%;">
+                        <view class="name wzsl">{{item.GoodsName}}</view>
+                        <text class="attr" decode style="display:block;width:100%"> {{item.AttrName ? '已选:'+item.AttrName : '&nbsp;'}}</text>
+                        <view style="position:relative">
+                            <view class="price">￥{{common.toFixed(item.Price*10000/1000000)}}
+                            </view>
+                            <view class="num">数量:{{item.BuyNum}}
+                            </view>
+                            <view class="city-card vz-flex flex-center" wx:if="{{item.Goods.hctId>0&&item.IsHct>0}}">
+                                <view class="wzsl" style="max-width:140rpx;margin-right:8rpx;">{{item.Goods.ctname}}</view>
+                                <view>{{item.Goods.discount}}折优惠</view>
+                            </view>
+                        </view>
+
+                    </view>
+                </view>
+            </block>
+            <view class="goods-count">
+                <!-- <view wx:if="{{null!=item.GetyMorders&&item.GetyMorders.Integration>0}}" style="color:#fe3d49;">积分抵 ￥{{common.toFixed(item.GetyMorders.Integration*10000/1000000)}}</view> -->
+                <view class="vz-flex flex-center">
+                <view style="margin:0 20rpx;white-space: nowrap">共{{item.GetGoodsOrder.BuyNum}}件</view>
+                <view style="color:#fe3d49">合计:￥{{common.toFixed(item.GetGoodsOrder.BuyPrice*10000/1000000)}}</view>
+                </view>                 
+                <veiw style="margin:20rpx 20rpx 0;">
+                    <text style="color:#fe3d49" wx:if="{{item.GetyMorders.payment_free}}">实付:￥{{common.toFixed(item.GetyMorders.payment_free*10000/1000000)}}</text>{{item.FreightMoney != '' && item.FreightMoney > 0?'(含运费'+common.toFixed(item.FreightMoney*10000/1000000)+')':''}}
+                </veiw>    
+            </view>
+            <view class="vz-flex flex-center flex-between" style="padding: 30rpx 0;">
+                <view class="buyer-info" style="width:58%">
+
+                    <view class="wzsl">买家: {{item.GetGoodsOrder.AccepterName}}</view>
+                    <view style="padding: 20rpx 0;">联系电话: {{item.GetGoodsOrder.AccepterTelePhone}}</view>
+                    <view>下单时间: {{common.convertJSONDateToJSDate(item.GetGoodsOrder.CreateDate)}}</view>
+                    <!-- <view class="message" wx:if="{{item.GetGoodsOrder.Message!=null && item.GetGoodsOrder.Message!=''}}">
+                        留言: {{item.GetGoodsOrder.Message}}
+                    </view> -->
+                    <view class="message" wx:if="{{item.GetGoodsOrder.RefundReason}}">退款说明：{{item.GetGoodsOrder.RefundReason}}</view>
+                    <view style="padding-top:20rpx;" wx:if="{{item.GetGoodsOrder.Refund_Left_Time}}">{{item.GetGoodsOrder.Refund_Left_Time}} </view>
+                </view>
+                <view  wx:if="{{item.GetGoodsOrder.State==-3}}" style="width:40%" class="vz-flex flex-center">
+                        <view class="buyer-btn" data-state='-2'  data-id="{{item.GetGoodsOrder.Id}}" style="background: #1AAD19" bindtap="refundComfirm">
+                                接受
+                        </view>
+                        <view class="buyer-btn" data-state='-4'  data-id="{{item.GetGoodsOrder.Id}}" style="margin-left: 10rpx" bindtap="refundComfirm">
+                                拒绝
+                        </view>
+                </view>
+                <view wx:if="{{item.GetGoodsOrder.State==4}}" class="vz-flex flex-center">
+                    <view class="buyer-btn" data-id="{{item.GetGoodsOrder.Id}}" data-state="{{item.GetGoodsOrder.State}}" bindtap="confirmDistribute">
+                        配送完成
+                    </view>
+                    <view class="buyer-btn" style="margin-left: 10rpx" data-id="{{item.GetGoodsOrder.Id}}" data-state="{{item.GetGoodsOrder.State}}"
+                        bindtap="deliveryGoods">
+                        送货地址
+                    </view>
+                </view>
+                <view wx:elif="{{item.GetGoodsOrder.State==3 || item.GetGoodsOrder.State==-4 && item.GetGoodsOrder.AddressId >0}}" style="width:40%">
+                    <view class="buyer-btn" style="float:right" data-id="{{item.GetGoodsOrder.Id}}" data-state="{{item.GetGoodsOrder.State}}"
+                        bindtap="deliveryGoods">
+                        立即发货
+                    </view>
+                </view>
+                <view wx:elif="{{item.GetGoodsOrder.AddressId > 0 && item.GetGoodsOrder.State==6 }}" style="width:40%">
+                    <view class="buyer-btn" style="float:right" data-id="{{item.GetGoodsOrder.Id}}" data-state="{{item.GetGoodsOrder.State}}"
+                        bindtap="deliveryGoods">
+                        送货地址
+                    </view>
+                </view>
+            </view>
+
+        </view>
+    </block>
+    <view wx:if="{{isHasData}}" style="margin-top:20rpx;width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">暂无数据</view>
+    <view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;margin-bottom:40rpx;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+</view>
+<!-- 解决滚动条 -->
+<view class="dispatching-panel" style="right:{{isShowDispatchingPanel?'0':'-100%'}}">
+    <view class="dispatching-panel-title">配送信息</view>
+    <view class="dispatching-panel-item">
+        <view>
+            收货人: {{distributionInfo.NickName}}
+        </view>
+        <view>
+            手机号码: {{distributionInfo.TelePhone}}
+        </view>
+        <view>
+            收货地址: {{distributionInfo.Address}}
+        </view>
+        <view>
+            配送方式: {{distributionInfo.DistributeName}}
+        </view>
+        <view>
+            物流单号: {{distributionInfo.DistributeOrderNo}}
+        </view>
+        <view>
+            下单时间: {{distributionInfo.DistributeTime}}
+        </view>
+    </view>
+    <view class="dispatching-panel-btn-wrap vz-flex flex-center flex">
+        <view wx:if="{{orderState==3}}" class="flex" style="color: #fff;background:#fe3d49;" catchtap="confirmDistribute">
+            确认发货
+        </view>
+        <view class="flex" bindtap="hideDisPatchingPanel">
+            取消
+        </view>
+    </view>
+</view>
+<wxs module="m">
+    var getState = function(state) { 
+        switch(''+state) { case '0': return '未付款'; case '1': return '待核销'; case '2': return '已核销';
+    case '3': return '待发货'; case '4': return '正在配送'; case '5': return '待收货'; case '6': return '已收货'; case '-1': return '已取消订单';
+    case '-2': return '已退款'; case '-3': return '申请退款中'; case '-4': return '拒绝退款'
+}
+ } 
+    module.exports.getState = getState;
+</wxs>

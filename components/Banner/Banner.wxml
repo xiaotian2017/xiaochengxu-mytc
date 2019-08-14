@@ -1,0 +1,14 @@
+<view class="swiper-container" wx:if="{{imgUrls.length>0}}">
+    <swiper class="swiper_box" autoplay="true" interval="3000" duration="1500" bindchange="swiperImgLazyLoad" circular="true">
+        <block wx:for="{{imgUrls}}" wx:key="id">
+          <swiper-item>
+            <image src="{{swiperImgLoadArr[index]?item.ImageUrl:''}}" class="slide-image"  catchtap="goToLink" data-url='{{item.AnnouncementLink}}'/>
+          </swiper-item>
+        </block>        
+    </swiper>
+    <view class="indicator-dots-wrap flex">
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+          <view class="indicator-dots-default {{index==activeDocIdx?'indicator-dots-active':''}}"></view>
+        </block>
+    </view>  
+</view>

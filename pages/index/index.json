@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+        "city-banner":"/components/Banner/Banner",
+        "city-iconBanner":"/components/IconBanner/IconBanner",
+        "city-activity":"/components/Activity/Activity",
+        "city-nav": "/components/Nav/Nav",
+        "city-contentList":"/components/ContentList/ContentList",        
+        "city-tips":"/components/Tips/Tips",
+        "city-navigator":"/components/Navigator/Navigator",
+        "city-bottomnav": "/components/BottomNav/BottomNav"
+    },
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+}

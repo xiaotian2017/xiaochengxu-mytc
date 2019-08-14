@@ -1,0 +1,109 @@
+<scroll-view class="vote-detail" bindscrolltolower="loadUser" scroll-y wx:if="{{init}}">
+    <view class="vote-banner-detail">
+        <swiper autoplay="true" indicator-color="#f2f2f2" indicator-active-color="#fe3d49" indicator-dots="{{imgUrls.length > 1}}" class="vote-banner">
+            <block wx:for="{{imgUrls}}" wx:key="unique">
+                <swiper-item>
+                    <image src="{{item.filepath}}" class="banner-img" mode="aspectFill"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+        <city-vote-count-down bind:getActiveStatus="getActiveStatus" countDownObj="{{countDownObj}}"></city-vote-count-down>
+    </view>
+
+    <view class="vote-dtl-info">
+        <view class="vote-dtl-player">
+            <text>{{Participant.SerialNum}}号</text>:
+            <text>{{Participant.ShowProductName?Participant.ProductName:Participant.NickName}}</text>
+        </view>
+        <view class="flex flex-between vote-info-content">
+            <view>
+                <view class="vote-info-name">得票数</view>
+                <view>{{Participant.Poll}}</view>
+            </view>
+            <view wx:if="{{Participant.IsSwitchGift}}">
+                <view class="vote-info-name">礼物</view>
+                <view>{{Participant.Giftcount}}</view>
+            </view>
+            <view>
+                <view class="vote-info-name">距前一名差</view>
+                <view>{{Participant.Last}}</view>
+            </view>
+            <view>
+                <view class="vote-info-name">距后一名差</view>
+                <view>{{Participant.Next}}</view>
+            </view>
+            <view>
+                <view class="vote-info-name">浏览量</view>
+                <view>{{Participant.ClickCount}}</view>
+            </view>
+        </view>
+    </view>
+    <view style="padding:0 20rpx" wx:if="{{!!Participant.Declaration}}">
+        <view class="block-name">
+            参赛宣言
+        </view>
+        <view class="vote-dtl-slogan">
+            {{Participant.Declaration}}
+        </view>
+    </view>
+    <view class="vote-player-dtl">
+        <view class="block-name">
+            选手详情
+        </view>
+        <view class="vote-dtl-text">
+            {{Participant.Introduction}}
+        </view>
+        <block wx:for="{{ImgDescList}}" wx:key="unique">
+            <image src="{{item}}" class="vote-dtl-img" mode="aspectFit" catchtap="previewImg" data-index="{{index}}"></image>
+        </block>
+    </view>
+    <view class="vote-detail-gap">  
+
+    </view>
+    <view style="padding-bottom: 160rpx">
+        <view class="flex">
+            <block wx:for="{{listNav}}" wx:key="unique">
+                <view class="vote-dtl-block-title flex-1 {{Participant. IsSwitchGift && currentList === index?'vote-dtl-nav-active':''}}" data-index="{{index}}" catchtap="switchList">{{item}}</view>
+            </block>
+        </view>
+        <view hidden="{{currentList !== 0}}">
+            <block wx:for="{{listUsers[0]}}" wx:key="unique">
+                <view class="flex flex-center vote-detail-list-item">
+                    <image class="vote-dtl-avatar" src="{{item.HeadImgUrl}}"></image>
+                    <view class="vote-dtl-userName clamp1">{{item.NickName}}</view>
+                    <view class="vote-dtl-time">{{item.CreateDate}}</view>
+                </view>
+            </block>
+            <view class="vote-dtl-loading-empty" wx:if="{{activeOver && listUsers[0].length === 0}}">暂无用户投票</view>
+            <view class="vote-dtl-loading-empty" wx:if="{{!activeOver && listUsers[0].length === 0}}">快找好朋友给您投票吧</view>
+            <view class="vote-dtl-loading-all" wx:if="{{loadingAll[1] && listUsers[0].length > 0}}">已查看所有参与投票用户</view>
+        </view>
+        <view hidden="{{currentList !== 1}}">
+            <block wx:for="{{listUsers[1]}}" wx:key="unique">
+                <view class="flex flex-center vote-detail-list-item">
+                    <image class="vote-dtl-avatar" src="{{item.HeadImgUrl}}"></image>
+                    <view class="vote-dtl-userName clamp1">{{item.NickName}}</view>
+                    <view class="vote-dtl-time">{{item.DateString}}</view>
+                </view>
+            </block>
+            <view class="vote-dtl-loading-empty" wx:if="{{listUsers[1].length === 0}}">还没有用户给你送礼物哦</view>
+            <view class="vote-dtl-loading-all" wx:if="{{loadingAll[1] && listUsers[1].length > 0}}">已查看所有送礼物的用户</view>
+        </view>
+
+    </view>
+</scroll-view>
+
+<city-gift wx:if="{{Participant.IsSwitchGift}}" listGift="{{listGift}}" detailObj="{{detailObj}}" showGift="{{showGift}}" bind:showTips="showTips"></city-gift>
+
+<view class="flex flex-between vote-dtl-fixed-bar" wx:if="{{!activeNoStart && !activeOver && init}}">
+    <view class="vote-dtl-btn" catchtap="addVote">投TA一票</view>
+    <view wx:if="{{Participant.IsSwitchGift}}" class="vote-dtl-gift" catchtap="sendGift">
+        <view class="flex vote-dtl-gift-img">
+            <image src="https://j.vzan.cc/content/city/vote/images/zuanshi.png" class="diamond diamond-rotate"></image>
+        </view>
+        <view>送TA礼物</view>
+    </view>
+    <view class="vote-dtl-btn" catchtap="attendVote">我要参赛</view>
+</view>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

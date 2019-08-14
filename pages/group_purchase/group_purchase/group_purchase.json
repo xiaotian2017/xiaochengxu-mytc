@@ -1,0 +1,8 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {        
+        "share-poster": "/components/shareposter",
+        "base-video": "/components/BaseVideo/BaseVideo",
+        "city-navigator":"/components/Navigator/Navigator"
+    }
+}

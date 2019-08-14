@@ -1,0 +1,27 @@
+<import src='../template/groupAdmin.wxml'/>
+<view class="d-flex flex-col" id="wrapper">
+    <view class="nav d-flex" id="nav">
+        <block wx:for="{{nav}}">
+            <view class="flex navItem {{currentNav == index?'navActive':''}}" data-index="{{index}}" catchtap="switchNav">{{item}}</view>
+        </block>
+    </view>
+    <swiper class="flex" bindchange="swiperPage" current="{{currentNav}}" id="content" circular="true">
+        <block wx:for="{{nav}}">
+            <swiper-item class="page" hidden="{{index != currentNav}}">
+                <template is="groupAdminList" data="{{list:page[currentNav],loadingAll:loadingAll[currentNav]}}"></template>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="btn-lg" catchtap="goPublish">
+        发布拼团
+    </view>
+    <view class="layer" hidden="{{close}}">
+        <view class="layerContent">
+            <view class="close" catchtap="closeLayer"></view>
+            <view class="layerTitle">长按识别二维码联系客服</view>
+            <view class="layerTips c999">该店铺已被删除</view>
+            <image src="{{cityqrcode}}"></image>
+            <view class="c666" style="margin-top:20rpx">{{cityphone}}</view>
+        </view>
+    </view>
+</view>

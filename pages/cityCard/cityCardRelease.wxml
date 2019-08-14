@@ -1,0 +1,154 @@
+<import src="../../public/shoptemplate.wxml" />
+<!-- 上传图片 -->
+<view style="overflow:hidden">
+    <view class="release-img-wrap">
+        <template is="item_image_shop" data="{{config:uploadimgobjects['cityCardBanner'].config,which:'cityCardBanner',itemid:releaseId}}"></template>
+    </view>
+    <view class="vz-flex" style="background: #fff;padding:0 20rpx;margin-bottom:20rpx">
+        <view style="width:20%">
+            <view class="p1">
+                优惠服务
+            </view>
+            <view class="p1">
+                适用类型
+            </view>
+            <view class="p1" hidden='{{subCityCardList.length==0}}'>
+                类型分类
+            </view>
+            <view class="p1">
+                折扣类型
+            </view>
+              <view class="p1" wx:if="{{discountType}}">原价</view>
+            <view class="p1">
+                折扣力度
+            </view>
+          
+       
+            <view class="p1">
+                折扣排序
+            </view>
+            <view class="p1">
+                折扣时间
+            </view>
+        </view>
+        <view style="width:80%">
+            <view class="p2" style="position:relative">
+                <input bindinput="getDiscountName" placeholder="请输入服务标题" value="{{discountName}}" class="discount-name" type="text" />
+            </view>
+            <view class="p2">
+                <picker bindchange="cityCardChange" value="{{cityCardIndex}}" range-key="Name" range="{{cityCardList}}">
+                    <view class="p2 vz-flex flex-between">
+                        <text>{{cityCardList[cityCardIndex].Name}}</text>
+                        <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                </picker>
+            </view>
+               <view class="p2"  hidden='{{subCityCardList.length==0}}'>
+                <picker bindchange="subCityCardChange" value="{{subCityCardIndex}}" range-key="Name" range="{{subCityCardList}}">
+                    <view class="p2 vz-flex flex-between">
+                        <text>{{subCityCardList[subCityCardIndex].Name}}</text>
+                        <icon class="iconfont icon-jiantou"></icon>
+                    </view>
+                </picker>
+            </view>
+            <view class="p2" style="position: relative;">
+                <view class="vz-flex flex discount-type-btn-wrap">
+                    <view class="flex discount-type-btn {{!discountType && 'discount-type-active'}}" data-type="0" bindtap="chooseDiscountType">全场折扣</view>
+                    <view class="flex discount-type-btn {{discountType && 'discount-type-active'}}" data-type="1" bindtap="chooseDiscountType">单件折扣</view>
+                </view>
+            </view>
+            <view class="p2" wx:if="{{discountType}}">
+                <input style="color: #333;position:relative;top:25%" maxlength="10" placeholder="请输入原价" type="number" value="{{originalPrice}}" bindinput="getOriginalPrice"
+                />
+            </view>
+            <view class="p2 vz-flex flex flex-center">
+                <picker class="flex" bindchange="cityDiscountChange" value="{{discountArrIdx}}" range="{{discountArr}}">
+                    <view class="p2 vz-flex flex flex-between">
+                        <text>{{discountArr[discountArrIdx]}}</text>
+                        <!-- <icon class="iconfont icon-jiantou"></icon> -->
+                    </view>
+                </picker>
+
+                <view wx:if="{{discountType}}" class="flex" style="text-align:right;padding-right:20rpx">
+                    折后{{discountPrice}}元
+                </view>
+            </view>
+            <view class="p2" style="position: relative;">
+                <view class="vz-flex flex discount-type-btn-wrap">
+                    <view class="flex discount-type-btn {{!dateType && 'discount-type-active'}}" data-type="0" bindtap="chooseDateType">按周排</view>
+                    <view class="flex discount-type-btn {{dateType && 'discount-type-active'}}" data-type="1" bindtap="chooseDateType">按月排</view>
+                </view>
+            </view>
+            <view class="p2 vz-flex flex-between" bindtap="showDataPicker">
+                <text class="wzsl">{{!dateType? weekChoosedStr && weekChoosedStr || '请选择每周折扣时间': dayChoosedStr && dayChoosedStr || '请选择每月折扣时间'}}
+                </text>
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+        </view>
+    </view>
+    <!--折扣详情 -->
+    <view class='discount-time-wrap ruzhu_cells mt-1 description' style="margin-bottom:20rpx;">
+        <view class="d-flex d-flex-center discount-detail c333" style="padding-left:20rpx;">
+            折扣详情
+        </view>
+        <view class='write_cell bg-f c333' style='border:none' wx:if="{{! isShowDate}}">
+            <textarea wx:if="{{!isShowDatePicker}}" maxlength="-1" style="width:100%;margin-bottom:20rpx;padding:0 20rpx;box-sizing:border-box"
+                auto-height="true" value='{{discountDescription}}' class='write_textarea' placeholder='请输入享受折扣的注意事项' placeholder-style="#999"
+                bindinput="getDescription"/>
+        </view>
+        <view class="shop-ruzhu-pic-ul" style="padding-bottom:20rpx">
+            <template is="item_image_shop" data="{{config:uploadimgobjects['cityCardDesp'].config,which:'cityCardDesp',itemid:releaseId}}"></template>
+        </view>
+    </view>
+
+    <view class="release-bot">
+        <view class="p1 vz-flex limit-number flex-center">
+            <view style="width: 20%">限制人数</view>
+            <view style="width: 80%" class="vz-flex flex-center flex-between">
+                <view wx:if="{{isLimitNum}}" style="color:#666">不限人数</view>
+                <input wx:else type="text" placeholder="请输入限制参与的人数" type="number" bindinput="getLimitNum" value="{{limitNum}}" />
+                <switch checked="{{isLimitNum}}" bindchange="changeLimit" />
+            </view>
+        </view>
+        <view class="vz-flex p1 flex-center flex-between">
+            <view>
+                是否需要预约
+            </view>
+            <switch checked="{{isAppointment}}" bindchange="switchChange" />
+        </view>
+    </view>
+    <view class="word">*添加的同城折扣服务，需要管理员审核才显示</view>
+
+    <view class="release-btn" bindtap="confirmRelease">
+        确定发布
+    </view>
+</view>
+
+<view class="mask" wx:if="{{isShowDate}}">
+    <view class="date-main">
+        <view class="date-main-bar vz-flex flex-center flex-between ">
+            <view bindtap="closeDate">取消</view>
+            <view style="color: #fe3d49" bindtap="confirmDate">确定</view>
+        </view>
+        <view class="vz-flex flex-wrap" hidden="{{!dateType}}">
+            <block wx:for="{{dayArr}}" wx:key="{{index}}">
+                <view class="date-main-item {{m1.getChoosed(chooseDayIdx, index) && 'date-main-item-active' || ''}}" bindtap="getDay" data-dayidx="{{index}}">
+                    {{item}}
+                </view>
+            </block>
+        </view>
+        <view class="vz-flex flex-wrap week" hidden="{{dateType}}">
+            <block wx:for="{{weekArr}}" wx:key="{{index}}">
+                <view class="date-main-item1 {{m1.getChoosed(chooseWeekIdx, index) && 'date-main-item1-active' || ''}}" bindtap="getWeek"
+                    data-weekidx="{{index}}">
+                    {{item}}
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+
+<wxs module="m1">
+    var getChoosed = function(array,idx) { if(array.indexOf(idx)>-1) return true; } 
+    module.exports.getChoosed = getChoosed;
+</wxs>

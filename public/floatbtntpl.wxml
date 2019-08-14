@@ -1,0 +1,108 @@
+<!--发布帖子按钮-->
+<template name="floatpostbtn">
+  <view class='index_fabu_bt' bindtap="toaddpage" hidden='{{1==buyVersion}}'>
+    <icon class='iconfont icon-jiahao'></icon>
+    <view class='f01'>发布</view>
+  </view>
+</template>
+<!--商家入驻按钮-->
+<template name="floatsettlebtn">
+  <view class='index_fabu_bt' bindtap="toaddshop">
+    <icon class='iconfont icon-jiahao'></icon>
+    <view class='f01'>入驻</view>
+  </view>
+</template>
+<!--客服按钮  -->
+<template name="city_kefu_btn">
+  <view class='index_fabu_bt index_kefu_bt' style="background: rgba(0,0,0,.5)" bindtap="bindtap_showkefuwin" style='line-height:40px;'>
+    <!-- <icon class='iconfont icon-jiahao'></icon> -->
+    <view>客服</view>
+  </view>
+</template>
+    <!--客服弹框-->
+<template name="city_kefu_win">
+  <view hidden='{{city_kefu_hidden}}'>
+    <view class="black_mask" bindtap='bindtap_close'></view>
+    <view class="erweima_tk">
+      <view class='pic01'>
+        <image src='{{QrCodeUrl}}'></image>
+      </view>
+      <view class='f01'>截图扫码，联系客服</view>
+      <view class='f01' hidden='{{""==cityphone}}' bindtap='callphone' data-phone='{{cityphone}}'>点击拨打：{{cityphone}}</view>
+      <icon class='iconfont icon-guanbi' bindtap='bindtap_close'></icon>
+    </view>
+  </view>
+</template>
+<!--管理员查看当前页面路径-->
+<template name="floatshowpathbtn">
+  <image src="https://i.vzan.cc/citysource/xcx_heka/link.png" class="tipsIcon" bindtap="hiddenTips" hidden="{{showpath?false:true}}"></image>
+</template>
+<!--返回顶部-->
+<template name="totopbtn">
+  <view class="returntopclass" hidden="{{!content.showBack}}" catchtap="{{content.back}}">
+  </view>
+</template>
+<!--底部导航-->
+<template name="bottom_nav">
+  <view class="fix-bl d-flex shangjia_bottom_nav index">
+    <view class="flex bt_li  {{1==currenttab?'active':''}}"  bindtap='bottomnavswitch'  data-url='{{buyversion==3?"../index/index":buyversion==2?"../shopindex/shopindex":"../postindex/postindex"}}'>
+    <!-- <icon class="icon_shouye"></icon> -->
+    <view style="height:40rpx;padding-bottom:22rpx;">   
+    <image class="footer-bar-icon" hidden="{{1!=currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/index-y.png" style="margin-top:8rpx;"></image>
+    <image class="footer-bar-icon" hidden="{{1==currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/index-n.png" style="margin-top:8rpx;"></image>
+  </view>
+    <text>首页</text>
+    </view>
+    <view hidden='{{buyversion!=3}}'  bindtap='bottomnavswitch'  data-url='../postindex/postindex' class="flex bt_li  {{3==currenttab?'active':''}}" >
+      <view style="height:40rpx;padding-bottom:22rpx;">   
+      <image class="footer-bar-icon" hidden="{{3!=currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/info-y.png" style="margin-top:8rpx;"></image>
+      <image class="footer-bar-icon" hidden="{{3==currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/info-n.png" style="margin-top:8rpx;"></image>
+    </view>
+      <text>分类信息</text>
+      </view> 
+   <view class="flex bt_li"  hidden='{{buyversion!=3}}' bindtap='bottomnavswitch'  data-url='../addpost/addenter'>
+        <icon style='background:#fff;'></icon>
+        <text>发布</text>
+        <view class="fabu"><view class='iconfont icon-jiahao'></view> </view>
+    </view> 
+    <view hidden='{{buyversion!=3}}'  bindtap='bottomnavswitch'  data-url='../shopindex/shopindex' class="flex bt_li  {{2==currenttab?'active':''}}" >
+      <view style="height:40rpx;padding-bottom:22rpx;">
+      <image class="footer-bar-icon" hidden="{{2!=currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/shop-y.png" style="margin-top:8rpx;"></image>
+      <image class="footer-bar-icon" hidden="{{2==currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/shop-n.png" style="margin-top:8rpx;"></image>
+      </view>
+      <text>好店</text>
+      </view> 
+    <view  hidden='{{1!=buyversion}}'  bindtap='bottomnavswitch'  data-url='../addpost/addenter' class="flex bt_li  {{4==currenttab?'active':''}}" >
+    <icon class="icon_nav_fubu"></icon>
+    <text>发布</text>
+    </view> 
+    <view  hidden='{{2!=buyversion}}'  bindtap='bottomnavswitch' data-url='../activity/activity' class="flex bt_li  {{5==currenttab?'active':''}}" >
+      <view style="height:40rpx;padding-bottom:22rpx;">
+      <image class="footer-bar-icon" hidden="{{5!=currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/discount-y.png" style="margin-top:8rpx;"></image>
+      <image class="footer-bar-icon" hidden="{{5==currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/discount-n.png" style="margin-top:8rpx;"></image>
+      </view>
+    <text>优惠</text>
+    </view> 
+    <view data-url='../person_center/person_center'  bindtap='bottomnavswitch' class="flex bt_li  {{6==currenttab?'active':''}}" >
+      <view style="height:40rpx;padding-bottom:22rpx;">
+      <image class="footer-bar-icon" hidden="{{6!=currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/mine-y.png" style="margin-top:8rpx;"></image>
+      <image class="footer-bar-icon" hidden="{{6==currenttab}}" src="https://j.vzan.cc/content/city/xcx/images/mine-n.png" style="margin-top:8rpx;"></image>
+      </view>
+    <text>我的</text>
+    </view> 
+  </view>
+</template> 
+<!--小程序低级店铺无法进入二维码弹框-->
+<template name="shopnotcanentertip">
+  <view hidden='{{currentshopqrcode==""?true:false}}' >
+    <view class="black_mask" ></view>
+    <view class="erweima_tk">
+      <view class='pic01'>
+        <image src='{{currentshopqrcode}}'></image>
+      </view>
+      <view  class='f01'>{{currentshoptip}}</view>
+       <view data-phone='{{currentphone}}' hidden='{{(currentphone==""||currentphone==mull)?true:false}}'  catchtap='callphone' class='f01'>(点击拨打)联系商家：{{currentphone}}</view>
+      <icon class='iconfont icon-guanbi' catchtap='closeqrcode'></icon>
+    </view>
+  </view>
+</template>

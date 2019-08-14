@@ -1,0 +1,23 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view class="container" hidden='{{loadall==0}}'>
+    <view class='withdraw'>
+        <view class='d-flex d-flex-center' style='padding: 30rpx;'>
+            <view class='head'><image class='' src='{{userimg}}'></image></view>
+            <view class='name clamp1 flex c999'>{{username}}</view>
+        </view>
+        <view class='balance'><text class='f01'>可提现余额：</text>￥{{usercandraw*1000/100000}}</view>
+        <view class='d-flex d-flex-center cell'>
+            <view class='flex money'><input type='tel' bindinput='inputamount' placeholder='请输入提现金额'></input></view>
+            <view class='bt' bindtap='submitdrawrequest'>申请提现</view>
+        </view>
+        <view class='rule'>
+            <text decode='true'>1.&nbsp;由于微信官方限制，余额达到1元或以上才可以提现</text>
+            <text decode='true'>2.&nbsp;每天只能提现1次哦</text>
+            <text decode='true'>3.&nbsp;提现成功，入账到微信钱包中</text>
+            <text decode='true'>4.&nbsp;到账金额=赏金</text>
+            <text class='f01' decode='true'>5.&nbsp;提现需先把微信号实名认证</text>
+            <text class='f01' decode='true'>6.&nbsp;提现需在个人中心验证手机号码</text>
+        </view>
+    </view>
+
+</view>

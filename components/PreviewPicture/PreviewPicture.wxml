@@ -1,0 +1,10 @@
+<!-- 图片预览 -->
+<view class="image-list" wx:if="{{imgList.length > 0}}}">
+    <view class="flex flex-center">
+        <block wx:for="{{imgList}}" wx:key="{{index}}">
+            <image mode="widthFix" src="{{item.thumbnail || item.Thumbnail}}" data-src="{{item.filepath || item.FileFullUrl}}" data-index="{{item.index}}"
+                class="image-item" catchtap="viewFullPicture" wx:if="{{index <=2 }}"></image>
+        </block>
+    </view>
+    <view class="image-account" wx:if="{{imgList.length>3}}">共{{imgList.length}}张</view>
+</view>

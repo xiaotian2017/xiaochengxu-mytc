@@ -1,0 +1,211 @@
+{
+  "pages": [
+    "pages/a_selbuyversion/a_selbuyversion",
+    "pages/storeExpirePage/storeExpirePage",
+    "pages/expirePage/expirePage",
+    "pages/categoryList/categoryList",
+    "pages/business_detail/pay",
+    "pages/payTransfer/payTransfer",
+    "pages/person_center/admininvite",
+    "pages/distribution/fxfollowers",
+    "pages/distribution/fxshouyi",
+    "pages/distribution/myDistribution",
+    "pages/city114/city114Search",
+    "pages/publish_collectlove/publish_collectlove",
+    "pages/myVoucher/myVoucher",
+    "pages/redpackageList/redpackageList",
+    "pages/shop/payForSetTop",
+    "pages/publishmix/p_carpooling",
+    "pages/business_ruzhu/business_ruzhu",
+    "pages/shop/shop_admin",
+    "pages/releaseDiscount/buyHistory",
+    "pages/index/seephonepaysel",
+    "pages/person_center/adminmgr",
+    "pages/publishmix/p_recuit",
+    "pages/releaseDiscount/releaseDiscount",
+    "pages/releaseDiscount/storeDiscount",
+    "pages/cutPrice/cutPrice",
+    "pages/redpackmgr/redpacklist",
+    "pages/redpackmgr/redpackedit",
+    "pages/shop/clerkinvite",
+    "pages/shop/clerkmgr",
+    "pages/cutuse/usestate",
+    "pages/cutuse/cutuse",
+    "pages/business_detail/business_detail",
+    "pages/activity/activity",
+    "pages/publish_cutprice/publish_cutprice",
+    "pages/person_center/person_center",
+    "pages/city114/city114",
+    "pages/shop/shop",
+    "pages/index/index",
+    "pages/city114/city114Mine",
+    "pages/city114/city114Detail",
+    "pages/lovemgr/lovemgr",
+    "pages/domain/domain",
+    "pages/buyHistory/buyHistory",
+    "pages/cutmgr/cutmgr",
+    "pages/postindex/postindex",
+    "pages/activity_jiaixin/activity_jiaixin_detail",
+    "pages/withdraw/withdraw",
+    "pages/bill/bill",
+    "pages/activity_record/activity_record",
+    "pages/cutlist/cutlist",
+    "pages/cutPriceTake/cutPriceTake",
+    "pages/bill_detail/bill_detail",
+    "pages/shopindex/shopindex",
+    "pages/person_center/edit",
+    "pages/youhui_detail/youhui_detail",
+    "pages/business_list/business_list",
+    "pages/order/order",
+    "pages/my_coupon/my_coupon",
+    "pages/my_coupon/mycoupon_detail",
+    "pages/addpost/addenter",
+    "pages/post/postlist",
+    "pages/fabu_biaodan/fabu_biaodan",
+    "pages/pay/pay",
+    "pages/bind_mobile/bind_mobile",
+    "pages/mypublish/mypublish",
+    "pages/detail/shop_report",
+    "pages/detail/detail",
+    "pages/index/needpay",
+    "pages/news_center/news_center",
+    "pages/news_center/news_detail",
+    "pages/news_center/reward",
+    "pages/business_continupay/business_continupay",
+    "pages/groupuse/groupuse",
+    "pages/city114/city114ruzhu",
+    "pages/my_coupon/use_state",
+    "pages/cutuse/loveusestate",
+    "pages/redPackageRecord/redPackageRecord",
+    "pages/redpackmgr/records",
+    "pages/lovemgr/loverecord",
+    "pages/groupuse/usestate",
+    "pages/business_detail/businessDetailEdit",
+    "pages/index/login",
+    "pages/voucherManage/voucherManage",
+    "pages/voucherManage/voucherRecord",
+    "pages/couponCodeVerification/couponCodeVerification",
+    "pages/shop/storeAppAd"
+  ],
+  "subPackages": [{
+      "root": "pages/goods",
+      "pages": [
+        "goodsOrderDetail",
+        "goodsReleaseList",
+        "goodsReleaseFareList",
+        "goodsRelease",
+        "goodsReleaseCateManagement",
+        "goodsReleaseFareAdd",
+        "goodsMerchantOrder",
+        "usestate",
+        "goodsAddressList",
+        "goodsRecord",
+        "goodsOrder",
+        "goodsAddressAdd",
+        "goods_car/goods_car",
+        "goods_detail/goods_detail",
+        "goods_list/goods_list"
+      ]
+    },
+    {
+      "root": "pages/group_purchase",
+      "pages": [
+        "group_subPurchase/group_subPurchase",
+        "group_explanation/group_explanation",
+        "pulish_group_purchase/pulish_group_purchase",
+        "group_admin/group_admin",
+        "group_purchase/group_purchase",
+        "group_purchase_record/group_purchase_record"
+      ]
+    },
+    {
+      "root": "pages/greetIngCard",
+      "pages": [
+        "greetIngCard",
+        "greetIngCardList",
+        "greetIngCardSend"
+      ]
+    },
+    {
+      "root": "pages/cityCard",
+      "pages": [
+        "cityCardService",
+        "cityCardList",
+        "cityCardPurchase",
+        "cityCardVerification",
+        "usestate",
+        "cityCardRelease",
+        "cityCardMgrList",
+        "cityCardRecord",
+        "cityCardIndex",
+        "cityCardMemberCode",
+        "memberStore",
+        "memberStoreGoods",
+        "memberStoreCoupon",
+        "memberCouponDetail"
+      ]
+    },
+    {
+      "root": "pages/storeAlbum",
+      "pages": [
+        "storeAlbum",
+        "uploadPhoto"
+      ]
+    },
+    {
+      "root": "pages/vote",
+      "pages": [
+        "take",
+        "voteActivity/voteActivity",
+        "voteDetail/voteDetail",
+        "voteList/voteList",
+        "votePay/votePay"
+      ]
+    },
+    {
+      "root": "pages/publishNote",
+      "pages": [
+        "commonPublish",
+        "noteDetail"
+      ]
+    },
+    {
+      "root": "pages/postNav",
+      "pages": [
+        "moreServer/moreServer",
+        "resetEdit/resetEdit",
+        "continueServer/continueServer",
+        "postSuccess/postSuccess"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/addpost/addenter": {
+      "network": "all",
+      "packages": [
+        "pages/postNav"
+      ]
+    },
+    "pages/mypublish/mypublish": {
+      "network": "all",
+      "packages": [
+        "pages/postNav"
+      ]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fe3d49",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于入驻店铺选择位置以及搜索附近的数据"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

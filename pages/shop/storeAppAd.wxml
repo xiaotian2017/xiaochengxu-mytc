@@ -1,0 +1,13 @@
+<view>
+  <image src="http://j.vzan.cc/content/city/xcx/images/s-store.png" style="width:100%" mode="widthFix"></image>
+  <view class="tips" wx:if="{{cityphone&&cityphone!='null'}}">
+    联系管理员立即入驻
+  </view>
+  <view class="city-phone" bindtap="makePhone" wx:if="{{cityphone&&cityphone!='null'}}">
+       {{cityphone}} <icon class="iconfont icon-dianhua" style="padding-left: 20rpx"></icon>
+  </view>
+
+  <!-- <view style="text-align: center">
+    <image src="{{qrSrc}}" class="qrcode" mode="widthFix" ></image>
+  </view> -->
+</view>

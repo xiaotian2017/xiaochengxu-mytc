@@ -1,0 +1,202 @@
+@import '../../../public/navigatorCommon.wxss';
+@import './goods_add_layer.wxss';
+view {
+    word-break: break-all
+}
+
+page {
+    --font-color: #333;
+    --main-color: #fe3d49;
+    background: #fff;
+}
+
+.goods-price {
+    font-size: 32rpx;
+    color: var(--main-color)
+}
+
+.goods-price::before {
+    content: "￥";
+    font-size: 24rpx;
+    vertical-align: 1px;
+    color: var(--main-color)
+}
+
+.global-wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden
+}
+
+/* 底部 */
+
+.foot-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 100rpx;
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 1rpx solid #f2f2f2;
+    background: #fff;
+    z-index: 990
+}
+
+.foot-icon {
+    position: relative;
+    padding: 20rpx 0;
+    width: 120rpx;
+    font-size: 24rpx;
+    color: #999;
+    box-sizing: border-box
+}
+
+.foot-icon::before {
+    display: block;
+    content: '';
+    margin: 0 auto 2px;
+    width: 22px;
+    height: 20px;
+    background: url(http://j.vzan.cc/content/city/xcx/images/goods.png?v=2) no-repeat;
+    background-size: 157px
+}
+
+.foot-service::before {
+    background-position: -133px -68px
+}
+
+.foot-store::before {
+    background-position: -67px -68px
+}
+
+.foot-goods-car::before {
+    background-position: -100px -68px
+}
+
+.foot-icon:not(:last-of-type)::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    content: '';
+    width: 1px;
+    height: 100%;
+    background: #f2f2f2;
+    transform: scaleX(.5)
+}
+
+.foot-add, .foot-purchase {
+    width: calc(50vw - 180rpx);
+    line-height: 100rpx;
+    font-size: 28rpx;
+    color: #fff;
+}
+
+.foot-goods-car {
+    position: relative;
+}
+
+.foot-num {
+    position: absolute;
+    top: 8rpx;
+    right: 20rpx;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: var(--main-color);
+    border-radius: 50%
+}
+
+.foot-add {
+    background: #fea100
+}
+
+.foot-purchase {
+    background: var(--main-color)
+}
+
+.foot-sold {
+    line-height: 100rpx;
+    font-size: 28rpx;
+    color: #333;
+    background: #f2f2f2
+}
+
+.goods-delete {
+    margin-top: 180rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.goods-delete image {
+    width: 220rpx;
+    height: 220rpx
+}
+
+.little-tips {
+    margin-top: 30rpx
+}
+
+.little-tips text {
+    color: #fe3d49
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+.fadeIn {
+    display: block;
+    animation: fadeIn .16s linear both
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+.fadeOut {
+    display: block;
+    animation: fadeOut .38s linear both
+}
+.make-money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  width: 74px;
+  height: 25px;
+  border-radius: 13px 0 0 13px;
+  background: #2F2D23;
+  font-size: 12px;
+  color: #D9AE6F;
+  z-index: 2;
+}
+
+.make-money>image {
+  position: abosute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  margin-left: -10px;
+}
+
+.make-money>text {
+  margin-left: 3px;
+}

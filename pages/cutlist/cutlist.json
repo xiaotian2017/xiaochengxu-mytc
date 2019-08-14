@@ -1,0 +1,7 @@
+{
+
+  "usingComponents": {
+    "city-navigator": "/components/Navigator/Navigator"
+
+  }
+}

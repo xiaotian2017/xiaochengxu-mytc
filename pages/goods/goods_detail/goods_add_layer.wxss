@@ -1,0 +1,182 @@
+.goods-car-layer{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .36);
+    z-index: 999
+}
+.close{
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    width: 20px;
+    height: 20px;
+    border: 1rpx solid #ccc;
+    border-radius: 50%;
+    z-index: 2
+}
+.close::before,.close::after{
+    background: #ccc
+}
+.goods-car-wrapper{
+    position: absolute;
+    bottom:-70vh;
+    width: 100vw;
+    height: 70vh;
+    max-height:70vh;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    background: #fff;
+    border-top-left-radius:16rpx;
+    border-top-right-radius:16rpx;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform:translateZ(0);
+    transform: translateZ(0)
+}
+@-webkit-keyframes slideFromDown {
+    to {
+      transform: translate3d(0,-100%, 0)
+    }
+}
+@keyframes slideFromDown {
+    to {
+        transform: translate3d(0,-100%, 0);
+        perspective: 1000
+    }
+}
+.slideFromDown {
+    -webkit-animation:slideFromDown .38s  cubic-bezier(0.420, 0.010, 0.245, 0.775) forwards;
+    animation: slideFromDown .38s cubic-bezier(0.420, 0.010, 0.245, 0.775) forwards 
+}
+@-webkit-keyframes slideOutDown {
+    from {
+        transform: translate3d(0,-100%, 0)
+    }  
+    to {
+        transform: translate3d(0,0, 0)
+    }
+}
+@keyframes slideOutDown {
+    from {
+        transform: translate3d(0,-100%, 0)
+    }
+    to {
+        transform: translate3d(0,0, 0)
+    }
+}
+.slideOutDown {
+    -webkit-animation: slideOutDown .38s cubic-bezier(0.205,0.680, 0.665, 1.000) forwards;
+    animation: slideOutDown .38s  cubic-bezier(0.205, 0.680, 0.665, 1.000) forwards
+}
+/* 添加购物车 */
+.goods-car-add{
+    width: 100%;
+    height: 100%
+}
+.goods-base-info{
+    position: relative;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #f2f2f2;
+    transition: max-height .38s
+}
+.goods-cover{
+    margin-top: -100rpx;
+    width: 200rpx;
+    height: 200rpx;
+    margin-right: 20rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    overflow: hidden
+}
+.goods-cover image{
+    width: 100%;
+    height: 100%
+}
+.goods-remain,.goods-size-name,.goods-layer-disocount{
+    color: #333;
+    font-size: 28rpx
+}
+.goods-layer-disocount{
+    position: absolute;
+    top:20rpx;
+    right: 230rpx;
+    height: 28rpx;
+    color: #fe3d49
+}
+.goods-size-select{
+    height:calc(70vh - 220rpx);
+    transition: height .38s linear;
+    overflow-y: scroll 
+}
+/* size */
+.goods-size{
+    padding-top: 20rpx;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.goods-size-tag{
+    padding-bottom: 20rpx;
+    font-size: 28rpx;
+    color: #333
+}
+.goods-size-item{
+    margin:0 20rpx 20rpx 0;
+    padding:10rpx 20rpx;
+    font-size: 26rpx;
+    line-height: 1;
+    color: #333;
+    background: #f5f5f5;
+    border-radius:30px
+}
+.goods-size-active{
+    color: #fff;
+    background: #fe3d49
+}
+.goods-sold{
+    color: #999
+}
+/* 选择数量*/
+.goods-quantity{
+    padding: 20rpx 0;
+    font-size: 28rpx;
+    color: #333
+}
+.goods-limit{
+    color:#999
+}
+.goods-minus,.goods-add{
+    width: 48rpx;
+    height: 52rpx;
+    padding: 2rpx 8rpx;
+    background: #f2f2f2
+}
+.goods-input{
+    width: 80rpx;
+    height: 56rpx;
+    line-height:56rpx;
+    margin:0 10rpx;
+    font-size: 30rpx;
+    text-align: center;
+    background: #f2f2f2;
+    caret-color:#fe3d49
+}
+.goods-quantity-action image{
+    width: 48rpx;
+    height: 48rpx;
+}
+.goods-layer-btn{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100rpx;
+    font-size: 36rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 100rpx;
+    background:#fe3d49
+}

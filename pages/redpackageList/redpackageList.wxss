@@ -1,0 +1,66 @@
+@import '../../public/navigatorCommon.wxss';
+view {
+    box-sizing: border-box;
+}
+
+.avatar {
+    width: 110rpx;
+    height: 110rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.redpackage-list-wrap {
+    background: #fff;
+    padding: 20rpx;
+    position: relative;
+    margin-bottom: 20rpx;
+}
+
+.redpackage-list-wrap-nickName {
+    font-weight: bold;
+    font-size: 32rpx;
+    width: 400rpx;
+    color: #333;
+}
+
+.redpackage-list-wrap-cash {
+    color: #666;
+    font-size: 28rpx;
+    position: absolute;
+    width: 400rpx;
+    bottom: 0;
+    left: 0;
+}
+
+.redpackage-list-left {
+    position: relative;
+}
+
+.redpackage-list-left-bottom {
+    position: relative;
+}
+
+.redpackage-attention {
+    color: #fe3d49;
+    font-size: 28rpx;
+}
+
+.redpackage-attention-label {
+    width: 140rpx;
+    height: 48rpx;
+    background: #fe3d49;
+    font-size: 28rpx;
+    color: #fff; 
+    line-height: 48rpx;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 20rpx;
+}
+
+.redpackage-list-gold-icon {
+    width: 36rpx;
+    height: 40rpx;
+    display: inline-block;
+}

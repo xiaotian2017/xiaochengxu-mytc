@@ -1,0 +1,361 @@
+view {
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.goods-release-detail {
+    background: #fff;
+    padding-left:20rpx;
+}
+
+.goods-release-title-wrap {
+    height: 80rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+    font-size: 30rpx;
+}
+
+.goods-release-title-tips  {
+    width: 20%;    
+}
+
+.goods-release-title-input {
+    width: 80%;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.goods-release-desc {
+    height: 240rpx;
+    width: 100%;
+    box-sizing: border-box;    
+    font-size: 30rpx;
+    padding: 20rpx 20rpx 20rpx 0;
+}
+
+.goods-release-desp-img-tip {
+    font-size: 24rpx;
+    color: #999;    
+    padding: 30rpx 0 0 20rpx;
+}
+
+.goods-release-init-size-wrap {
+    background: #fff;
+    font-size: 30rpx;
+    padding-left: 20rpx;    
+}
+
+.goods-release-origin-price {
+    border-top: 1rpx solid #f0f0f0;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.goods-release-init-size-item {
+    height: 80rpx;
+}
+
+.goods-release-new-size-wrap {
+    background: #fff;    
+}
+
+.goods-release-new-size-item {
+    height: 84rpx;
+    padding-left: 20rpx;
+    font-size: 34rpx;
+}
+
+.goods-release-new-size-left {
+    width: 80%;
+    border-right: 1rpx solid #f0f0f0;
+}
+
+.goods-release-new-size-right {
+    width: 20%;
+    text-align: center;    
+}
+
+.goods-release-new-size-right .icon-cha {
+    font-size: 40rpx;
+}
+
+.goods-release-new-size-tip {
+    width: 20%;
+}
+
+.goods-release-new-size-wrap + .goods-release-new-size-wrap {
+    margin-top: 20rpx;
+}
+
+.goods-release-add-size-btn {
+  width: 90%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  margin: 20rpx auto;
+  background: #fff;
+  color: #fe3d49;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+}
+
+.goods-release-add-size-btn text {
+    padding-left: 20rpx;    
+}
+
+.goods-release-add-size-btn icon {
+    transform: rotate(45deg);  
+}
+
+.goods-release-options-wrap {
+    padding-left: 20rpx;
+    background: #fff;
+    font-size: 30rpx;
+    margin-bottom:20rpx;
+
+}
+
+.goods-release-options-item {
+    height: 80rpx;
+    padding-right: 20rpx;
+}
+
+.goods-release-integral-item {
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.goods-release-fare-template {
+    width: 100%;
+    background: #fff;
+    font-size: 30rpx;
+    position: absolute;    
+    bottom: 0;
+
+
+}
+.cate-wrap {
+    max-height:40vh;
+    overflow:scroll;
+}
+.goods-release-fare-template-title {
+    height: 96rpx;
+    text-align: center;
+    line-height: 96rpx;    
+    color: #999;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.goods-release-fare-template-item {    
+    height: 110rpx;    
+    line-height: 110rpx;
+    padding: 0 30rpx;
+}
+
+.goods-release-fare-template-item + .goods-release-fare-template-item {
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.goods-release-fare-template-btn {
+    height: 108rpx;
+    line-height: 108rpx;
+    text-align: center;
+}
+
+.goods-release-fare-btn-wrap {
+     border-top: 1rpx solid #f0f0f0;
+}
+
+.create-cate-btn-wrap {
+    padding: 30rpx;
+    background: #f0f0f0;    
+}
+
+.create-cate-btn-wrap view {
+    color: #fe3d49;
+    border: 1rpx solid #fe3d49;    
+    text-align: center;
+    line-height: 80rpx;
+    height: 80rpx;
+    border-radius: 12rpx;
+    font-size: 36rpx;    
+}
+
+.create-cate-name-wrap {
+    width: 600rpx;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32rpx;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-title {
+    height: 108rpx;
+    line-height: 108rpx;
+    text-align: center;
+    color: #555;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.create-cate-name-wrap input {
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    height: 108rpx;
+    width: 90%;
+    margin: 20rpx;
+    border: 1rpx solid #f0f0f0;
+    border-radius: 8rpx;
+}
+
+.create-cate-name-btn {
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+}
+
+.create-cate-name-btn-wrap {
+    position: relative;
+}
+
+.create-cate-name-btn-wrap::after {
+    content: '';
+    display: block;
+    height: 60rpx;
+    border-left: 2rpx solid #f0f0f0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.city-card {
+    background: #fff;
+    padding: 0 0 0 20rpx;
+    margin-bottom: 20rpx; 
+}
+
+.city-card-item {
+    height: 80rpx;    
+    font-size: 30rpx;
+}
+
+.city-card-item + .city-card-item {
+    border-top: 1rpx solid #f0f0f0;    
+}
+
+.city-card-limit-buy-item {
+    border-top: 1rpx solid #f0f0f0;
+    font-size: 30rpx;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.city-card-input {
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+
+.release-goods-btn {
+    height: 108rpx;
+    line-height:  108rpx;
+    text-align: center;
+    color: #fff;
+    background: #fe3d49;
+    font-size: 30rpx;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;    
+}
+
+.voucher-wrapper {
+    background: #fff;
+    font-size: 28rpx;
+    padding: 0 0 0 20rpx;
+    margin-bottom: 200rpx;
+}
+
+
+.required {
+     color: #fe3d49;
+}
+
+.instructions {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.voucher-item {
+    height: 80rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.voucher-item-left {
+    width: 200rpx;
+}
+
+.voucher-use-scope view {
+    padding: 8rpx 0;
+    width: 160rpx;
+    text-align: center;
+    border-radius: 12rpx;
+    border: 1rpx solid #999;   
+    color: #999; 
+    margin-right: 20rpx; 
+}
+
+.voucher-use-scope .active {
+    color: #fe3d49;
+    border-color: #fe3d49;
+}
+
+.mb20 {
+    margin-bottom: 20rxp;
+}
+
+.picker-top-bar {
+    position: absolute;
+    bottom: 300px;
+    width: 100%;
+    background: #fff;
+    font-size: 36rpx;
+    -webkit-box-pack: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 20rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+
+.release-discount-name-item {
+    height: 100rpx;
+    font-size: 28rpx;
+    
+}
+
+.release-discount-name-item {
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.release-discount-name-left {
+    width: 200rpx;
+}
+
+.release-discount-name-input {
+    width: 480rpx;
+}
+
+.distribution-wrap {
+    font-size: 28rpx;
+    padding: 0 20rpx;
+    background: #fff;
+}

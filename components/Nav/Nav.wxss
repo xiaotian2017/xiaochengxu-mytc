@@ -1,0 +1,48 @@
+.city-nav{
+    position: relative;
+    height:96rpx;
+    width: 100vw;
+    white-space: nowrap;
+    color: #333;
+    font-size: 0;
+    background: #fff;
+    box-sizing: border-box;  
+}
+.city-nav::before{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width:100vw;
+    height:1px;
+    background: #e5e5e5;
+    transform: scaleY(.5)
+}
+.nav-item{
+    display: inline-block;
+    position: relative;
+    padding:0 20rpx;
+    line-height: 96rpx;
+    font-size: 28rpx;
+}
+.navActive{
+    /* color: #fe3d49; */
+    font-weight: 700;
+    font-size: 30rpx;
+}
+.navActive::before{
+    content: '';
+    position: absolute;
+    /* left:11px; */
+    bottom:28rpx;
+    height: 12rpx;
+    width:  70%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;   
+    background: linear-gradient(to right, #fa0f20 50%, #fa0f73 50%);    
+}
+.nav-name {
+    position: relative;
+    z-index: 100;
+}

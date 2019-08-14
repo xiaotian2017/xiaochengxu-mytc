@@ -1,0 +1,261 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<import src='/template/companyInfo.wxml' />
+<import src='/template/recommend.wxml' />
+<import src='/template/loveranking.wxml' />
+<import src='/template/activeFriends.wxml' />
+<import src="../../public/floatbtntpl.wxml" />
+
+<view wx:if='{{1==renderpage}}'><view class="container" style="padding-bottom:20px;" hidden='{{loadall==0}}'>
+    <view class='basewrap d-flex flex-center kanjia_focus_cell' style='background: #000;'>
+        <view class='flex number activeAccount d-flex'>
+            <view class='activeAccountItem'>{{mainmodel.viewcount}}人查看</view>
+            <view class='activeAccountItem'>{{mainmodel.sharecount}}人分享</view>
+            <view class='activeAccountItem'>{{mainmodel.joincount}}人参与</view>
+        </view>
+        <!-- <view class='bt' catchtap='follow'>{{hasFollow==1?'已关注':'关注'}}</view> -->
+    </view>
+    <!--商品图-->
+    <view class='pintuan_commodity'>
+        <image mode="widthFix" src='{{mainmodel.introduceimg}}'></image>
+        <view class='d-flex flex-center time' style='padding: 5px 10px;background: rgba(0, 0, 0, 0.8);'>
+            <view>{{countdown}}</view>
+            <view wx:if='{{null!=countTimer}}'>
+                <em>{{countTimer.d}}</em>天
+                <em>{{countTimer.h}}</em>时
+                <em>{{countTimer.m}}</em>分
+                <em>{{countTimer.s}}</em>秒
+            </view>
+        </view>
+    </view>
+
+    <!--商品信息-->
+    <view class="jizan_commodity_infor">
+        <view class="name vz-flex flex-between">
+            <view>{{mainmodel.lovename}}</view>           
+        </view>
+        <view class="vz-flex flex-between flex-center">
+            <view style="font-size: 24rpx;text-decoration: line-through" class="c666">原价￥{{mainmodel.originalprice*10000 / 1000000}}</view>
+            <view class="re-coupon-label" wx:if="{{voucher}}">返{{voucher.VoucherMoney}}元代金券</view>
+        </view>
+        <view class="d-flex price flex-between">
+            <view>最低爱心价
+                <label class="i_price01">￥{{mainmodel.minprice*10000 / 1000000}}</label>
+            </view>    
+            <view class="sheng">仅剩{{mainmodel.remainnum}}件</view>
+        </view> 
+        <view class="date" style='border-bottom:none'>兑换有效期：{{mainmodel.receivestart}} - {{mainmodel.receiveend}}</view>
+        <view class="aixin" style="border-top:{{mainmodel.remainnum>0&&mainmodel.isend==0?'1rpx solid #f0f0f0':''}}" wx:if="{{mainmodel.remainnum>0&&mainmodel.isend==0}}">
+            <view class="f01" wx:if="{{''!=mainmodel.remark&&null!=mainmodel.remark&&undefiend!=mainmodel.remark}}">{{mainmodel.remark}}</view>
+            <view class="bt" wx:if="{{mainmodel.luid==0&&mainmodel.likeisend}}">
+                <text decode='true' class="get-love-price-btn" bindtap="startCut">我要爱心价</text>
+            </view>
+            <view class="bt" wx:elif="{{mainmodel.luid>0}}">
+                <view class="click_aixin">
+                    <!-- <image class="aixin_pic {{(click_aixin||mainmodel.luserstate>0||mainmodel.isend)?'':'active'}}" mode='widthFix' src="http://j.vzan.cc/content/city/xcx/images/Entertainment_{{click_aixin?'09':'10'}}.png"></image>                   -->
+                    <view class="vz-flex flex-between">
+                        <view bindtap="click_aixin" style="text-align: center;padding-left:30rpx;margin:0 auto;width:35%" class="get-love-wrap wzsl vz-flex flex-center">
+              
+                            <image class="heart-img" src="{{click_aixin&&mainmodel.luserstate==0?'https://j.vzan.cc/content/city/love/images/tc-yh-115.png':'https://j.vzan.cc/content/city/love/images/tc-yh-114.png'}}"></image>
+                            <view style="padding-left:30rpx" wx:if='{{click_aixin&&mainmodel.luserstate==0}}'>已点爱心</view>
+                            <view class="f02" style="color: #fff;padding-left:12rpx" wx:elif='{{mainmodel.mode==0&&mainmodel.luserstate>0}}' data-bid='{{lid}}' data-buid='{{mainmodel.luid}}' catchtap='gotouse'>去使用</view>
+                            <view class="f02" style="color: #fff" wx:elif='{{mainmodel.mode==1&&mainmodel.luserstate>0}}'>领取成功</view>
+                            <view class="f02" style="padding-left:10rpx;color:#fff" wx:else>点亮爱心</view>
+                        </view>
+                        <button style="margin:0" decode='true' class="get-love-wrap vz-flex flex-center" wx:if='{{mainmodel.isself&&mainmodel.luserstate==0}}' open-type="share">
+                            <image style="padding-left:30rpx" class="heart-img" src="https://j.vzan.cc/content/city/love/images/tc-yh-114.png" wx:if='{{mainmodel.mode!=0||mainmodel.luserstate<=0}}'></image>
+                            <view style="padding-left:10rpx">请伙伴们帮忙</view>
+                        </button>
+                        <view decode='true' class="get-love-wrap vz-flex flex-center" bindtap="gotolovepage" wx:if="{{!mainmodel.isself}}">
+                            <image style="padding-left:30rpx" class="heart-img" src="https://j.vzan.cc/content/city/love/images/tc-yh-114.png"></image>
+                            <view style="padding-left:40rpx">
+                                我也要爱心价
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+
+            </view>
+        </view>
+    </view>
+    <!--减价好友-->
+    <template is="activeFriends" data="{{userName:mainmodel.usernick,buid:luid,helpers:helpers,type:1}}"></template>
+    <!--公司信息-->
+    <template is="companyInfo" data="{{shop:companyInfo}}"></template>
+
+    <!--购买-->
+    <view class='jizan_number_cells mt-1' wx:if="mainmodel.configs!=null&&mainmodel.configs.length>0">
+        <view class="d-flex d-flex-center jizan_number_cell" wx:for='{{mainmodel.configs}}' wx:key='uqnique'>
+            <view class="f01">{{item.NeedNum}}个爱心</view>
+            <view class="f02 flex" wx:if="{{mainmodel.mode==0&&mainmodel.stockmode==0}}">￥{{item.BuyPrice*10000 / 1000000}}</view>
+            <view class="f02 flex" wx:if="{{mainmodel.mode==0&&mainmodel.stockmode==1}}">￥{{item.BuyPrice*10000 / 1000000}}({{item.Memo!='null'&&item.Memo||''}}剩{{item.Stock}}份）</view>
+            <view class="f02 flex" wx:if="{{mainmodel.mode==1&&mainmodel.stockmode==1}}">({{item.Memo!='null'&&item.Memo||''}}剩{{item.Stock}}份）</view>
+            <view class="f03" wx:if="{{mainmodel.luid>0&&mainmodel.isself&&mainmodel.likeisend&&mainmodel.luserstate==0}}">
+                <view class="bt " wx:if="{{item.NeedNum<=mainmodel.collectcount&&(index+1<mainmodel.configs.length?(mainmodel.configs[index+1].NeedNum>mainmodel.collectcount):true)}}"
+                    data-config='{{item}}' bindtap='getlove'>{{mainmodel.mode==0?"购买":"领取"}}</view>
+
+                <view wx:elif="{{item.NeedNum>mainmodel.collectcount}}" class="bt active">还差{{item.NeedNum-mainmodel.collectcount}}个爱心</view>
+                <view wx:else class="bt " data-config='{{item}}' bindtap='getlove'>{{mainmodel.mode==0?"购买":"领取"}}</view>
+            </view>
+            <view class="f03" wx:else>
+                <view class="bt active">还差{{(item.NeedNum-mainmodel.collectcount
+                    <0)?0:item.NeedNum-mainmodel.collectcount}}个爱心</view>
+                </view>
+            </view>
+
+        </view>
+        <!--活动信息-->
+        <view class='mt-1 activeScrollItem activeInfoItem' style='padding-bottom:0' id='tabItem1' data-id="110">
+            <view class='pintuan_commodity_title'>
+                <view class='shu'></view>
+                <view class='name'>
+                    <view class='clamp1'>活动信息</view>
+                </view>
+            </view>
+            <view class='pintuan_commodity_miaoshu'>
+                <view class='word'>
+                    <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+                </view>
+                <image wx:for='{{mainmodel.listdetailimg}}' wx:key='{{item}}' mode='widthFix' src='{{item}}'></image>
+            </view>
+        </view>
+
+        <!--集爱心说明-->
+        <view class='mt-1'>
+            <view class="pintuan_commodity_title">
+                <view class='shu'></view>
+                <view class='name'>
+                    <view class='clamp1'>集爱心说明</view>
+                </view>
+            </view>
+            <view class='pintuan_commodity_miaoshu'>
+                <image mode="widthFix" src='http://j.vzan.cc/content/city/xcx/images/cutPrice.png' style='margin-bottom:20rpx;'></image>
+                <view class="jizan_shuoming_f {{xiangxi?'none':''}}">
+                    <text>1、点击底部“我要集爱心”按钮参加活动。</text>
+                    <text>2、奖品份数有限，不一定非要减到底价，减到您觉得划算就赶紧付款抢下哦。</text>
+                    <text>3、付款后奖品份数自动减少，领完则无法继续参与点爱心活动，请速度哦。</text>
+                    <text>4、集爱心成功并在线支付后，即可前往活动商铺进行消费，详情请看商家信息。</text>
+                </view>
+                <view>
+                    <view class="zhankai_bt {{xiangxi?'':'none'}}" bindtap='xiangxi'>
+                        <view class='f01'>详细说明</view>
+                        <label class='iconfont icon-jiantou-down' style='font-size:32rpx'></label>
+                    </view>
+                    <view class="zhankai_bt {{xiangxi?'none':''}}" bindtap='xiangxi'>
+                        <label class='iconfont icon-jiantou-up' style='font-size:32rpx'></label>
+                        <view class='f01'>收起</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--排行-->
+        <template is="loveranking" data="{{ranking:ranks,showbottomtip:showbottomtip,showallbottomtip:showallbottomtip}}">
+
+        </template>
+
+        <!--弹框填写电话号码-->
+        <view class='fix-tl-100' hidden='{{takeform==0?true:false}}'>
+            <view class='black_mask' bindtap='close_tk'></view>
+            <view class='dialog_tk tel'>
+                <view class='f01'>所有信息均不会公开，仅用于兑换商品</view>
+                <view class='shuru_all'>
+                    <view class='title'>手机号</view>
+                    <view class='flex shuru'>
+                        <input type='text' value='{{Phone}}' bindinput='inputphone'></input>
+                    </view>
+                </view>
+                <view class='shuru_all'>
+                    <view class='title'>姓名</view>
+                    <view class='flex shuru'>
+                        <input type='text' value='{{UserName}}' bindinput="inputusername"></input>
+                    </view>
+                </view>
+                <view class='que_ding_all'>
+                    <button class='que_ding_bt' hover-class='none' bindtap='addparticipant'>确定</button>
+                </view>
+                <view class='iconfont icon-guanbi' bindtap='closeformwin'></view>
+            </view>
+        </view>
+
+        <!--支付弹框-->
+        <view class='fix-tl-100' hidden='{{showpaywin==1?false:true}}'>
+            <view class='black_mask'></view>
+            <view class='dialog_tk tel'>
+                <view class="d-flex d-flex-center" style="text-align: left;">
+                    <view class="head">
+                        <image style="width:100%;height:100%" src="{{companyInfo.companyAvatar}}"></image>
+                    </view>
+                    <view class="flex">
+                        <view class="clamp2" style="font-size:32rpx;margin-bottom:50rpx;">{{mainmodel.lovename}}</view>
+                        <view style="font-size:36rpx;color: #ff5a00;" wx:if="postpayItem!=null&&mainmodel.mode==0">￥{{(postpayItem.BuyPrice-voucherMoney)*10000 / 1000000}}</view>
+                        <view style="font-size:36rpx;color: #ff5a00;" wx:elif="postpayItem!=null&&mainmodel.mode==1">免费领</view>
+                    </view>
+                </view>
+                <view wx:if="{{listvoucher.length>0}}" class="voucher-box vz-flex flex-between" bindtap="showVoucher">
+                    <view wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+                    <view wx:else>减
+                        <text style="color:#ff5a00">{{voucherMoney*10000 / 1000000}}</text>元</view>
+                    <icon class="iconfont icon-jiantou"></icon>
+                </view>
+                <view style="font-size: 32rpx;padding: 20rpx 0;text-align: left;margin-top: 20rpx;border-top:1rpx solid #f0f0f0">使用有效期：{{mainmodel.receivestart}} - {{mainmodel.receiveend}}</view>
+                <view class='que_ding_all' style='margin-top:10rpx;'>
+                    <button class='que_ding_bt orange' bindtap='PostPay' data-configid='{{postpayItem.Id}}' wx:if="{{mainmodel.mode==0}}">马上支付</button>
+                    <button class='que_ding_bt orange' bindtap='PostPay' data-configid='{{postpayItem.Id}}' wx:else>马上领取</button>
+                </view>
+                <view class='iconfont icon-guanbi' bindtap='closepaywin'></view>
+            </view>
+        </view>
+    </view>
+    <share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+ <view wx:if='{{shareposterparams.isfx==1}}' class="make-money" bindtap="sharePoster" data-fx='1'>
+<image src='/images/icon-fx.png' />
+<text>分享赚钱</text>
+</view>
+<view wx:else class="make-money" bindtap="sharePoster" data-fx='0'>
+<image src='/images/icon-share.png' />
+<text>生成海报</text>
+</view>
+    <!-- 快捷导航 -->
+    <city-navigator>
+        <view slot="slot1" class="navigatorItem navigatorItem-poster" bindtap="createposter" hidden='{{shareposterparams.isfx==1}}'>海报</view>
+        <view slot="slot2" class="navigatorItem navigatorItem-activity" bindtap="goToActivity">更多活动</view>
+        <view slot="slot3" class="navigatorItem navigatorItem-order" bindtap="goToMyLove">我的</view>
+        <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+    </city-navigator>
+
+    <!-- <red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package> -->
+
+    <base-audio wx:if="{{audioSrc !==''}}" audio-src="{{audioSrc}}"></base-audio>
+
+    <view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+        <view class="re-coupon-body">
+            <view class="re-coupon-body-title">
+                选择代金券
+                <icon class="iconfont icon-cha" bindtap="hideVoucher"></icon>
+            </view>
+            <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+                <view class="re-coupon-item-wrap">
+                    <block wx:for="{{listvoucher}}" wx:key="{{index}}">
+                        <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+                            <view class="re-coupon-price">
+                                <text>￥</text>
+                                <text>{{item.Money}}</text>
+                            </view>
+                            <view class="re-coupon-right">
+                                <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+                                <view wx:else>无门槛</view>
+                                <view class="c666">
+                                    <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                                        <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                                        <text>{{companyInfo.companyName}}</text>
+                                    </view>
+                                    <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+                                </view>
+                            </view>
+                            <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view></view>

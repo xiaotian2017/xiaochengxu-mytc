@@ -1,0 +1,26 @@
+<view style="padding:20rpx">
+    <view class="city-cardTips flex flex-center c3 justify-center" wx:if="{{cityCardList.length > 0}}">
+        <view>购买同城卡</view>
+        <image mode="widthFix" class="right-arrow" src="../../images/long-right-arrpw.svg"></image>
+        <view>选择服务</view>
+        <image class="right-arrow"  mode="widthFix" src="../../images/long-right-arrpw.svg"></image>
+        <view>到店服务</view>
+    </view>
+</view>
+<block wx:for="{{cityCardList}}" wx:key="{{index}}">
+    <view class="item" catchtap="goCityCardDtl" data-typeid="{{item.Id}}">
+        <image src="{{item.ImgUrl}}"></image>
+        <view class="mask"></view>
+        <view class="content flex flex-col flex-between">
+            <view class="type">{{item.Name}}</view>
+            <view class="descri">{{item.Propaganda}}</view>
+            <view class="account">
+                {{item.ServicesCount}}个商家优惠
+                <view class="arr-guide"></view>
+            </view>
+        </view>
+        <view class="status {{item.State?'open':''}}">
+            {{item.IsHalfCard?'已开通':'未开通'}}
+        </view>
+    </view>
+</block>

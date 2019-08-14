@@ -1,0 +1,91 @@
+<block wx:for="{{goCarList}}" wx:key="unique">
+    <view class="goods-car-item">
+        <view class="goods-car-item-head d-flex flex-center">
+            <view class="model-radio {{checkedArr[index].checkedAll?'model-active':''}}" data-index="{{index}}" catchtap="selectAll"></view>
+                <view catchtap="goToStore" data-index="{{index}}" class="clamp1 goods-storename">{{item.StoreName}}</view>
+                <image class="arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg" />
+        </view>
+        <block wx:for="{{item.CartList}}" wx:key="unique" wx:for-item="subItem" wx:for-index="subIndex">
+            <view class="d-flex goods-car-item-content" bindtap="goToDetail" data-goodsId="{{subItem.GoodsId}}">
+                <view class="model-radio {{checkedArr[index].checkedArr[subIndex]?'model-active':''}}" catchtap="select" data-index="{{index}}" data-subIndex="{{subIndex}}">
+                </view>
+                <view class="goods-cover">
+                    <image src="{{subItem.Goods.ImgUrl}}"></image>
+                </view>
+                <view class="goods-info flex d-flex flex-col">
+                    <view class="goods-name clamp2">{{subItem.Goods.GoodsName}}</view>
+                    <view class="goods-size" wx:if="{{item.CartList[0].AttrId>0}}">{{subItem.GoodsAttr.AttrName}}</view>
+
+                    <view class="d-flex flex-end">
+                     
+                        <view class="goods-price" wx:if="{{!subItem.GoodsAttr}}">                         
+                            <text wx:if="{{isMemberUser&&item.OpenMemberPrice&&subItem.Goods.MemberPrice>0}}">{{subItem.Goods.MemberPrice*1000/100000}}</text> 
+                            <text wx:else>{{subItem.Goods.Price*1000/100000}}</text>
+                        </view>
+
+                         <view class="goods-price" wx:if="{{!!subItem.GoodsAttr}}">                            
+                            <text wx:if="{{isMemberUser&&item.OpenMemberPrice&&subItem.GoodsAttr.MemberPrice>0}}">{{subItem.GoodsAttr.MemberPrice*1000/100000}}</text>
+                            <text wx:else>{{subItem.GoodsAttr.Price*1000/100000}}</text>
+                        </view> 
+                      
+                    
+                        <view class="goods-sold" wx:if="{{subItem.Goods.Stock < 1}}">
+                            已售罄
+                        </view>
+                        <!-- 数量 -->
+                        <view class="goods-num">×{{subItem.BuyNum}}</view>
+                    </view>
+                    <!-- 限购 -->
+                    <view class="goods-limit" wx:if="{{subItem.Goods.IsSell == 1 && subItem.Goods.LimitNum >= 1}}">该商品每人限购{{subItem.Goods.LimitNum}}件</view>
+
+                    <!-- 下架处理 -->
+                    <view class="goods-remove" wx:if="{{subItem.Goods.IsSell < 1}}">该商品已下架或移至别处</view>
+
+                    <view wx:if="{{!!item.CartList[0].Goods.ctname && !!item.CartList[0].Goods.goods-discount > 0}}" class="goods-discount">购物卡{{subItem.Goods.discount}}折优惠</view>
+
+                    <view wx:if="{{subItem.Goods.hctId > 0 && subItem.Goods.discount > 0}}" class="goods-discount">购物卡{{subItem.Goods.discount}}折优惠</view>
+
+                </view>
+                <!-- 编辑 -->
+                <view class="goods-edit d-flex" data-type="edit" wx:if="{{editArr[index][subIndex]}}" catchtap="goToDetail">
+                    <view class="flex d-flex select-num">
+                        <view class="goods-minus" data-index="{{index}}" data-subIndex="{{subIndex}}" catchtap="goodsMinus">
+                            <image src="http://j.vzan.cc/content/city/xcx/images/minus.svg"></image>
+                        </view>
+                        <view class="edit-num">{{subItem.BuyNum}}</view>
+                        <view class="goods-add" data-index="{{index}}" data-subIndex="{{subIndex}}" catchtap="goodsAdd">
+                            <image src="http://j.vzan.cc/content/city/xcx/images/add.svg"></image>
+                        </view>
+                        <view class="trash d-flex" data-index="{{index}}" data-subIndex="{{subIndex}}" catchtap="goodsDelete">
+                            <image src="http://j.vzan.cc/content/city/xcx/images/trash.svg?v=3"></image>
+                        </view>
+                    </view>
+                    <view class="done d-flex" data-index="{{index}}" data-subIndex="{{subIndex}}" catchtap="goodsEdit"> 
+                        <text>完成</text>
+                    </view>
+                </view>
+                <view class="icon-edit" data-index="{{index}}" data-subIndex="{{subIndex}}" catchtap="goodsEdit">
+                    <image src="http://j.vzan.cc/content/city/xcx/images/edit.svg"></image>
+                </view>
+            </view>
+        </block>
+    </view>
+</block>
+
+<view class="goods-payment d-flex" wx:if="{{goCarList.length > 0}}">
+    <view class="goods-total-price flex">
+        合计：
+        <text class="goods-price">{{!!totalPrice?totalPrice:'0.00'}}</text>
+    </view>
+    <view class="goods-pay" catchtap="goodsPay">
+        结算
+    </view>
+</view>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<!-- 无商品图案 -->
+<view  wx:if="{{goCarList.length == 0 && initfinnish}}" class="goods-car-empty">
+    <image src="https://j.vzan.cc/content/city/xcx/images/empty-car.png"></image>
+    <view class="little-tips">您的购物车空空如也,快点去<text catchtap="goToList">其他地方</text>看看吧</view>
+</view>

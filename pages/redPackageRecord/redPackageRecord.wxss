@@ -1,0 +1,40 @@
+  view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+.red-package-title {
+    padding: 20rpx;
+    font-size: 32rpx;
+}
+
+.red-package-list-wrap {
+    padding: 20rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    font-size: 28rpx;
+    color: #333;
+}  
+.red-package-list-item {
+    display: flex;
+    align-items:center;
+}
+
+.red-package-list-item image{
+    width: 92rpx;
+    height: 92rpx;
+    border-radius: 50%;
+}
+
+
+.red-package-receive-nickname {
+    display: inline-block;
+    max-width: 200rpx;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    padding-left: 20rpx;
+    vertical-align: middle;
+
+}

@@ -1,0 +1,190 @@
+<!-- 顶部搜索 -->
+<view class="search-warp" bindtap="to114List">
+  <input class="search-input" disabled="false"  placeholder="搜索商家名称" />
+  <icon class="search-icon" size="18" type="search"></icon>
+</view>
+<!-- swiper -->
+<view class="swiper-wrap">
+  <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#d9d9d9" circular indicator-active-color="#fe3d49" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{bannerUrls}}" wx:key="{{index}}">
+      <swiper-item class="swiper-item">
+        <image class="swiper-img" src="{{item.ImageUrl}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<view>
+  <swiper class="cat-swiper" indicator-dots="{{indicatorDots}}" circular indicator-color="#d9d9d9" indicator-active-color="#fe3d49"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{companyCategory}}" wx:key="{{index}}">
+      <swiper-item class="vz-flex cat-swiper-item">    
+        <block wx:for="{{item}}" wx:key="{{index}}">
+          <view class="cat-swiper-subitem" data-catid="{{item.code}}" bindtap="to114List">
+            <image class="cat-img" src="{{item.IconUrl}}"/>
+            <view class="cat-name" >{{item.name}}</view>
+          </view>
+        </block>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<view class="enter-swiper vz-flex flex-center flex-between">
+  <view class="vz-flex flex-center">
+    <image style="width:50rpx;height:60rpx;padding-right: 20rpx" src="https://j.vzan.cc/content/city/newcity114/images/tc-yh-162.png"></image>
+    <swiper style="height: 88rpx;width:500rpx;" class="enter-swiper-body" vertical circularautoplay="{{autoplay}}" interval="{{interval}}"
+      duration="{{duration}}">
+      <block wx:for="{{companyList}}" wx:key="{{index}}">
+        <swiper-item class="enter-word">
+          <block wx:for="{{item}}" wx:key="{{index}}">              
+              <view class="clamp1 enter-word-item" style="line-height: 1.2"  data-detailData="{{item}}" data-cpid="{{item.Id}}" catchtap="toDetail">
+                  <text class="c999">恭喜</text>{{item.Name}}
+                  <text class="c999">入驻成功</text>
+                </view> 
+          </block>      
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class="enter-btn" bindtap="toRuZhu">
+    入驻
+  </view>
+</view>
+
+<view style="padding-bottom:200rpx">
+  <view class="main-tab vz-flex flex-center flex">
+    <view class="flex {{tabIdx==0?'main-tab-active':''}}" data-idx="0" bindtap="getCat" >
+      行业
+    </view>
+    <view class="flex {{tabIdx==1?'main-tab-active':''}}" data-idx="1" bindtap="getHotOrNew">
+      热门
+    </view>
+    <view class="flex {{tabIdx==2?'main-tab-active':''}}" data-idx="2" bindtap="getHotOrNew">
+      最新
+    </view>
+  </view>
+  <!-- 行业 -->
+  <view wx:if="{{tabIdx==0}}">
+    <block wx:for="{{newAllCompanyCategory}}" wx:key="{{index}}" wx:for-index="mainIdx">
+      <view style="background:#fff;margin-bottom:20rpx">
+        <view class="cat-title"  data-catid="{{item.id}}" bindtap="to114List">{{item.name}}</view>              
+          <view class= "cat-list-wrap vz-flex flex-center flex-wrap" >            
+          <view wx:for="{{item.secondCompanyCategoryList}}" bindtap="to114List" data-mainCatIdx="{{mainIdx}}" data-subId="{{item.Id}}" wx:key="{{index}}" class="cat-list-item vz-flex flex-center flex-between" style="height:80rpx;border-bottom: 1rpx solid #f0f0f0;width:50%;text-align: center;">
+            <view class="clamp1" style="width:200rpx;line-height: 1.2;text-align: left">{{item.Name}}</view>
+            <view class="cat-content-num">{{item.Count}}</view>
+          </view>
+        </view>
+        <view class="show-more" wx:if="{{item.showMore}}" data-idx="{{mainIdx}}" bindtap="showMore">
+          <text style="padding-right: 20rpx;vertical-align: middle"> {{item.secondCompanyCategoryList.length>4?'收起':'显示更多'}}</text><icon class="iconfont icon-jiantou {{item.secondCompanyCategoryList.length>4?'icon-active':''}}"></icon>
+        </view>
+      </view> 
+      </block>
+    </view>    
+
+    <!-- 热门和最新 -->
+  <view wx:else>
+    <block wx:for="{{indexList}}" wx:key="{{index}}">
+      <view class="hot-wrap" style="position: relative;">
+        <view class="hot-title clamp2" style="margin-bottom: 30rpx;word-break:break-all;">
+            {{item.Name}}
+        </view>
+        <view class="vz-flex flex-center flex-wrap" style="margin-bottom:12rpx">
+          <block wx:for="{{mod.split(item.Welfare)}}"  wx:key="{{index}}">
+            <view class="welfare" style="margin-bottom:8rpx">
+              {{item}}
+            </view>
+          </block>
+        </view>
+        <view wx:if="{{item.AreaName&&item.AreaName!='null'}}" class="hot-address clamp1" style="margin-bottom: 20rpx;line-height: 1.3;">
+          地址:{{item.AreaName}}
+        </view>              
+        <view class="hot-tel" style="margin-bottom: 30rpx" wx:if="{{item.LinkPhone&&item.LinkPhone!='null'}}">
+          电话:{{item.LinkPhone}}
+        </view>     
+        <view class="hot-detail" data-detailData="{{item}}" data-cpid="{{item.Id}}" catchtap="toDetail">
+          <text>查看详情</text> 
+          <icon class="iconfont icon-jiantou"></icon>
+        </view>
+        <view class="set-top-btn" wx:if="{{item.TopStatus <= 0 && item.OpenId==openid && !isIos}}" data-id="{{item.Id}}" catchtap="toTop">我要置顶</view>
+        <view class="set-top-btn" wx:if="{{item.TopStatus>=2 && item.OpenId==openid}}">我已置顶</view>
+        <view class="set-top-btn" wx:if="{{item.OpenId!=openid}}" catchtap="makePhone" data-telNum2="{{item.LinkEmail}}" data-telNum="{{item.LinkPhone}}">拨号</view>
+
+        <view class="top-tips"  wx:if="{{item.TopStatus>0 && !isHot && isHot!==null}}">
+            <text class="top-tips-text">顶</text>
+        </view>
+
+        <view class="vz-flex flex-center logo-item-wrap">
+          <image class="logo-item" wx:if="{{item.storeId}}" data-sid="{{item.storeId}}" bindtap="toStore" src="https://j.vzan.cc/content/city/xcx/images/store.png"></image>
+          <image class="logo-item" catchtap="openQr" data-qr="{{item.LogoUrl}}" wx:if="{{item.LogoUrl}}"  src="https://j.vzan.cc/content/city/xcx/images/wx.png"></image>
+          <image class="logo-item" catchtap="openQr" data-qr="{{item.xcxImgUrl}}" wx:if="{{item.xcxImgUrl}}" src="https://j.vzan.cc/content/city/xcx/images/link.png"></image>
+        </view>
+      </view>        
+    </block>
+  </view>
+</view>
+
+<view wx:if="{{isDone}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+
+<!-- 二维码 -->
+<view class="qr-wrap" wx:if="{{isShowQr}}" bindtap="closeQr">
+  <view class="qr-main" catchtap="">
+    <view class="qr-title">
+      截图扫码，微信访问
+    </view>
+    <image class="qr" src="{{qrUrl}}" />
+  </view>
+</view>
+
+<!--footer bar -->
+<view class="footer vz-flex">
+  <view class="footer-item" bindtap="toIndex">
+    <icon class="iconfont icon-index footer-icon"></icon>
+    <text>首页</text>
+  </view>
+  <view class="footer-item footer-active">
+    <icon class="iconfont icon-tongcheng footer-icon"></icon>
+    <text>{{customName}}</text>
+  </view>
+  <view class="footer-item" bindtap="toRuZhu">
+    <icon class="iconfont icon-ruzhu footer-icon"></icon>
+    <text>我要入驻</text>
+  </view>
+  <view class="footer-item" bindtap="toMine">
+    <icon class="iconfont icon-person footer-icon"></icon>
+    <text>我的</text>
+  </view>
+</view>
+
+<view class="xufei-warp" wx:if="{{isShowPay}}">
+  <view class="xufei-body">
+    <view class="xufei-title">
+      我要置顶
+    </view>
+    <block>
+      <view>
+        <radio-group class="radio-group" bindchange="payChange">
+          <label class="radio" wx:for="{{payList}}" wx:key="{{index}}">
+            <radio value="{{index}}" checked="{{index==0}}" />{{item}}
+          </label>
+        </radio-group>
+      </view>
+    </block>
+    <view class="xufei-btn-warp">
+      <view class="xufei-btn" catchtap="buyIt">
+        马上购买
+      </view>
+    </view>
+    <icon class="iconfont icon-guanbi close-btn" catchtap="closeBtn"></icon>
+  </view>
+</view>
+<!-- 快捷导航 -->
+<city-navigator wx:if="{{showpath}}">
+  <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>
+
+<wxs module="mod">
+function split(p) {
+  return p? p.split(';') : []
+}
+module.exports.split = split
+</wxs>

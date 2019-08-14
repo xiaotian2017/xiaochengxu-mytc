@@ -1,0 +1,23 @@
+ <view  hidden='{{records.length>0}}'>
+            <view style="margin: 100px auto 0; width: 150px;">
+                <image src="http://j.vzan.cc/content/images/city/no_cont.png?v=0.01" style="width: 150px;height:140px"></image>
+            </view>
+            <view style="color: #999; font-size:16px; text-align: center;">暂无领取记录
+            </view>
+  </view>
+    <view  hidden='{{records.length==0}}' >
+        <view class="redInfo c333">{{RedPacket.Amount*1000/100000}}元（共{{RedPacket.TotalCount}})个，已领取{{RedPacket.Count_current}}个）</view>
+        <view class="redList" style="padding-bottom:100px">
+            <view wx:for='{{records}}' class="bottom-line d-flex d-flex-center">
+                <image src="{{item.headImg}}" class="avatar"></image>
+                <view>
+                    <view>{{item.NickName}}</view>
+                    领取了
+                    <view>￥{{item.Amount*1000/100000}}</view>
+                </view>
+                <view class="timeInfo">
+                    <view>{{item.CreatDateTimeString}}</view>
+                </view>
+            </view>
+        </view>
+    </view>

@@ -1,0 +1,301 @@
+ <import src="../../public/template.wxml" />
+ <import src="../../public/shoptemplate.wxml" />
+ <view class="main">
+   <!-- <view class="cl_nav" >
+      <radio-group class="radio-group nav_ul ul" bindchange="pintypechange" style="padding:0 30%">
+  <label class="radio li li_title">
+    <radio color="#FA0F20"  value="3" checked="{{post.PositionType==3}}" />临时
+  </label>
+    <label class="radio li li_title" style='padding-left:20px'>
+    <radio  color="#FA0F20" value="4" checked="{{post.PositionType==4}}" />长期
+  </label>
+</radio-group>
+        </view> -->
+   <view class="type-choose vz-flex flex-center">
+     <view style="font-size:32rpx;">类型选择</view>
+     <view class="vz-flex flex-center">
+       <view class="type-item {{post.PositionType==3?'type-item-active':''}}" bindtap="pintypechange" data-val="3"
+         style="margin-left: 20rpx">临时</view>
+       <view wx:if='{{1==longpingche}}' class="type-item {{post.PositionType==4?'type-item-active':''}}"
+         bindtap="pintypechange" data-val="4" style="margin-left: 20rpx">长期</view>
+     </view>
+   </view>
+
+   <view class="vz-flex flex-center wrapper-personal-info">
+     <view class="personnal-info-title">填写信息</view>
+     <view class="personnal-info-label">必填</view>
+   </view>
+
+   <view class="cl_con">
+     <view class="con_ul ul">
+       <view class="vz-flex flex-center" style="padding-top:40rpx;">
+         <view class="li_title">出发地</view>
+         <view class="li_center">
+           <input bindinput="inputStartPoint" style="text-align: right;font-size: 32rpx" value="{{post.startPoint}}"
+             placeholder="请填写"></input>
+         </view>
+       </view>
+       <view class="vz-flex flex-center" style="padding-top:50rpx">
+         <view class="li_title">目的地</view>
+         <view class="li_center">
+           <input bindinput="inputEndPoint" style="text-align: right;font-size: 32rpx" value="{{post.endPoint}}"
+             placeholder="请填写"></input>
+         </view>
+       </view>
+       <view class="vz-flex flex-center" style='display:{{4==post.PositionType?"none":""}};padding-top:50rpx'>
+         <view class="li_title">出发时间
+         </view>
+         <view class="li_center">
+           <view data-type="0" bindtap="commontDateFn" class='custtimepicker c999'
+             style="text-align: right;font-size: 32rpx;">
+             {{!!post.WorkTime?post.WorkTime:"请选择时间"}}
+           </view>
+           <!-- <view class='custtimepicker' bindtap="timesure" wx:else>{{year}}年{{month}}月{{day}}日{{our}}时{{minue}}分</view> -->
+         </view>
+
+       </view>
+       <view class="vz-flex flex-center flex-between"
+         style='display:{{3==post.PositionType?"none":""}};padding-top:60rpx'>
+         <view class="li_title">有效天数</view>
+         <input type="number" bindinput="getValidDay" maxlength="3" value="{{validDay}}" placeholder="请输入有效天数"
+           style="text-align: right" />
+       </view>
+       <view class="vz-flex flex-center" style='display:{{3==post.PositionType?"none":""}};padding-top:50rpx'>
+         <view class="li_title">出发时间</view>
+         <view class="cl_s_center">
+           <picker mode="time" fields="day" start="09:01" data-type="go" bindchange="timesel">
+             <view class="picker custtimepicker c999" style="text-align: right;font-size: 32rpx;">
+               {{!!post.WorkTime?post.WorkTime:"请选择时间"}}
+             </view>
+           </picker>
+         </view>
+
+       </view>
+
+       <!-- <view class="vz-flex flex-center"  style='display:{{3==post.PositionType?"none":""}};padding-top:60rpx'>
+                    <view class="li_title">开始日期</view>
+                     
+                              <picker mode="date" fields="day" start="09:01" data-type="start"   bindchange="timesel" style="width: 100%">
+                                <view class="picker custtimepicker c999" style="text-align: right;font-size: 32rpx;">
+                                    {{!!post.ExpectJob?post.ExpectJob:"请选择时间"}}
+                                </view>
+                              </picker>
+                </view> -->
+       <!-- <view class="vz-flex flex-center"  style='display:{{3==post.PositionType?"none":""}};padding-top:60rpx'>
+                    <view class="li_title">结束日期</view>
+                   
+                              <picker mode="date" fields="day" start="09:01" data-type="end"  bindchange="timesel" style="width: 100%">
+                                <view class="picker custtimepicker c999" style="text-align: right;width: 100%;font-size: 32rpx;">
+                                    {{!!post.Experience?post.Experience:"请选择时间"}}
+                                </view>
+                              </picker>                                  
+                </view> -->
+
+       <!-- <view class="li" style='display:{{4==post.IdentityType||6==post.IdentityType?"none":""}}'>
+                    <view class="li_title">车牌号</view>
+                    <view class="li_title" style="width:100%;">
+                        <input  placeholder="请填写"  bindinput="inputcarPlate" style="text-align: right;width:100%;" value="{{post.carPlate}}"></input>
+                    </view>
+                </view> -->
+       <view class="vz-flex flex-center" style="padding-top:60rpx">
+         <view class="li_title">
+           {{post.IdentityType == 3 ? "空位数量":post.IdentityType ==4 ? "乘客人数":post.IdentityType ==5 ? "车辆数量":"货物重量"}}
+         </view>
+         <view class="li_center">
+           <input placeholder="请填写{{post.IdentityType==6?'货物重量，单位KG' : ''}}" bindinput="inputNumber"
+             style="text-align: right;font-size: 32rpx" value="{{post.Number}}"></input>
+         </view>
+       </view>
+     </view>
+   </view>
+   <view class="cl_con">
+     <view class="con_ul ul">
+       <!-- <view class="li">
+                    <view class="li_title">联系人</view>
+                    <view class="li_center">
+                        <input  bindinput="inputLinkMan"   value="{{post.LinkMan}}" placeholder="请填写"></input>
+                    </view>
+                </view> -->
+       <view class="vz-flex flex-center" style="padding-top:50rpx">
+         <view class="li_title">联系电话</view>
+         <view class="li_center">
+           <input bindinput="inputLinkPhone" style="text-align: right;font-size: 32rpx" value="{{post.LinkPhone}}"
+             placeholder="请填写"></input>
+         </view>
+       </view>
+     </view>
+   </view>
+   <view class="carpooling-detail" style="margin-top:0;margin-bottom:20rpx">
+     <view class="cl_d_title" style="font-weight: 700;font-size: 32rpx;padding-bottom:20rpx">备注</view>
+     <view class="cl_d_txt" wx:if="{{!isknow}}">
+       <textarea hidden='{{isTimePicker}}' class='custtimepicker' style="width: 100%;height: 100%;" maxlength="-1"
+         bindinput="inputDescription" value="{{post.Description}}" placeholder="途径地点、出发/返程时间、费用、车位费等事项"></textarea>
+     </view>
+     <view class="cl_d_img postimg" style="margin-left:-10px;padding-top:20rpx;">
+
+       <template is="item_image_shop" data="{{config:uploadimgobjects['remark'].config,which:'remark'}}"></template>
+
+     </view>
+   </view>
+   <view style='display:{{4==post.IdentityType||6==post.IdentityType?"none":""}}'>
+     <view class="personnal-info-title other-type" style="font-size: 32rpx;padding-top:30rpx;">其他</view>
+     <view class="con_ul ul">
+       <view class="vz-flex flex-center" style="padding:36rpx 0 20rpx;">
+         <view class="li_title">车牌号</view>
+         <view class="li_title" style="width:100%;">
+           <input placeholder="请填写" bindinput="inputcarPlate" style="text-align: right;width:100%;"
+             value="{{post.carPlate}}"></input>
+         </view>
+       </view>
+     </view>
+   </view>
+   <view class="cl_spa">
+     <view class="cl_s_ul ul">
+       <!-- <view class="li"  style='display:{{0==mustpay?"none":""}}'>
+                        <view class="cl_s_left">
+                            <i class="s_icon">
+                                <view class='checkicon'></view>
+                            </i>
+                            发帖收费
+                        </view>
+                        <view class="cl_s_center" style="color: #999;">
+                            <view>￥<span id="display-money-span">{{postpay}}</span></view>
+                        </view>
+                    </view> -->
+       <view class="li" wx:if="{{listtop.length>0&&!isIos}}">
+         <view class="cl_s_left">
+           <i class="s_icon">
+             <input class="check" style="display:none;" disabled="" id="isgotop-check" type="checkbox" value="0"
+               data-paytype="201" data-price="0" data-type="0" data-time="1"></input>
+           </i>
+           <label for="isgotop-check">是否置顶</label>
+         </view>
+         <view class="cl_s_center">
+           <picker mode="selector" bindchange="selTopPay" value="{{topindex}}" range="{{listtop}}"
+             range-key="{{'name'}}">
+             <view class="picker">
+               <text>{{listtop[topindex].name}}</text>
+             </view>
+           </picker>
+         </view>
+       </view>
+     </view>
+   </view>
+   <view class="pc_tip" style='color: #333;padding: 30rpx 0 30rpx 30rpx;'>
+     <radio-group bindchange="agreenoticechange">
+       <radio value="1" color="#FA0F20" checked="{{1==agree}}" />
+       <view style='display:inline-block' catchtap="zhidaoclick"> 我同意《平台拼车声明》</view>
+
+     </radio-group>
+   </view>
+   <view class="pc_tip" style='color: #FA0F20;padding:10rpx 0 160rpx 30rpx'>
+     发布后将不能被修改，请确认填写信息
+   </view>
+   <view class="buttom">
+     <view class="infoTop vz-flex vz-flex-center flex-between" wx:if="{{!isIos}}">
+       <view>信息置顶</view>
+       <view class="topStatus {{topStatus?'openTop':'closeTop'}}" bindtap='changeTopStatus'></view>
+     </view>
+     <view class="saveBtn" bindtap='save'>
+       {{isFree?'发布':'下一步'}}
+     </view>
+
+   </view>
+
+   <!-- <view class="vz-flex flex-center note-footer" style="height: 100rpx;">
+     <view style="width: 60%;">
+       <view class="vz-flex flex-center justify-center" wx:if="{{totalpay.compute(postpay,toppay)>0&&!isIos}}">
+         <view style="font-size:24rpx;" class="c999">需付款:</view>
+         <view style="color:#fa0f20;font-weight: 700">￥{{totalpay.compute(postpay,toppay)}}</view>
+       </view>
+     </view>
+     <view style="font-size:32rpx;height: 100rpx;text-align: center;line-height: 100rpx;width: 40%" class="confirm-btn"
+       bindtap="save">
+       确认发布
+     </view>
+   </view> -->
+
+
+ </view>
+ <!-- 时间选择器 -->
+ <view class="gonggaoclass" hidden='{{!isknow}}'>
+   <!--拼车公告-->
+   <view class="gonggaobox" style="padding:0;max-height:410px;">
+     <view class="gonggaobox" style="margin:0px;">
+       <view class="gongaobox2">
+         <view class="carSM">免责声明：本平台不对任何人提供任何形式的担保，所有信息仅供参考，不承担由此产生的任何民事及法律责任。用户使用本平台即视为同意。</view>
+         <view class="carSMTitle">司机篇</view>
+         <view class="carSM">
+           1，要确认好拼车人信息。详细记录拼车者 姓名、年龄、 身份证、个人及家庭联系方式等，最好有认识的人一起拼 车。
+         </view>
+         <view class="carSM">
+           2，与乘客约好出发时间，出发前1天最好给乘客通一次 电话提醒对方。
+         </view>
+         <view class="carSM">
+           3，要明确拼车所需的费用。尤其是一旦发生交通违章造 成罚款的分担，以及车辆发生问题所带来的维修费用的承 担。
+         </view>
+         <view class="carSM">
+           4，要和乘客明确是上车前支付还是上车后支付，还应明 确额外费用的支付方式。
+         </view>
+         <view class="carSM">
+           5，合理规划时间，总路程不宜超过十小时，不走夜路。 不要疲劳驾驶，同时保管好个人财物。
+         </view>
+         <view class="carSM">
+           6，车主和同车人应分别将了解到的对方信息发送给至少 一名亲友，以备出现问题后联系使用，并有意让对方知 道这个情况。
+         </view>
+         <view class="carSM">
+           7，事先确定好关于吸烟等细节的规则,特别是有女性和小 孩在场的时候。
+         </view>
+         <view class="carSM">
+           8，签协议和买保险是非常有必要的。
+         </view>
+         <view class="carSMTitle">乘客篇</view>
+         <view class="carSM">
+           1，拼车者最好是熟悉的。与陌生人拼车时，要注意预防 骗子或劫车者，车主和乘车人有必要互相了解对方的真实 身份及联系方式。
+         </view>
+         <view class="carSM">
+           2，车主和同车人应分别将了解到的对方信息发送给至少 一名亲友，以备出现问题后联系使用，并有意让对方知道 这个情况。
+         </view>
+         <view class="carSM">
+           3，搭车人应事先了解驾驶员的技术水平、所用车型。关 键是有无 跑长途的经历。
+         </view>
+         <view class="carSM">
+           4，要和乘客明确是上车前支付还是上车后支付，还应明 确额外费用的支付方式。
+         </view>
+         <view class="carSM">
+           5，总路程不宜超过10小时，不走夜路。避免心急赶路和 疲劳驾驶，合理安排休息。
+         </view>
+         <view class="carSM">
+           6，车主对于没有驾驶过所乘车型的同车人，尽量不要让 其参与驾驶。
+         </view>
+         <view class="carSM">
+           7，不要在途中向同车不熟悉的人炫耀自己的或者所携带 财物 情况。
+         </view>
+         <view class="carSM">
+           8，女性车主或乘车人应有熟悉的男性成年亲友相伴。
+         </view>
+         <view class="carSM">
+           9，事先确定好关于吸烟等细节的规则,特别是有女性和小 孩在场的时候 。
+         </view>
+         <view class="carSM">
+           10，签协议和买保险是非常有必要的。
+         </view>
+       </view>
+     </view>
+     <view class="gonggaozhidao" catchtap="zhidaoclick">我知道了</view>
+   </view>
+ </view>
+ <wxs module="totalpay">
+   var compute = function (a,b) {
+   var price=parseFloat(a) + parseFloat(b);
+   return price.toFixed(2);
+   }
+   module.exports = {
+   compute : compute,
+   }
+ </wxs>
+ <city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+ <base-time-picker id='timerPicker' bindtimerpickercancel="timerPickerCancel"
+   bindtimerpickerconfirm="timerPickerConfirm" timer-value-arr-idx="{{timerValueArrIdx}}"
+   is-time-picker="{{isTimePicker}}"></base-time-picker>

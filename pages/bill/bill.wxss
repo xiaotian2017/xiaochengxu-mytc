@@ -1,0 +1,161 @@
+.bill_all{padding:90rpx 0 40rpx;}
+
+.business_detail_nav {
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.business_detail_nav button {
+  font-size: 32rpx;
+  line-height: 90rpx;
+  height: 90rpx;
+  padding: 0;
+}
+.business_detail_nav button.active {
+  color: #fe3d49;
+  border-bottom: 4rpx solid #fe3d49;
+}
+
+/*账单总数*/
+.bill_cell {
+  text-align: center;
+  background: #fff;
+  color: #333;
+  position: relative;
+  padding: 30rpx 0;
+}
+.bill_cell text {
+  display: block;
+}
+.bill_cell .f01 {
+  font-size: 32rpx;
+   margin-top: 16rpx;
+}
+.bill_cell .f02 {
+  font-size: 24rpx;
+  color: #333;
+}
+.bill_cell .money {
+  position: relative;
+}
+.bill_cell .money:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  bottom: 0;
+  border-left: 1px solid #f0f0f0;
+  color: #f0f0f0;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+  z-index: 2;
+}
+
+.bill_cell .money:first-child:after {
+  display: none;
+}
+
+.bill_cell .icon-jiantou{position:absolute;right:20rpx;top:50%;transform:translate(0,-50%);}
+
+/*提现按钮*/
+.withdraw_bt{background: #fff;overflow: hidden;padding: 0 20rpx 30rpx;}
+
+.withdraw_bt button{height: 50rpx;width: 140rpx;border-radius: 8rpx;font-size: 32rpx;color: #fe3d49;
+border: 1rpx solid #fe3d49;line-height: 50rpx;display: block;float: right;}
+
+/*账单列表*/
+.zhangdan_cell {
+  background: #fff;
+  padding:24rpx 0rpx;
+  position: relative;
+  margin: 0 20rpx
+}
+.zhangdan_cell .date {
+  font-size: 28rpx;
+  color: #999;
+  width: 100rpx
+}
+.zhangdan_cell .date .f02 {
+  margin-top: 6rpx;
+}
+.zhangdan_cell .type {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  font-size: 36rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 70rpx;
+  margin: 0 30rpx;
+  overflow: hidden;
+}
+.zhangdan_cell .type.love {
+  background: #ff5826;
+}
+.zhangdan_cell .type.dian {
+  background: #f63b46;
+}
+.zhangdan_cell .type.ti {
+  background: #3dafff;
+}
+.zhangdan_cell .type.hong {
+  background: #ff5826;
+}
+.zhangdan_cell .infor .f01 {
+  font-size: 32rpx;
+}
+.zhangdan_cell .infor .f02,
+.zhangdan_cell .infor .name {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 12rpx;
+}
+.zhangdan_cell .infor .name {
+  max-width: 60%;
+}
+.zhangdan_cell .money {
+  color: #ff5a00;
+  font-size: 32rpx;
+}
+
+.zhangdan_cell:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #f0f0f0;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+/*账单导航*/
+.pintuan_commodity_title{
+  background:#fff;
+  font-size:28rpx;
+  line-height:1.35;
+  color:#333;
+  position:relative;
+  display:flex;
+  padding:0 20rpx;
+  height:88rpx;
+  box-sizing:border-box;
+  align-items:center;
+}
+
+.pintuan_commodity_title .shu{
+  height:26rpx;
+  width:6rpx;
+  display:inline-block;
+  background:#ff5a00;
+  margin-right:12rpx;
+}
+
+
+

@@ -1,0 +1,205 @@
+<import src="../../public/floatbtntpl.wxml" />
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view wx:if='{{1==renderpage}}'>
+  <view class="container" hidden='{{loadall==0}}'>
+    <!-- 优惠详情轮播 -->
+    <view class="coupon-top-wrap" style="position:relative">
+      <swiper wx:if="{{coupon.ImgList.length}}" class="swiper_business_detail" indicator-dots="false" indicator-dots="true" indicator-color="#d9d9d9" indicator-active-color="#fe3d49" autoplay="{{true}}" interval="2000" duration="500">
+        <block wx:for="{{coupon.ImgList}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item.thumbnail}}" data-src="{{item.filepath}}" mode="aspectFill" class="slide-image" catchtap='clickToPreview' />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='d-flex flex-center time' style='padding: 5px 10px;background: rgba(0, 0, 0, 0.8);'>
+        <view>{{countdown}}</view>
+        <view wx:if='{{null!=countTimer}}'>
+          <em>{{countTimer.d}}</em>
+          天
+          <em>{{countTimer.h}}</em>
+          时
+          <em>{{countTimer.m}}</em>
+          分
+          <em>{{countTimer.s}}</em>
+          秒
+        </view>
+      </view>
+    </view>
+    <!-- 优惠主要信息 -->
+    <view class="youhui-title">
+      <view class="youhui-name clamp2">
+        {{coupon.CouponName.length > 0 ? coupon.CouponName : ''}}
+      </view>
+      <view>
+        <view class="origin-money vz-flex flex-between flex-center">
+          <view style="text-decoration: line-through;font-size: 24rpx">
+            原价{{coupon.CouponMoney > 0 ? coupon.CouponMoney*1000/100000 : 0}}
+          </view>
+          <view class="re-coupon-label" wx:if="{{voucher}}">返{{voucher.VoucherMoney}}元代金券</view>
+        </view>
+        <view class="vz-flex flex-between discount-money">
+          <view class="vz-flex flex-center">
+            <view>￥{{coupon.BuyPrice > 0 ? coupon.BuyPrice*1000/100000 : 0}}</view>
+            <!-- <text>
+            <text style="color:#FFB924;font-size: 28rpx;margin-left:30rpx;" wx:if="{{coupon.MemberPrice}}">会员价:￥{{coupon.MemberPrice*1000/100000}}</text>
+          </text> -->
+            <view class="vz-flex flex-center" style="font-size: 28rpx;color:#FF0000" wx:if="{{coupon.MemberPriceState ==1}}">
+              <view>
+                ￥
+                <text>{{coupon.MemberPrice*1000/100000}}</text>
+              </view>
+              <view style="width: 80rpx;height: 38rpx;line-height: 38rpx;text-align: center;background: #FF0000;color: #fff;font-size: 24rpx;border-radius: 8rpx;margin-left:8rpx">
+                会员价
+              </view>
+            </view>
+          </view>
+          <view style="font-size:26rpx;" if="{{coupon!=null}}">仅剩{{coupon.RemainNum}}份</view>
+        </view>
+        <view class="use-date-end" wx:if='{{UseDateEnd}}'>使用截止日期 {{UseDateEnd}}</view>
+      </view>
+    </view>
+    <!-- 注意事项 -->
+    <view class="qiang_yh_attention" style="padding-top:0;border-bottom:none">
+      <view class='a'>
+        <icon type='{{coupon.RefundUse?"success":"clear"}}' size='13' color='#{{coupon.RefundUse?"fe3d49":"999"}}'></icon>
+        {{coupon.RefundUse?"可退款":"不可退款"}}
+      </view>
+      <view class='a'>
+        <icon type='{{coupon.RepeatUse?"success":"clear"}}' size='13' color='#{{coupon.RepeatUse?"fe3d49":"999"}}'></icon>
+        {{coupon.RepeatUse?"可叠加":"不可叠加"}}
+      </view>
+      <view class='a'>
+        <icon type='success' size='13' color='#fe3d49'></icon>
+        {{coupon.CreateNum}}份
+      </view>
+      <view class='a'>
+        <icon type='success' size='13' color='#fe3d49'></icon>
+        {{coupon.LimitNum==0?"不限购":"限购"+coupon.LimitNum+"份"}}
+      </view>
+    </view>
+    <view class="youhui-btn-wrap">
+      <view class="get-love-price-btn" catchtap='clickToBalance' wx:if='{{countdown=="距活动结束时间"}}'>
+        立即抢购
+      </view>
+      <view class="get-love-price-btn1" wx:if='{{countdown=="活动已结束"}}'>活动已结束</view>
+      <view class="get-love-price-btn1" wx:if='{{countdown=="距活动开始时间"}}'>活动未开始</view>
+    </view>
+    <!-- 已售人数 -->
+    <view class="d-flex d-flex-center qiang_yh_people">
+      <view class="f01">已售{{coupon.CreateNum-coupon.RemainNum}}份</view>
+      <view class="flex">
+        <view class='head' wx:for="{{headImgs}}" wx:key="{{index}}">
+          <image src="{{item.HeadImgUrl}}" mode="aspectFill"></image>
+        </view>
+      </view>
+      <!-- <view class="right_arrow"></view> -->
+    </view>
+    <!-- 地址 -->
+    <view class="d-flex business_detail_address mt-1" catchtap='clickToStoreDetail' data-id="{{store.Id}}">
+      <view class="head">
+        <image src="{{store.LogoUrl}}" mode="aspectFill"></image>
+      </view>
+      <view class="flex content">
+        <view class="title clamp1">{{store.SName}}</view>
+        <view class="f01">
+          <icon class="icon_time" wx:if="{{store.Shop_hours}}"></icon>
+          {{store.Shop_hours && store.Shop_hours || ' '}}
+        </view>
+        <view class="f01" style='margin-top:4px'>
+          <icon class="icon_local"></icon>
+          {{store.Address}}
+          <text style='color:#fe3d49;' catchtap="clickShowMap">(点击导航)</text>
+        </view>
+      </view>
+      <view>
+        <button class="call" catchtap='makePhoneCall'>
+          <icon class="icon_yh_call"></icon>
+        </button>
+      </view>
+    </view>
+    <!-- 购买须知 -->
+    <!-- <view class="qiang_yh_konw">
+    <view class="title">购买须知</view>
+    <view class='content'>
+      <view class="f01">抢购时间</view>
+      <view class="f02">
+        <view>{{ValidDateStart}} 至
+          <text>{{ValidDateEnd}}</text>
+        </view>
+        <view wx:if='{{coupon.RemainValidDays>=0}}'>距离抢购截止还有{{coupon.RemainValidDays}}天</view>
+      </view>
+      <view class="f01">消费时间</view>
+      <view class="f02">
+        <view>{{UseDateStart}} 至
+          <text>{{UseDateEnd}}</text>
+        </view>
+        <view wx:if='{{coupon.RemainUseDays>=0}}'>距离截止截止还有{{coupon.RemainUseDays}}天</view>
+      </view>
+    </view>
+  </view> -->
+    <!-- 商品详情 -->
+    <view class="qiang_yh_konw">
+      <view class="title">优惠信息</view>
+      <view class='content'>
+        <base-video wx:if="{{videoParams.convertFilePath!==''}}" video-params="{{videoParams}}" />
+        <view class="f03">
+          <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+        </view>
+        <image mode='widthFix' src="{{item.filepath}}" wx:for="{{coupon.DescImgList}}" wx:key="unique"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 底部栏 -->
+  <view class="fix-bl d-flex shangjia_bottom_nav youhui">
+    <button class="bt_li" catchtap='clickToCouponList'>
+      <icon class="icon_more_youhui"></icon>
+      <text>更多优惠</text>
+    </button>
+    <button class="bt_li" catchtap='clickToStoreDetail' data-phone='{{store.TelePhone}}' data-qrcode='{{store.Qrcode_Url}}' data-vip='{{store.XcxVipVer}}' wx:key='unique' data-phone='{{item.ShopOwernPhone}}' data-id="{{store.Id}}">
+      <icon class="icon_jinru_shop"></icon>
+      <text>进入店铺</text>
+    </button>
+    <button class="flex block_bt" wx:if='{{countdown=="距活动结束时间"}}'>
+      <view class='juzhong' catchtap='clickToBalance'>
+        <text class='f01'>立即抢购</text>
+        <!-- 2019/07/03 添加line-height:0 解决测试的问题 -->
+        <text class='f02' style="line-height:0" wx:if="{{coupon.NewPayCash!=''||coupon.PayCash>0}}">
+          {{coupon.NewPayCash.length>0?'需到店付'+coupon.NewPayCash:coupon.PayCash>0?'需到店付'+coupon.PayCash+'元':''}}
+        </text>
+      </view>
+    </button>
+    <button class="flex block_bt" wx:if='{{countdown=="活动已结束"}}' style="background:#ccc">
+      <view class='juzhong'>
+        <text class='f01'>活动已结束</text>
+      </view>
+    </button>
+    <button class="flex block_bt" wx:if='{{countdown=="距活动开始时间"}}' style="background:#ccc">
+      <view class='juzhong'>
+        <text class='f01'>活动未开始</text>
+      </view>
+    </button>
+  </view>
+  <view wx:if='{{shareposterparams.isfx==1}}' class="make-money" bindtap="sharePoster" data-fx='1'>
+    <image src='/images/icon-fx.png' />
+    <text>分享赚钱</text>
+  </view>
+  <view wx:else class="make-money" bindtap="sharePoster" data-fx='0'>
+    <image src='/images/icon-share.png' />
+    <text>生成海报</text>
+  </view>
+  <red-package red-package-params="{{redPackageParams}}" is-share-success="{{isShareSuccess}}" bind:deliverParams="getDeliverParams"></red-package>
+  <share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+  <template is="shopnotcanentertip" data="{{currentshopqrcode:currentshopqrcode,currentshoptip:currentshoptip,currentphone:currentphone}}"></template>
+  <city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-poster" bindtap="createposter" hidden='{{shareposterparams.isfx==1}}'>
+      海报
+    </view>
+    <view slot="slot2" class="navigatorItem navigatorItem-moreGoods" bindtap="moreGoods">更多商品</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-order" bindtap="clickToMyCoupon">
+      优惠券
+    </view>
+    <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">
+      获取链接
+    </view>
+  </city-navigator>
+</view>

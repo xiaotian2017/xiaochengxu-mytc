@@ -1,0 +1,72 @@
+<view>
+    <view class="city-purchase-top  vz-flex flex-center">
+        <image class="user-avatar" src="{{userInfo.avatarUrl}}"></image>
+        <view>
+            <view class="user-name">
+                {{userInfo.nickName}}
+            </view>
+            <view class="city-card-title">
+                {{!memberuser?'开通立享优惠':memberuser.EndDate+'到期'}}
+            </view>
+        </view>
+    </view>
+    <view class="city-card-main" wx:if="{{cityCardListArray.length>0}}">
+        <view class="city-card-main-title">开通同城卡</view>
+        <view class="">
+            <block wx:for="{{cityCardListArray}}" wx:key="{{index}}">
+                <view data-idx="{{index}}" bindtap="chooseCityCard" class="city-buy-item vz-flex flex-center flex-between {{chooseCardIdx==index?'active-city-buy-item':''}}">
+
+                    <view style="line-height: 98rpx;">
+                        <text class="city-card-name {{chooseCardIdx==index?'active-title':''}}">{{item.MemberType==0&&'周卡'||item.MemberType==1&&'月卡'||item.MemberType==2&&'季卡'||item.MemberType==3&&'年卡'}}</text>
+                        <text class="money-wrp {{chooseCardIdx==index?'active-money':''}}">
+                            <text>
+                                <text class="money-label1">￥</text>
+                                <text class="buy-money">{{item.BuyPrice*100/10000}}</text>
+                            </text>
+                            <text class="origin-money-wrp">
+                                <text class="money-label2">￥</text>
+                                <text class="origin-money">{{item.OriginalPrice*100/10000}}</text>
+                            </text>
+                        </text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                        <view>
+                            <text wx:if="{{isNew && item.NewPeoplePrice>0}}" class="new-people-price">新用户{{item.NewPeoplePrice*100/10000}}元</text>
+                        </view>
+                        <view class="radio-box {{chooseCardIdx==index?'active-radio':''}} ">
+                            <image class="radio-check-img" wx:if="{{chooseCardIdx==index}}" src="https://j.vzan.cc/content/city/xcx/images/gou-111.png"></image>
+                        </view>
+                    </view>
+                    <image mode="widthFix" wx:if="{{item.ReCommend==1}}" class="tj-label" src="https://j.vzan.cc/content/city/xcx/images/tj-111.png"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view style="background: #fff;padding-bottom:170rpx;margin-bottom: 10rpx;">
+        <view class="right-desp-wrp">
+            <view class="right-label">
+                <image class="right-img" src="https://j.vzan.cc/content/city/xcx/images/react-111.png"></image>
+                <view class="right-text">
+                    {{cityCardListArray[chooseCardIdx].MemberType==0&&'周卡权益'||cityCardListArray[chooseCardIdx].MemberType==1&&'月卡权益'||cityCardListArray[chooseCardIdx].MemberType==2&&'季卡权益'||cityCardListArray[chooseCardIdx].MemberType==3&&'年卡权益'}}
+                </view>
+            </view>
+            <view class="vz-flex flex-center flex">
+                <view class="flex" style="text-align:center">
+                    <image class="right-des-img" src="https://j.vzan.cc/content/city/xcx/images/coupon-111.png"></image>
+                    <view class="right-des-text">赠送{{cityCardListArray[chooseCardIdx].RightsCount}}次优惠</view>
+                </view>
+                <view class="flex" style="text-align:center">
+                    <image class="right-des-img" src="https://j.vzan.cc/content/city/xcx/images/time-111.png"></image>
+                    <view class="right-des-text">{{cityCardListArray[chooseCardIdx].MemberType==0&&'7天内有效'||cityCardListArray[chooseCardIdx].MemberType==1&&'一个月内有效'||cityCardListArray[chooseCardIdx].MemberType==2&&'三个月内有效'||cityCardListArray[chooseCardIdx].MemberType==3&&'一年内有效'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="buy-bar vz-flex flex-center flex-between" wx:if="{{cityCardListArray.length>0}}">
+        <view class="buy-price">            
+            总计:￥{{isNew&&cityCardListArray[chooseCardIdx].NewPeoplePrice*100/10000||cityCardListArray[chooseCardIdx].BuyPrice*100/10000}}
+        </view>
+        <view class="buy-btn" bindtap="payByWx">立即购买</view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

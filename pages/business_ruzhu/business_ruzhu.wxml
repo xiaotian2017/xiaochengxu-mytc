@@ -1,0 +1,125 @@
+<import src="../../public/shoptemplate.wxml" />
+<view class="container" style='padding-bottom:70px;{{showpage==1?"":"display:none"}}'>
+    <view class='ruzhu_cells'>
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_shopname"></view>
+            <view class="flex"><input value='{{store.SName}}' placeholder-style="color:#999" bindinput="inputsname" placeholder='请输入您的店铺名称'></input> </view>
+        </view>
+        <view class="d-flex d-flex-center ruzhu_cell" hidden='{{store.Id>0?"true":false}}'>
+            <view class="icon_size icon_ruzhu_time"></view>
+            <view class='flex right'>
+                <picker mode="multiSelector" value="{{index}}" bindchange="bindPickerChange" bindcolumnchange="bindPickerColumnChange" range="{{province}}" range-key="{{'name'}}">
+                  <view class="picker">
+                    {{province[0][multiIndex[0]].name}}{{province[1][multiIndex[1]].name}}
+                  </view>
+                </picker>
+                <label class="right_arrow"></label>
+            </view>
+        </view> 
+        <view class="d-flex d-flex-center ruzhu_cell" bindtap='getLocation'>
+            <view class="icon_size icon_ruzhu_address"></view>
+            <view class="flex right location" >
+                <button hover-class="none" class='address' style='color:{{store.Address?"#333":"#ff5a00"}};'>{{store.Address || "详细地址（点击定位）"}}   
+                </button>
+                <label class="right_arrow"></label>
+            </view>
+        </view>
+        <view class="d-flex d-flex-center ruzhu_cell" hidden='{{store.Id>0?"true":false}}'>
+            <view class="icon_size icon_ruzhu_shopkind"></view> 
+            <view class='flex right'>
+              
+                <picker mode="multiSelector" class='shopkind_picker' bindchange="bindfenleichange" bindcolumnchange="bindfirttypechange" value="{{stindex}}" range="{{storetypes}}" range-key="{{'name'}}"> 
+                  <view class="picker">
+                    {{storetypes[0][storeMultiIndex[0]].name}};{{storetypes[1][storeMultiIndex[1]].name}}
+                  </view>
+                </picker>
+                <label class="right_arrow"></label>
+            </view>
+        </view> 
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_dianzhuname"></view>
+            <view class="flex"><input placeholder-style="color:#999" bindinput="inputusername" value='{{UserName}}' placeholder='请输入店主姓名'></input> </view>
+        </view> 
+    </view>   
+
+    <view class='ruzhu_cells mt-1' >
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_phone"></view>
+            <view class="flex"><input placeholder-style="color:#999" maxlength="11" type='number' placeholder='请输入联系电话' bindinput='inputphone' value='{{store.TelePhone}}'></input></view>
+            <button hidden='{{1==hasbindphone}}' hover-class="none" class='get_code' bindtap='getcode'>{{content}}</button>
+        </view>
+        <view class="d-flex d-flex-center ruzhu_cell" wx:if="{{0==hasbindphone}}">
+            <view class="icon_size icon_ruzhu_yanzhengma"></view>
+            <view class="flex"><input placeholder-style="color:#999" maxlength="4" type='number' bindinput="inputcode" placeholder='请输入手机验证码'></input></view>
+        </view> 
+    </view>     
+
+    <view class="a-describe-cells" style="margin-top:6px;" wx-if="{{store.Id>0}}">
+        <view class="a-describe-cell">
+                <label class="a-describe-label" style="width: auto;color: #666;font-size: 14px;">店铺头像</label>
+        </view>
+       <!--上传照片-->
+      <view class="clearfix shop-ruzhu-pic-ul bg-f">
+        <template is="item_image_shop" data="{{config:uploadimgobjects['shoplogo'].config,which:'shoplogo',itemid:store.Id}}"></template>
+      </view>
+    </view>
+   <view class="a-describe-cells" style="margin-top:6px;" wx-if="{{store.Id>0}}">
+        <view class="a-describe-cell">
+                <label class="a-describe-label" style="width: auto;color: #666;font-size: 14px;">店铺轮播图(640x360最佳)</label>
+        </view>
+         <view class="clearfix shop-ruzhu-pic-ul bg-f">
+           <template is="item_image_shop" data="{{config:uploadimgobjects['shoplunbo'].config,which:'shoplunbo',itemid:store.Id}}"></template>
+         </view>
+    </view>
+     <view class="a-describe-cells" style="margin-top:6px;" wx-if="{{store.Id>0}}">
+        <view class="a-describe-cell">
+                <label class="a-describe-label" style="width: auto;color: #666;font-size: 14px;">店铺二维码</label>
+        </view>
+         <view class="clearfix shop-ruzhu-pic-ul bg-f">
+           <template is="item_image_shop" data="{{config:uploadimgobjects['shopqrcode'].config,which:'shopqrcode',itemid:store.Id}}"></template>
+         </view>
+    </view>
+    <view class="a-describe-cells" style="margin-top:6px;" wx-if="{{store.Id>0}}">
+          <view class="a-describe-cell">
+                  <label class="a-describe-label" style="width: auto;color: #666;font-size: 14px;">店铺介绍</label>
+          </view>
+          <view class="a-describe-f" style="height:250px;overflow:scroll">
+            <textarea bindinput="inputdecription" bindtap='checkedit'  data-edit='{{store.CanEdite}}'  disabled='{{store.CanEdite==0}}'  class="Desdes" value='{{store.Description}}' style="user-select: text; overflow-y: auto; outline: none; cursor: text;height:240px;" placeholder=""/>
+            
+        </view>
+         <template is="item_image_shop" data="{{config:uploadimgobjects['shopintroduce'].config,which:'shopintroduce',itemid:store.Id}}"></template>
+      </view>
+    <view wx:if="{{!isIos}}" hidden='{{""==QrCodeUrl}}' class='ruzhu_cells mt-1' bindtap='bindtap_erweima' style="padding-left: 20rpx">入驻收费价格有疑问？立马联系管理员(点击获取联系方式)</view>
+    <view  class='ruzhu_cells mt-1' wx:if="{{0==store.Id&&!isIos}}">
+        <view class="d-flex d-flex-center ruzhu_cell">
+            <view class="icon_size icon_ruzhu_time"></view>    
+            <view class='flex right'>
+                <view class='picker_down' style='color:{{ruzhuxiangArray[0][ctIndex]?"#333":"#999"}};'>{{ruzhuxiangArray[0][ctIndex].name ||"请选择入驻项"}}                </view>
+                <picker mode="multiSelector" class='shopkind_picker' bindchange="bindruzhuxiangchange" value="{{ctIndex}}" range="{{ruzhuxiangArray}}" range-key="{{'name'}}">        
+                    <view class="picker">{{ruzhuxiangArray[0][ctIndex].name}}</view>
+                </picker>
+                <label class="right_arrow"></label>
+            </view>    
+        </view> 
+    </view> 
+
+
+    <view class='fix-bl'>
+        <view class='d-flex d-flex-center pay_bottom_nav'>
+            <view  hidden="{{store.Id>0||isIos ? true : false}}" class='shifukuan flex'><text class='f01'>实付款：</text><text class='f02'>{{moneyChoseArray[0][ctIndex]}}</text></view>
+                        <view  hidden="{{store.Id==0&&!isIos ? true : false}}" class='shifukuan flex'><text class='f01'></text></view>
+            <view class='bt {{store.Id>0 ? "flex":"" }}'   catchtap="SubmitSettled">{{store.Id==0?"确认入驻":"确定修改"}}</view>
+        </view>
+    </view> 
+      <!--二维码弹框-->
+  <view class='{{erweima_tk}}'>
+    <view class="black_mask" bindtap='close_tk'></view>
+    <view class="erweima_tk">
+      <view class='pic01'>
+        <image src='{{QrCodeUrl}}'></image>
+      </view>
+      <view class='f01'>截图扫码，联系客服</view>
+      <icon class='iconfont icon-guanbi' bindtap='bindtap_close'></icon>
+    </view>
+  </view>       
+</view>

@@ -1,0 +1,17 @@
+<view class="szpro">
+    <view class='ul'>
+            <view class='li' wx:for='{{listmgr}}'>
+                <view class="sztitle">
+                    <view class="sztitleTop">{{item.nick}}</view>
+                    <view class="sztitleBottom">{{item.roleclssify==1?'管理员':item.roleclssify==2?'副管理员':item.roleclssify==4?'分销管理员':'分销副管理员'}}</view>
+                </view>
+                <view class="sztell">{{item.tel==null?'未绑定':item.tel}}</view>
+                <view class="szzhuang">{{item.state}}</view>
+                <view class="szdelect" bindtap='deladmin'  data-roleid="{{item.roleid}}" data-index="{{index}}"><i></i></view>
+            </view>
+           
+    </view>
+</view>
+<view  class="szbth" style="margin-bottom: 1.2rem;">
+  <button class="szbtnIn"  open-type="share">邀请副管理员</button>
+</view> 

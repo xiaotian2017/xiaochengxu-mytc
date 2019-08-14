@@ -1,0 +1,28 @@
+.search-wrap { 
+    width: 500rpx;   
+    font-size: 28rpx;   
+    position: absolute;
+    top:20rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 8888;
+    color:#fff;
+}
+.search-input {    
+    background: rgba(255, 255, 255, .8);  
+    height: 58rpx;
+    line-height: 56rpx;
+    padding:0 0 0 80rpx;     
+    box-sizing: border-box;  
+    border: 1rpx solid #eaeaea;  
+    width: 100%;  
+    border-radius: 40rpx;   
+    color: #929292; 
+}
+.search-btn {
+    position: absolute;    
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30rpx;     
+    z-index: 8000;    
+}

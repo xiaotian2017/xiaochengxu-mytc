@@ -1,0 +1,159 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="city-card-container">
+    <view class="top-bg">    
+    </view>
+    <view class="city-card-self-wrp">
+        <image class="city-card-self" mode="widthFix" src="https://j.vzan.cc/content/city/member/img0322/vip-bg.png"></image>
+        <view class="city-card-name">同城会员卡</view>
+       
+        <view class="rights-wrp vz-flex flex-center flex-between">
+            <view class="member-right">会员权益次数：{{memberuser.RightsCount>0?memberuser.RightsCount:0}}次</view>            
+            <view wx:if="{{!memberuser}}">
+                <view class="renew-btn" bindtap="toBuyCityCard">立即开通</view>
+            </view>
+            <view class="renew-btn" wx:else bindtap="toBuyCityCard">续费增加权益</view>
+        </view>
+        <view bindtap="toExchangeCityCard" class="city-card-exchange vz-flex flex-center">
+            <text>兑换码</text>
+            <text class="iconfont icon-jiantou"></text>
+        </view>
+    </view>
+
+    <view class="vz-flex flex-center flex right-logo-wrp">
+        <view class="flex" style="text-align: center">
+            <image class="right-img" mode="widthFix" src="https://j.vzan.cc/content/city/member/img0322/vip-card-1.png"></image>
+            <view class="right-text">代金券</view>
+        </view>
+        <view class="flex" style="text-align: center">
+            <image class="right-img" mode="widthFix" src="https://j.vzan.cc/content/city/member/img0322/vip-card-2.png"></image>
+            <view class="right-text">专属会员价</view>
+        </view>
+    </view>
+
+    <view class="member-store-wrp">
+        <view class="vz-flex flex-center flex-between">
+            <view>
+                <text class="common-title">会员商家</text>
+                <text class="common-sub-title">(在线买单)</text>
+            </view>
+            <view class="vz-flex flex-center" bindtap="toCityCardStore">
+                <text class="common-more">更多</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view class="vz-flex flex-center flex-between flex-container" style="padding-top:30rpx;">
+            <block wx:for="{{memberStoreList}}" wx:key="{{index}}" >
+                <view class="vz-flex member-store-item" data-storeid="{{item.StoreId}}"  data-vip="{{item.XcxVipVer}}" data-telephone="{{item.TelePhone}}" data-qrcode="{{item.QrCode}}" bindtap="toStore">
+                    <image class="member-store-img" src="{{item.StoreLogo}}"></image>
+                    <view class="member-store-name">
+                        <view class="clamp2" style="width:140rpx;line-height: 1.3;height:72rpx">{{item.StoreName}}</view>
+                        <view style="padding-top:20rpx;">
+                            <text class="member-goods-price">{{item.Discount*100/1000}}</text>
+                            <text style="font-size: 28rpx;">折</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <view>
+        <view class="vz-flex flex-center flex-between" style="padding: 0 30rpx 30rpx;" >
+            <view>
+                <text class="common-title">会员商品</text>
+            </view>
+            <view class="vz-flex flex-center" bindtap="toCityCardGoods">
+                <text class="common-more">更多</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <block wx:for="{{memberGoodsList}}">
+            <view class="vz-flex member-discount-goods-wrp" data-goodsid="{{item.Id}}" bindtap="toGoods">
+                <image class="member-discount-goods-img" src="{{item.ImgUrl}}"></image>
+                <view style="width: 420rpx;">
+                    <view style="height: 72rpx;">
+                        <view class="clamp2 member-discount-goods-name">{{item.GoodsName}}</view>
+                    </view>
+                    <view class="vz-flex flex-center">
+                        <view>
+                            <text style="font-size: 24rpx">￥</text>
+                            <text style="font-size: 32rpx;color: #FF0000;font-weight: 700">{{item.MemberPrice*100/10000}}</text>
+                        </view>                   
+                        <view class="member-store-label">
+                            会员
+                        </view>
+                        <view style="font-size: 24rpx;color:#999;">
+                            省￥{{item.PriceRank}}
+                        </view>
+                    </view>
+                    <view class="vz-flex flex-center flex-between" style="padding-top: 34rpx">
+                        <view>
+                            <text class="sold-price">售价:</text>
+                            <text class="sold-price">￥{{item.Price*100/10000}}</text>                        
+                        </view>
+                        <view class="discount-buy-btn">立即购买</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view>
+        <view class="vz-flex flex-center flex-between">
+            <view class="month-copon">会员代金券</view>
+            <view class="vz-flex flex-center" style="padding-right: 30rpx;" bindtap="toCityCardCoupon">
+                <text class="common-more">更多</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view style="padding-bottom: 180rpx;">
+            <block wx:for="{{couponList}}" wx:key="{{index}}">
+                <view class="vz-flex flex-center coupon-item"  bindtap="toCityCardCouponDetail" data-vid="{{item.id}}">
+                    <view class="coupon-list-left">
+                        <view class="price-amount-wrp">
+                            <view wx:if="{{item.IsDiscount==0}}">
+                                <text class="money-label" style="color:#333">￥</text>
+                                <text class="money-amount">{{item.VoucherMoney}}</text>
+                            </view>
+                            <view wx:else class="vz-flex flex-center justify-center">
+                                <text style="color:#ff3a1b;font-weight: 700;font-size: 48rpx">{{item.Discount*100/1000}}</text><text style="color:#333;font-size: 24rpx">折</text>
+                            </view>
+                            <view wx:if="{{item.Deducting>0}}" style="color:#333" class="coupon-condition">
+                                满{{item.Deducting}}可用
+                            </view>
+                            <view wx:else class="coupon-condition" style="color:#333">
+                                无门槛
+                            </view>
+                        </view>
+                    </view>
+                    <view class="coupon-list-right">
+                        <view class="vz-flex flex-center">                            
+                            <view class="member-store-label" style="margin:0 20rpx 0 0" wx:if="{{item.IsCityMember>0}}">
+                                会员
+                            </view>
+                            <view class="coupon-name clamp1">{{item.StoreName}}</view>
+                        </view>
+                        <view class="coupon-tips" wx:if="{{item.UseEndDateStr!=''&&item.UseStartDateStr!=''}}">{{item.UseEndDateStr}}过期</view>
+                        <view class="coupon-tips" wx:else> 长期可领取
+                            <text wx:if="{{item.ValidDays>0}}">,领取后{{item.ValidDays}}天有效</text>
+                        </view>
+                        <view class="use-condition" wx:if="{{item.IsDiscount==1}}">限在线买单用</view>
+                        <view class="fresh-man" wx:if="{{item.IsNewUser>0}}">限店铺新人</view>
+                        <view class="receive-btn" wx:if="{{item.IsHaving==0}}" data-vid="{{item.id}}" catchtap="drawVoucher">立即领取</view>
+                        <view class="receive-btn" wx:else style="opacity: .5">已领取</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="open-btn-wrp">
+        <view class="open-btn vz-flex flex-center" bindtap="toBuyCityCard">
+            <view class="text-wrp vz-flex flex-center">
+                <text style="color: #fff;font-size: 32rpx;">{{memberuser?'续费增加会员权益次数':'开通同城卡 立享优惠'}}</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+<template is="city_kefu_win" data="{{city_kefu_hidden:city_kefu_hidden,cityphone:cityphone,QrCodeUrl:QrCodeUrl}}"></template>

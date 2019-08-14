@@ -1,0 +1,37 @@
+ <view class="szHeader" style="margin-top:2px" wx:for='{{shopmgrs}}'>
+        <view class="szHL">
+            <view class="szName">{{item.UserInfo.NickName}}</view>
+            <view class="szIdcard">店长</view>
+            <view class="szIdcard">核销数量：{{item.UserValidteCount}}</view>
+        </view>
+        <view class="szRight">{{item.UserInfo.TelePhone}}</view>
+        <view class="szdelect" data-itemid="0"></view>
+</view>
+
+<!-- wx:for='{{clerks}}' -->
+<view class="szpro"  >
+    <view class='ul'>
+          <view class='li' wx:for='{{clerks}}' wx:key="{{index}}">
+                <view class="sztitle">
+                     <view class="sztitleTop">{{item.UserInfo.NickName}}</view>
+                     <view class="sztitleBottom">
+                        店员
+                     </view>
+                </view>
+                <view class="sztell">
+                    <view> </view>  
+                    <view>备注:</view>
+                    <view style="-webkit-line-clamp: 2;">核销数量：{{item.UserValidteCount}}</view>
+                </view>
+                   <view wx:if='{{logineropenid!=item.UserRole.OpenId}}' data-idx='{{index}}' data-roleid='{{item.UserRole.Id}}' bindtap='delclerk' class="lahei-bt szdelect"><view>删除</view></view>
+                    <!-- <view wx:if='{{logineropenid!=item.UserRole.OpenId}}' class="lahei-bt" style="margin-left: 5px;">
+                    <view>编辑</view>
+                    </view> -->
+                 
+           </view>
+    </view>
+</view>
+
+<view  class="szbth" style="margin-bottom: 1.2rem;">
+  <button class="szbtnIn"  open-type="share">邀请店员</button>
+</view> 

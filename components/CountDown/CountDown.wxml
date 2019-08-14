@@ -1,0 +1,12 @@
+<view class="flex flex-end count-time" style="background:{{countDownColor}}" wx:if="{{!activeOver}}">
+    剩<view class="count-item" style="color:{{countDownColor}}" wx:if="{{timeList[0] != '00'}}">{{timeList[0]}}</view>
+    <text wx:if="{{timeList[0] != '00'}}">天</text><view class="count-item" style="color:{{countDownColor}}">{{timeList[1]}}</view>
+    时<view class="count-item" style="color:{{countDownColor}}">{{timeList[2]}}</view>
+    分<view class="count-item" style="color:{{countDownColor}}">{{timeList[3]}}</view>
+    秒
+    <view wx:if="{{activeNoStart}}">开始</view>
+    <view wx:else>结束</view>
+</view>
+<view class="count-over" wx:else>
+    已结束
+</view>

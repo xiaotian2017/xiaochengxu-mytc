@@ -1,0 +1,76 @@
+<template name="groupAdminList">
+  <scroll-view enable-back-to-top="true" class="scrollContent" bindscrolltolower="loadData" scroll-y="true">
+    <view class="groupList" wx:if="{{list.length > 0}}">
+      <block wx:for="{{list}}">
+        <view class="groupItem">
+          <view class="groupCon d-flex" catchtap="goGroupDtl" data-state="{{item.State}}" data-gid="{{item.Id}}">
+            <view class="groupCover" style="position: relative;">
+              <image src="{{item.ImgUrl}}"></image>
+              <view class='re-coupons' wx:if='{{!!item.Voucher}}'>
+                返{{item.Voucher.VoucherMoney}}元劵
+              </view>
+            </view>
+            <view class="d-flex flex-col flex groupInfo">
+              <view class="groupTitle clamp1">{{item.GroupName}}</view>
+              <view class="groupNum d-flex">
+                <text class="mark">{{item.GroupSize}}</text>
+                人团
+                <view class="priceItem" style="margin-left:20rpx">
+                  <text class="tag">团购价</text>
+                  <text class="mark">￥{{item.DiscountPrice}}</text>
+                </view>
+                <view class="priceItem" style="margin-left:20rpx">
+                  <text class="tag">单买价</text>
+                  <text class="mark">￥{{item.UnitPrice}}</text>
+                </view>
+              </view>
+              <view class="groupPrice d-flex flex-wrap">
+                <text class="tag">原价</text>
+                <text class="c666">￥{{item.OriginalPrice}}</text>
+              </view>
+              <view class="groupRest d-flex">
+                <view style="margin-right:20rpx">
+                  <text>已售</text>
+                  <text class="mark">{{item.CreateNum-item.RemainNum}}</text>
+                  份
+                </view>
+                <view>
+                  <text>还剩</text>
+                  <text class="c666">{{item.RemainNum}}</text>
+                  份
+                </view>
+              </view>
+              <view class="groupEndTime">{{item.ShowTime}}结束</view>
+            </view>
+            <view class="groupStatus progressing" wx:if="{{item.IsEnd == 0 &&item.State == 1}}">
+              进行中
+            </view>
+            <view class="groupStatus progressing" wx:elif="{{item.State == 2}}">准备开团</view>
+            <view class="groupStatus await" wx:elif="{{item.State == 0}}">待审核</view>
+            <view class="groupStatus delete" wx:elif="{{item.State == -1}}">已删除</view>
+            <view class="groupStatus overd" wx:if="{{item.IsEnd == 1}}">已结束</view>
+          </view>
+          <view class="groupAction d-flex">
+            <view class="btn" wx:if="{{item.State >= 0 && item.IsEnd != 1}}" data-gid="{{item.Id}}" data-index="{{index}}" catchtap="delete">
+              删除
+            </view>
+            <view class="btn" wx:if="{{item.State == 0 && item.IsEnd == 0}}" data-gid="{{item.Id}}" data-index="{{index}}" catchtap="edit" data-r="0">
+              编辑
+            </view>
+            <view class="btn" wx:if="{{item.State == -1 || item.IsEnd == 1}}" data-gid="{{item.Id}}" catchtap="edit" data-r="1">
+              再发一个
+            </view>
+            <view class="btn" catchtap="goRecord" data-index="{{index}}" wx:if="{{item.State == 1}}">
+              购买记录
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="loadAllData" wx:if="{{loadingAll && list.length > 0}}">已加载全部数据</view>
+  </scroll-view>
+  <view class="groupListNone" hidden="{{list.length}}">
+    <image src="https://j.vzan.cc/content/city/images/pintuan/05.png"></image>
+    <view class="c999">暂无拼团数据，快去发布拼团吧</view>
+  </view>
+</template>

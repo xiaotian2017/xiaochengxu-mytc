@@ -1,0 +1,10 @@
+{
+    "enablePullDownRefresh": false,  
+    "navigationBarBackgroundColor": "#e60000",
+    "navigationBarTextStyle": "white",   
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "usingComponents": {
+        "share-poster": "/components/shareposter"
+    }
+}

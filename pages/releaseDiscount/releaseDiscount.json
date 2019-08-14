@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "发布店铺优惠",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "base-time-picker": "/components/BaseTimePicker"
+    }
+}

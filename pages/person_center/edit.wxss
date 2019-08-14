@@ -1,0 +1,3 @@
+
+@import "../../css/cell.wxss";
+@import "../../css/icon_position.wxss";

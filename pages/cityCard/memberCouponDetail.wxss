@@ -1,0 +1,73 @@
+.member-coupon-detail-container view {
+    line-height: 1;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.store-name-wrp {
+    font-size: 24rpx;
+    height: 78rpx !important;
+    line-height: 78rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.store-name {
+    padding-left: 10rpx;
+}
+
+.money-label {
+    font-size: 24rpx;
+    color: #FF0000;
+}
+
+.money-mum {
+    font-size: 50rpx;
+    color: #FF0000;
+    font-weight: 700;
+}
+
+.member-label-wrp {
+    text-align: center;
+    padding-top: 80rpx;
+}
+
+.use-condition {
+    font-size: 24rpx;
+    text-align: center;
+    padding-top: 32rpx;
+}
+
+.discount-wrp {
+    padding-top: 80rpx;
+    text-align: center;
+}
+
+.discount-num {
+    font-size: 50rpx;
+    color: #FF0000;
+    font-weight: 700;
+}
+
+.discount-text {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.receive-btn {
+    width: 420rpx;
+    line-height: 80rpx !important;
+    background: linear-gradient(90deg, rgba(85, 189, 255, 1), rgba(70, 153, 255, 1));
+    text-align: center;
+    margin: 80rpx auto 0;
+    color: #fff !important;
+    font-size: 32rpx;
+}
+
+.rule-list {
+    font-size: 24rpx;
+    padding-top:60rpx;
+}
+
+.rule-list view+view {
+    margin-top: 30rpx;
+}

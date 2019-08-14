@@ -1,0 +1,61 @@
+<view class="d-flex flex-col" id="wrapper">
+    <view class="nav d-flex">
+        <view class="flex navItem {{currentNav == 0?'navActive':''}}" data-index="0" catchtap="switchNav">发布拼团</view>
+        <view class="flex navItem {{currentNav == 1?'navActive':''}}" data-index="1" catchtap="switchNav">参加拼团</view>
+    </view>
+    <swiper class="flex" bindchange="swiperPage" current="{{currentNav}}">
+        <swiper-item class="publishPage">
+            <view>
+                <image src="http://j.vzan.cc/content/city/xcx/images/pub.png" class="pub"></image>
+            </view>
+            <view class="content">
+                    <view>
+                            1.填写商品信息：轮播图以<text class="mark">640*360</text>，即手机横屏拍摄生成的尺寸为佳。
+                        </view>
+                        <view>
+                            2.拼团价和单买价：拼团价格即凑够拼团人数可享受的价格。用户也可以以单买价购买商品。单买也会消耗发放数量。.填写商品信息：轮播图以640*360，即手机横屏拍摄生成的尺寸为佳。
+                        </view>
+                        <view>
+                            3.发放数量：能购买的最大数量。剩余数量不足以成一个团时，则不能开启新团。
+                        </view>
+                        <view>
+                            4.活动时间：活动时间必须<text class="mark">大于48小时。活动结束则所有团都会结束</text>，建议适当延长活动时间，以增加成团几率。
+                        </view>
+                        <view>
+                            5.限购数量：填写了限购数量则每用户只能购买限购数量的商品。以单买和拼团的数量总和计算。
+                        </view>
+                        <view>
+                            6.拼团是否成功只<text class="mark">与拼团人数有关</text>，与此团的总购买数量无关。<text class="mark">用户可以参与自己开的团</text>，达到一人拼成的效果。
+                        </view>
+                        <view>
+                            7.拼团商品需到店自取或到店消费，<text class="mark">拼团成功后不限制使用时间</text>，拼团<text class="mark">成功不退款</text>，拼团失败用户可退款。
+                        </view>
+            </view>
+        </swiper-item>
+        <swiper-item class="attendPage">
+            <view>
+                <image src="http://j.vzan.cc/content/city/xcx/images/att.png" class="att"></image>
+            </view>
+            <view class="content">
+                    <view>
+                            1.选择商品开团：选择拼团商品下单，团长完成支付后，团即刻开启。在活动期间内，参团人数需至少在<text class="mark">24小时内</text>达到规定人数，此团方能成功，否则超过活动期，或者超过组团时间，此团均为失败。
+                        </view>
+                        <view>
+                            2.团长：开团且该团第一位支付成功的人。
+                        </view>
+                        <view>
+                            3.参团成员：通过团长邀请购买该商品的成员即为参团人员，参团人员也可通过分享团链接给微信好友邀请更多的成员参加。
+                        </view>
+                        <view>
+                            4.拼团成功：在规定时间内，所有成员完成支付，此拼团即算作成功，<text class="mark">拼团成功不可退款</text>，如有异议请自行与商家协商。<text class="mark">商品需到店自取或到店消费。</text>
+                        </view>
+                        <view>
+                            5.拼团失败：从团长开团24小时内未能凑够拼团人数，或者拼团时间超过活动时间，均为拼团失败。请到“我的拼团”里面进行退款。
+                        </view>
+                        <view>
+                            6.拼团，是基于好友的组团购买，获取团购优惠，为了保证广大消费者的权益，本同城运营者有权将判定为黄牛倒卖的团解散并取消活动资格
+                        </view>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>

@@ -1,0 +1,59 @@
+<template name="monther-day">
+    <view class="_div data-v-93131358 mother-wrapper">
+      <view class="_p data-v-93131358 mother-title">{{fromNikeName}}
+        <view class="_br data-v-93131358"></view>祝{{toNikeName}}母亲节快乐!</view>
+      <image  bindtap="toSendCard" class="_img data-v-93131358 js-blessing-btn blessing-btn" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-01.png"></image>
+      <image class="_img data-v-93131358 mother-pic02" style="height:180rpx" src="http://j.vzan.cc/content/city/xcx/images/mother-02.png"></image>
+      <view class="_p data-v-93131358 mother-blessing"> 你也许曾经许愿，
+        <view class="_br data-v-93131358"></view> 让爱情甜甜蜜蜜；
+        <view class="_br data-v-93131358"></view> 你也许曾经祈愿，
+        <view class="_br data-v-93131358"></view> 让工作顺顺利利；
+        <view class="_br data-v-93131358"></view> 今天，我必须在佛前虔诚的祝愿
+        <view class="_br data-v-93131358"></view> 祝愿母亲永远健康平安。
+        <view class="_br data-v-93131358"></view> 母爱无涯，回报有恩。
+        <view class="_br data-v-93131358"></view>
+      </view>
+      <image class="_img data-v-93131358 mother-pic03" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-03.png"></image>
+      <view class="_p data-v-93131358 mother-blessing"> 您对我的爱谁也无法代替，
+        <view class="_br data-v-93131358"></view> 您对我的情谁也难以比拟，
+        <view class="_br data-v-93131358"></view> 您对我的意谁也难以取替，
+        <view class="_br data-v-93131358"></view> 您对我的恩谁也无力相比，
+        <view class="_br data-v-93131358"></view> 您就是我心中的女神，
+        <view class="_br data-v-93131358"></view> 我惹您生气您照样把我疼惜，
+        <view class="_br data-v-93131358"></view> 您脸上的皱纹都绽放着花样的美丽，
+        <view class="_br data-v-93131358"></view> 亲爱的妈妈，祝您母亲节快乐，
+        <view class="_br data-v-93131358"></view> 健康幸福好身体！
+        <view class="_br data-v-93131358"></view>
+      </view>
+      <image class="_img data-v-93131358 mother-pic04" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-04.png"></image>
+      <view class="_p data-v-93131358 mother-blessing"> 多少个不眠之夜，
+        <view class="_br data-v-93131358"></view> 你守候我甜入梦乡；
+        <view class="_br data-v-93131358"></view> 多少回临出家门，
+        <view class="_br data-v-93131358"></view> 你为我整理行装；
+        <view class="_br data-v-93131358"></view> 多少次电话那头，
+        <view class="_br data-v-93131358"></view> 你为我挂肚牵肠。
+        <view class="_br data-v-93131358"></view> 母亲节到了，祝您节日快乐！
+        <view class="_br data-v-93131358"></view>
+      </view>
+      <image class="_img data-v-93131358 mother-pic05" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-05.png"></image>
+      <view class="_p data-v-93131358 mother-blessing"> 多少个不眠之夜，
+        <view class="_br data-v-93131358"></view> 你守候我甜入梦乡；
+        <view class="_br data-v-93131358"></view> 多少回临出家门，
+        <view class="_br data-v-93131358"></view> 你为我整理行装；
+        <view class="_br data-v-93131358"></view> 多少次电话那头，
+        <view class="_br data-v-93131358"></view> 你为我挂肚牵肠。
+        <view class="_br data-v-93131358"></view> 母亲节到了，祝您节日快乐！
+        <view class="_br data-v-93131358"></view>
+      </view>
+      <image class="_img data-v-93131358 mother-pic06" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-06.png"></image>
+      <view class="_p data-v-93131358 mother-blessing"> 责骂中，总包含着爱；
+        <view class="_br data-v-93131358"></view> 唠叨里，总透着关心；
+        <view class="_br data-v-93131358"></view> 沉默时，总藏着挂念；
+        <view class="_br data-v-93131358"></view> 举手间，总盼儿平安；
+        <view class="_br data-v-93131358"></view> 这就是母爱，
+        <view class="_br data-v-93131358"></view> 母亲节了，祝母亲健康平安！
+        <view class="_br data-v-93131358"></view>
+      </view>
+      <image class="_img data-v-93131358 mother-pic07" mode="widthFix" src="http://j.vzan.cc/content/city/xcx/images/mother-07.png"></image>
+    </view>
+  </template>

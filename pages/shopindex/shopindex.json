@@ -1,0 +1,13 @@
+{
+    "usingComponents": {
+        "city-banner":"/components/Banner/Banner",
+        "city-search":"/components/Search/Search",
+        "city-activity":"/components/Activity/Activity",
+        "city-iconBanner":"/components/IconBanner/IconBanner",
+        "city-navigator":"/components/Navigator/Navigator",        
+        "city-backTop":"/components/BackTop/BackTop",
+        "city-bottomnav": "/components/BottomNav/BottomNav"
+    },
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+}

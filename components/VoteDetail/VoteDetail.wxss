@@ -1,0 +1,177 @@
+@import '/components/component.wxss';
+
+.vote-detail {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    background: #fff
+}
+
+.vote-banner-detail {
+    position: relative;
+}
+
+.vote-banner {
+    width: 100%;
+    height: 300rpx;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%
+}
+
+.vote-dtl-player{
+    padding: 20rpx 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 32rpx;
+    color: #333;
+}
+.block-name {
+    padding: 20rpx 0;
+    font-size: 30rpx;
+    line-height: 1
+}
+.block-name::before{
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10rpx;
+    height: 30rpx;
+    width: 3px;
+    border-radius: 3px;
+    background: #fe3d49
+}
+.vote-info-content{
+    padding: 0 20rpx;
+    margin-bottom: 40rpx;
+    box-sizing: border-box;
+    text-align: center;
+    color: #666;
+    font-size: 28rpx
+}
+.vote-dtl-slogan,.vote-dtl-text{
+    line-height: 1.6;
+    color:#333;
+    word-break: break-all;
+    font-size: 28rpx
+}
+.vote-dtl-text {
+    padding-bottom: 10rpx
+}
+.vote-dtl-img {
+    width: 100%
+}
+.vote-player-dtl {
+    padding:0 20rpx 30rpx
+}
+
+.vote-dtl-fixed-bar {
+    box-sizing: border-box;
+    position:absolute;
+    bottom:0;
+    padding: 18rpx 40rpx;
+    width: 100vw;
+    background: rgba(0,0,0,.42)
+}
+
+.vote-info-name{
+    margin-bottom: 10rpx
+}
+
+.vote-dtl-btn{
+    padding:12rpx 24rpx;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+    border-radius: 6rpx;
+    background: #fe3d49
+}
+.vote-dtl-gift{
+    position: absolute;
+    top: -62rpx;
+    right: 0;
+    left: 0;
+    text-align: center;
+    width: 132rpx;
+    height: 110rpx;
+    margin: 0 auto;
+    font-size: 30rpx;
+    color: #fff
+}
+.vote-dtl-gift-img{
+    margin: 0 auto;
+    width:90rpx;
+    height:90rpx;
+    background:#feea89;
+    border-radius: 50%
+}
+.diamond {
+    width: 60rpx;
+    height: 60rpx;
+    margin:auto
+}
+.diamond-rotate{
+    animation: rotate 1s ease-in infinite
+}
+@keyframes rotate{
+    0%  { transform:rotate(0deg)}
+    10% { transform:rotate(20deg)}
+    15% { transform:rotate(-20deg)}
+    20% { transform:rotate(-0deg)}
+    25% { transform:rotate(20deg)}
+    30% { transform:rotate(-20deg)}
+    35% { transform:rotate(0deg)}
+    40%,100% { transform:rotate(0deg)}         
+}
+  
+
+.vote-detail-gap{
+    width: 100vw;
+    height: 20rpx;
+    background: #f2f2f2
+}
+.vote-dtl-block-title{
+    position: relative;
+    padding: 24rpx 0;
+    text-align: center;
+    color: #333;
+    font-size: 28rpx;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.vote-dtl-nav-active::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    width: 40%;
+    height: 2px;
+    background: #fe3d49
+}
+.vote-detail-list-item {
+    padding: 20rpx;
+    font-size: 28rpx
+}
+.vote-dtl-avatar{
+    width: 42rpx;
+    height: 42rpx;
+    border-radius: 50%
+}
+.vote-dtl-userName {
+    max-width: 60%;
+    margin-left: 20rpx;
+    color: #666
+}
+.vote-dtl-time{
+    margin-left: auto;
+    color: #999
+}
+.vote-dtl-loading-empty,.vote-dtl-loading-all {
+    text-align: center;
+    font-size: 24rpx;
+    color: #999;
+    padding: 30rpx 0
+}

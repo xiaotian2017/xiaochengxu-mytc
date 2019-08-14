@@ -1,0 +1,44 @@
+view {
+    line-height: 1;
+}
+
+.record-warp {
+    padding: 30rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.record-list-left {
+   color: #999; 
+}
+
+.record-list-mid {
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 50%;
+    background: #fe3d49;
+    color: #fff;
+    margin: 0 20rpx;
+}
+
+.name {
+    font-size: 32rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.hexiao {
+    font-size: 26rpx;
+    color: #666;
+    margin-top: 20rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}

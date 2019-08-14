@@ -1,0 +1,27 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+<view style="padding-bottom: 100rpx;">
+    <block wx:for="{{fareListArr}}" wx:key="{{index}}">
+        <view class="vz-flex flex-center fare-list-wrap flex-between">
+            <view class="fare-lise-left">
+                <view class="fare-title">名称：{{item.Name}}</view>
+                <view class="fare-desp">默认运费：{{item.BaseCount}}件内{{common.toFixed(item.BaseCost/100)}}元,每增加一件，运费增加{{common.toFixed(item.ExtraCost/100)}}元</view>
+            </view>
+            <view class="vz-flex flex-center fare-list-right">
+                <view class="edit" bindtap="toEditFareTemp" data-id="{{item.Id}}">
+                    编辑
+                </view>
+                <view class="del" bindtap="deleteFreight" data-id="{{item.Id}}">
+                    删除
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <view wx:if="{{isHasData}}" style="margin-top:20rpx;width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">暂无数据</view>
+    <view wx:if="{{isLoadAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>
+</view>
+
+<view class="add-btn-wrap" bindtap="toAddFareTemp">
+    <icon class="iconfont icon-guanbi add-btn"></icon>
+    新建运费模板
+</view>

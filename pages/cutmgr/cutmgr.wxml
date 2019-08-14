@@ -1,0 +1,50 @@
+    
+<view class="container"> 
+        <!--导航--> 
+        <view class="d-flex business_detail_nav" style='position:static;'>
+          <button class="flex {{tabsecond==0? 'active':''}}" hover-class="none" data-index='{{0}}' bindtap='click_navsecond'>待审核</button>
+          <button class="flex {{tabsecond==1? 'active':''}}" hover-class="none" data-index='{{1}}'  bindtap='click_navsecond'>未开始</button>
+          <button class="flex {{tabsecond==2 ? 'active':''}}" hover-class="none" data-index='{{2}}'  bindtap='click_navsecond'>进行中</button>
+          <button class="flex {{tabsecond==3 ? 'active':''}}" hover-class="none" data-index='{{3}}'  bindtap='click_navsecond'>已结束</button> 
+        </view>
+ 
+    <!--列表--> 
+  <view >
+      
+        <view>
+            <view class='pintuan_manage_cells mb-1'  wx:for="{{cuts}}"   wx:for-index="idx" data-bid='{{item.Id}}'
+            bindtap='gotucutdetail'>
+                <view class="d-flex d-flex-center pintuan_manage_cell jizan">
+                    <view class="head">
+                        <image src="{{item.ImgUrl}}"></image>
+                        <label class="zhuangtai">
+                           {{item.statetext}}
+                        </label>
+                        <view class='re-coupons' wx:if='{{!!item.Voucher}}'>返{{item.Voucher.VoucherMoney}}元劵</view>
+                    </view> 
+                    <view class="flex content">
+                        <view class="f01 clamp1" style='margin-left:20rpx'>{{item.BName}}</view>
+                        <view class="f04" style='margin-left:20rpx'> 现价<label class="price">{{item.OriginalPrice*1000/100000}}</label><label class="price02">最低￥{{item.FloorPrice*1000/100000}}</label>
+                        </view>
+                          <view  class="f04" ><label class="price02">有效期至{{item.ShowTime}}</label> 
+                    </view> 
+                          <view  class="f04" ><label class="price02">{{item.usercount}}人参与/{{item.paycount}}人付款</label>
+                        </view>
+                    </view> 
+                </view>
+                <view class="bt_cell" >
+                    <view class='bt active' catchtap='editeitem' data-bid='{{item.Id}}' >编辑</view>
+                    <view class='bt active' catchtap='delitem' data-index='{{idx}}' data-bid='{{item.Id}}' >删除</view>
+                </view>
+            </view>
+        </view>
+      <view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>	
+        	<view style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showallbottomtip==true?'':'none'}}">— — 数据显示完了 — —</view>		
+      </view>
+    <!--底部导航-->
+    <view class="fix-bl d-flex shangjia_bottom_nav index">
+        <view style='font-size:18px;line-height:50px;background:#fe3d49;color:white' class="flex bt_li" hover-class='none' data-storeid='{{storeid}}'  bindtap='gotoadd'>
+              添加
+        </view>                         
+    </view>    
+</view>

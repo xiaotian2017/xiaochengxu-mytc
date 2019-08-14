@@ -1,0 +1,7 @@
+{
+    "component":true,
+    "usingComponents": {
+        "city-backTop":"/components/BackTop/BackTop",
+        "city-video":"/components/BaseVideo/BaseVideo"
+    }
+}

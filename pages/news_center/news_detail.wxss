@@ -1,0 +1,313 @@
+@import "./comment.wxss";
+@import '../../public/navigatorCommon.wxss';
+page{
+    --main-color:#fe3d49;
+    background: #fff
+}
+
+.post-title{
+    padding:8rpx 20rpx;
+    font-size: 36rpx;
+    line-height: 1.6;
+    color: #333;
+    background: #fff
+}
+.post-info{
+    padding:0 20rpx 10rpx;
+    background: #fff
+}
+.post-info .times{
+    margin-right:20rpx;
+    color: #999;
+    font-size: 28rpx
+}
+.post-info .cityName{
+    font-size: 28rpx;
+    color: #fe3d49
+}
+.content{
+    padding:0 20rpx;
+    background: #fff
+}
+.headlines-video{
+    padding: 10rpx 0 20rpx;
+    width: 100%;
+    height: 400rpx;
+}
+.phase{
+    line-height: 2;
+    font-size: 28rpx;
+    color: #333
+}
+.index_title_cell{
+    padding:20rpx 20rpx;
+    background:#fff
+}
+.wxParse-p image{
+    vertical-align: top
+}
+.wxParse-p{
+    line-height: 2
+}
+
+.reward{
+    padding-top: 36px;
+    text-align: center
+}
+.reward-btn{
+    margin: 0 auto;
+    width: 100rpx;
+    padding: 16rpx 20rpx;
+    font-size: 28rpx;
+    line-height: 1;
+    color: #fff;
+    background: #fe3d49;
+    border-radius: 8rpx
+}
+.reward-account{
+    margin-top: 24rpx;
+    font-size: 28rpx;
+    color: #333
+}
+.reward-account text{
+    color: #fe3d49
+}
+.reward-avatarList{
+    margin-top: 24rpx;
+    height: 70rpx
+}
+.reward-avatar{
+    width: 70rpx;
+    height: 70rpx;
+    margin-right: 10rpx;
+    border-radius: 50%
+}
+.reward-ellipse{
+    margin-top: auto;
+    color: #999
+}
+.post-account{
+    padding:36rpx 0 20rpx;
+    font-size: 28rpx;
+    color: #666;
+}
+.post-account image{
+    vertical-align: middle
+}
+.post-viewer{
+    margin-right: 24rpx
+}
+.post-viewer image{
+    margin-right: 10rpx;
+    width:32rpx;
+    height:32rpx
+}
+.post-likeMan image{
+    width:42rpx;
+    height:40rpx
+}
+.comment-list{
+    font-size: 26rpx;
+    padding-bottom: 50px;
+    background: #fff
+}
+.left-message-title{
+    position: relative;
+    padding: 24rpx 0;
+    text-align: center;
+    font-size: 32rpx;
+    color: #666666
+}
+.left-message-title::before,.left-message-title::after{
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 23%;
+    height: 1px;
+    background: #e5e5e5;
+    transform: scaleY(.5)
+}
+.left-message-title::before{
+    left: 15%
+}
+.left-message-title::after{
+    right: 15%
+}
+.comment-gif{
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+.comment-item{
+    padding:20rpx
+}
+.comment-item:first-of-type{
+    margin-top: 0
+}
+.comment-item:not(:last-of-type){
+    border-bottom: 1rpx solid #f0f0f0
+}
+.comment-item .comment-userInfo{
+    font-size: 28rpx;
+}
+.comment-item .comment-userInfo .avatar{
+    width: 70rpx;
+    height: 70rpx;
+    margin-right: 20rpx;
+    border-radius: 50%;
+    overflow: hidden
+}
+.comment-item .comment-userInfo .avatar image{
+    width: 100%;
+    height: 100%
+}
+.comment-item .comment-userInfo .username{
+    max-width: 40%;
+    font-size:28rpx;
+    color: #333
+}
+.comment-item .comment-userInfo .deliver-time{
+    font-size:24rpx;
+    color: #999
+}
+.comment-like{
+    color:#999
+}
+.comment-like .icon{
+    display:inline-block;
+    vertical-align:middle
+}
+.icon-comment-like{
+   background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path d="M15.7,34.7H10c-0.9,0-1.7-0.8-1.7-1.7V18c0-0.9,0.8-1.7,1.7-1.7h5.7V34.7z M10,17.7c-0.2,0-0.3,0.1-0.3,0.3v15c0,0.2,0.1,0.3,0.3,0.3h4.3V17.7H10z" fill="#999"/><path d="M30.1,34.7H15v-1.4h14.9c0.3-0.1,3.1-1.7,4.9-12c0-0.6-0.2-1.6-0.9-2.3c-0.5-0.5-1.2-0.8-2-0.8l-5.2,0c-0.3,0-0.6-0.1-0.9-0.5c-0.4-0.6-0.4-1.5,0.2-2.9c0.7-1.9,1.2-7.1-1.6-8.4c-0.2,0-0.4,0.2-0.4,0.3h0c-0.1,1.4-2.3,10.5-8.9,11l-0.1-1.4c5.6-0.4,7.6-8.9,7.6-9.7l0-0.1c0.1-0.7,0.7-1.2,1.2-1.4c0.4-0.2,0.8-0.2,1.1,0c4.1,1.7,3.2,8.1,2.4,10.2c-0.3,0.9-0.4,1.3-0.4,1.5l5,0c1.2,0,2.2,0.4,3,1.2c0.8,0.9,1.3,2.2,1.2,3.4C34,33.6,30.5,34.6,30.1,34.7L30.1,34.7z M26.7,16.8C26.7,16.8,26.7,16.8,26.7,16.8L26.7,16.8C26.7,16.8,26.7,16.8,26.7,16.8z" fill="#999"/></svg>') no-repeat;
+   background-size:100%
+}
+.icon-comment-liked{
+   background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path d="M15,34h-5c-0.6,0-1-0.5-1-1V18c0-0.5,0.4-1,1-1h5V34z" fill="#fe3d49"/><path d="M15,34h15c0,0,4.2-0.4,5.4-12.6c0.1-1.5-0.9-4-3.6-3.9c-0.5,0-5.2,0-5.2,0s-1,0-0.1-2.4c0.7-1.9,1.5-7.9-2.1-9.3c-0.2-0.2-1.2,0.2-1.3,0.9c0,0.7-2,9.9-8.3,10.4" fill="#fe3d49"/><head xmlns=""/></svg>') no-repeat;
+   background-size:100%
+}
+.comment-content{
+    padding: 0 0 20rpx 90rpx
+}
+.comment-phase{
+    margin-top: 16rpx;
+    line-height: 1.5;
+    word-break: break-all;
+    color: #333
+}
+.comment-phase text{
+    vertical-align: middle
+}
+.comment-pic{
+    margin-top: 16rpx
+}
+.comment-pic image{
+    width:120rpx;
+    height: 120rpx
+}
+.comment-btn{
+    margin-left: auto;
+    margin-top: 20rpx;
+    width: 50px;
+    text-align: right;
+    line-height: 1;
+    color: #999
+}
+.comment-btn image{
+    margin-right:10rpx;
+    width: 32rpx;
+    height: 32rpx;
+    vertical-align: middle
+}
+.top-border{
+    border-width: calc(100vw - 40rpx);
+    border-top: 1rpx solid #f2f2f2
+}
+.comment-subList{
+    margin-left:90rpx;
+    background: #f2f2f2
+}
+.comment-subItem,.seeAllSubComments{
+    line-height: 1.85
+}
+.comment-subItem-tap{
+    background: rgba(0,0,0,0.08)
+}
+.comment-subItem text{
+    vertical-align: middle
+}
+.comment-subItem .comment-subItem-username{
+    color: #fe3d49
+}
+.isLoading,.loadingError,.loadingAll{
+    padding: 30rpx 0;
+    text-align: center;
+    font-size: 12px;
+    color: #999
+}
+.isLoading image{
+    margin-right: 10rpx;
+    width: 42rpx;
+    height: 42rpx;
+    vertical-align: middle
+}
+.loadingError text{
+    color: #fe3d49
+}
+.comment-empty{
+    padding: 20rpx 0;
+    text-align: center
+}
+.comment-empty image{
+    width:280rpx;
+    height: 280rpx
+}
+.comment-empty view{
+    margin-top: 12rpx;
+    font-size: 28rpx;
+    color: #999
+}
+.like-anim{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width:150px;
+    height:150px;
+    background: url(http://j.vzan.cc/content/city/xcx/images/like-anim.png) no-repeat;
+    background-size: 3600px 150px
+}
+
+.praiseAnimation{
+    display: block;
+    animation: praiseAnimation 1.32s .16s both 1 steps(24)
+}
+@keyframes praiseAnimation{
+    0%{
+        background-position: 0 0
+    }
+    100%{
+        background-position: -3600px 0
+    }
+}
+.icon-action{
+    position: fixed;
+    right: 20rpx;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+.backIndex{
+  padding:6px 8px;
+  text-align:center;
+  font-size:12px;
+  box-sizing:border-box;
+  bottom:260rpx;
+  color:#fff;
+  background:rgba(0,0,0,.42)
+}

@@ -1,0 +1,16 @@
+<view class="code-contanier">
+    <input class="code-input" bindinput="getMemberCode" placeholder="请输入兑换码" type="number" />
+
+    <view class="exchange-btn" bindtap="confirmBtn">
+        确认兑换
+    </view>
+   
+    <view class="mask" wx:if="{{memberType}}" bindtap="toCardIndex">
+        <view class="mask-main">
+            <image mode="widthFix" class="receive-success-bg" src="https://j.vzan.cc/content/city/xcx/images/receive-success.png"></image>
+            <view class="receive-text">成功获得{{memberType}}一张</view>
+            <view class="back-btn">返回账户查看</view>
+        </view>
+    </view>
+    <city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+</view>

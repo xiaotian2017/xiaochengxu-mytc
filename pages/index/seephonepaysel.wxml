@@ -1,0 +1,19 @@
+<view >
+ 
+    <view class="pushedWay">选择购买套餐</view>
+    <view class="pushedWayList">
+  
+        <radio-group class="radio-group ul" bindchange="configChange">
+            <label  class='li' wx:for='{{configlist}}'>
+                <radio  value="{{item.id}}" />{{item.name}}
+            </label>
+            
+        </radio-group>
+         
+ 
+    </view>
+    <view class="pushedBtn">
+        <view class="amout">总计<i id="payamout">{{needpay}}元</i></view>
+        <view  class='pushedBtninner' bindtap='sure'>确认</view>
+    </view>
+</view>

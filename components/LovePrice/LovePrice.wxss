@@ -1,0 +1,7 @@
+@import  '../Template/LovePrice-Privilege.wxss';
+.lowest{
+    color: #fe4b4b
+}
+city-progressBar{
+    margin-top: 46rpx
+}

@@ -1,0 +1,185 @@
+<view style="padding:20rpx 20rpx 0;">
+<block wx:for="{{convenientInfoList}}" wx:key="{{index}}">
+  <view class="item" data-type="2">
+        <view class="top-label flex" wx:if="{{item.TopStatus>0}}">
+                <view class="top-label-left">顶</view>
+                <view class="top-label-right">
+                    <view class="top-arrow"></view>
+                    <view class="bottom-arrow"></view>
+                </view>                    
+        </view>
+    <!-- 头部 -->
+    <view class="flex">   
+    <view class="avatar">
+            <image wx:if="{{!!item.user.img}}" src="{{item.user.img}}"></image>
+            <image wx:else src="http://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg"></image>
+    </view>
+    <view style="width:86%">
+    <view class="head flex" data-id="{{item.Id}}" data-typeid="{{item.PTypeId}}" bindtap="bottomItemClick">  
+        <view class="headInfo">
+            <view class="userName clamp1" style="width:400rpx;line-height: 1.3;margin-bottom:8rpx;"  wx:if="{{!!item.user && !!item.user.name}}">{{item.user.name}}</view>
+            <view class="post-status flex flex-center" >                     
+                <view class="type" style="margin-right:10rpx;background:#980afc" wx:if="{{item.pname}}">{{item.pname}}</view>
+                <view class="type" style="background:#fa0f3a" wx:if="{{item.cname}}">{{item.cname}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 拨打电话 -->
+    <view class="call flex" data-phone="{{item.user.tel}}" data-postid="{{item.Id}}" catchtap="callpeple" wx:if="{{item.user !=null && !!item.user.tel}}">
+        <image src="http://j.vzan.cc/content/city/xcx/images/tel.svg"></image>
+    </view>
+    <!-- 内容 -->
+    <view class="content" data-id="{{item.Id}}" catchtap="bottomItemClick" data-typeid="{{item.PTypeId}}" style="font-size:28rpx;color:#101010">
+        <view wx:if="{{item.TopPayTime.length>0 && mypublish==1}}">
+            置顶到{{item.TopPayTime}}
+        </view>
+        <image mode="widthFix" wx:if="{{item.PTypeId==304069&&item.IsExpired==1}}" style="width: 100rpx;height:80rpx;border-radius: 100%;position:absolute;right:140rpx;top:140rpx;" src="https://j.vzan.cc/content/city/xcx/images/city-vehicle.jpg"></image>
+        <!-- 标题 -->                
+        <!-- 详情 -->       
+        <text class="description {{showArr[index]?'clamp2':''}}"  data-index="{{index}}">    
+            <text class="title" wx:if="{{!!item.Title}}" style="color:#333;display:block;padding:20rpx 0 ;font-weight: 700">{{item.Title}}</text>     
+            <text class="title" wx:else style="color:#333;display:block;padding-top:20rpx;font-weight: 700"> </text>    
+            <text style="line-height: 1.3">
+            <text class="phase car-title" wx:if="{{item.PTypeId==304069}}">
+                <text style="color:#65D521">起：</text><text>{{item.startPoint+'\n'}}</text> 
+                <text style="color:#FA0F20">终：</text><text>{{item.endPoint+'\n'}}</text>
+            </text>
+                <!--拼车-->
+                <block wx:if="{{item.PTypeId==304069}}">
+                    <text class="phase">出发时间：{{item.ShowTime+'\n'}}</text>
+                    <text class="phase">{{item.IdentityType==4?"乘客":"空座"}}：{{item.ValNumber+'\n'}}</text>
+                    <text class="phase" wx:if="{{item.IdentityType==3 && !!item.carPlate}}">车牌号：{{item.carPlate+'\n'}}</text>
+                </block>
+               
+                <!--招聘求职-->
+                <block wx:elif="{{item.PTypeId==295254}}">
+                    <block wx:if="{{item.SaleType!=7}}">
+                        <text class="phase" wx:if="{{item.CompanyName&&item.CompanyName!='null'}}">单位名称：{{item.CompanyName&&item.CompanyName!='null'&&item.CompanyName+'\n'||''}}</text>
+                        <text class="phase" wx:if="{{1 <= item.Experience && item.Experience <=7}}">工作经验：{{md.judgeExp(item.Experience)+'\n'}}</text>
+                        <text class="phase" wx:if="{{item.Salary!=null && !!item.SalaryName && item.Salary!='1'}}">月薪：￥{{item.SalaryName+'\n'}}</text>
+                        <text class="phase" wx:if="{{item.Gender==1 || item.Gender==2}}">性别要求：{{item.Gender==1?"男":"女"+'\n'}}</text>                
+                        <text class="phase" wx:if="{{0 < item.AgeRe && item.AgeRe< 6}}">年龄要求：{{md.judgeAge(item.AgeRe)+'\n'}}</text>
+                        <text class="phase" wx:if="{{!!item.WorkHours}}">工作时间：{{item.WorkHours+'\n'}}</text>
+                        <text class="phase" wx:if="{{!item.NumberQ}}">招聘人数：{{item.NumberQ==0?'若干\n':item.NumberQ+'\n'}}</text>
+                        <text class="phase" wx:if="{{!!item.Floor}}">福利：{{item.Floor+'\n'}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="phase" wx:if="{{!!item.LinkMan}}">姓名：{{item.LinkMan+'\n'}}</text> 
+                        <text class="phase" wx:if="{{!!item.AgeQ}}">姓名：{{item.item.AgeQ+'\n'}}</text>
+                        <text class="phase" wx:if="{{!!item.WorkTime}}">学历：{{item.WorkTime+'\n'}}</text>
+                        <text class="phase" wx:if="{{1 <= item.Experience && item.Experience<=7}}">工作经验：{{md.judgeExp(item.Experience)+'\n'}}</text>
+                        <text class="phase" wx:if="{{item.Salary !=null && !!item.SalaryName && item.Salary !='1'}}">期望月薪：￥{{item.SalaryName+'\n'}}</text>
+                    </block>
+                </block>
+                <!--二手物品 车辆买卖 生活服务-->
+                <block wx:elif="{{md.judgeSecond(item.PTypeId)}}">
+                    <text class="phase" wx:if="{{!!item.Price}}">价格：￥{{item.Price+'\n'}}</text>
+                </block>
+                <!--房屋出租-->
+                <block wx:elif="{{item.PTypeId==295252}}">
+                    <text class="phase" wx:if="{{!!item.AreaSize}}">面积：{{item.AreaSize}}平方\n</text>
+                    <text class="phase" wx:if="{{!!item.HouseType}}">户型：{{item.HouseType+'\n'}}</text>
+                    <text class="phase" wx:if="{{!!item.Price}}">价格：￥{{item.Price+'\n'}}</text>
+                </block>
+                <text wx:if="{{!!item.Description}}">{{item.Description}}</text>
+            </text> 
+            </text>
+        <!-- 展开收起 -->
+        <view class="showall" wx:if="{{isShow[index]}}">
+            <text data-index="{{index}}" catchtap="showAll">{{showArr[index]?'展开':'收起'}}</text>
+        </view>
+        <!-- 图片 -->
+        <view style="padding-top: 20rpx">
+        <city-previewPicture imgList="{{item.ImgList}}"></city-previewPicture>
+    </view>
+  
+    </view>
+</view>
+</view>
+      <!-- 时间地点 --> 
+    <view class="space flex" style="color: #999">
+            <view class="address clamp1" hidden='{{null==item.Address}}'>
+                <image wx:if="{{item.Address&&item.Address!='null'&&item.Address||''}}" src="http://j.vzan.cc/content/city/xcx/images/location.svg"></image>
+                <text>{{item.Address&&item.Address!='null'&&item.Address||''}}</text>               
+            </view>
+            <view class="post-times">
+                {{item.FromNowTime}}
+            </view>
+        </view>
+    <!-- 评论转发 -->
+    <view class="action flex">
+        <!-- 浏览量 -->
+        <view class="action-item viewer">
+            <image src="http://j.vzan.cc/content/city/xcx/images/viewer.svg"></image>
+        <text>{{item.ViewCount}}</text>
+        </view>
+        <!-- 转发 -->
+        <button class="action-item repost" open-type="share"  data-convenientInfo="convenientInfo" data-id="{{item.Id}}" data-linkman="{{item.LinkMan}}" data-pname="{{item.pname}}" data-index="{{index}}" data-sharecount="{{item.ShareCount}}" bindtap="getCurrentPost">
+            <image src="http://j.vzan.cc/content/city/xcx/images/repost.svg"></image>
+            <text wx:if="{{!!item.ShareCount}}">{{item.ShareCount}}</text>
+        </button>
+        <!-- 评论 -->
+        <view class="action-item comment" catchtap="bottomItemClick" data-id="{{item.Id}}" data-typeid="{{item.PTypeId}}" data-type="pl">
+            <image src="http://j.vzan.cc/content/city/xcx/images/comment.svg"></image>
+            <text>{{item.CommentCount}}</text>
+        </view>
+        <!-- 城主 -->
+        <view class="action-item city-owner"  bindtap="openLayer" data-index="{{index}}" data-postid="{{item.Id}}" wx:if="{{showpath}}">
+            <image src="http://j.vzan.cc/content/city/xcx/images/more.svg"></image>
+            <text>更多</text>
+        </view>
+    </view>
+</view>
+</block>
+</view>
+<wxs module="md">
+  /*二手*/
+  function judgeSecond(arg){
+    return ["286121","295257","295258"].indexOf(arg)
+  }
+  /*学历*/
+  function judgeAcademic(arg){
+    var academic = {
+      "1":"高中以下",
+      "2":"高中",
+      "3":"中专/技校",
+      "4":"大专",
+      "5":"本科",
+      "6":"硕士",
+      "7":"博士",
+      "8":"MBA/EMBA"
+    }
+    return academic[arg]
+  }
+  /*年纪*/
+  function judgeAge(arg){
+    var age = {
+      "1":"25岁以下",
+      "2":"30岁以下",
+      "3":"35岁以下",
+      "4":"40岁以下",
+      "5":"50岁以下",
+      "7":"45岁以下"
+    }
+    return age[''+arg]
+  }
+  /*工作经验*/
+  function judgeExp(arg){
+    var exp = {
+      "1":"无工作经验",
+      "2":"应届毕业生",
+      "3":"1年以下工作经验",
+      "4":"1 - 3年工作经验",
+      "5":"3 - 5年工作经验",
+      "6":"5 - 10年工作经验",
+      "7":"10年以上工作经验"
+    }  
+    return exp[arg]
+  }
+  module.exports = { 
+    judgeSecond:judgeSecond,/*二手*/
+    judgeAcademic:judgeAcademic,/*学历*/
+    judgeAge:judgeAge,   /*年纪*/
+    judgeExp:judgeExp  /*工作经验*/
+  }
+</wxs>

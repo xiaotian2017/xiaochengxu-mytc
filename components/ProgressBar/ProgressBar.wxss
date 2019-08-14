@@ -1,0 +1,21 @@
+.progressBg{
+    position: relative;
+    line-height: 1;
+    height:30rpx;
+    width:280rpx;
+    border-radius: 30rpx;
+    overflow: hidden
+}
+.progressing{
+    position: absolute;
+    left: 0;
+    height:30rpx;
+    border-radius: 30rpx;
+}
+.progressText{
+    position: absolute;
+    top:1px;
+    left: 14rpx;
+    font-size: 24rpx;
+    color: #fff
+}

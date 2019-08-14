@@ -1,0 +1,30 @@
+    <!--减价排行-->
+  <template name="ranking">
+    <view class='mt-1 activeScrollItem' id='tabItem3' style='padding-bottom:60px'>
+        <view class='pintuan_commodity_title'>
+            <view class='shu'></view>
+            <view class='name'>
+                <view class='clamp1'>减价排行</view>
+            </view>
+        </view>
+        <view class='kanjia-ranking'>
+            <view class='headTitle d-flex'>
+                <text>排名</text>
+                <text class='flex' style='text-align:center'>用户</text>
+                <text style='width:110rpx;text-align:center'>现价</text>
+            </view>
+            <block wx:for="{{ranking}}">
+                 <view class='ranking-item d-flex flex-center'>
+                    <image class='xunzhang_size' src='http://j.vzan.cc/content/city/xcx/images/Entertainment_1{{index+1}}.png' wx:if="{{index <= 2}}"></image>
+                    <text wx:else style='width:64rpx;text-align:center'>{{index+1}}</text>
+                    <view class='flex d-flex flex-center'>
+                        <image src='{{item.avatar}}' class='head'></image>
+                        <text class='userName'>{{item.userName}}</text>
+                    </view>
+                    <text class='endPrice'>￥{{item.currentPrice*1000/100000}}</text>
+                </view>
+            </block>
+        </view>
+    
+    </view>
+</template>  

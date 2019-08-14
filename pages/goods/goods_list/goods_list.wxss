@@ -1,0 +1,132 @@
+.tipsIcon {
+    position: fixed;
+    bottom: 270px;
+    right: 20rpx;
+    z-index: 999;
+    height: 80rpx;
+    width: 80rpx;
+    border-radius: 50%;
+    overflow: hidden
+}
+page{
+    --main-color:#fe3d49
+}
+.nav{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #fff;
+    border-bottom: 1rpx solid #f0f0f0;
+    z-index:18
+}
+.nav-item{
+    position: relative;
+    color: #333;
+    font-size: 28rpx;
+    text-align: center
+}
+.nav-item:not(:last-of-type)::after{
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
+    width: 1px;
+    height:28rpx;
+    background:#e5e5e5;
+    -webkit-transform: scale(.5);
+    transform: scaleX(.5)
+}
+.nav-active{
+    color: var(--main-color)
+}
+.scan-type{
+    width: 100rpx;
+    height: 100%
+}
+.icon{
+    margin:auto;
+    width:16px;
+    height:16px;
+    background: url(http://j.vzan.cc/content/city/xcx/images/goods.png?v=2) no-repeat;
+    background-size:157px
+}
+.icon-list{
+    background-position:-2px -73px 
+}
+.icon-column{
+    background-position:-32px -73px
+}
+
+/* 弹层 */
+.goods-layer{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .42);
+    z-index:16
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0
+    }
+    100%{
+        opacity:1
+    }
+}
+.fadeIn{
+    display: block;
+    animation: fadeIn .16s linear both
+}
+@keyframes fadeOut{
+    0%{
+        opacity: 1
+    }
+    100%{
+        opacity:0
+    }
+}
+.fadeOut{
+    display: block;
+    animation: fadeOut .28s linear both
+}
+.good-layer-list{
+    position: absolute;
+    top: 70rpx;
+    width: 100vw;
+    max-height: 0;
+    color: #333;
+    font-size: 28rpx;
+    text-align: center;
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: max-height .48s cubic-bezier(0.375, 1, 0.355, 1);
+    transition:max-height .48s cubic-bezier(0.375, 1, 0.355, 1)
+}
+.slideDown{
+    max-height:540rpx
+}
+.goods-layer-item{
+    height:80rpx;
+    line-height:80rpx;
+    box-sizing: border-box
+}
+.goods-layer-item-active{
+    color: var(--main-color)
+}
+.goods-layer-item:not(:last-of-type){
+    border-bottom: 1rpx solid #f2f2f2
+}
+.select{
+    background: rgba(0, 0, 0, .08)
+}

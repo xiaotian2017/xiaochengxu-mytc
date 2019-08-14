@@ -1,0 +1,217 @@
+<template name="new-year-temp">
+    <view style="background:#e60000;overflow:hidden">
+        <view style="position: relative">
+                <image class="top" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/pig-top.png"></image>      
+                <image class="top-2019 bounceInDown animated" src="https://i.vzan.cc/citysource/xcx_heka/pig-2019.png" mode="widthFix" alt=""></image>
+        </view>        
+        <view class="greeting-title">
+            {{fromNikeName}}祝{{toNikeName}}新年快乐!
+        </view>
+        <view class="greeting-btn" bindtap="toSendCard">
+            <image src="https://i.vzan.cc/citysource/xcx_heka/8.jpg"></image>
+            <text>我也要发祝福</text>
+        </view>
+        <!-- 上横批 -->
+        <!-- <view class="top-banner-wrap" style="height: 200rpx">
+            <view class="top-banner-img-wrap top-banner-img-wrap-begin}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/66.png" class="roller roller-left }}"></image>
+                <view class="top-banner-img-inner">
+                </view>
+                <image src="https://i.vzan.cc/citysource/xcx_heka/66.png" class="roller roller-right}}"></image>
+            </view>
+        </view> -->
+        <!-- 左右横幅夹猪-->
+        <!-- <view class="left-banner-wrap" style="height: 670rpx">
+            <view class="single-word single-word1">
+                <text class="single-word-body">谨</text>
+            </view>
+            <view class="single-word single-word2">
+                <text class="single-word-body">贺</text>
+            </view>
+            <view class="single-word single-word3">
+                <text class="single-word-body">新</text>
+            </view>
+            <view class="single-word single-word4">
+                <text class="single-word-body">年</text>
+            </view>
+            
+            <view class="dog-wrap">
+                <image mode="widthFix" class="dog-word" src="https://i.vzan.cc/citysource/xcx_heka/23.png"></image>
+                <view class="dog">
+                    <view class="dog-body slideFromDown">
+                        <view class="dog-ball dropDown">
+                        </view>
+                        <view class="dog-eyes">
+                            <view class="left-eyes blink">
+
+                            </view>
+                            <view class="right-eyes blink">
+                            </view>
+                        </view>
+                        <view class="dog-tongue tongue">
+                        </view>
+                    </view>
+                </view>
+                <view class="dog-paw-left pawl">
+                </view>
+                <view class="dog-paw-right pawr">
+                </view>
+            </view>
+          
+            <view class="left-banner">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/7.png" class="roller-top-left"></image>
+                <view class="left-banner-img-warp left-banner-img-warp-begin}}">
+                    <view class="left-banner-img-inner">
+                    </view>
+                </view>
+                <image src="https://i.vzan.cc/citysource/xcx_heka/7.png" class="roller-bottom-right"></image>
+            </view>
+          
+            <view class="right-banner">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/7.png" class="roller-top-left"></image>
+                <view class="left-banner-img-warp left-banner-img-warp-begin}}">
+                    <view class="right-banner-img-inner">
+                    </view>
+                </view>
+                <image src="https://i.vzan.cc/citysource/xcx_heka/7.png" class="roller-bottom-right"></image>
+            </view>
+        </view> -->
+
+
+        <image class="pig-mine" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/pig-mine.png"></image>        
+        <image class="pig-say" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/pig-happy.png"></image>
+
+        <view class="page1-bottom">
+            <view>新年恭喜您:</view>
+            <view>一帆风顺 二蛇腾飞</view>
+            <view>三羊开泰 四季平安</view>
+            <view>五福临门 六六大顺</view>
+            <view>七星高照 八方来财</view>
+        </view>
+        <view style="position:relative">
+            <image src="https://i.vzan.cc/citysource/xcx_heka/20.png" mode="widthFix" class="kids"></image>
+            <image class="tree" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/9.png"></image>
+        </view>
+        <!-- <view class="label-wrap">
+            <image class="label lable-animate}}" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/10.png"></image>
+        </view> -->
+        <view class="page2-bottom">
+            <view>新年恭喜您:</view>
+            <view>顺顺利利 大吉大利</view>
+            <view>平平安安 生意兴隆</view>
+            <view>福星高照 六六大顺</view>
+            <view>财源广进 八方来财</view>
+        </view>
+        <view style="position: relative;margin: 100rpx 0">
+            <view class="streetBtn" bindtap="toActivity"></view>
+            <image class="street" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/11.jpg"></image>
+        </view>
+
+        <view class="page3-bottom">
+            <view> 鱼跃龙门好有福，猪年贺岁来送福</view>
+            <view>大福小福全家福，有福享福处处福</view>
+            <view>知福来福有祝福，清福鸿福添幸福</view>
+            <view> 接福纳福年年福，守福祈福岁岁福</view>
+            <view>九九同心 十全十美</view>
+        </view>
+        <view class="family">
+            <view class="air-box1 air-box-first {{newYearObj.isOpenFaimly ? 'air-box-first-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/13.png"></image>
+                <text>有钱没钱回家过年。</text>
+            </view>
+            <view class="air-box1 air-box2 {{newYearObj.isOpenFaimly ? 'air-box2-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/18.png"></image>
+                <text>回家做饺子吃。</text>
+            </view>
+            <view class="air-box1 air-box3 {{newYearObj.isOpenFaimly ? 'air-box3-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/18.png"></image>
+                <text>回家吃饺子。</text>
+            </view>
+            <view class="air-box1 air-box4 {{newYearObj.isOpenFaimly ? 'air-box4-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/18.png"></image>
+                <text>噢~Yeah!</text>
+            </view>
+            <image mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/12.jpg"></image>
+        </view>
+
+        <view class="page4-bottom">
+            <view> 猪年到 </view>
+            <view> 一祝家庭幸福，福傳千里</view>
+            <view> 二愿財運亨通，通上徹下</view>
+            <view>三望龍馬精神，神采飛揚</view>
+        </view>
+        <view class="old">
+            <!-- <image mode="widthFix" class="old-bg" src="https://i.vzan.cc/citysource/xcx_heka/19.png"></image>
+            <view class="air-box1 air-box1-first {{newYearObj.isOpenOld ? 'air-box-first-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/13.png"></image>
+                <text>穿新衣过年咯</text>
+            </view>
+            <view class="air-box1 air-box3 {{newYearObj.isOpenOld ? 'air-box2-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/13.png"></image>
+                <text>恭喜过大年</text>
+            </view>
+            <view class="air-box1 air-box4 {{newYearObj.isOpenOld ? 'air-box3-begin':''}}">
+                <image src="https://i.vzan.cc/citysource/xcx_heka/13.png"></image>
+                <text>大家新年快乐</text>
+            </view> -->
+            <image class="pig-kuaile" mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/pig-kuaile.png"></image>
+        </view>
+        <view class="page5-bottom">
+            <view>愿所有的好梦依偎着您 </view>
+            <view>入睡甜甜 醒来成真 </view>
+            <view>愿所有的财运笼罩着您</view>
+            <view>日出遇贵，日落见财</view>
+            <view>愿所有的吉星呵护着您</view>
+            <view>时时吉祥，岁岁平安</view>
+        </view>
+
+        <view>
+            <image mode="widthFix" src="https://i.vzan.cc/citysource/xcx_heka/pig-family.png" class="print {{newYearObj.isPrint?'print-move':''}}"></image>
+            <image mode="widthFix" class="end-bg" src="https://i.vzan.cc/citysource/xcx_heka/15.png"></image>
+        </view>
+
+        <!-- <view class="laba-red-packet-bt" bindtap="showRed" wx:if="{{isShowRedBtn}}" style="z-index: 99;">
+            <image mode="widthFix" src="http://j.vzan.cc/content/city/newcards/img/redActive.png" style="width:100%"></image>
+        </view>
+
+        <view class="mask show" wx:if="{{isShowRed}}">
+            <view class="red-package-wrap show">
+                <view class="red-package-top">
+                     <view class="rep-package-amount">红包总金额为1元</view> 
+                    <image class="image1" src="https://j.vzan.cc/content/city/rp/images/redTop.png"></image>
+                    <image class="image2" src="http://j.vzan.cc/content/city/xcx/images/redbagrel.png"></image>
+                    <view class="red-package-tips"> {{isReceiveFail && redAmount==0 ? '红包已抢光' : '恭喜您！获得一个红包'}}</view>
+                    <view wx:if="{{redAmount==0 && !isReceiveFail }}" catchtap="drawNormalRedPacket" class="open-red-package-btn"></view>
+                    <view class="red-amount" wx:else style="font-size:{{isReceiveFail && redAmount==0?'30rpx':'60rpx'}}">
+                        {{isReceiveFail && redAmount==0? '红包总额 '+allAmount+'元' : '￥'+redAmount}}
+                        <view class="to-cash vz-flex flex-center flex-between">
+                            <view wx:if="{{!isReceiveFail || redAmount!=0}}" catchtap="goToBill">去提现</view>
+                            <view catchtap="goToDetail" style="padding-left:{{isReceiveFail && redAmount==0 ? '0' : '30rpx'}}">查看领取详情</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="red-package-bot">
+                    <image src="https://j.vzan.cc/content/city/rp/images/redBot.png"></image>
+                    <view class="red-package-balance-tips">领取的红包请在个人收益查看</view>
+                </view>
+                <view catchtap="closeRed" class="close"></view>
+            </view>
+        </view>
+
+        <view class="my-bless" bindtap="toMyBless">
+            <view class="text">
+                <view style="padding-top:20%">我的</view>
+                <view>祝福</view>
+            </view>
+        </view>
+
+        <view class="index-btn" bindtap="toIndex">
+            <text>首页</text>
+        </view>
+        <button class="zhuanfa" open-type="share">
+            <icon class="iconfont icon-zhuanfa" style="color:#ccc"></icon>
+        </button>
+        <share-poster share-params="{{shareposterparams}}"></share-poster>
+        <view class='share-poster' style='display:block;' hover-class='none' bindtap='createposter'>海报</view> -->
+    </view>
+</template>

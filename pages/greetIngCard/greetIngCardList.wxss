@@ -1,0 +1,84 @@
+view {
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.card-list-wrap {
+    padding: 20rpx 0;  
+ }
+
+.avatar-wrap {  
+    width: 16%;
+    vertical-align: middle;
+}
+
+ .right-wrap {
+     width: 84%;
+ }
+
+ .same-text {
+     font-size: 30rpx;
+     color: #333;
+ }
+
+ .time {
+   font-size: 30rpx;
+   color: #999;
+ }
+
+ .outter-wrap {
+    padding: 20rpx;
+    border-bottom:1rpx solid #f0f0f0;
+ }
+
+ .top-avatar {
+     width:152rpx;
+     height: 152rpx;
+     border-radius: 50%;     
+ }
+
+ .top {
+   height:120rpx;
+   margin-bottom:120rpx;
+   background:#e60000;
+   border-bottom-left-radius:50rpx;
+   border-bottom-right-radius:50rpx;
+   position: relative;
+ }
+
+ .top-mid {
+     font-size: 28rpx;
+     text-align: center;
+     color: #333;
+     position:absolute;
+     left: 50%;
+     bottom: -110rpx;
+     transform: translateX(-50%);
+ }
+
+ .to-send-card {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: #e60000;
+    color: #FFF;
+    font-size: 28rpx;
+    text-align: center;
+ }
+
+ .red-desp {
+    font-size: 28rpx;    
+ }
+
+ .to-red-detail {
+     text-decoration: underline;
+ }

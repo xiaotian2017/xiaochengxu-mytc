@@ -1,0 +1,59 @@
+<view style="padding-bottom:80px;">
+  <view class="write-infor-cells mar-t" wx:if="{{!(post.State==-3 && chargeTypeInfoList[0].PriceDispaly==0)}}">
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{post.istop==1}}">
+      <view class="write-title flex01">发布收费</view>
+      <view class="write">
+        <label class="c-f5a0">￥{{chargeTypeInfoList[0].PriceDispaly}}</label>
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{post.istop==1}}">
+      <view class="write-title flex01">我要置顶</view>
+      <view class="write">
+        <switch color="#fe3d49" checked bindchange="switch1Change" />
+      </view>
+    </view>
+    <view class="d-flex d-flex-center write-infor-cell" hidden="{{!istop}}">
+      <view class="write-title">选择置顶类型
+        <icon class="required-sign"></icon>
+      </view>
+      <!--<view class="flex01 write arrow">
+        <picker mode="date" fields="day" start="{{startime}}" data-id="{{item.Id}}" bindchange="ListenerPickerSelected">
+          <view class="picker">
+            {{toptime}}
+          </view>
+        </picker>
+      </view>-->
+      <view class="flex01 write arrow">
+        <picker mode="selector" range="{{toplist}}" index='0' bindchange="ListenerPickerSelected">
+          <view class="picker">
+            {{toptime}}
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  
+  <view class="agreement-f" show="{{!(post.State==-3 && chargeTypeInfoList[0].PriceDispaly==0)}}">
+    <text class="c-09cf">该同城已关闭付费发帖功能 , 您可免费发帖啦 !</text>
+  </view>
+  <view class="agreement-f" hidden="true">
+    <icon type="success" size="18" color="#009cff" />我已阅读并同意
+    <text class="c-09cf">《平台分类信息管理条款》</text>
+  </view>
+
+  <!--底部栏-->
+  <view class="fix-tb" wx:if="{{!(post.State==-3 && chargeTypeInfoList[0].PriceDispaly==0)}}">
+    <view class="d-flex d-flex-center write-bottom-nav ta-c">
+      <view class="flex01">
+        <label class="f01">需付款</label>
+        <label class="f02">{{allprice}}</label>
+      </view>
+      <view class="bt" catchtap="payclick">{{issumit==1?'付款中...':'确认付款'}}</view>
+    </view>
+  </view>
+  <view class="fix-tb" wx:else>
+    <view class="d-flex d-flex-center write-bottom-nav ta-c">
+      <view class="bt" style="width:100%;" catchtap="passpost">{{issumit==1?'提交中...':'继续发帖'}}</view>
+    </view>
+  </view>
+</view>

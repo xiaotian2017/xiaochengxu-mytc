@@ -1,0 +1,16 @@
+<view class="local-news-wrap"> 
+    <block wx:for="{{localNewsList}}" wx:key="unique">
+        <view class="item flex" data-hid="{{item.Id}}" data-headtype="{{item.HeadType}}" bindtap="readArticle">
+            <view class="content flex-1 flex flex-col">
+                <view class="title c3 clamp2" wx:if="{{item.Title != null}} ">
+                    {{item.Title}}
+                </view>
+                <view class="text-info c6 clamp1" wx:if="{{item.Description != null}}">
+                    {{item.Description}}
+                </view>
+                <city-postInfo date="{{item.FromNowTime}}" viewer="{{item.BrowseCount}}"></city-postInfo>
+            </view>
+            <image src="{{item.ImgUrl}}" class="cover"></image>
+        </view>
+    </block>
+</view>

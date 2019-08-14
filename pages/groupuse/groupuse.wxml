@@ -1,0 +1,60 @@
+<view class="container" style="padding-bottom:20px;" hidden='{{loadall==0}}'>
+    <view class='d-flex flex-center use_cell' catchtap='gotodetail' data-gid='{{mainmodel.GroupId}}'>
+        <view class='head'>
+            <image src='{{mainmodel.GroupImgUrl}}'></image>
+        </view>
+        <view class='flex'>
+        <view>原价：￥{{mainmodel.OriginalPrice*1000/100000}}</view>  
+         <view>实付价格：￥{{mainmodel.BuyPrice*1000/100000}}</view>  
+         <view>购买数量：{{mainmodel.BuyNum}}</view>  
+        </view>
+       
+    </view>
+    <view class='youhuiquan_detail_top'>
+        <view class='head'>
+            <image src='{{qrlink}}'></image>
+        </view>
+        <view class='text_f'>
+            <text class='f01'>券号：{{mainmodel.GroupNumber}}</text>
+            <text class='f02'>{{mainmodel.Name}}</text>
+        </view>
+    </view>
+    <view class='youhuiquan_detail_zhong'>
+        <view class='d-flex cell'>
+             <view class='f01'>截止时间</view> 
+             <view class='flex f02'>{{mainmodel.ValidShowTime}}</view> 
+        </view>
+    </view>
+    <!--地址--> 
+    <view class="d-flex business_detail_address mt-1" catchtap='gotoshopdetail' data-storeid='{{store.Id}}'> 
+	      <view class="head">
+	          <image src="{{store.LogoUrl}}"></image>
+	      </view> 
+	      <view class="flex content">
+	          <view class="title clamp1">{{store.SName}}</view>
+            <view class="f01"><icon class="icon_time"></icon>24小时营业</view> 
+	          <view class="f01 clamp2" style='margin-top:4px;line-height:1.45'><icon class="icon_local"></icon>{{store.Address}}</view>	 
+	      </view>
+        <view hidden='{{store.TelePhone==""}}'>
+            <button class="call" data-phone='{{store.TelePhone}}' catchtap='callphone'><icon class="icon_yh_call"></icon></button>
+        </view>        
+    </view>  
+
+</view>
+
+<view class="mask" wx:if="{{showVoucher}}">
+        <view class="dialog-Voucher">
+            <icon class="iconfont icon-guanbi guanbi" bindtap="closeVoucher"></icon>
+            <view class="dialog-name">购物返券</view>
+            <view>
+                <text style="color: rgb(216, 78, 67);font-size: 150rpx;line-height: 1; margin-top: 10rpx;">{{voucher.VoucherMoney}}</text>
+                <text style="color: rgb(216, 78, 67);">元</text>          
+            </view>
+            <view style="color: rgb(251, 220, 163); margin-top: 90rpx;font-size: 28rpx">          
+                    <text wx:if="{{voucher.Deducting>0}}">满{{voucher.VoucherMoney}}元使用</text><text wx:if="{{voucher.ValidDays>0}}"><text wx:if="{{voucher.ValidDays>0&&voucher.Deducting>0}}">|</text>{{voucher.ValidDays}}天内有效</text>
+                </view> 
+            <view style="color: rgb(251, 220, 163); padding-top: 40rpx;font-size: 28rpx;text-decoration: underline" bindtap="tomyVoucher">
+                查看代金券
+            </view>
+        </view>
+    </view>

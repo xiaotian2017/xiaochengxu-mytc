@@ -1,0 +1,38 @@
+@import "../../public/template.wxss";
+
+page {
+  height: 100%;
+  width: 100%;
+}
+
+.textareView {
+  box-sizing: border-box;
+  padding: 10rpx;
+  width: 100%;
+  height:280rpx;
+  background: #fff
+}
+
+.reportTextarea {
+  width: 100%;
+  height: 100%;
+  font-size:28rpx;
+  color: #333;
+  font-size: 14px;
+  font-family: "微软雅黑";
+}
+
+.commitBtn {
+  height: 40px;
+  background: #fe3d49;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 20px;
+  width: 90%;
+  margin: 0px auto;
+  margin-top: 15px;
+}

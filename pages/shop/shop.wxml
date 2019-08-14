@@ -1,0 +1,53 @@
+<import src="../../public/floatbtntpl.wxml" />
+<view class="container" style="padding-bottom:20px;">
+    <!--顶部-->
+    <view class="pc_top_bg_01">
+        <view class="d-flex d-flex-center infor">
+            <!--头像-->
+            <view class='userimg'>
+                <image src="{{HeadImg}}"></image>
+            </view>
+            <!--名字 id-->
+            <view class="flex name_tuijian">
+                <view class="name clamp1">{{UserNickName}}</view>
+                <view class="tuijian clamp1">ID：{{UserId}}</view>
+            </view>
+        </view>
+    </view>    
+        <view hidden='{{1==buyversion}}' style='padding:5px 0;line-height:1.5;background:#fff;text-align:center;border-bottom:1rpx solid #f0f0f0'>电脑端管理地址：http://ic.vzan.com/cm/login/{{cityid}}</view>
+    <!--正常运营店铺-->
+    <view class="bg-f mt-1" style='padding-bottom:50px'>
+    <view class="d-flex business_detail_nav">
+      <button class="flex {{watchstate==1? 'active':''}}" hover-class="none"  data-type='1' bindtap='chooseType'>正常运营</button>
+      <button class="flex {{watchstate==-9? 'active':''}}" hover-class="none" data-type='-9' bindtap='chooseType'>失效店铺 </button>
+    </view>
+        <view style="border-bottom:1rpx solid #f0f0f0;" wx:for="{{stores}}" wx:for-index="idx" wx:key='unique'>
+            <view class="d-flex d-flex-center shop-admin-cell" data-id='{{item.Id}}' bindtap='shop_admin'>
+                <view class="head">
+                    <image src="{{''!=item.LogoUrl?item.LogoUrl:'https://oss.vzan.cc/image/jpg/2016/12/2/154847faf8bfa75fd445f2b990702f09abf3aa.jpg'}}"></image>
+                </view>
+                <view class="flex content">
+                    <view class="title clamp1"  >{{item.SName}}</view>
+                    <view wx:if="{{''!=item.InExpireTime}}" class="f01"> {{item.InExpireTime}}到期</view>
+                    <view class="f01">{{item.IsStoreAdmin==1?'店主':'店员'}}</view>
+                    <!-- <view class="f01">店铺交易手续费<label style='color:#ff5a00'>{{item.CityRate}}%</label>
+                    </view> -->
+                      <view class="d-flex d-flex-center shop-admin_invalid-cell" wx:if='{{item.Status!=1}}'>
+                           <view class="flex f01" >
+                              <icon class="iconfont icon-iconmoban" color='#f20202'></icon>
+                              <label wx:if='{{item.Status==-4}}'>未付款</label>
+                              <label wx:elif='{{item.Status==0}}'>审核中</label>
+                              <label wx:elif='{{item.Status==-3}}'>到期关闭</label>
+                            
+                            </view>
+                            <view catchtap='continupay'  data-storeid='{{item.Id}}' wx-if='{{item.Status==-4||item.Status==-3}}'> <button class="xifei_bt">续费</button></view>
+                     </view>
+                 
+                </view>
+            </view>
+        </view>    
+          
+
+    </view>
+</view> 
+<template is="bottom_nav" data="{{buyversion:buyversion,currenttab:currenttab}}"></template>

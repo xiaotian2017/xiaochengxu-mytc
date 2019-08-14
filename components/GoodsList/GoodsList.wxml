@@ -1,0 +1,63 @@
+<scroll-view class="content" scroll-y="true" enable-back-to-top="true" scroll-with-animation="true" bindscrolltolower="loadData"  lower-threshold	="30 " bindscroll="scroll" scrollTop="{{scrollTop[currentNav]}}">
+    <!-- 列表页 -->
+    <view class="goods-column" wx:if="{{viewType == 'column'}}">
+        <block wx:for="{{goodsList}}"  wx:key="unique">
+            <view class="goods-column-item" bindtap="goToGoodsDetail" data-sid="{{item.StoreId}}" data-gid="{{item.Id}}">
+                <view class="goods-cover">
+                    <image src="{{item.ImgUrl}}" lazy-load="true"></image>
+                    <view class="goods-discount" wx:if="{{item.discount > 0}}">{{item.discount}}折</view>
+                    <view  wx:if="{{item.Voucher}}" class="re-coupons">返{{item.Voucher.VoucherMoney}}元代金券</view>
+                </view>
+                <view class="goods-info flex flex-col">
+                    <view class="goods-title clamp2">{{item.GoodsName}}</view>
+                    <view class="flex flex-center flex-between">
+                        <view class="goods-price">{{item.Price *1000/100000}}</view>
+                        <view class="btn">去购买</view>
+                    </view>
+                </view>
+            </view>        
+        </block>
+    </view>
+    <!-- 列表页 -->
+    <view class="goods-list" wx:if="{{viewType == 'list'}}">
+        <block wx:for="{{goodsList}}"  wx:key="unique">
+            <view class="goods-list-item flex" bindtap="goToGoodsDetail" data-gid="{{item.Id}}">
+                <view class="goods-cover">
+                    <image src="{{item.ImgUrl}}" lazy-load="true"></image>
+                    <view class="goods-discount" wx:if="{{item.discount > 0}}">{{item.discount}}折</view>
+                </view>
+                <view class="goods-content flex flex-col flex-1">
+                    <view class="goods-title clamp1">{{item.GoodsName}}</view>
+                    <view class="goods-info">
+                        <view class="flex flex-end">
+                            <view class="goods-price">{{item.Price * 1000/100000}}</view>
+                            <view class="goods-origin-price">{{item.OriginalPrice * 1000/100000}}</view>
+                        </view>
+                        <view class="flex flex-center goods-store">
+                            <view class="store-name clamp1" catchtap="goToStore" data-storeId="{{item.StoreId}}">{{item.StoreName}}</view>
+                            <image class="icon-arrow" src="http://j.vzan.cc/content/city/xcx/images/arrow-right.svg" />
+                        </view>
+                    </view>
+                </view>
+            </view>
+       </block>
+    </view>
+    <!-- 正在加载 -->
+    <view class="isLoading" hidden="{{isLoading}}">
+        <image src="http://j.vzan.cc/content/city/xcx/images/loading.svg?v=1.2"></image>
+    </view>
+    <!-- 全部加载完 -->
+    <view class="loading-all" hidden="{{loadingAll}}">
+        更多商品即将上架,敬请期待
+    </view>
+    <!-- 获取超时 -->
+    <view class="loading-time-out" hidden="{{loadingTimeOut}}">
+        请求超时,下拉刷新试试
+    </view>
+    <!-- 加载出错 -->
+    <view class="loading-error" hidden="{{loadingError}}">
+        获取热卖商品列表页出错
+    </view>
+</scroll-view>
+<!--返回顶部-->
+<city-backTop show="{{showBackTop[currentNav]}}" bindtap="backTop"></city-backTop>

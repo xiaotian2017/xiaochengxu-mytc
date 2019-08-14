@@ -1,0 +1,262 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<import src='/template/companyInfo.wxml' />
+<import src='/template/recommend.wxml' />
+<import src='/template/ranking.wxml' />
+<import src='/template/activeFriends.wxml' />
+<import src="../../public/floatbtntpl.wxml" />
+<view hidden='{{loadall==0?true:false}}'>
+    <!--关注栏-->
+    <view class='basewrap d-flex flex-center kanjia_focus_cell' style='background: #000;'>
+        <view class='flex number activeAccount d-flex'>
+            <view class='activeAccountItem'>{{mainmodel.viewcount}}人查看</view>
+            <view class='activeAccountItem'>{{mainmodel.sharecount}}人分享</view>
+            <view class='activeAccountItem'>{{mainmodel.joincount}}人参与</view>
+        </view>
+        <!-- <view class='bt' catchtap='follow'>{{hasFollow==1?'已关注':'关注'}}</view> -->
+    </view>
+    <!--商品图-->
+    <view class='pintuan_commodity'>
+        <image mode='widthFix' src='{{mainmodel.introduceimg}}'></image>
+        <view class='d-flex flex-center time' style='padding: 5px 10px;background: rgba(0, 0, 0, 0.8);'>
+            <view>{{countdown}}</view>
+            <view wx:if='{{null!=countTimer}}'>
+                <em>{{countTimer.d}}</em>天
+                <em>{{countTimer.h}}</em>时
+                <em>{{countTimer.m}}</em>分
+                <em>{{countTimer.s}}</em>秒
+            </view>
+        </view>
+    </view>
+    <!--商品信息-->
+    <view class='jizan_commodity_infor'>
+        <view class='name'>{{mainmodel.bname}}</view>
+        <view class='vz-flex flex-between flex-center'>
+            <view style="font-size: 24rpx;text-decoration: line-through" class="c666">原价￥{{mainmodel.originalprice*1000/100000}}</view>
+            <view class="re-coupon-label" wx:if="{{voucher}}">返{{voucher.VoucherMoney}}元代金券</view>
+        </view>
+        <view class='d-flex price flex-between'>
+            <view>
+                <text>底价</text>
+                <text class='i_price01'>￥{{mainmodel.floorprice*1000/100000}}</text>
+                <text wx:if="{{mainmodel.MemberPriceState&&mainmodel.MemberPrice>0}}"  class="member-price">会员再优惠{{mainmodel.MemberPrice*1000/100000}}</text>
+            </view>     
+            <view class='sheng'>仅剩{{mainmodel.remainnum}}件</view>
+        </view>
+        <view class='date'>兑换有效期：{{mainmodel.receivestart}} - {{mainmodel.receiveend}}</view>
+
+        <!-- 邀请统计-->
+        <view class='invite_account' hidden='{{mainmodel.buserstate==1?true:false}}'>
+            <view class='d-flex flex-between'>
+                <view class='currentPrice d-flex flex-col flex-col-end'>
+                    <text class='num'>￥{{mainmodel.currentprice*1000/100000}}</text>
+                    <text class='tagName'>当前价格</text>
+                </view>
+                <view class='avatarContent d-flex flex-center flex-col'>
+                    <image class='avatar' src='{{mainmodel.userheadimg}}'></image>
+                    <text class='userName clamp1'>{{mainmodel.usernick}}</text>
+                </view>
+                <view class='currentSupport d-flex flex-col flex-col-end'>
+                    <text class='num'>{{mainmodel.surpportcount}}人</text>
+                    <text class='tagName'>支持人数</text>
+                </view>
+            </view>
+            <!-- 开始砍价 -->
+            <button class='startCut' wx:if='{{mainmodel.isend}}' bindtap='gotomore'>
+                活动已抢光或结束，查看其他活动
+            </button>
+            <button class='startCut' bindtap='gotouse' data-bid='{{mainmodel.bid}}' data-buid='{{buid}}' wx:elif='{{mainmodel.buserstate==1&&mainmodel.isself}}'>
+                已购买，去使用
+            </button>
+            <button class='startCut' bindtap='gotomore' wx:elif='{{mainmodel.buserstate==2&&mainmodel.isself}}'>
+                已参与，查看其它活动
+            </button>
+            <button class='startCut' data-bid='{{mainmodel.bid}}' bindtap='gotoplay' wx:elif='{{mainmodel.buserstate>0&&!mainmodel.isself}}'>
+                TA已成交，我要报名
+            </button>
+            <button class='startCut' data-bid='{{mainmodel.bid}}' bindtap='gotoplay' wx:elif='{{mainmodel.buserstate<=0&&!mainmodel.isself&&mainmodel.iscut}}'>
+                已帮减，我要报名
+            </button>
+            <button bindtap='selfcut' class='startCut' wx:if='{{mainmodel.buserstate<=0&&!mainmodel.isself&&!mainmodel.iscut}}'>
+                帮TA减价
+            </button>
+            <button class='startCut' data-bid='{{mainmodel.bid}}' bindtap='gotoplay' wx:if='{{mainmodel.buserstate<=0&&!mainmodel.isself&&!mainmodel.iscut}}'>
+                我要报名
+            </button>
+            <button wx:if='{{mainmodel.isself&&0==mainmodel.buserstate&&!mainmodel.isend}}' style="border-radius:8rpx;border:0" class='inviteFriends'
+                open-type="share">请好友减价</button>
+            <view wx:if='{{mainmodel.isself&&0==mainmodel.buserstate&&!mainmodel.isend}}' class='d-flex flex-between' style='width: 92.96%;margin:0 auto'>
+                <button class='buyThisPrice' bindtap='openpaywin' style="border:0;color:#fff;border-radius:8rpx">以当前价格购买</button>
+                <button class='cutMyself' bindtap='selfcut' style="border:0;color:#fff;border-radius:8rpx;">自己减价</button>
+            </view>
+        </view>
+    </view>
+    <!--减价好友-->
+    <template is="activeFriends" data="{{userName:mainmodel.usernick,buid:buid,helpers:helpers,type:0}}"></template>
+    <!--公司信息-->
+    <template is="companyInfo" data="{{shop:companyInfo}}"></template>
+
+    <!--活动信息-->
+    <view class='mt-1 activeScrollItem activeInfoItem' id='tabItem1' data-id="110">
+        <view class='pintuan_commodity_title'>
+            <view class='shu'></view>
+            <view class='name'>
+                <view class='clamp1'>活动信息</view>
+            </view>
+        </view>
+        <view class='pintuan_commodity_miaoshu'>
+            <view class='word'>
+                <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+            </view>
+            <image wx:for='{{mainmodel.listdetailimg}}' wx:key='{{item}}' mode='widthFix' src='{{item}}'></image>
+        </view>
+    </view>
+    <!--减价说明-->
+    <view class='mt-1 activeScrollItem' id='tabItem2'>
+        <view class='pintuan_commodity_title'>
+            <view class='shu'></view>
+            <view class='name'>
+                <view class='clamp1'>减价说明</view>
+            </view>
+        </view>
+        <view class='pintuan_commodity_miaoshu'>
+            <image mode='widthFix' src='http://j.vzan.cc/content/city/xcx/images/cutPrice.png' style='margin-bottom:20rpx;'></image>
+            <view class='jizan_shuoming_f'>
+                <text>1.点击顶上“我也参加”按钮参加活动。</text>
+                <text>2.报名者自己每隔一段时间可以点击“自己减价”随机减少价格。</text>
+                <text>3.奖品份数有限，不一定非要减到低价，减到您觉得划算就赶紧付款抢下哦。</text>
+                <text>4.付款后奖品分数自动减少，领完则无法继续报名和减价，请速度哦。</text>
+                <text>5.减价成功并在线支付后，即可前往活动店铺进行消费，详情请看领取信息和商家信息。</text>
+            </view>
+        </view>
+    </view>
+    <!--减价排行-->
+    <template is="ranking" data="{{ranking:ranks,showbottomtip:showbottomtip,showallbottomtip:showallbottomtip}}"></template>
+    <city-navigator>
+        <view slot="slot1" class="navigatorItem navigatorItem-poster" bindtap="createposter">海报</view>
+        <view slot="slot2" class="navigatorItem navigatorItem-activity" bindtap="goToActivity">更多活动</view>
+        <view slot="slot3" class="navigatorItem navigatorItem-order" bindtap="goToMyCutPrice">我的</view>
+        <view slot="slot4" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+    </city-navigator>
+
+    <!--弹框填写电话号码-->
+    <view class='fix-tl-100' hidden='{{takeform==0?true:false}}'>
+        <view class='black_mask' bindtap='close_tk'></view>
+        <view class='dialog_tk tel'>
+            <view class='f01'>所有信息均不会公开，仅用于兑换商品</view>
+            <view class='shuru_all'>
+                <view class='title'>手机号</view>
+                <view class='flex shuru'>
+                    <input type='text' value='{{Phone}}' bindinput='inputphone'></input>
+                </view>
+            </view>
+            <view class='shuru_all'>
+                <view class='title'>姓名</view>
+                <view class='flex shuru'>
+                    <input type='text' value='{{UserName}}' bindinput="inputusername"></input>
+                </view>
+            </view>
+            <view class='que_ding_all'>
+                <button class='que_ding_bt' hover-class='none' bindtap='addparticipant'>确定</button>
+            </view>
+            <view class='iconfont icon-guanbi' bindtap='closeformwin'></view>
+        </view>
+    </view>
+
+    <!--支付弹框-->
+    <view class='fix-tl-100' hidden='{{showpaywin==1?false:true}}'>
+        <view class='black_mask'></view>
+        <view class='dialog_tk tel'>
+            <view class='d-flex flex-center' style='text-align: left;'>
+                <view class='head'>
+                    <image style="width:100%;height:100%" src='{{companyInfo.companyAvatar}}'></image>
+                </view>
+                <view class='flex'>
+                    <view class='clamp2' style='font-size:32rpx;margin-bottom:50rpx;'>{{mainmodel.bname}}</view>
+                    <view wx:if="{{memberuser}}" style='font-size:36rpx;color: #ff5a00;'>￥{{(mainmodel.currentprice-(mainmodel.MemberPriceState&&mainmodel.MemberPrice>0?mainmodel.MemberPrice:0) -voucherMoney)*1000/100000}}</view>
+                    <view wx:else style='font-size:36rpx;color: #ff5a00;'>￥{{(mainmodel.currentprice-voucherMoney)*1000/100000}}</view>
+                </view>
+            </view>
+            <view wx:if="{{listvoucher.length>0}}" style="font-size: 24rpx" class="voucher-box vz-flex flex-between" bindtap="showVoucher">
+                <view wx:if="{{voucherMoney==0}}">选择可用代金券</view>
+                <view wx:else>减<text style="color:#ff5a00">{{voucherMoney*10000 / 1000000}}</text>元</view>
+                <icon class="iconfont icon-jiantou"></icon>
+            </view>
+            <view style='font-size: 32rpx;padding: 20rpx 0;text-align: left;margin-top: 20rpx;border-top:1rpx solid #f0f0f0'>使用有效期效：{{mainmodel.receivestart}} -{{mainmodel.receiveend}}</view>
+            <view class='que_ding_all' style='margin-top:10rpx;'>
+                <button class='que_ding_bt orange' hover-class='none' bindtap='clickToBalance'>确定</button>
+            </view>
+            <view class='iconfont icon-guanbi' bindtap='closepaywin'></view>
+        </view>
+    </view>
+
+    <view class="fix-tl-100" hidden='{{cutsuccesstip==1?false:true}}'>
+        <view class="black_mask"></view>
+        <view class="dialog_tk jianjia">
+            <image class="pic01" src="http://j.vzan.cc/content/city/xcx/images/Entertainment_19.png" mode="widthFix"></image>
+            <view class="f01" hidden='{{ismycut==1}}'>Niubility！你成功帮
+                <text style='color:#ff5a00'>{{mainmodel.usernick}}</text>减掉了
+                <text style='color:#ff5a00'>￥{{cutprice}}</text>
+            </view>
+            <view class="f01" hidden='{{ismycut==0}}'>Niubility！你成功为自己
+                <text style='color:#ff5a00'>{{mainmodel.usernick}}</text>减掉了
+                <text style='color:#ff5a00'>￥{{cutprice}}</text>
+            </view>
+            <image class="pic02" src="http://j.vzan.cc/content/city/xcx/images/Entertainment_20.jpg" mode="widthFix"></image>
+            <button class="bt01" data-bid="{{mainmodel.bid}}" bindtap='gotoplay'>我也要玩</button>
+            <view class='iconfont icon-guanbi' bindtap='closecutsucesstip'></view>
+        </view>
+    </view>
+    <!--二维码弹层-->
+    <view hidden='{{showcitytelwin==0?true:false}}'>
+        <view class="black_mask" bindtap='closecitytelwin'></view>
+        <view class="erweima_tk">
+            <view class='pic01'>
+                <image src='{{cityqrcode}}'></image>
+            </view>
+            <view class='f01'>截图扫码联系客服</view>
+            <view data-phone='{{cityphone}}' hidden='{{(cityphone==""||cityphone==mull)?true:false}}' catchtap='callphone' class='f01'>(点击拨打)联系商家：{{cityphone}}</view>
+            <icon class='iconfont icon-guanbi' bindtap='closecitytelwin'></icon>
+        </view>
+    </view>
+    <!-- 我也要制作 -->
+    <view class="fix-bl" style="z-index:500" bindtap='opencitytelwin'>
+        <view class="kanjia_make_cell d-flex flex-center">
+            <view class="f01">我也要制作 发布减价活动</view>
+            <text style='color:#ff6600;margin-left:10rpx;' bindtap=''>{{cityname}}</text>
+        </view>
+    </view>
+</view>
+<share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+
+<view class="mask" style="z-index: 9999;" wx:if="{{hasVoucher}}">
+        <view class="re-coupon-body">
+            <view class="re-coupon-body-title">
+                选择代金券
+                <icon class="iconfont icon-cha" bindtap="hideVoucher"></icon>
+            </view>
+            <scroll-view class="re-coupon-body-scroll" scroll-y style="height: 400rpx">
+                <view class="re-coupon-item-wrap">
+                    <block wx:for="{{listvoucher}}" wx:key="{{index}}">
+                        <view class="re-coupon-item vz-flex vz-flex-center flex-between" data-idx="{{index}}" bindtap="chooseVoucher">
+                            <view class="re-coupon-price">
+                                <text>￥</text>
+                                <text>{{item.Money}}</text>
+                            </view>
+                            <view class="re-coupon-right">
+                                <view wx:if="{{item.Voucher.Deducting>0}}">满{{item.Voucher.Deducting}}元可用</view>
+                                <view wx:else>无门槛</view>
+                                <view class="c666">
+                                    <view style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">
+                                        <icon class="iconfont icon-city-store" style="margin-right:20rpx"></icon>
+                                        <text>{{companyInfo.companyName}}</text>
+                                    </view>
+                                    <view class="voucher-date" wx:if="{{item.StartDateStr!=''&&item.EndDateStr!=''}}">{{item.StartDateStr}} - {{item.EndDateStr}}</view>
+                                </view>
+                            </view>
+                            <view class="re-coupon-enddays" wx:if="{{item.enddays>0}}">{{item.enddays}}天后过期</view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>

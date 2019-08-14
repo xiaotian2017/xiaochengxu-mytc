@@ -1,0 +1,3 @@
+<view>
+    <image wx:if="{{audioSrc}}" bindtap="audioStateChange" src="https://j.vzan.cc/content/city/lunaryear/img/music.png" class="audio-icon  {{!isPlay?'audio-animate':''}}"></image>
+</view>

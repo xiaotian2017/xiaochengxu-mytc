@@ -1,0 +1,9 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "会员商家",
+    "usingComponents": { 
+        "city-tips":"/components/Tips/Tips"   
+    }  
+}

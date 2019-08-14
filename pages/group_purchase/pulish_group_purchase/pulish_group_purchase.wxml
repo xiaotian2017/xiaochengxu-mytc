@@ -1,0 +1,165 @@
+<import src="../../../public/shoptemplate.wxml" />
+<view id="wrapper" data-index="id">
+    <!-- 拼团说明 -->
+    <view class="group-explanation d-flex flex-between" catchtap="goExplanation">
+        <view class="explanationText">拼团说明，商家必读</view>
+        <i class="iconfont icon-jiantou"></i>
+    </view>
+    <!--上传主轮播图-->
+    <view class="shop-ruzhu-pic-ul" style="position:relative;margin-bottom:20rpx;padding:20rpx 0">
+        <template is="item_image_shop" data="{{config:uploadimgobjects['sliderShow'].config,which:'sliderShow',itemid:groupId}}"></template>
+        <view class="upTips c999" hidden="{{uploadimgobjects['sliderShow'].config.imageList != 0}}">上传拼团轮播图16:9，其它比例可能被裁剪</view>
+    </view>
+    <!-- 输入 -->
+    <view class="inputArea">
+        <block wx:for="{{groupInput}}">
+            <view class="d-flex flex-center inputItem">
+                <view class="tagName">
+                    {{item.tagName}}
+                </view>：
+                <input type="{{item.type}}" placeholder="{{item.tips}}" class="flex" placeholder-calss="inputCla" bindblur="getValue" data-index="{{index}}"
+                    value="{{inputVal['val'+index]}}"></input>
+                <view class="c333" hidden="{{index<1||index>4}}">元</view>
+            </view>
+        </block>
+    </view>
+    <!-- 时间选择器 -->
+    <view class="pickerTimeArea">
+        <block wx:for="{{pickerTime}}" wx:key="{{index}}">
+            <view class="pickerItem d-flex" wx:if="{{index<pickerTime.length-2}}">
+                <view class="tagName">
+                    {{item.pickerName}}
+                </view>
+                <picker mode="multiSelector" bindchange="timesChange" bindcolumnchange="timesColumnChange" range="{{timesMultiArr[index]}}"
+                    value="{{multiIndex[index]}}" data-num="{{index}}" style="margin-left:auto">
+                    <view class="c999">
+                        {{pickeTime[index] != ''?pickeTime[index]:"请选择时间"}}
+                    </view>
+                </picker>
+                <i class="iconfont icon-jiantou"></i>
+            </view>
+        </block>
+    </view>
+    <!--商品描述  -->
+    <view class='descriptionArea' style="margin-bottom:20rpx">
+        <view class="d-flex flex-center tagName">
+            团购描述
+        </view>
+        <textarea auto-height="true" value='{{description}}' placeholder='请输入优惠使用条件，优惠商品范围等 ' placeholder-style="color:#999" bindinput="getDescription"
+            maxlength="-1" />
+        <!-- 上传图片 -->
+        <view class="shop-ruzhu-pic-ul">
+            <template is="item_image_shop" data="{{config:uploadimgobjects['goodsDecri'].config,which:'goodsDecri',itemid:groupId}}"></template>
+        </view>
+    </view>
+<view>
+         <view class="distribution-wrap">
+            <view class="vz-flex vz-flex-center flex-between voucher-item">
+                <view>
+                    人人分销          
+                </view>
+                <switch bindchange="distributionToggle" checked="{{isShowDistribution}}" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center flex-between" wx:if="{{isShowDistribution}}">
+                    <view class="voucher-item-left">分成比例
+                        <text class="required">*</text>
+                    </view>
+                    <view class="vz-flex flex-center">
+                    <input type="number" placeholder="0" maxlength="3" value="{{distribution}}" style="text-align:right" bindinput="getDistribution" />
+                    <text>%</text>
+                   </view>
+            </view>
+    </view>
+  </view>
+    <!-- 购买返券 -->
+    <view class="voucher-wrapper" wx:if="{{!gid}}">
+        <view class="vz-flex vz-flex-center flex-between voucher-item ">
+            <view>
+                返现代金券
+                <text class="instructions">（刺激二次消费）</text>
+            </view>
+            <switch bindchange="voucherToggle" />
+        </view>
+        <view hidden="{{!isVoucher}}">
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">券的面额
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherPrice}}" bindinput="getVoucherPrice" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">发放数量
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherNum}}" bindinput="getVoucherNum" />
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">
+                    使用范围
+                </view>
+                <view class="vz-flex vz-flex-center voucher-use-scope">
+                    <view class="{{voucherScopeIdx==1?'active':''}}" data-idx="1" bindtap="changeVoucherScope">无门槛</view>
+                    <view class="{{voucherScopeIdx==2?'active':''}}" data-idx="2" bindtap="changeVoucherScope">满 减</view>
+                </view>
+            </view>
+            <view wx:if="{{voucherScopeIdx==2}}" class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">
+                    满减金额
+                </view>
+                <input type="number" maxlength="2" placeholder="0" value="{{fullSubtraction}}" bindinput="getFullSubtraction" />
+            </view>
+            <view class="pickerTimeArea" style="margin-top:0">
+                <block wx:for="{{pickerTime}}" wx:key="{{index}}">
+                    <view class="voucher-item d-flex" wx:if="{{index>=pickerTime.length-2}}" style="line-height: 100rpx">
+                        <view class="tagName">
+                            {{item.pickerName}}
+                        </view>
+                        <picker mode="multiSelector" bindchange="timesChange" bindcolumnchange="timesColumnChange" range="{{timesMultiArr[index]}}"
+                            value="{{multiIndex[index]}}" data-num="{{index}}" style="margin-left:auto">
+                            <view class="c999">
+                                    {{pickeTime[index]}}    
+                            </view> 
+                        </picker>
+                        <i class="iconfont icon-jiantou"></i>
+                    </view>
+                </block>
+            </view>
+            <view class="voucher-item vz-flex vz-flex-center">
+                <view class="voucher-item-left">领取有效天数
+                    <text class="required">*</text>
+                </view>
+                <input type="number" placeholder="0" maxlength="5" value="{{voucherValidDay}}" bindinput="getValidDay" />
+            </view>
+        </view>
+    </view>
+
+    <!-- 限购-->
+    <view class="d-flex limit">
+        <view class="tagName">每个用户限购</view>
+        <picker style="margin-left:auto" mode="selector" bindchange="chooseLimit" range="{{limitArr}}" value="limitIndex">
+            <view>{{limitArr[limitIndex]}}</view>
+        </picker>
+        <i class="iconfont icon-jiantou"></i>
+    </view>
+    <!-- 是否需要电话 -->
+    <view class="d-flex flex-center checkPhone">
+        <view class="tagName">填写电话</view>
+        <radio-group bindchange="radioChange">
+            <lable>
+                <radio checked="{{validPhone}}"></radio>需要
+            </lable>
+            <lable>
+                <radio checked="{{!validPhone}}"></radio>不需要
+            </lable>
+        </radio-group>
+    </view>
+    <!-- tips -->
+    <view class="d-flex tips">
+        <view style="color:#999">说明</view>
+        <view class="flex phase">
+            <view>1.拼团需要同城管理员审核后才可显示。</view>
+            <view>2.拼团无法退款。</view>
+        </view>
+    </view>
+</view>
+<view class="publish-btn" catchtap="submit">发布拼团</view>

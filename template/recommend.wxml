@@ -1,0 +1,19 @@
+<template name="recommend">
+    <view class='mt-1'>
+        <view class='pintuan_commodity_title'>
+            <view class='shu'></view>
+            <view class='title flex'>为你推荐</view>
+            <navigator class='more01 c666' hover-class='none'>更多
+                <view class='iconfont icon-jiantou' style='display:inline-block;'></view>
+            </navigator>
+        </view>
+        <scroll-view class='scroll_tuijian' scroll-x='true'>
+            <block wx:for="{{recommend}}">
+                <view class='li' data-id="{{item.id}}" bindtap='viewDetailGoods'>
+                    <image src='{{item.url}}'></image>
+                    <text>{{item.price}}</text>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</template>

@@ -1,0 +1,43 @@
+<!-- <import src="../../public/shoptemplate.wxml" /> -->
+
+<view class="vz-flex flex-center flex-between album-info">
+    <view class="vz-flex flex-center">
+        <view>相册名称</view>
+        <input class="album-input" type="text" maxlength="5" bindinput="getAlbumName" value="{{albumName}}" bindconfirm="editAlbumName" focus="{{!isAblumNameDisabled}}"
+            disabled="{{isAblumNameDisabled}}" />
+    </view>
+    <view bindtap="editAlbumName" style="white-space: nowrap" class="album-name-edit" wx:if="{{isOwner}}">
+        {{isAblumNameDisabled?'编辑':'保存'}}
+    </view>
+</view>
+
+<view class="album-photo-wrap vz-flex flex-between flex-wrap">
+    <block wx:for="{{albumPhotoList}}" wx:key="{{index}}">
+        <view style="position:relative;width:48.4%" catchtap="previewAlbumPhoto" data-url="{{item.filepath}}">
+                <radio class="album-radio" style="padding:20rpx;" wx:if="{{isShowDelBtn}}" data-idx="{{index}}" checked="{{m.findIdx(index, radioIdx)}}" catchtap="getRadioIdx"></radio>
+            <image class="album-photo" src="{{item.filepath}}" data-id="{{item.id}}"></image>
+         
+        </view>
+    </block>
+</view>
+
+<view class="del-album-btn" bindtap="delAlbumPhoto" wx:if="{{isOwner}}">删除</view>
+
+<view class="add-btn-wrap" bindtap="chooseImage" wx:if="{{isOwner}}">
+    上传图片
+</view>
+
+<view class="add-btn-wrap vz-flex flex flex-center" wx:if="{{isShowDelBtn}}">
+    <view class="flex del-btn" bindtap="cancelDelAlbumPhoto">取消</view>
+    <view class="flex add-album-btn" bindtap="confirmDelAlbumPhoto">确认删除</view>
+</view>
+
+<!-- 提示弹层 -->
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+
+<wxs module="m">
+        function findIdx (idx, param) {
+            return (param.indexOf(idx)>-1)   
+        }    
+        module.exports.findIdx = findIdx;
+</wxs>

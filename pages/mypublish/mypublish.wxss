@@ -1,0 +1,114 @@
+/* 2019/7/9 */
+.tab-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  border-top: 1rpx solid #f0f0f0;
+  background: #fff;
+  z-index: 100;
+}
+
+.tab-active {
+  position: relative;
+  font-weight: bold;
+  color: #FF5A00;
+}
+
+.tab-active::after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56rpx;
+  height: 8rpx;
+  transform: translateX(-50%);
+  background: #FF5A00;
+}
+
+/* list */
+.list-wrap {
+  box-sizing: border-box;
+  margin-top: 108rpx;
+}
+
+.itemList {
+  width: 100%;
+  height: 312rpx;
+  padding: 30rpx 30rpx 0 30rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.listTop {
+  width: 100%;
+  height: 211rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.listType {
+  color: #666;
+  margin-top: 40rpx;
+}
+
+.listStatus {
+  font-size: 28rpx;
+  color: #999;
+  margin: 30rpx 0;
+}
+
+.listBottom {
+  width: 100%;
+  height: 70rpx;
+}
+
+.more {
+  position: relative;
+  flex: 0 0 120rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.moreBtn {
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: absolute;
+  right: -46rpx;
+  bottom: -108rpx;
+  width: 115rpx;
+  height: 111rpx;
+  font-size: 28rpx;
+  color: #666;
+  background: #fff;
+  box-shadow: 0 0 10rpx 0 rgba(204, 204, 204, 0.5);
+}
+
+.btn {
+  padding: 8rpx 12rpx;
+  font-size: 26rpx;
+  color: #FF5A00;
+  border-radius: 8rpx;
+  border: 1rpx solid #FF5A00;
+  margin-left: 20rpx;
+}

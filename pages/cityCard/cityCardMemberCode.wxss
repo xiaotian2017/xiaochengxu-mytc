@@ -1,0 +1,88 @@
+view {
+    box-sizing: border-box;
+}
+
+.code-input {
+    width: 670rpx;
+    height: 98rpx;
+    font-size: 32rpx;
+    border: 1px solid #ccc;
+    margin: 0 auto 360rpx;
+    padding-left: 30rpx;
+    box-sizing: border-box;
+}
+
+.exchange-btn {
+    width: 540rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: linear-gradient(90deg, rgba(255, 84, 0, 1), rgba(250, 15, 103, 1));
+    border-radius: 40rpx;
+    margin: 0 auto;
+    font-size: 32rpx;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    opacity: .5;
+}
+
+.code-contanier {
+    height: 100vh;
+    background: #fff;
+    padding-top: 140rpx;
+}
+
+.exchange-btn-active {
+    opacity: 1;
+}
+
+.receive-success-bg {
+    width: 570rpx;
+    height: 640rpx;
+    position: absolute;
+    top: 0;
+    left: 0;   
+}
+
+.receive-text {
+    color: #D9AE6F;
+    font-size: 28rpx;
+    position: absolute;
+    width: 100%;
+    z-index: 200;
+    text-align: center;
+    bottom: 180rpx;    
+}
+
+.back-btn {
+    width: 400rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    background: rgba(248, 226, 107, 1);
+    border-radius: 44rpx;    
+    font-size: 32rpx;
+    text-align: center;   
+    position: absolute;
+    z-index: 200;
+    font-weight: 700;
+    bottom: 50rpx;   
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mask {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.mask-main {
+    width: 570rpx;
+    height: 640rpx;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+}

@@ -1,0 +1,31 @@
+    <!--爱心价排行榜-->
+  <template name="loveranking">
+    <view class='mt-1 activeScrollItem' id='tabItem3' style='padding-bottom:60px'>
+        <view class='pintuan_commodity_title'>
+            <view class='shu'></view>
+            <view class='name'>
+                <view class='clamp1'>爱心价排行榜</view>
+            </view>
+        </view>
+        <view class='kanjia-ranking'>
+            <view class='headTitle d-flex'>
+                <text>排名</text>
+                <text class='flex' style='text-align:center'>用户</text>
+                <text style='width:110rpx;text-align:center'>爱心</text>
+            </view>
+            <block wx:for="{{ranking}}">
+                 <view class='ranking-item d-flex flex-center'>
+                    <image class='xunzhang_size' src='http://j.vzan.cc/content/city/xcx/images/Entertainment_1{{index+1}}.png' wx:if="{{index <= 2}}"></image>
+                    <text wx:else style='width:64rpx;text-align:center'>{{index+1}}</text>
+                    <view class='flex d-flex flex-center'>
+                        <image src='{{item.userImg}}' class='head'></image>
+                        <text class='userName'>{{item.userName}}</text>
+                    </view>
+                    <text class='endPrice'>{{item.likeNum}}</text>
+                </view>
+            </block>
+        </view>
+        <view style="width:100%;text-align:center;margin-bottom:30rpx;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showbottomtip==true?'':'none'}}">— — 我是有底线的 — —</view>
+        <view style="width:100%;text-align:center;margin-bottom:30rpx;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;display:{{showallbottomtip==true?'':'none'}}">— — 数据显示完了 — —</view>
+    </view>
+</template>  

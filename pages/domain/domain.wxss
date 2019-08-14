@@ -1,0 +1,79 @@
+@import "../../css/cell.wxss";
+@import "../../css/icon_position.wxss";
+.clear_btn {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  margin-left: 75px;
+  top: 0px;
+  right: 14px;
+}
+.images-image .image {
+  position: relative;
+  top: 0rpx;
+  left: 0rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.a-describe-cell {
+    padding: 10px 15px;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.a-describe-label {
+    display: block;
+    width: 80px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.a-describe-cell:after {
+    content: " ";
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.btnaddfile {
+    width: 70px;
+    height: 70px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+    overflow: hidden;
+    margin: 10px 10px 10px 0;
+}.a-describe-cells {
+    background-color: #fff;
+    line-height: 14px;
+    font-size: 15px;
+    overflow: hidden;
+    position: relative;
+    color: #333;
+}.a-describe-f {
+    height: 100px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}.Desdes {
+    width: 100%;
+    line-height: 40px;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    resize: none;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    box-sizing: border-box;
+}.ruzhu_cell .right.location{height: auto;line-height: 1.25;}
+.ruzhu_cell .right.location .address{line-height: 1.25;vertical-align: middle}

@@ -1,0 +1,33 @@
+var toFixed = function (num) {
+  return parseFloat(num).toFixed(2);
+}
+
+function getDateTime(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hh = date.getHours();
+  var mm = date.getMinutes();
+  var ss = date.getSeconds();
+
+  if (parseInt(hh) < 10) {
+    hh = "0" + hh;
+  }
+  if (parseInt(mm) < 10) {
+    mm = "0" + mm;
+  }
+  if (parseInt(ss) < 10) {
+    ss = "0" + ss;
+  }
+  return year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+}
+
+function convertJSONDateToJSDate(jsondate) {
+  var date = getDate(parseInt(jsondate.replace('/Date(', '').replace(')/', ''), 10));
+  return getDateTime(date);
+}
+
+module.exports = {
+  toFixed: toFixed,
+  convertJSONDateToJSDate: convertJSONDateToJSDate
+}

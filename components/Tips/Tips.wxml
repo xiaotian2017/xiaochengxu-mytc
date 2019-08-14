@@ -1,0 +1,5 @@
+<view class="tips {{animCla}}" hidden="{{!showTips}}">
+    <view class="tips-content">
+         {{content}}
+    </view>
+ </view>

@@ -1,0 +1,22 @@
+
+.withdraw .balance{font-size:60rpx;color: #ff5a00;text-align: center;padding: 80rpx 0;background: #fff}
+
+.withdraw .balance text{font-size: 28rpx;color: #333;text-align: center}
+
+.youhuiquan_detail_zhong {
+  background: #fff;
+  border-top: 1rpx solid #f0f0f0;
+  padding-bottom: 15px;
+}
+.youhuiquan_detail_zhong .cell {
+  padding: 15px 10px 0;
+  color: #666;
+  font-size: 14px;
+}
+.youhuiquan_detail_zhong .cell .f01 {
+  margin-right: 10px;
+  width: 60px;
+}
+.youhuiquan_detail_zhong .cell .f02 {
+  text-align: right;
+}

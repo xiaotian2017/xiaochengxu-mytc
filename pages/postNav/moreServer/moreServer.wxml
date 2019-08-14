@@ -1,0 +1,51 @@
+<view class="page">
+  <!-- 消息置顶 -->
+  <view class="cells" wx:if='{{payType!=200}}'>
+    <view class="cellsTitle vz-flex vz-flex-center">信息置顶</view>
+    <block wx:for='{{top}}' wx:key='item'>
+      <view class="cell vz-flex vz-flex-center flex-col-start" data-index='{{index}}' bindtap='topTag'>
+        <icon type="{{item.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+        <view>{{item.ExtendSpan/24}}{{item.ExtentName}}收费￥{{item.Price*100/10000}}</view>
+      </view>
+    </block>
+  </view>
+
+  <block wx:if='{{payType!=201}}'>
+    <!-- 信息展示天数 -->
+    <view class="cells" wx:if='{{single.State == 0}}'>
+      <view class="cellsTitle vz-flex vz-flex-center">信息展示天数<text
+          style="font-size: 24rpx;color:#999;margin-left: 30rpx;">天数过期后，信息将不再展示</text></view>
+      <block wx:for='{{time}}' wx:key='item'>
+        <view class="cell vz-flex vz-flex-center flex-col-start" data-index='{{index}}' bindtap='timeTag'>
+          <icon type="{{item.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+          <view>{{item.ExtendSpan/24}}{{item.ExtentName}}收费￥{{item.Price*100/10000}}</view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 消息发布 -->
+    <view class="cells" wx:else>
+      <view class="cellsTitle vz-flex vz-flex-center">信息发布</view>
+      <view class="cell vz-flex vz-flex-center flex-col-start" bindtap='singleTag' wx:if='{{single.Price}}'>
+        <icon type="{{single.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+        <view>￥{{single.Price*100/10000}}/一次收费，永久有效</view>
+      </view>
+      <view class="cell vz-flex vz-flex-center flex-col-start" bindtap='singleTag' wx:elif='{{isReNew}}'>
+        <icon type="{{single.select?'success':'circle'}}" size="24" color='#FF5A00'></icon>
+        <view>免费续期一次，信息永久展示</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- btn -->
+  <view class="btns">
+    <view class="infoTop vz-flex vz-flex-center flex-between" wx:if="{{!isIos&&showJifen}}">
+      <view>积分抵扣</view>
+      <view class="topStatus {{jifenBol?'openTop':'closeTop'}}" bindtap='jifenStatus'></view>
+    </view>
+    <view class="saveBtn vz-flex vz-flex-center flex-between">
+      <view class="showPrice vz-flex-1">需付款：<text>￥{{totalPrice*100/10000}}</text></view>
+      <view class="save vz-flex-1" catchtap='savePost'>发布</view>
+    </view>
+  </view>
+</view>

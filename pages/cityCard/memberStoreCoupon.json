@@ -1,0 +1,9 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "代金券",
+    "usingComponents": { 
+        "city-tips":"/components/Tips/Tips"   
+    }  
+}

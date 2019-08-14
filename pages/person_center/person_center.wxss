@@ -1,0 +1,228 @@
+@import "../../public/floatbtntpl.wxss";
+@import "../../css/cell.wxss";
+.small-tag {
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 100%;
+    background: #FF5A00;
+    text-align: center;
+    line-height: 36rpx !important;
+    position: absolute;
+    color: #fff;
+    font-size: 24rpx !important;
+    top:-18rpx;
+    right:16rpx;    
+}
+
+.poz {
+    position: relative;
+}
+
+.person-center-item {
+    padding-bottom: 140rpx;
+}
+
+.masked {
+    text-align: center;
+    background-image: -webkit-linear-gradient(left, #e81106, #E6D205 25%, #e81106 50%, #E6D205 75%, #e81106);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-background-size: 200% 100%;
+    -webkit-animation: masked-animation 4s infinite linear;
+}
+
+@-webkit-keyframes masked-animation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.person-center-container view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+
+.person-center-container text {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.person-center-bg-top {
+    height: 284rpx;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.person-center-avatar {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.person-center-info {
+    width: 690rpx;
+    height: 350rpx;
+    padding: 20rpx 30rpx;
+    background: linear-gradient(90deg, rgba(255, 145, 31, 1), rgba(238, 73, 14, 1));
+    box-shadow: 0px 12rpx 30rpx 0px rgba(223, 64, 5, 0.38);
+    border-radius: 20rpx;
+    position: absolute;
+    z-index: 10000;
+    top: 34rpx;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.user-name {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #fff;
+    max-width: 160rpx;
+    line-height: 1.3 !important;
+}
+
+.user-id {
+    font-size: 24rpx;
+    color: #fff;
+    padding-top: 12rpx;
+}
+
+.person-center-data-item {
+    text-align: center;
+    color: #fff;
+}
+
+.data-num {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.data-name {
+    font-size: 24rpx;
+    padding-top: 30rpx;
+}
+
+.person-center-sj-btn {
+    width: 280rpx;
+    height: 58rpx;
+    background: linear-gradient(90deg, rgba(255, 225, 86, 1), rgba(255, 208, 82, 1));
+    border-radius: 29rpx;
+    margin: 30rpx auto 0;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 58rpx !important;
+}
+
+.icon-left-arrow::before {
+    font-size: 24rpx !important;
+}
+
+.ad-banner {
+    width: 690rpx;
+    height: 108rpx;
+    line-height: 108rpx !important;
+    position: relative;
+    margin: 0 auto;
+    top: 140rpx;
+}
+
+.ad-img {
+    width: 690rpx;
+    height: 108rpx;
+    border-top-left-radius: 12rpx;
+    border-top-right-radius: 12rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.member-label {
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 100%;
+    margin: 0 30rpx 0 50rpx;
+}
+
+.ad-slogan {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 80rpx;
+}
+
+.right-open-btn {
+    width: 165rpx;
+    height: 44rpx;
+    line-height: 44rpx !important;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 22rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #FFB924;
+}
+
+.order-list {
+    position: relative;
+    top: 190rpx;
+    padding: 0 30rpx;
+}
+
+.line-1 {
+    width: 6rpx;
+    height: 26rpx;
+    background: rgba(255, 90, 0, 1);
+    border-radius: 3rpx;
+    margin-right: 10rpx;
+}
+
+.order-item-name {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.all-roder {
+    color: #666;
+    font-size: 26rpx;
+}
+
+.order-img {
+    width: 48rpx;
+    height: 48rpx;
+    margin-bottom: 20rpx;
+}
+
+.order-text {
+    font-size: 24rpx;
+}
+
+.person-center-flex-wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.order-item-option {
+    width: 134rpx;
+    text-align: center;
+    margin-bottom: 50rpx;
+    position: relative;
+}
+
+
+.order-item-option-1 {
+    width: 130rpx;
+    text-align: center;
+    margin-bottom: 50rpx;
+}
+
+.member-vip-label {
+    width: 50rpx;
+    height: 38rpx;
+    margin-left: 20rpx;
+}

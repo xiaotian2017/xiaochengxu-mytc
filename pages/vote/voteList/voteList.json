@@ -1,0 +1,7 @@
+{   
+    "navigationBarTitleText": "投票列表",
+    "usingComponents": {
+        "city-banner":"/components/Banner/Banner",
+        "city-navigator":"/components/Navigator/Navigator"
+    }
+}

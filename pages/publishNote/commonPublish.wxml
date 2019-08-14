@@ -1,0 +1,309 @@
+<import src="../../public/shoptemplate.wxml" />
+<view class="publish-note-container">
+
+  <!-- 房屋租售 下个版本添加这个-->
+  <!-- <view class="type-choose vz-flex flex-center">
+        <view style="font-size:32rpx;">您的身份</view>
+        <view wx:for="{{['个人', '中介']}}" wx:key="{{index}}" clsss="vz-flex flex-center">
+            <view class="type-item {{index==typeIdx?'type-item-active':''}}" bindtap="getType" data-idx="{{index}}" style="width: 180rpx;margin-left: 60rpx">{{item}}</view>
+        </view>
+    </view> -->
+  <!-- 求职 -->
+  <view class="job-wanted-container" wx:if="{{isJobWanted}}">
+    <view style="background: #fff;text-align: center;padding-top:30rpx" bindtap="chooseImage" data-index='0'
+      data-row="{{items[0].content.row}}">
+      <image
+        src="{{items[0].content.imageList.length?items[0].content.imageList[items[0].content.imageList.length-1]:items[0].content.icon}}"
+        class="user-avatar"></image>
+      <view class="uploading-tips c999">点击上传头像</view>
+    </view>
+    <view class="type-choose vz-flex flex-center">
+      <view style="font-size:32rpx;color:#101010">求职类型</view>
+      <view class="vz-flex flex-center">
+        <view class="type-item {{positionType==1?'type-item-active':''}}" bindtap="getPositionType" data-val="1"
+          style="margin-left: 60rpx;width:180rpx;">全职</view>
+        <view class="type-item {{positionType==2?'type-item-active':''}}" bindtap="getPositionType" data-val="2"
+          style="margin-left: 60rpx;width:180rpx;">兼职</view>
+      </view>
+    </view>
+    <view class="wrapper-personal-info">
+      <view class="vz-flex flex-center" style="padding-top:30rpx;">
+        <view class="personnal-info-title">
+          个人信息
+        </view>
+        <view class="personnal-info-label">
+          必填
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding-top: 36rpx">
+        <view>姓名</view>
+        <input type="text" bindinput="getLinkMan" style="text-align: right" value="{{nickName}}"
+          placeholder="请输入你的姓名" />
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding-top: 38rpx">
+        <view>手机号码</view>
+        <input style="text-align: right" placeholder="请输入你的手机号码" bindinput="getPhoneNumber" value="{{phoneNumber}}"
+          type="number" />
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding: 38rpx 0 12rpx">
+        <view>邮箱</view>
+        <input type="text" style="text-align: right" placeholder="请输入你的邮箱(选填)" bindinput="getEmail"
+          value="{{posterEmail}}" />
+      </view>
+    </view>
+    <view class="job-require">
+      <view>
+        <view class="vz-flex flex-center" style="padding-top:30rpx;">
+          <view class="personnal-info-title">
+            职位要求
+          </view>
+          <view class="personnal-info-label">
+            必填
+          </view>
+        </view>
+        <view class="vz-flex flex-center flex-between" style="padding-top: 36rpx">
+          <view>求职标题</view>
+          <input type="text" bindinput="getTitle" style="text-align: right" value="{{title}}" maxlength="25"
+            placeholder="请输入标题" />
+        </view>
+        <view class="vz-flex flex-center flex-between" style="padding-top: 36rpx;">
+          <view>职位类别</view>
+          <view>
+            <picker mode="selector" bindchange="selectPositionType" value="0" range-key="Title"
+              range="{{positionTypeArr}}">
+              <text
+                class="{{positionTypeArrIdx!==null?'':'c999'}}">{{positionTypeArrIdx!==null?positionTypeArr[positionTypeArrIdx].Title:'请选择类型'}}</text>
+              <icon class="iconfont icon-jiantou"></icon>
+            </picker>
+          </view>
+        </view>
+        <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx">
+          <view>薪资待遇</view>
+          <input type="text" disabled='{{expectmoneydisable}}' bindinput="inputPayUnit" style="text-align: right"
+            value="{{payunit}}" maxlength="25" placeholder="请输入薪资待遇" />
+          <view class="li_right">
+
+            <checkbox-group bindchange="expectmoneychange">
+              <span>
+                <checkbox value="1" checked="{{pay===1}}" /> 面议
+              </span>
+            </checkbox-group>
+          </view>
+        </view>
+        <!-- <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx;">
+                    <view>薪资待遇</view>
+                    <view>
+                        <picker mode="selector" bindchange="selectSalaryType" value="0" range="{{salaryTypeArr}}">
+                            <text class="{{salaryTypeArrIdx!==null?'':'c999'}}">{{salaryTypeArrIdx!==null?salaryTypeArr[salaryTypeArrIdx]:'请选择类型'}}</text>
+                            <icon class="iconfont icon-jiantou"></icon>
+                        </picker>
+                    </view>
+                </view> -->
+      </view>
+      <view style="padding: 48rpx 0 0;">
+        <view style="padding-bottom: 30rpx;">自我描述</view>
+        <textarea class="detail-textarea" maxlength="-1" placeholder="请输入你的自我描述/工作经验..." bindinput="getDetailInfo"
+          value="{{detailInfo}}"></textarea>
+        <view class="" style="padding:20rpx 0 10rpx;margin-left:-20rpx;">
+          <template is="item_image_shop"
+            data="{{config:uploadimgobjects['detailInfoImage'].config,which:'detailInfoImage',itemid:postid}}"></template>
+        </view>
+      </view>
+    </view>
+    <view class="fill-tips">
+      <text style="padding-right: 20rpx">填写更多资料，提高求职成功率</text>
+      <view class="triangle"></view>
+    </view>
+    <view class="more-data">
+      <view class="vz-flex flex-center flex-between">
+        <view>性别</view>
+        <view>
+          <label bindtap="getGender" data-gender="1">
+            <radio color="#FA0F20" checked="{{gender==1}}"></radio>
+            男
+          </label>
+          <label bindtap="getGender" data-gender="2" style="padding-left:40rpx">
+            <radio color="#FA0F20" checked="{{gender==2}}"></radio>
+            女
+          </label>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx;">
+        <view>年龄</view>
+        <input type="number" bindinput="getAge" placeholder="请输入你的年龄" value="{{posterAge}}" style="text-align: right" />
+      </view>
+
+      <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx;">
+        <view>学历</view>
+        <view>
+          <picker mode="selector" bindchange="selectEducationType" value="0" range="{{listEducationArr}}">
+            <text
+              class="{{educationIdx!==null?'':'c999'}}">{{educationIdx!==null?listEducationArr[educationIdx]:'请选择类型'}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+          </picker>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx;">
+        <view>工作经验</view>
+        <view>
+          <picker mode="selector" bindchange="selectExperienceType" value="0" range="{{listExperience}}">
+            <text
+              class="{{experienceIdx!==null?'':'c999'}}">{{experienceIdx!==null?listExperience[experienceIdx]:'请选择类型'}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+          </picker>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding-top: 48rpx;">
+        <view>
+          所在区域
+        </view>
+        <picker mode="multiSelector" value="{{areaIdxArr}}" bindchange="areaPickerChange"
+          bindcolumnchange="bindRegionPickerColumnChange" range="{{areaRegion}}" range-key="Name">
+          <view class="picker vz-flex flex-center" style="text-align: right">
+            <text style="padding-left: 4rpx; white-space: nowrap">{{areaRegion[0][0].Name}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+            <text style="line-height: 1.4" class="clamp1"> {{areaRegion[1][areaIdxArr[1]].Name}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="type-choose vz-flex flex-center" wx:if="{{typeArr.length}}">
+      <view style="font-size:32rpx;">类型选择</view>
+      <block wx:for="{{typeArr}}" wx:key="{{index}}" clsss="vz-flex flex-center">
+        <view class="type-item {{index==typeIdx?'type-item-active':''}}" bindtap="getType" data-idx="{{index}}"
+          style="width: calc(68% / {{typeArr.length}});margin-left: 20rpx">{{item.name}}</view>
+      </block>
+    </view>
+
+
+    <view class="wrapper-personal-info">
+      <view class="vz-flex flex-center" style="padding-top:30rpx;">
+        <view class="personnal-info-title">填写信息</view>
+        <view class="personnal-info-label">必填</view>
+      </view>
+      <view class="vz-flex flex-center" style="padding-top:36rpx" wx:if="{{isWholesale}}">
+        <view style="margin-right: 112rpx;">联系人</view>
+        <view class="vz-flex flex-center">
+          <input type="text" bindinput="getLinkMan" style="text-align: right" value="{{nickName}}" />
+        </view>
+      </view>
+
+      <!-- 房产租售 -->
+      <view class="vz-flex flex-center flex-between" style="padding-top:36rpx" wx:if="{{typeList.length>0}}">
+        <view>类型</view>
+        <view>
+          <picker mode="selector" bindchange="selectType" value="0" range-key="Title" range="{{typeList}}">
+            <text>{{typeListIdx!==null?typeList[typeListIdx].Title:'请选择类型'}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+          </picker>
+        </view>
+      </view>
+
+      <view class="vz-flex flex-center flex-between" style="padding-top:40rpx">
+        <view style="white-space: nowrap">联系电话</view>
+        <view class="vz-flex flex-center">
+          <input placeholder="请输入手机号码" style="text-align: right;padding-right: 20rpx" bindinput="getPhoneNumber"
+            value="{{phoneNumber}}" type="number" />
+          <view class="auto-fill-btn" bindtap="autoFillPhoneNumber">自动填写</view>
+        </view>
+      </view>
+      <view>
+        <view class="detail-title" style="padding-top: 60rpx;">详细信息</view>
+        <textarea class="detail-textarea" maxlength="-1" placeholder="请补充填写具体描述" bindinput="getDetailInfo"
+          value="{{detailInfo}}"></textarea>
+        <view class="" style="padding:20rpx 0 10rpx;margin-left:-20rpx;">
+          <template is="item_image_shop"
+            data="{{config:uploadimgobjects['detailInfoImage'].config,which:'detailInfoImage',itemid:postid}}"></template>
+        </view>
+      </view>
+    </view>
+
+    <!-- 房产出售 -->
+    <view class="house-detail" wx:if="{{isPublishHouse}}">
+      <view class="vz-flex flex-center">
+        <view class="house-title">高级选项</view>
+        <view class="house-title-tips">补充详细信息可增加租售成功率</view>
+      </view>
+      <view class="vz-flex flex-center flex-between common-top">
+        <view class="" style="white-space: nowrap">价格</view>
+        <view class="vz-flex flex-center" style="white-space: nowrap">
+          <input type="number" bindinput="getPrice" maxlength="10" disabled="{{isMeetTalk}}" value="{{housePrice}}"
+            placeholder="单位(元)" style="padding-right: 20rpx" />
+          <view class="price-discuss">
+            <label bindtap="getMeetTalk">
+              <radio color="#FA0F20" checked="{{isMeetTalk}}" /> 面议
+            </label>
+          </view>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between common-top">
+        <view style="white-space: nowrap">面积</view>
+        <view class="vz-flex flex-center">
+          <input type="digit" bindinput="getAreaSize" maxlength="10" value="{{areaSize}}" placeholder="0.00"
+            style="padding-right: 20rpx" />
+          <view style="white-space: nowrap">平方米</view>
+        </view>
+      </view>
+      <view class="vz-flex flex-center flex-between common-top">
+        <view style="white-space: nowrap">户型</view>
+        <input type="text" maxlength="20" bindinput="getHouseType" value="{{houseType}}" placeholder="几室几厅几卫" />
+      </view>
+    </view>
+
+    <!-- 房产租售时隐藏这段 -->
+    <view class="wrapper-address">
+      <view class="vz-flex flex-center flex-between">
+        <view style="margin-right:30rpx;white-space: nowrap;">所在区域</view>
+        <picker mode="multiSelector" value="{{0}}" bindcolumnchange="bindRegionPickerColumnChange"
+          bindchange="areaPickerChange" range="{{areaRegion}}" range-key="Name">
+          <view class="picker vz-flex flex-center"
+            style="width: 530rpx;text-align: right;padding-right: 20rpx;padding-left:30rpx;">
+            <text style="padding-left: 4rpx; white-space: nowrap">{{areaRegion[0][areaIdxArr[0]].Name}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+            <text style="line-height: 1.4" class="clamp1"> {{areaRegion[1][areaIdxArr[1]].Name}}</text>
+            <icon class="iconfont icon-jiantou"></icon>
+          </view>
+        </picker>
+      </view>
+      <view class="vz-flex flex-center flex-between" style="padding: 20rpx 0 10rpx;">
+        <view style="white-space: nowrap;">定位地址</view>
+        <view class="vz-flex flex-center">
+          <input type="text" class="address-input" placeholder="请输入详细地址" value="{{address}}" bindinput="getAddress" />
+          <view class="icon-position-wrapper" bindtap="chooseLocationByWx">
+            <icon class="icon-font icon-new-position"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="padding-bottom: 200rpx" wx:if="{{chargeTypeInfoTopList.length && !isIos}}">
+    <view class="tip" wx:if="{{!isIos}}" style="color:#FA0F20">
+      <text class="dot"></text>
+      置顶信息可有效提升浏览量。
+    </view>
+  </view>
+
+  <view class="buttom">
+    <view class="infoTop vz-flex vz-flex-center flex-between" wx:if="{{!isIos}}">
+      <view>信息置顶</view>
+      <view class="topStatus {{topStatus?'openTop':'closeTop'}}" bindtap='changeTopStatus'></view>
+    </view>
+    <view class="saveBtn" bindtap='submitNote'>
+      {{isFree?'发布':'下一步'}}
+    </view>
+  </view>
+
+</view>
+
+
+<!-- 显示链接图标 -->
+<city-navigator wx:if="{{showpath}}">
+  <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips">获取链接</view>
+</city-navigator>
+
+<wxs module="md">
+  function getAvatarIdx() { let idx = 0; idx++ return idx } module.exports = { getAvatarIdx:getAvatarIdx }
+</wxs>

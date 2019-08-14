@@ -1,0 +1,242 @@
+page{
+    --main-color:#fe3d49;
+    padding-bottom: 100rpx;
+}
+.goods-price{
+    font-size:32rpx;
+    color: var(--main-color)
+}
+.goods-price::before{
+    content: "￥";
+    font-size: 24rpx;
+    vertical-align: 1px;
+    color: var(--main-color)
+}
+.model-radio{
+    margin:auto 16rpx auto 0;
+    width: 24px;
+    height:24px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-radius: 50%;
+    border:1rpx solid #e5e5e5;
+    overflow: hidden
+}
+.model-active{
+    position: relative;
+    background: var(--main-color);
+    border-color: var(--main-color)
+}
+.model-active::before,.model-active::after{
+    display: block;
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: #fff;
+    border-radius: 2px
+}
+.model-active::before{
+    top: 50%;
+    left: 25%;
+    height:40%;
+    transform: rotate(-45deg)
+}
+.model-active::after{
+    top: 25%;
+    right:31%;
+    height: 70%;
+    transform: rotate(45deg)
+}
+
+.arrow{
+    vertical-align:-2px;
+    width: 28rpx;
+    height: 28rpx
+}
+.goods-car-item{
+    margin-bottom: 20rpx;
+    background: #fff
+}
+.goods-car-item-head{
+    padding: 20rpx;
+    font-size: 28rpx;
+    line-height: 1;
+    color: #333;
+    border-bottom: 1rpx solid #f2f2f2
+}
+.goods-car-item-content{
+    position:relative;
+    padding: 20rpx;
+}
+.goods-car-item-content:not(:last-of-type){
+    border-bottom: 1rpx solid #f2f2f2
+}
+.goods-car-item-content .radio{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.goods-cover{
+    width: 180rpx;
+    height: 180rpx
+}
+.goods-cover image{
+    width: 100%;
+    height: 100%
+}
+.goods-info{
+    padding-left:20rpx
+}
+.goods-name{
+    padding-right: 60rpx;
+    font-size: 28rpx;
+    margin-bottom: 12rpx;
+    color: #333
+}
+.goods-size{
+    font-size: 28rpx;
+    color: #999
+}
+.select-num{
+    margin: 20rpx 0 0 20rpx
+}
+.goods-edit{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: calc(100% - 20px - 220rpx);
+    height: 100%;
+    background: #fff;
+    z-index: 10
+}
+.goods-minus,.goods-add{
+    width: 48rpx;
+    height: 48rpx;
+    padding: 4rpx 8rpx;
+    background: #f2f2f2
+}
+.edit-num{
+    width: 52rpx;
+    height: 56rpx;
+    margin: 0 4rpx;
+    line-height: 56rpx;
+    font-size: 28rpx;
+    text-align: center;
+    color: #999
+}
+.goods-minus image,.goods-add image{
+    width: 48rpx;
+    height: 48rpx
+}
+.trash{
+    width: 50rpx;
+    height: 56rpx;
+    margin-left: auto;
+    margin-right: 30rpx
+}
+.trash image{
+    width: 100%;
+    height: 100%
+}
+.done{
+    height: 100%;
+    width: 100rpx;
+    background: var(--main-color)
+}
+.done text{
+    margin: auto;
+    font-size: 32rpx;
+    color: #fff
+}
+.goods-origin-price{
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    color: #666;
+    text-decoration: line-through
+}
+.goods-num{
+    margin-left: auto;
+    font-size: 28rpx;
+    color: #999
+}
+.goods-sold{
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    color: #999
+}
+.goods-storename{
+    line-height: 1.35;
+    word-break: break-all;
+    max-width:65%;
+}
+.goods-remove{
+    margin-top: 10rpx;
+    font-size: 28rpx;
+    color: #999
+}
+.goods-limit{
+    margin-top:10rpx;
+    font-size:12px;
+    color:#666
+}
+.goods-discount{
+    margin-top: auto;
+    padding:1px 8rpx;
+    width: 192rpx;
+    text-align: center;
+    font-size: 12px;
+    color: var(--main-color);
+    border: 1rpx solid var(--main-color);
+    border-radius: 30px
+}
+.icon-edit{
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    width: 40rpx;
+    height: 40rpx
+}
+.icon-edit image{
+    width: 100%;
+    height: 100%
+}
+.goods-payment{
+    position: fixed;
+    bottom: 0;
+    width:100vw;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    background: #fff;
+    border-top: 1rpx solid #f2f2f2;
+    box-sizing: border-box;
+    z-index: 999;
+}
+.goods-total-price{
+    padding-right: 20rpx;
+    box-sizing: border-box;
+    text-align: right;
+    color: #333
+}
+.goods-pay{
+    width: 280rpx;
+    color: #fff;
+    text-align: center;
+    background: var(--main-color)
+}
+.goods-car-empty{
+    margin-top: 180rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #999
+}
+.goods-car-empty image{
+    width: 220rpx;
+    height: 220rpx
+}
+.little-tips{
+    margin-top: 30rpx
+}
+.little-tips text{
+    color: #fe3d49
+}
+

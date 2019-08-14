@@ -1,0 +1,198 @@
+<import src="../../public/template.wxml" />
+<import src="../../public/floatbtntpl.wxml" />
+<import src="./news_centerTemplate.wxml"/>
+
+<view id="wrapper">
+    <!--内容正文-->
+    <view class="content">
+        <!--本地头条-->
+        <view class="localPage d-flex flex-col" hidden="{{currentIndex != 3}}">
+            <!--头条导航-->
+            <scroll-view class="localNav" scroll-x="true" scroll-with-animation="true" scroll-left="{{localNav.scrollLeft}}">
+                <block wx:for="{{localNav.localNavArr}}">
+                    <view data-localNavIndex="{{index}}" class="localNavItem {{index === localNav.localCurrentIndex?'localNavActive':''}}" bindtap="switchLocalNav">
+                        {{item.Name}}
+                    </view>
+                </block>
+            </scroll-view>
+            <!--头条列表页-->
+            <view class="localContent flex-1">
+                <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{localNav.localNavArr[localNav.localCurrentIndex].scrollTop}}"
+                    bindscrolltolower="loadData" class="scrollContent">
+                    <block wx:for="{{contentPage[3][localNav.localCurrentIndex]}}">
+                        <view class="local-newsItem d-flex flex-center" data-headtype="{{item.HeadType}}" data-hid="{{item.Id}}" catchtap="readArticle">
+                            <view class="local-newsItemCon flex d-flex flex-col">
+                                <view class="local-newsTitle c333 clamp2" wx:if="{{item.Title != null}}">{{item.Title}}</view>
+                                <view class="local-newsInfo c666 clamp1" wx:if="{{item.Description != null}}">{{item.Description}}</view>
+                                <view class="status local-newsStatus d-flex flex-center">
+                                    <view class="times 999">{{item.FromNowTime}}</view>
+                                    <view class="viewer iconfont icon-eyes">{{item.BrowseCount}}</view>
+                                </view>
+                            </view>
+                            <image src="{{item.ImgUrl}}" class="local-newsItemImg"></image>
+                        </view>
+                    </block>
+                    <template is="loadingAll" wx:if="{{localNav.loadingAllArr.length != 0}}" data="{{LoadingAll:localNav.loadingAllArr[localNav.localCurrentIndex]}}"></template>
+                </scroll-view>
+            </view>
+        </view>
+        <!--商家动态-->
+        <view class="activePage" hidden="{{currentIndex != 0}}">
+            <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{pageScrollTop[0]}}" bindscrolltolower="loadData"
+                class="scrollContent">
+                <block wx:for="{{contentPage[0]}}">
+                    <view class="active-newsItem">
+                        <!-- 头像-->
+                        <view class="userInfo d-flex flex-center">
+                            <image src="{{item.StoreLogoUrl}}" class="avatar" data-strategeid="{{item.Id}}" catchtap="goToDtl"></image>
+                            <view class='flex'>
+                                <view class="userName clamp1 c333">{{item.StoreSName}}</view>
+                                <view class="activeType c666" wx:if="{{item.StoreTag != null}}">{{item.StoreTag}}</view>
+                            </view>
+                            <view class="follow {{item.IsConcern?'followed':''}}" data-storeId="{{item.StoreId}}" data-index="{{index}}" catchtap="follow">{{item.IsConcern?'已关注':'关注'}}</view>
+                            <view class="setTop" wx:if="{{item.CityTopStatus == 1}}"></view>
+                        </view>
+                        <!-- 内容 -->
+                        <view class="activeCon">
+                            <view class="activeText c333" data-strategeid="{{item.Id}}" catchtap="goToDtl">
+                                <view class="activeTextTitle clamp1" wx:if="{{item.Title != null}}">{{item.Title}}</view>
+                                <view class="activeTextPhase {{readAll?'':'clamp4'}}" wx:if="{{item.ContentDesc != null}}">{{item.ContentDesc}}</view>
+                            </view>
+                            <!-- 图片预览 -->
+                            <view class="activePic" wx:if="{{item.DescImgList.length != 0}}">
+                                <block wx:for="{{item.DescImgList}}" wx:for-item="activePicItem" wx:for-index="activePicIndex">
+                                    <image mode="aspectFit" wx:if="{{activePicIndex<=2}}" src="{{activePicItem.thumbnail}}" data-src="{{activePicItem.thumbnail}}"
+                                        class="activePicItem" bindtap="viewFullPic" data-activeIndex="{{index}}"></image>
+                                </block>
+                                <view class="picAccount" wx:if="{{item.DescImgList.length>3}}">共{{item.DescImgList.length}}张</view>
+                            </view>
+                        </view>
+                        <!-- 视频 -->
+                        <view class="activeVideo" hidden="{{!item.AttVideo}}">
+                            视频
+                        </view>
+                        <!-- 优惠券 -->
+                        <view class="coupon" wx:if="{{item.TicketId != 0}}">
+                            <view class="couponTag c333">推荐优惠</view>
+                            <view class="couponCon d-flex">
+                                <view class="couponText flex">
+                                    <view class="couponTitle clamp1" hidden="{{item.TicketTitle == null}}">{{item.TicketTitle}}</view>
+                                    <view class="couponNum">仅剩{{item.TicketReMainNum}}份</view>
+                                </view>
+                                <view class="couponBtn" data-ticketId="{{item.TicketId}}" data-ticketType="{{item.TicketType}}" catchtap="enterActive">立即领取</view>
+                            </view>
+                        </view>
+                        <!-- 状态 -->
+                        <view class="status activeStatus d-flex flex-center">
+                            <text class="times clamp1 999">{{item.DispalyTime}}</text>
+                            <view class="viewer iconfont icon-eyes">{{item.PageView}}</view>
+                        </view>
+                    </view>
+                </block>
+                <template is="loadingAll" data="{{LoadingAll:isLoadingAll[currentIndex]}}"></template>
+            </scroll-view>
+        </view>
+        <!--推荐商家-->
+        <view class="recomPage" hidden="{{currentIndex != 1}}">
+            <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{pageScrollTop[1]}}" bindscrolltolower="loadData"
+                class="scrollContent">
+                <!--我要开店    -->
+                <view class="d-flex flex-between flex-center  goToPub" hover-class="pubActive" catchtap="settled">
+                    <view class="left">
+                        <view class="tag">商家</view>
+                        <view class="descri">我要开店</view>
+                    </view>
+                    <view class="right">
+                        <text>即刻入驻让销量翻倍</text>
+                        <i class="iconfont icon-jiantou"></i>
+                    </view>
+                </view>
+                <!-- 列表页 -->
+                <block wx:for="{{contentPage[1]}}">
+                    <view class="recomItem" data-phone='{{item.Phone}}' data-qrcode='{{item.Qrcode}}' data-vip='{{item.XcxVipVer}}'
+                    catchtap="goToRecomDtl" data-id="{{item.StoreId}}" data-phone='{{item.ShopOwernPhone}}'>
+                        <view class="d-flex flex-center">
+                            <!-- 图片封面 -->
+                            <view class="cover">
+                                <image src="{{item.StoreLogoUrl}}" mode="aspectFill" />
+                                <view wx:if='{{item.StoreTopStatus>0}}' class="setTop">置顶</view>
+                            </view>
+                            <!-- 内容信息 -->
+                            <view class='flex'>
+                                <view class="flow_auto d-flex">
+                                    <text class="title clamp1 c333">{{item.StoreSName}}</text>
+                                    <text class="distance">{{item.Distance!=null?item.Distance:""}}</text>
+                                </view>
+                                <view class="comsumeCount c666">{{item.StoreTag !== 'NaN'?item.StoreTag:''}}
+                                    <text class="visitor">{{item.StoreCheckin_Num}}人来过</text>
+                                </view>
+                                <view class="paymentSupport" wx:if='{{item.StoreOpenId.length>0}}'>
+                                    <image class="icon_weixin_pay" src="http://j.vzan.cc/content/city/xcx/images/Entertainment_02.png" />
+                                    <text style="vertical-align:middle">本店支持微信支付</text>
+                                </view>
+                            </view>
+                        </view>
+                        <!-- 优惠活动 -->
+                        <view class="recommdStoreActivity c999" wx:if="{{item.StoreCouponId>0||item.StoreBookingId>0||item.StoreBookingFreeId>0}}">
+                            <view class="activity clamp1" wx:if="{{item.StoreBookingId>0||item.StoreBookingFreeId>0}}">
+                                <view class="purple tag">订</view>
+                                <text>{{item.StoreBookingId>0?item.StoreBookingTitle:item.StoreBookingFreeTitle}}</text>
+                            </view>
+                            <view class="activity clamp1" wx:if="{{item.StoreCouponId>0}}">
+                                <view class="blue tag">惠</view>
+                                <text>{{item.StoreCouponCouponName}}</text>
+                            </view>
+                            <view class="activity clamp1" wx:if="{{item.StoreCutId>0}}">
+                                <view class="yellow tag">砍</view>
+                                <text>{{item.StoreCutTitle}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                <template is="loadingAll" data="{{LoadingAll:isLoadingAll[0]}}"></template>
+            </scroll-view>
+        </view>
+        <!--便民信息-->
+        <view class="regularlyPage" hidden="{{currentIndex != 2}}">
+            <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{pageScrollTop[2]}}" bindscrolltolower="loadData"
+                class="scrollContent">
+                 <!--我要发布    -->
+                 <view class="d-flex flex-between flex-center goToPub" hover-class="pubActive" catchtap="publishInfo" data-url='../addpost/addenter'>
+                    <view class="left">
+                        <view class="tag">信息</view>
+                        <view class="descri">我要发布</view>
+                    </view>
+                    <view class="right">
+                        <text>即刻发布分类信息</text>
+                        <i class="iconfont icon-jiantou"></i>
+                    </view>
+                </view>
+                <block wx:for="{{contentPage[2]}}">
+                     <template is="template_postlist" data="{{content:item,typeid:0,tongcheng_new_02:tongcheng_new_02,tongcheng_01:tongcheng_01,showcallbtn:1,showallbtns:showallbtns,contentH:contentH,index:index}}"></template>
+                </block>
+                <template is="loadingAll" data="{{LoadingAll:isLoadingAll[2]}}"></template>
+            </scroll-view>
+        </view>
+    </view>
+
+    <!--导航栏-->
+    <view class="news-centerTab d-flex">
+        <block wx:for="{{newsCenterArr}}">
+            <view data-tabBarIndex="{{index}}" class="tabItem tabItem{{index}} flex iconfont {{index == currentIndex ? 'tabItemActive':''}}"
+                bindtap="switchNewsCenterBar">
+                {{item}}
+            </view>
+        </block>
+    </view>
+</view>
+
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-order" bindtap="backIndex">首页</view>
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">获取链接</view>
+</city-navigator>
+
+
+<view class="icon-action back-top" bindtap="backTop"></view> 
+
+<!-- 弹窗 -->
+<template is="shopnotcanentertip" data="{{...recomStoreInfo}}"></template>

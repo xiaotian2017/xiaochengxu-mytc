@@ -1,0 +1,181 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view wx:if="{{init}}">
+    <view class="post-title clamp2">{{article.Headlines.Title}}</view>
+    <view class="post-info d-flex">
+        <view class="times">{{article.Headlines.CreateDate}}</view>
+      
+            <view class="cityName clamp1" bindtap='gotoshopdetail' data-storeid='{{article.CStore.Id}}' wx:if="{{article.CStore!=null}}">{{article.CStore.SName}}
+
+</view>
+                 <view class="cityName clamp1" bindtap='backIndex'  wx:elif="{{article.CityInfo.CName != ''}}">{{article.CityInfo.CName}}</view>
+    </view>
+    <!-- 正文 -->
+    <view class="content">
+        <view class="headlines-video" wx:if="{{!!article.HeadVideo}}">
+            <city-video video-params="{{article.HeadVideo}}"></city-video>
+        </view>
+        <view class="phase">
+            <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+        </view>
+     
+         <image wx:for='{{article.ImgList}}' mode="widthFix" style='width:100%;margin-top:5px;'  src='{{item.filepath}}'></image>
+       
+        
+        <!-- 赞赏 -->
+        <view class="reward">
+          <!--<view class="reward-btn" data-hid="{{options.hid}}" data-typeid="{{options.t}}" catchtap="goToReward">赞赏</view> -->  
+            <view class="reward-account" wx:if="{{rewardList.listReward.length > 0}}">已有
+                <text>{{rewardList.totalCount}}</text>人赞赏</view>
+            <view class="reward-avatarList d-flex flex-end justify-center" wx:if="{{rewardList.listReward.length > 0}}">
+                <block wx:for="{{rewardList.listReward}}" wx:key="unique">
+                    <image class="reward-avatar" src="{{item.fromuser.HeadImgUrl}}" wx:if="{{index < 8}}">
+                    </image>
+                </block>
+                <text class="reward-ellipse" wx:if="{{rewardList.listReward.length > 7}}">...</text>
+            </view>
+        </view>
+
+        <!-- 帖子统计 -->
+        <view class="post-account d-flex c666">
+            <view class="post-viewer">
+                <image src="{{icon.common + icon.viewer}}" lazy-load="true"></image>
+                <text>阅读</text>
+                {{article.Headlines.BrowseCount}}
+            </view>
+            <view class="post-likeMan" catchtap="like">
+                <image src="{{icon.common + icon.like}}" lazy-load="true"></image>
+                <text>点赞</text>
+                {{!!article.Headlines.FabulousCount?article.Headlines.FabulousCount : '0'}}
+            </view>
+        </view>
+    </view>
+    <view style="height:20rpx;background:#f2f2f2"></view>
+    <!-- 评论列表 -->
+    <view class="comment-list">
+        <view class="left-message-title">网友点评</view>
+        <view wx:if="{{commentList.length > 0}}">
+            <!--评论内容-->
+            <block wx:for="{{commentList}}" wx:key="unique">
+                <view class="comment-item">
+                    <view class="comment-userInfo d-flex">
+                        <view class="avatar">
+                            <image src="{{item.ComUser.Headimgurl}}"></image>
+                        </view>
+                        <view class="d-flex flex flex-col">
+                            <view class="username clamp1">{{item.ComUser.NickName}}</view>
+                            <view class="deliver-time">{{item.FromNowTime}}</view>
+                        </view>
+                        <view class="comment-like" style="display:none">
+                            <view class="icon icon-comment-like {{item?'icon-comment-liked':''}}" catchtap="commentLike" data-index="{{index}}"></view>
+                            <text style="vertical-align:middle">{{item.PraiseCount}}</text>
+                        </view>
+                    </view>
+                    <view class="comment-content">
+                        <view class="comment-phase">
+                            <block wx:for="{{item.ContentHtml.nodes}}" wx:for-item="node" wx:key="unique">
+                                <image class="comment-gif" wx:if="{{node.tag=='img'}}" src="{{node.attr.src}}"></image>
+                                <text wx:else>{{node.text}}</text>
+                            </block>
+                        </view>
+                       <view class="comment-pic" wx:if="{{item.ImagUrls.length > 0}}">
+                            <image src="{{item.ImagUrls[0]}}" data-src="{{item.ImagUrls[0]}}" catchtap="viewCommentPic"></image>
+                        </view>
+                        <view class="comment-btn" data-index='{{index}}' data-nickname="{{item.ComUser.NickName}}" data-comuserid="{{item.ComUser.Id}}" data-parentid="{{item.Id}}" catchtap="reply">
+                            <image src="{{icon.common + icon.comment}}"></image>回复
+                        </view>
+                    </view>
+
+                    <!-- 子评论 -->
+                    <view class="comment-subList" wx:if="{{item.SubCommentList.length > 0}}">
+                        <block wx:for="{{item.SubCommentList}}" wx:for-item="subCommentItem" wx:for-index="subCommentIndex" wx:key="unique">
+                            <view class="comment-subItem clamp3" hover-class="comment-subItem-tap" data-index="{{index}}" data-subIndex="{{subCommentIndex}}" data-nickname="{{subCommentItem.ComUser.NickName}}" data-parentId="{{subCommentItem.Id}}" data-comuserId="{{subCommentItem.ComUser.Id}}" catchtap="reply" wx:if="{{subCommentIndex < checkAllCommentArr[index]}}">
+                                <text class="comment-subItem-username">{{subCommentItem.ComUser.NickName}}</text>
+
+                                <view style="display:inline-block" wx:if="{{item.Id != subCommentItem.ParentId}}">
+                                    回复
+                                    <text class="comment-subItem-username">{{subCommentItem.DUser.NickName}}</text>
+                                </view><text style="vertical-align:middle">：</text>
+                                <block wx:for="{{subCommentItem.ContentHtml.nodes}}" wx:key="unique" wx:for-item="subNode">
+                                    <image wx:if="{{subNode.tag == 'img'}}" src="{{subNode.attr.src}}" class="comment-gif"></image>
+                                    <text wx:else>{{subNode.text}}</text>
+                                </block>
+                            </view>
+                        </block>
+                        <view class="seeAllSubComments" wx:if="{{item.SubCommentList.length > 5}}" data-index="{{index}}" catchtap="checkAllComment">
+                                {{checkAllCommentArr[index] === 5 ? '查看全部'+item.SubCommentList.length+'评论':'收起全部评论'}}
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="comment-empty" wx:if="{{empty && commentList.length === 0 && loadingError}}">
+            <image src="{{icon.common + icon.sofa}}" lazy-load="true"></image>
+            <view>快来抢下第一把沙发</view>
+        </view>
+
+        <view class="isLoading" hidden="{{isLoading}}">
+            <image src="{{icon.common + icon.loading}}" lazy-load="true"></image> 一大波评论正在飞来
+        </view>
+        <view class="loadingError" hidden="{{loadingError}}">
+            获取评论出错,
+            <text catchtap="getCommentList">点击重新加载</text>
+        </view>
+        <view class="loadingAll" wx:if="{{commentList.length > 0 && !loadingAll}}">
+            没有更多评论了
+        </view>
+    </view>
+</view>
+
+<view class="mask {{maskShow}}" catchtap="getBlur">
+
+</view>
+
+<!-- 评论框弹层 -->
+<coverview class="comment d-flex" wx:if="{{init}}">
+    <!-- 上部分 -->
+    <!-- {{items[0].content.imageList.length > 0 ?90:20}} -->
+    <view class="comment-area d-flex flex-wrap flex-center">
+        <textarea class="comment-input" maxlength="-1" show-confirm-bar="false" placeholder="{{comment.placeholder?'回复'+comment.placeholder:'善于发言的人运气都不会差'}}"
+            placeholder-class="comment-input-placeholder" fixed="true" adjust-position="false" focus="{{focus}}" auto-height="true" cursor-spacing="20" bindfocus="reply" bindinput="getComment" value="{{comment.commentContent}}"></textarea>
+        <!-- 上传图片 -->
+        <view class="deliver-pic" hidden="{{items[0].content.imageList.length === 0}}">
+            <image src="{{items[0].content.imageList[0]}}"></image>
+            <view class="close" catchtap="clearImage" data-row="0"></view>
+        </view>
+    </view>
+    <view class="comment-action d-flex flex-center" hidden="{{focus}}">
+        <!-- 
+        <view class="icon icon-reward" data-hid="{{options.hid}}" catchtap="goToReward">
+            <image src="{{icon.common + icon.reward}}" lazy-load="true"></image>
+        </view>
+        -->
+        <view class="icon icon-like" catchtap="like">
+            <image src="{{icon.common + icon.like}}" lazy-load="true"></image>
+        </view>
+        <button class="icon icon-repost" open-type="share">
+            <image src="{{icon.common + icon.repost}}" lazy-load="true"></image>
+        </button>
+    </view>
+    <view class="comment-action d-flex comment-action-deliver" hidden="{{!focus}}">
+        <!-- 图片 -->
+        <view class="icon icon-image" catchtap="chooseImage" hidden="{{!!comment.parentid || !!comment.comsuerid || items[0].content.imageList.length > 0}}">
+            <image src="{{icon.common + icon.photoes}}" lazy-load="true"></image>
+        </view>
+        <!-- 发送 -->
+        <view class="icon icon-deliver" catchtap="deliver">
+            <view class="deliver {{items[0].content.imageList.length > 0 || comment.commentContent.length > 0?'active':''}}"></view>
+        </view>
+    </view>
+</coverview>
+<!-- 点赞动画 -->
+<view class="like-anim {{likeAnim?'praiseAnimation':''}}" hidden="{{!article.IsFabulous}}">
+</view>
+
+<!-- 快捷导航 -->
+<city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-personalCenter" bindtap="goToPersonalCenter">个人中心</view>
+    <view slot="slot2" class="navigatorItem navigatorItem-index" bindtap="backIndex">首页</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-localNews" bindtap="goToNewsCenter">本地头条</view>
+</city-navigator>
+
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

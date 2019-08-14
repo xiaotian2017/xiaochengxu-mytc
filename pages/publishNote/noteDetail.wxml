@@ -1,0 +1,374 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="note-detail-container">
+  <view class="vz-flex flex-center flex-between title-wrapper" wx:if="{{!isJobWanted&&!isRecuit}}">
+    <view class="vz-flex flex-center">
+      <image class="note-detail-avatar" src="{{postInfo.user.img}}"></image>
+      <view class="note-detail-username clamp1">{{postInfo.user.name}}</view>
+    </view>
+    <view class="note-detail-type" wx:if="{{postInfo.SaleType>0}}">{{typeName}}</view>
+  </view>
+  <view class="note-detail-title" wx:if="{{postInfo.Title&&!isHouseDetail&&!isCarDetail&&!isJobWanted&&!isRecuit}}">
+    <view style="border-top: 1rpx solid #eaeaea;padding-bottom:30rpx">
+      <view class="clamp1" wx:if="{{postInfo.Title}}" style="padding-top:30rpx;line-height: 1.4">
+        {{postInfo.Title}}
+      </view>
+      <view class="note-detail-price" style="padding:30rpx 0 0;" wx:if="{{isShowPrice}}">
+        价格：面议
+      </view>
+    </view>
+  </view>
+  <!-- 求职 -->
+  <view style="margin-bottom: 20rpx" wx:if="{{isJobWanted && !isRecuit}}">
+    <view class="vz-flex flex-center flex-between title-wrapper">
+      <view class="vz-flex flex-center">
+        <view class="note-detail-jobwanted-title clamp2" style="line-height: 1.4">
+          {{postInfo.Title}}
+        </view>
+      </view>
+      <view class="note-detail-type">{{postInfo.PositionType==1?'全职':'兼职'}}</view>
+    </view>
+    <view style="background: #fff;padding:30rpx 0 30rpx 30rpx;">
+      <view class="note-detail-type-name">{{postInfo.TypeName}}</view>
+      <view class="c999 personal-info">
+        <text>{{postInfo.Gender==1?'男':'女'}}</text>
+        <text style="padding:0 8rpx" wx:if="{{postInfo.AgeQ!=0}}">|</text>
+        <text wx:if="{{postInfo.AgeQ!=0}}">{{postInfo.AgeQ}}</text>
+        <text style="padding:0 8rpx" wx:if="{{postInfo.Experience}}">|</text>
+        <text wx:if="{{postInfo.Experience}}">{{postInfo.Experience}}</text>
+        <text wx:if="{{postInfo.WorkTime}}" style="padding:0 8rpx">|</text>
+        <text wx:if="{{postInfo.WorkTime}}">{{postInfo.WorkTime}}</text>
+      </view>
+      <view class="salary-wrapper vz-flex flex-center">
+        <view>期望薪资:</view>
+        <view class="main-color" style="font-weight: 700;font-size: 32rpx;padding-left:20rpx">
+          ￥{{postInfo.Salary}}
+        </view>
+      </view>
+      <view style="padding:60rpx 30rpx 0 0;">
+        <view class="vz-flex flex-center" style="padding-right: 20rpx">
+          <image class="poster-avatar" src="{{postInfo.user.img}}"></image>
+          <view>
+            <view style="font-size: 28rpx" class="clamp1">{{postInfo.LinkMan}}</view>
+            <view class="c999" style="font-size: 24rpx;padding-top:15rpx;">
+              {{postInfo.LinkEmail != "null" && postInfo.LinkEmail || ''}}
+            </view>
+          </view>
+        </view>
+        <view class="c999 vz-flex flex-center flex-between" style="font-size: 24rpx;padding-top: 30rpx;">
+          <view>浏览量：{{postInfo.ViewCount}}</view>
+          <view>发布时间：{{postInfo.FromNowTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 招聘 -->
+  <view style="margin-bottom: 20rpx" wx:if="{{isRecuit}}">
+    <view class="vz-flex flex-center flex-between title-wrapper">
+      <view class="vz-flex flex-center">
+        <view class="note-detail-jobwanted-title clamp1" style="line-height: 1.4">
+          {{postInfo.Title}}
+        </view>
+      </view>
+      <view class="note-detail-type">
+        {{postInfo.PositionType==1 && '全职'||postInfo.PositionType==2 && '兼职' || '招聘'}}
+      </view>
+    </view>
+    <view style="background: #fff;padding:30rpx 0 30rpx 30rpx;">
+      <view class="c999 personal-info">
+        <text>{{postInfo.Gender == 0 && '性别不限' || postInfo.Gender == 1 && '男' || '女'}}</text>
+        <text style="padding:0 8rpx" wx:if="{{postInfo.AgeRe!=0}}">|</text>
+        <text wx:if="{{postInfo.AgeRe!=0}}">{{postInfo.AgeRe}}</text>
+        <text style="padding:0 8rpx" wx:if="{{postInfo.Experience}}">|</text>
+        <text wx:if="{{postInfo.Experience}}">{{postInfo.Experience}}</text>
+        <text style="padding:0 8rpx" wx:if="{{postInfo.WorkTime}}">|</text>
+        <text wx:if="{{postInfo.WorkTime}}">{{postInfo.WorkTime}}</text>
+      </view>
+      <view class="vz-flex flex-center floor-wrap">
+        <block wx:for="{{postInfo.Floor && postInfo.Floor}}" wx:key="{{index}}">
+          <view class="floor">{{item}}</view>
+        </block>
+      </view>
+      <view class="salary-wrapper vz-flex flex-center">
+        <view class="main-color" style="font-weight: 700;font-size: 32rpx;">
+          ￥{{postInfo.Salary}}
+        </view>
+      </view>
+      <view style="padding:30rpx 30rpx 0 0;">
+        <view class="c999 vz-flex flex-center flex-between" style="font-size: 24rpx;padding-top: 30rpx;">
+          <view>浏览量：{{postInfo.ViewCount}}</view>
+          <view>发布时间：{{postInfo.FromNowTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 房产 -->
+  <view class="note-detail-title" wx:if="{{isHouseDetail}}">
+    <view style="border-top: 1rpx solid #eaeaea;height:90rpx" class="vz-flex flex-center flex-between">
+      <view class="clamp1" style="font-weight: 700;width: 400rpx;line-height: 1.4">
+        {{postInfo.Title}}
+      </view>
+      <view class="note-detail-price">
+        <text wx:if="{{postInfo.Price}}">￥{{postInfo.Price*1000/100000}}元</text>
+        <text wx:else>价格：面议</text>
+      </view>
+    </view>
+  </view>
+  <!-- 房产详情 -->
+  <view class="house-detail" wx:if="{{isHouseDetail}}">
+    <view class="house-detail-title">房屋详情</view>
+    <view class="house-detail-main vz-flex flex-center flex-between">
+      <view>
+        <view class="c666" style="padding-bottom:30rpx;">户型</view>
+        <view class="clamp1" style="width: 200rpx;line-height: 1.2">
+          {{postInfo.HouseType?postInfo.HouseType:'—'}}
+        </view>
+      </view>
+      <view>
+        <view class="c666" style="padding-bottom:30rpx;">面积</view>
+        <view class="clamp1" style="width: 200rpx;">
+          {{postInfo.AreaSize&&postInfo.AreaSize!=0?postInfo.AreaSize+'㎡':'—'}}
+        </view>
+      </view>
+      <view>
+        <view class="c666" style="padding-bottom:30rpx;">类型</view>
+        <view class="clamp1" style="width: 200rpx">{{postInfo.TypeName}}</view>
+      </view>
+    </view>
+    <view class="vz-flex" style="padding-top:60rpx;" wx:if="{{postInfo.Address}}">
+      <view class="c666" style="width: 120rpx;white-space: nowrap">详细地址:</view>
+      <view class="main-color clamp2" style="padding-left:20rpx;line-height: 1.4">
+        {{postInfo.Address}}
+      </view>
+    </view>
+  </view>
+  <!-- 拼车详情 -->
+  <view wx:if="{{isCarDetail}}">
+    <view class="car-detail">
+      <view class="vz-flex flex-center car-detail-item">
+        <view class="c666" style="padding-right: 30rpx;white-space: nowrap;">出发地</view>
+        <view class="clamp2" style="line-height: 1.2">{{postInfo.startPoint}}</view>
+      </view>
+      <view class="vz-flex flex-center car-detail-item">
+        <view class="c666" style="padding-right: 30rpx;white-space: nowrap;">目的地</view>
+        <view class="clamp2" style="line-height: 1.2">{{postInfo.endPoint}}</view>
+      </view>
+    </view>
+    <view class="car-detail-main">
+      <view class="car-detail-title">拼车详情</view>
+      <view class="car-detail-content">
+        <image class="car-status" wx:if="{{postInfo.IsExpired>0}}" src="http://j.vzan.cc/content/city/xcx/images/city-vehicle.jpg"></image>
+        <view class="c666 vz-flex flex-center">
+          <view class="car-detail-content-right">发车时间</view>
+          <view>{{postInfo.WorkTime}}</view>
+        </view>
+        <view class="c666 vz-flex flex-center car-detail-content-top">
+          <view class="car-detail-content-right">手机号码</view>
+          <view>{{postInfo.LinkPhone}}</view>
+        </view>
+        <view class="c666 vz-flex flex-center car-detail-content-top" wx:if="{{postInfo.carPlate&&postInfo.carPlate!='null'}}">
+          <view class="car-detail-content-right">车牌号码</view>
+          <view>{{postInfo.carPlate}}</view>
+        </view>
+        <view class="c666 vz-flex flex-center car-detail-content-top" wx:if="{{postInfo.SaleType==3||postInfo.SaleType==4}}">
+          <view class="car-detail-content-right">人数/空位</view>
+          <view>
+            {{postInfo.Number}}{{postInfo.SaleType==3?'空位':''}}{{postInfo.SaleType==4?'人':''}}
+          </view>
+        </view>
+        <view class="c666 vz-flex flex-center car-detail-content-top" wx:if="{{postInfo.SaleType==6}}">
+          <view class="car-detail-content-right">货物重量</view>
+          <view>{{postInfo.Number}}KG</view>
+        </view>
+        <view class="c666 vz-flex flex-center car-detail-content-top" wx:if="{{postInfo.SaleType==5}}">
+          <view class="car-detail-content-right">车辆数量</view>
+          <view>{{postInfo.Number}}辆</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="note-detail-address" wx:if="{{!isHouseDetail&&!isCarDetail&&!isJobWanted}}">
+    <view class="vz-flex flex-center address-item" wx:if="{{postInfo.AreaName}}">
+      <view class="c333 left-title">所在区域</view>
+      <view class="clamp1 c999" style="padding-right: 60rpx" wx:if="{{postInfo.AreaName}}">
+        {{postInfo.AreaName}}
+      </view>
+    </view>
+    <view class="vz-flex flex-center flex-between address-item" wx:if="{{postInfo.Address}}">
+      <view class="vz-flex flex-center">
+        <view class="c333 left-title" style="width:126rpx">定位地址</view>
+        <view class="clamp1 c999">{{postInfo.Address}}</view>
+      </view>
+      <view class="address-icon">
+        <icon class="iconfont icon-position"></icon>
+        <view style="font-size: 20rpx; padding: 12rpx 0 20rpx 0;" class="main-color">定位</view>
+      </view>
+    </view>
+  </view>
+  <view class="description">
+    <view class="description-title vz-flex flex-center flex-between">
+      <view>{{isCarDetail?'备注':'详细信息'}}</view>
+      <view class="c666" style="font-weight: 400;font-size: 28rpx" wx:if="{{isCarDetail}}">
+        {{postInfo.FromNowTime}}发布
+      </view>
+    </view>
+    <view>
+      <view>
+        <template is="wxParse" data="{{wxParseData:Description.nodes}}" />
+        <view class="city-post-imgList" wx:if="{{postInfo.DescImgList.length > 0}}">
+          <block wx:for="{{postInfo.DescImgList}}" wx:for-index="imgIndex" wx:key="{{index}}">
+            <image mode="widthFix" class='post_img' src="{{item.filepath}}" data-index="{{imgIndex}}" catchtap="viewFullPicture" lazy-load="true"></image>
+          </block>
+        </view>
+      </view>
+      <view class="description-tips c999">
+        联系时请说明是在
+        <text class="main-color">{{cityName}}</text>
+        看到的
+      </view>
+    </view>
+  </view>
+  <view class="report-wrapper">
+    <view class="vz-flex flex-center flex-between">
+      <view class="main-color">温馨提示</view>
+      <view class="c999 vz-flex flex-center" bindtap="report">
+        <image class="report" src="https://j.vzan.cc/content/city/xcx/images/report.svg"></image>
+        <text>举报</text>
+      </view>
+    </view>
+    <view class="c999" style="padding-top:20rpx">交易时请警惕网络诈骗、欺诈交易，如遇不实，请立即举报。</view>
+  </view>
+  <ad wx:if="{{''!=advid}}" unit-id="{{advid}}"></ad>
+  <!-- 评论 -->
+  <view class="city-post-comment">
+    <view class="city-post-comment-title d-flex flex-between">
+      <view style="font-weight: 700">留言</view>
+      <view catchtap="startComment" style="color:#fe3d49">我要留言</view>
+    </view>
+    <view class="city-post-commentList">
+      <!-- 评论内容 -->
+      <block wx:for="{{commentList}}" wx:key="{{index}}">
+        <view class="comment-item">
+          <view class="comment-userInfo d-flex">
+            <view class="avatar">
+              <image src="{{item.Headimgurl}}"></image>
+            </view>
+            <view class="d-flex flex flex-col">
+              <view class="username clamp1">{{item.NickName}}</view>
+              <view class="deliver-time">{{item.FromNowTime}}</view>
+            </view>
+          </view>
+          <view class="comment-content">
+            <view class="comment-phase">
+              <block wx:for="{{item.ContentHtml.nodes}}" wx:for-item="node" wx:key="{{index}}">
+                <image class="comment-gif" wx:if="{{node.tag=='img'}}" src="{{node.attr.src}}"></image>
+                <text wx:else>{{node.text}}</text>
+              </block>
+            </view>
+            <view class="comment-pic" wx:if="{{item.ImagUrls.length > 0}}">
+              <image src="{{item.ImagUrls[0]}}" data-src="{{item.ImagUrls[0]}}" catchtap="viewCommentPic"></image>
+            </view>
+            <view class="comment-btn" data-index='{{index}}' data-nickname="{{item.NickName}}" data-comuserid="{{item.ComUserId}}" data-parentid="{{item.Id}}" catchtap="reply">
+              <image src="http://j.vzan.cc/content/city/xcx/images/comment.svg"></image>
+              回复
+            </view>
+          </view>
+          <!-- 子评论 -->
+          <view class="comment-subList" wx:if="{{item.SubCommentList.length > 0}}">
+            <block wx:for="{{item.SubCommentList}}" wx:for-item="subCommentItem" wx:for-index="subCommentIndex" wx:key="{{subCommentIndex}}">
+              <view class="comment-subItem clamp3" hover-class="comment-subItem-tap" data-index="{{index}}" data-subIndex="{{subCommentIndex}}" data-nickname="{{subCommentItem.NickName}}" data-parentId="{{subCommentItem.ParentId}}" data-comuserId="{{subCommentItem.ComUserId}}" catchtap="reply" wx:if="{{subCommentIndex < checkAllCommentArr[index]}}">
+                <text class="comment-subItem-username">{{subCommentItem.NickName}}</text>
+                <view style="display:inline-block" wx:if="{{item.Id != subCommentItem.ParentId}}">
+                  回复
+                  <text class="comment-subItem-username">
+                    {{item.parentNickName[subCommentItem.ParentId]}}
+                  </text>
+                </view>
+                <text style="vertical-align:middle">：</text>
+                <block wx:for="{{subCommentItem.ContentHtml.nodes}}" wx:key="{{index}}" wx:for-item="subNode">
+                  <image wx:if="{{subNode.tag == 'img'}}" src="{{subNode.attr.src}}" class="comment-gif"></image>
+                  <text wx:else>{{subNode.text}}</text>
+                </block>
+              </view>
+            </block>
+            <view class="seeAllSubComments c999" style="padding-left:20rpx" wx:if="{{item.SubCommentList.length > 5}}" data-index="{{index}}" catchtap="checkAllComment">
+              {{checkAllCommentArr[index] === 5 ? '查看全部'+item.SubCommentList.length+'评论':'收起全部评论'}}
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="comment-status" wx:if="{{isMore}}" bindtap="getMoreComment">点击加载更多评论</view>
+      <view class="comment-status" wx:if="{{!commentList.length}}">暂时还没有人评论哦</view>
+      <view class="comment-status" wx:if="{{!isMore&&commentList.length}}">已加载所有评论</view>
+    </view>
+  </view>
+  <view class="note-detail-footer vz-flex flex-center">
+    <view class="note-detail-footer-left c999 vz-flex flex-center flex">
+      <view class="flex">
+        <view class="icon-font icon-index-home" bindtap="toIndex"></view>
+        <view style="padding-top:8rpx">首页</view>
+      </view>
+      <view class="flex" bindtap="toPublish">
+        <view class="icon-font icon-publish"></view>
+        <view style="padding-top:8rpx">发布</view>
+      </view>
+      <view class="flex" bindtap="toMyPublish">
+        <view class="icon-font icon-my-publish"></view>
+        <view style="padding-top:8rpx">我的发布</view>
+      </view>
+    </view>
+    <view class="note-detail-footer-right" data-phone="{{postInfo.LinkPhone}}" data-postid="{{postInfo.Id}}" catchtap="call">
+      拨打电话
+    </view>
+  </view>
+  <!-- 评论框 -->
+  <view class="city-post-commentInput {{sliderCla}}">
+    <view class="commentInput-title d-flex flex-between flex-center">
+      <view class="close" catchtap="cancelComment"></view>
+      <view class="avatar">
+        <image src="{{userAvatar}}"></image>
+      </view>
+      <view class="icon-deliver" catchtap="deliver">
+        <view class="deliver {{items[0].content.imageList.length > 0 || comment.commentContent.length > 0?'active':''}}"></view>
+      </view>
+    </view>
+    <view class="city-post-commentArea">
+      <textarea placeholder="{{comment.placeholder?'回复'+comment.placeholder:'来说点什么吧'}}" class="city-post-commentContent" fixed="true" focus="{{focus}}" bindinput="getComment" value="{{comment.commentContent}}"></textarea>
+      <view class="input-account">
+        <text class="{{comment.commentContent.length > 140?'over-text':''}}">
+          {{comment.commentContent.length}}
+        </text>
+        /140
+      </view>
+    </view>
+    <!-- 图片评论 -->
+    <view class="city-upImg d-flex">
+      <view class="city-upImg-item" hidden="{{items[0].content.imageList.length === 0}}">
+        <image src="{{items[0].content.imageList[0]}}" mode="aspectFit"></image>
+        <view class="close" catchtap="clearImage" data-row="0"></view>
+      </view>
+      <view class="city-upSigns d-flex" hidden="{{!!comment.parentid || !!comment.comsuerid || items[0].content.imageList.length > 0}}">
+        <view class="add" data-row="0" catchtap="chooseImage"></view>
+      </view>
+    </view>
+  </view>
+  <!-- 记得做广告 -->
+  <city-navigator>
+    <view slot="slot1" class="navigatorItem navigatorItem-personalCenter" bindtap="goToPersonalCenter">
+      个人中心
+    </view>
+    <view slot="slot2" class="navigatorItem navigatorItem-index" bindtap="toIndexPage">首页</view>
+    <view slot="slot3" class="navigatorItem navigatorItem-report" bindtap="report">举报</view>
+    <button slot="slot4" class="navigatorItem-repost" open-type="share" hidden='{{post.State<0}}'>
+      转发
+    </button>
+    <view slot="slot5" class="navigatorItem navigatorItem-link" bindtap="hiddenTips" wx:if="{{showpath}}">
+      获取链接
+    </view>
+    <view slot="slot6" class="navigatorItem navigatorItem-post" bindtap="createPoster" hidden="{{isCarDetail}}">
+      生成海报
+    </view>
+  </city-navigator>
+  <!-- 海报 2019/7/2 -->
+  <share-poster id='poster' share-params="{{shareposterparams}}"></share-poster>
+  <city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>
+</view>

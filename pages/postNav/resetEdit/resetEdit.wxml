@@ -1,0 +1,10 @@
+<view class='page'>
+  <!-- content -->
+  <view class="con">
+    <image src="https://j.vzan.cc/content/miniProgram/images/icon_edit.png" mode="widthFix"></image>
+    <view class='title'>编辑页面停留时间超时~</view>
+  </view>
+
+  <!-- btn -->
+  <view class="btn" bindtap="goMyPost">重新编辑</view>
+</view>

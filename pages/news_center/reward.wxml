@@ -1,0 +1,37 @@
+<view>
+    <view class="cover">
+
+    </view>
+    <view class="avatar">
+        <image src="{{avatar}}"></image>
+    </view>
+    <view class="tips">赏一个</view>
+    <view class="money">
+        <block wx:for="{{moneyArr}}" wx:key="unique">
+            <view data-money="{{item}}" class="money-item" catchtap="getDefiniteMoney">
+                {{item}}元
+            </view>
+        </block>
+    </view>
+    <view class="independent-pay" catchtap="openMask">
+        其他金额
+    </view>
+</view>
+<view class="mask" hidden="{{showMask}}">
+    <view class="mask-content-wrapper">
+        <view class="mask-close close" catchtap="openMask"></view>
+        <view class="mask-title">
+            其他金额
+        </view>
+        <view class="mask-content">
+            <view class="mask-input-area d-flex">
+                <view class="mask-tag">金额(元)</view>
+                <input type="digit" placeholder="可填写0.1-1000" class="flex mask-input" bindinput="getIndependentPay" value="{{rewardMoney}}"/>
+            </view>
+            <view class="mask-btn" catchtap="startPay">
+                赞赏
+            </view>
+        </view>
+    </view>
+</view>
+<city-tips content="{{content}}" showTips="{{showTips}}"></city-tips>

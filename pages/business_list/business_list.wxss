@@ -1,0 +1,8 @@
+@import "../../public/floatbtntpl.wxss";
+@import "../../public/navigatorCommon.wxss"
+page{height: 100%;}
+
+
+
+
+

@@ -1,0 +1,23 @@
+﻿
+一、业务相关
+1.小程序的首页是  a_selbuyversion  这个在这里做一些小程序客户版本的控制 【分类信息版  好店版  混合版】
+2.所有新页面都要调用 app.getUserInfo 在回调里面获取用户的信息
+3.util文件下  AddOrder通用的微信下单并支付   wxpay这个是支付的通用方法有些单独的下单接口获得订单iD后再调这个支付
+   vzNavigateTo  这个是仿vue的路由跳转方法方便传值  httpClient这个是简单的http请求封装  搭配异步函数比较方便 前提是要引入runtime这个js文件
+   vzPromise 这个是promise的封装主要用来减少wxApi的回调
+4.addr文件下  ‘https://txiaowei.vzan.com/' 这个是测试域名  ‘https://cityapi.vzan.com/' 这个是正式域名  新接口一般放这里做统一管理
+5.uploadImgenew这个是图片上传通用插件 具体使用方法参考前人的使用  这个插件有些bug  但不好修改
+6.BaseTimePicker 通用的时间选择器 具体使用方法参考我之前的使用 
+7.components下的Tips.js是上一位同事封装的toast弹框 具体使用参考之前的使用
+8.countDown 这个是通用的倒计时定时器方法 主要用在营销活动的列表那
+9.xwParse 做富文本解析用  具体使用方法参考前人的使用
+
+二、css相关
+1.app.wxss 通用的一些css布局基本都写在这了 比如flex 布局 文本溢出等 还有一些字体图标
+2.组件需要单独引用component.wxss  通用的类也基本写在这
+
+三、图片
+1.images  如果不是必须放在本地的图片  让后台丢到服务器
+
+四、修客户反馈的bug
+1. 手动修改openid  在ext.json下修改成用户的appId

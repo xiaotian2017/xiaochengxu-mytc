@@ -1,0 +1,6 @@
+{
+    "component":true,
+    "usingComponents": {
+        "city-backTop":"/components/BackTop/BackTop"
+    }
+}

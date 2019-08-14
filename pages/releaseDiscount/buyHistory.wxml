@@ -1,0 +1,108 @@
+<view>
+    <!-- <view class="store-wrap">
+        店铺名称： 哈哈哈
+    </view> -->
+    <view class="main">
+        <view class="vz-flex vz-flex-1" style="border-bottom:1rpx solid #f0f0f0">
+            <view class="vz-flex-1 main-inner">
+                <view style="border-right:1rpx solid #f0f0f0">
+                    <view style="padding-bottom:20rpx;">
+                       <icon class="iconfont icon-zhuanfa" style="color:#fe3d49"></icon> 已发放
+                    </view>
+                    <view>
+                        <text class="money">￥{{totalamount}}</text>
+                        <text>{{creatnum}}份</text>
+                    </view>
+                </view>
+            </view>
+            <view class="vz-flex-1 main-inner">
+                <view>
+                    <view style="padding-bottom:20rpx;">
+                        <icon class="iconfont icon-data" style="color:#fe3d49"></icon> 已销售
+                    </view>
+                    <view>
+                        <text>{{sellnum}}份</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="vz-flex vz-flex-1">
+            <view class="vz-flex-1 main-inner">
+                <view style="padding-bottom:20rpx;">
+                    <icon class="iconfont icon-shandian" style="color:#fe3d49"></icon> 已核销
+                </view>
+                <view>
+                    <text>{{usecount}}份</text>
+                </view>
+            </view>
+            <view class="vz-flex-1 main-inner">
+                <view>
+                    <view style="border-left:1rpx solid #f0f0f0">
+                        <view style="padding-bottom:20rpx;">
+                            <icon class="iconfont icon-zhangbu" style="color:#fe3d49"></icon> 已入账
+                        </view>
+                        <view class="money">
+                            <text>￥{{totalincome*1000/100000}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="vz-flex des">
+        <view>收益说明：</view>
+        <view>
+            <view style="margin-bottom:6rpx">不可退款的立即入账，可退款的核销入账</view>
+            <view>入账数值已扣除{{payrate}}%手续费，提现请到
+                <text style="text-decoration:underline" bindtap='gotobill'>我的收益</text>
+            </view>
+        </view>
+    </view>
+    <view wx:for="{{historyList}}" style="padding:20rpx;background:#fff">
+        <view  class="hexiaoren-wrap vz-flex flex-center flex-between">
+      
+        <view style="font-size: 24rpx;color: #666;">日期：{{item.ShowTime}}</view>
+            <image class="hexiaoren" src="{{item.ShopLogoUrl}}"></image>
+            <view>
+                <view class="p1">姓名：{{item.NickName}}</view>
+                <view class="p1">手机：{{item.Phone}}</view>
+               
+            </view>
+              <view class="lianxi" data-phone='{{item.Phone}}' bindtap='callpeple' style="height: 60rpx;width:120rpx;line-height:60rpx;">
+                联系
+            </view>
+       
+        </view>
+         <view class="infor f-12rem c666  top-line">             
+               <view class="d-flex d-flex-center f01">                
+                  <view class="flex">当时购买价格：               
+                        <i class="c-f5a0">￥{{item.BuyPrice*1000/100000}}</i>
+                  </view>                              
+                </view>            
+               <view class="d-flex d-flex-center f01">                
+                     <view class="flex">购买数量：{{item.income}}</view>
+               </view>     
+                    <view class="d-flex d-flex-center f01" wx:if='{{null!=item.TelePhoneXcx}}'>                
+                          <view class="flex">联系方式：{{item.TelePhoneXcx}}</view>
+                     </view> 
+                    <view class="d-flex d-flex-center f01" wx:if='{{null!=item.RemarkXcx}}'>                
+                     <view class="flex">备注：{{item.RemarkXcx}}</view>
+               </view>       
+              <view class="d-flex d-flex-center f01">
+                   <view class="flex" wx:if="{{item.State==-1}}">
+                    核销时间：{{item.validtime}}
+                    </view>     
+                    <view class="flex" wx:else>
+                    
+                    </view>                
+                    <view>状态：
+                          <i class="c-09cf" wx:if="{{item.State==-1}}">已核销</i>
+                          <i class="c-09cf" wx:elif="{{item.State==-2}}">已退款</i>
+                          <i class="c-09cf" wx:elif="{{item.IsExpire==1}}">已过期</i>
+                            <i class="c-09cf" wx:else>未核销</i>
+                    </view>
+              </view>
+          </view>
+    </view>
+    <view wx:if="{{isAll}}" style="width:100%;text-align:center;padding-bottom:20rpx;padding-top:20rpx;font-size:22rpx;color:#aaa;background-color:#fff;">— — 数据显示完了 — —</view>		
+</view>

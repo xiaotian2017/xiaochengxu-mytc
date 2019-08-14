@@ -1,0 +1,132 @@
+page{
+    background: #fff
+}
+.cover{
+    background: #fe3d49;
+    border-radius: 50%;
+    width: 100%;
+    height:180px;
+    margin: 0 auto;
+    position: absolute;
+    top: -85px;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: -1
+}
+.cover::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100vw;
+    height:24px
+}
+.avatar{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 50px auto 0;
+    border: 2px solid #fff;
+    box-shadow: 0 3px 4px #e5e5e5
+}
+.avatar image{
+    width: 100%;
+    height: 100%
+}
+.tips{
+    margin-top: 30rpx;
+    color: #fe3d49;
+    font-size: 32rpx;
+    font-weight:700;
+    text-align: center
+}
+.money{
+    margin: 2rem 10% 0;
+    font-size: 0;
+    overflow: hidden
+}
+.money-item{
+    display: inline-block;
+    box-sizing: border-box;
+    padding:10rpx 0;
+    width: 30%;
+    margin: 2% 1%;
+    text-align: center;
+    font-size: 40rpx;
+    color: #ea5e3a;
+    border: 4rpx solid #fe3d49;
+    border-radius: 8rpx;
+}
+.independent-pay{
+    margin-top:30rpx;
+    font-size: 28rpx;
+    text-align: center;
+    color: 999
+}
+.mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, .42);
+    z-index: 99
+}
+.mask-content-wrapper{
+    position: absolute;
+    top: 30%;
+    right: 0;
+    left: 0;
+    margin:0 auto;
+    width: 80%;
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: 8rpx;
+}
+.mask-title{
+    text-align: center;
+    line-height:90rpx;
+    font-size:32rpx;
+    color: #333
+}
+.mask-close{
+    position: absolute;
+    top:12rpx;
+    right:12rpx;
+    width: 48rpx;
+    height:48rpx
+}
+.mask-close::before,.mask-close::after{
+    height: 80%;
+    background: #333
+}
+.mask-content{
+    padding: 40rpx
+}
+.mask-input-area{
+    margin-bottom:50rpx;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    border: 1px solid #f2f2f2;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+}
+.mask-tag{
+    color: #333
+}
+.mask-input{
+    padding-left: 20rpx;
+    height:80rpx;
+    color: #fe3d49
+}
+.mask-btn{
+    height:80rpx;
+    line-height:80rpx;
+    color: #fff;
+    font-size: 36rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    background: #fe3d49;
+}

@@ -1,0 +1,4 @@
+@import  '../Template/CutPrice-Group.wxss';
+.lowest{
+    color: #25cea8
+}

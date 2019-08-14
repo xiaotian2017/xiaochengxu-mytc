@@ -1,0 +1,183 @@
+view {
+    box-sizing: border-box;
+    line-height: 1;
+    color: #333;
+}
+
+.search-box {
+    width: 90%;
+    background: #f2f2f2;
+    margin: 0 auto;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    overflow: hidden;
+}
+
+.search-box input {
+    height: 80rpx;
+    width: 70%;
+}
+
+.search-box .search-icon {
+    width: 10%;
+    text-align: center;
+}
+
+.search-box .search-btn {
+    width: 20%;
+    text-align: center;
+    background: #fe3d49;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: #fff;
+}
+
+.merchant-order-tab {
+    text-align: center;
+    font-size: 28rpx;
+    background: #fff;
+    border-top: 1rpx solid #f0f0f0;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.merchant-order-tab view {
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.merchant-order-tab .active-tab {
+    border-bottom: 1rpx solid #fe3d49;
+    color: #fe3d49;
+}
+
+.order-num {
+    height: 110rpx;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+    margin: 0 -30rpx;
+}
+
+.goods-img {
+    height: 190rpx;
+    width: 190rpx;
+}
+
+.goods-info {
+    padding: 30rpx 0;
+    margin-right: -30rpx;
+}
+
+.goods-info .name {
+    font-size: 28rpx;
+    /* margin-bottom: 4rpx; */
+}
+
+.goods-info .price {
+    font-size: 34rpx;
+    color: #fe3d49;
+    margin-bottom: 20rpx;
+}
+
+.goods-info .num {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.goods-count {
+    font-size: 28rpx;
+    padding: 30rpx 20rpx;
+    background: #fff2e2;
+}
+
+.buyer-info {
+    font-size: 24rpx;
+}
+
+.buyer-btn {
+    width: 150rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #fff;
+    background: #fe3d49;
+    border-radius: 8rpx;
+}
+
+.goods-info+.goods-info {
+    border-top: 1rpx solid #f0f0f0;
+    /* margin-right: -30rpx; */
+}
+
+.attr {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1.4;
+    padding: 20rpx 0;
+}
+
+.city-card {
+    padding: 0 20rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border: 1rpx solid #333;
+    border-radius: 8rpx;
+    font-size: 24rpx;
+    text-align: center;
+    position: absolute;
+    right:0;
+    top:0;    
+}
+
+.message {
+    padding-top: 20rpx;
+    line-height: 1.4;
+}
+
+.dispatching-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    background: #fff;
+    z-index: 100;
+    height: 100%;
+    transition: all .5s ease-in-out;
+}
+
+.dispatching-panel-title {
+    padding: 30rpx;
+    background: #f2f2f2;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.dispatching-panel-item view {
+    font-size: 28rpx;
+    color: #333;
+    padding: 30rpx 30rpx 0;
+    line-height: 1.4;
+}
+
+.dispatching-panel-btn-wrap {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #f2f2f2;
+}
+
+.dispatching-panel-btn-wrap view {
+    height: 108rpx;
+    line-height: 108rpx;
+    text-align: center;
+    font-size: 32rpx;
+}
+
+.refund-btn {
+
+}
+
+.refund-btn-wrap {
+
+}

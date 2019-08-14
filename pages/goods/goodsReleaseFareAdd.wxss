@@ -1,0 +1,65 @@
+view {
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+.fare-name-wrap {
+    height: 86rpx;
+    font-size: 34rpx;
+    color: #333;
+    background: #fff;
+    margin: 20rpx 0 30rpx 0;
+    padding: 0 30rpx;
+}
+    
+.fare-name-tips {
+     width: 30%;
+}
+
+.fare-name-input {
+    width: 100%;
+}
+
+.fare-main {
+     background: #fff;
+     padding-left: 30rpx;
+}
+
+.fare-main-tip {
+    font-size: 34rpx;
+    line-height: 86rpx;
+    height: 86rpx;
+    color: #333;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.fare-main input{
+    width:160rpx;
+    border:1rpx solid #f0f0f0;
+    border-radius:8rpx;
+    text-align:center;
+    height:70rpx;
+}
+
+.fare-main view {
+    font-size: 30rpx;
+    color: #555;
+
+}
+
+.fare-add-btn {
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    color:#fff;
+    background: #fe3d49;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    font-size: 34rpx;
+}
